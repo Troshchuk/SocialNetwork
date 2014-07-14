@@ -17,7 +17,24 @@
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-core</artifactId>
           <version>4.3.5.Final</version>
-      </dependency></dependencies>
+      </dependency>
+
+      <!--Jersey adding-->
+      <dependency>
+          <groupId>org.glassfish.jersey.containers </groupId>
+          <artifactId>jersey-container-servlet</artifactId>
+          <version>2.10.1</version>
+          <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.glassfish.jersey.core</groupId>
+          <artifactId>jersey-client</artifactId>
+          <version>2.10.1</version>
+          <scope>provided</scope>
+      </dependency>
+
+  </dependencies>
   <build>
     <finalName>maven-archetype-webapp</finalName>
   </build>
