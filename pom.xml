@@ -18,6 +18,12 @@
           <artifactId>hibernate-core</artifactId>
           <version>4.3.5.Final</version>
       </dependency>
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.6</version>
+      </dependency>
+
 
       <!--Jersey adding-->
       <dependency>
