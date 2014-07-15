@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "Passwords")
 public class Password {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long userId;
 
