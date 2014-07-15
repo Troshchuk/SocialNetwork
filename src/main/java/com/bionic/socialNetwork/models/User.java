@@ -14,10 +14,15 @@ public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+
     private String login;
+
     private String name;
+
     private String surname;
+
     private String position;
+
     @OneToOne
     @JoinColumn(name = "id")
     private Password password;
@@ -72,5 +77,9 @@ public class User {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public Password getPassword() {
+        return password;
     }
 }
