@@ -8,4 +8,5 @@ import com.bionic.socialNetwork.models.User;
  */
 public interface UserDao {
     public void addUser(User user) throws Exception;
+    public User getUserById(long id) throws Exception;
 }

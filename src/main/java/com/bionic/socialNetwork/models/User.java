@@ -26,7 +26,7 @@ public class User {
 
     }
 
-    public User(int id, String login, String name, String surname,
+    public User(long id, String login, String name, String surname,
                 String position) {
         this.id = id;
         this.login = login;
@@ -39,7 +39,7 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

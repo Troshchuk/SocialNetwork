@@ -20,4 +20,12 @@ public class UserDaoImpl implements UserDao {
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public User getUserById(long id) throws Exception {
+        Session session;
+        session = HibernateUtil.getSessionFactory().openSession();
+        User user = (User) session.load(User.class, id);
+        return user;
+    }
 }
