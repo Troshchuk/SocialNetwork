@@ -3,6 +3,7 @@ package com.bionic.socialNetwork.dao.impl;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -25,6 +26,18 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(long id) throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
+        User user = (User) session.load(User.class, id);
+        session.close();
+        return user;
+    }
+
+    @Override
+    public User getUserByLogin(String login) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(
+                "SELECT id FROM User where login = '" + login + "'");
+        int id = query.getFirstResult();
         User user = (User) session.load(User.class, id);
         session.close();
         return user;
