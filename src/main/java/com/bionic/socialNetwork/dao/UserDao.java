@@ -7,7 +7,7 @@ import com.bionic.socialNetwork.models.User;
  * @version 1.00  14.07.14.
  */
 public interface UserDao {
-    public void addUser(User user) throws Exception;
-    public User getUserById(long id) throws Exception;
-    public User getUserByLogin(String login) throws Exception;
+    public void insert(User user) throws Exception;
+    public User selectById(long id) throws Exception;
+    public User selectByLogin(String login) throws Exception;
 }

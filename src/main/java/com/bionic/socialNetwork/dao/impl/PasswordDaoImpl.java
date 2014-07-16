@@ -12,28 +12,28 @@ import org.hibernate.Session;
 public class PasswordDaoImpl implements PasswordDao {
 
     @Override
-    public String getPasswordById(long id) throws Exception {
+    public Password selectById(long id) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Password password = (Password) session.get(Password.class, id);
         session.close();
-        return password.getPassword();
+        return password;
     }
 
     @Override
-    public void updatePasswordById(long id, String pass) throws Exception {
+    public void update(Password password) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Password password = new Password(id, pass);
+
         session.update(password);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void addPasswordById(long id, String pass) throws Exception {
+    public void insert(Password password) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Password password = new Password(id, pass);
+
         session.save(password);
         session.getTransaction().commit();
         session.close();

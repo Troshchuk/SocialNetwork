@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public void addUser(User user) throws Exception {
+    public void insert(User user) throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(long id) throws Exception {
+    public User selectById(long id) throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
         User user = (User) session.get(User.class, id);
@@ -34,13 +34,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByLogin(String login) throws Exception {
+    public User selectByLogin(String login) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(
                 "SELECT id FROM User where login = '" + login + "'");
         List<Long> list = query.list();
-        User user = getUserById(list.get(0));
+        User user = selectById(list.get(0));
 
         session.close();
         return user;
