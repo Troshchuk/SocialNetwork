@@ -20,7 +20,17 @@ public class PasswordDaoImpl implements PasswordDao {
     }
 
     @Override
-    public void setPasswordById(long id, String pass) throws Exception {
+    public void updatePasswordById(long id, String pass) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Password password = new Password(id, pass);
+        session.update(password);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void addPasswordById(long id, String pass) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         Password password = new Password(id, pass);

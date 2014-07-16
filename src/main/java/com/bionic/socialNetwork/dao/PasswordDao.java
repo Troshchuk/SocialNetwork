@@ -8,5 +8,6 @@ import com.bionic.socialNetwork.models.Password;
  */
 public interface PasswordDao {
     public String getPasswordById(long id) throws Exception;
-    public void setPasswordById(long id, String pass) throws Exception;
+    public void updatePasswordById(long id, String pass) throws Exception;
+    public void addPasswordById(long id, String pass) throws Exception;
 }
