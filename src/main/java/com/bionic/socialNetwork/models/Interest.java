@@ -29,7 +29,7 @@ public class Interest {
     @Column(name = "interest")
     private String interest;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",
                joinColumns = {@JoinColumn(name = "interest_id")},
                inverseJoinColumns = {@JoinColumn(name = "user_id")})
