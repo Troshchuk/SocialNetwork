@@ -20,7 +20,8 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- Mapping files will go here.... -->
-        <mapping class="com.bionic.socialNetwork.models.User" />
-        <mapping class="com.bionic.socialNetwork.models.Password" />
+        <mapping class="com.bionic.socialNetwork.models.User"/>
+        <mapping class="com.bionic.socialNetwork.models.Password"/>
+        <mapping class="com.bionic.socialNetwork.models.Post"/>
     </session-factory>
 </hibernate-configuration>

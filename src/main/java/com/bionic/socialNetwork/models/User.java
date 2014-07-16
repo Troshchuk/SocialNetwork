@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * User's entity
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "Users")
 public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String login;
@@ -26,6 +27,17 @@ public class User {
     @OneToOne
     @JoinColumn(name = "id")
     private Password password;
+
+    @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
+    private List<Post> posts;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     public User() {
 

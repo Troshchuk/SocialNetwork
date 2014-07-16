@@ -24,26 +24,17 @@ public class PrivateMessage {
 
     private String message;//or maybe **File**
 
-    PrivateMessage() {
+    public PrivateMessage() {
 
     }
 
-    PrivateMessage(long messageId, long sentUserId,
-                   long receiverUserId, String message) {
-        this.messageId = messageId;
+    public PrivateMessage(long sentUserId,
+                          long receiverUserId, String message) {
         this.sentUserId = sentUserId;
         this.receiverUserId = receiverUserId;
         this.message = message;
     }
 
-
-    public long getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(long messageId) {
-        this.messageId = messageId;
-    }
 
     public long getSentUserId() {
         return sentUserId;
