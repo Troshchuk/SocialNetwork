@@ -9,7 +9,7 @@ import com.bionic.socialNetwork.models.Post;
  * @version 1.00  16.07.2014.
  */
 public interface PostDao {
-    public Post getPost(long userId) throws Exception;
+    public Post selectById(long userId) throws Exception;
 
-    public void setPost(Post post) throws Exception;
+    public void insert(Post post) throws Exception;
 }

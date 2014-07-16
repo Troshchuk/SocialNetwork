@@ -14,7 +14,7 @@ import org.hibernate.Session;
 public class PostDaoImpl implements PostDao {
 
     @Override
-    public Post getPost(long userId) throws Exception {
+    public Post selectById(long userId) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Post post = (Post) session.get(Post.class, userId);
         session.close();
@@ -22,7 +22,7 @@ public class PostDaoImpl implements PostDao {
     }
 
     @Override
-    public void setPost(Post post) throws Exception {
+    public void insert(Post post) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(post);

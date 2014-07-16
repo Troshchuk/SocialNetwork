@@ -5,29 +5,39 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
 import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Denis
  * @version 1.00  16.07.2014.
  */
 public class PostDaoImplTest {
+    private User user;
+    private PostDao postDao;
+    private long postId;
 
+    @Before
     @Test
-    public void testSetPost() throws Exception {
-        User user = new User("www", "", "", "");
+    public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
+        user = new User("PostUser", "", "", "");
         userDao.insert(user);
 
-        Post post = new Post("Succes", user);
-        PostDao postDao = new PostDaoImpl();
-        postDao.setPost(post);
+        postDao = new PostDaoImpl();
+        Post post = new Post("Some Post", user);
+        postDao.insert(post);
+
+        postId = post.getPostId();
+        assertEquals(post.getPostId(), postDao.selectById(postId).getPostId());
     }
 
     @Test
-    public void testGetPost() throws Exception {
-        long userId = 1;
-        PostDao postDao = new PostDaoImpl();
-        Post post = postDao.getPost(userId);
+    public void testSelectById() throws Exception {
+        Post post = postDao.selectById(postId);
+        assertNotNull(post);
     }
 }
