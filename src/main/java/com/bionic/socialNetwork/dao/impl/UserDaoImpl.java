@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(long id) throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
-        User user = (User) session.load(User.class, id);
+        User user = (User) session.get(User.class, id);
         session.close();
         return user;
     }
@@ -39,9 +39,8 @@ public class UserDaoImpl implements UserDao {
 
         Query query = session.createQuery(
                 "SELECT id FROM User where login = '" + login + "'");
-        List list = query.list();
-
-        User user = getUserById((Long) list.get(0));
+        List<Long> list = query.list();
+        User user = getUserById(list.get(0));
 
         session.close();
         return user;
