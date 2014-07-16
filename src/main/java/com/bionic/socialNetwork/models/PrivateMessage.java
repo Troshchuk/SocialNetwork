@@ -16,40 +16,48 @@ public class PrivateMessage {
     @Column(name = "message_id")
     private long messageId;
 
-    @Column(name = "sent_user_id")
-    private long sentUserId;
+    @ManyToOne
+    @JoinColumn(name = "sent_user_id")
+    private User sentUser;
 
-    @Column(name = "receiver_user_id")
-    private long receiverUserId;
+    @ManyToOne
+    @JoinColumn(name = "receiver_user_id")
+    private User receiverUser;
 
-    private String message;//or maybe **File**
+    private String message;
 
     public PrivateMessage() {
 
     }
 
-    public PrivateMessage(long sentUserId,
-                          long receiverUserId, String message) {
-        this.sentUserId = sentUserId;
-        this.receiverUserId = receiverUserId;
+    public PrivateMessage(User sentUser, User receiverUser, String message) {
+        this.sentUser = sentUser;
+        this.receiverUser = receiverUser;
         this.message = message;
     }
 
-
-    public long getSentUserId() {
-        return sentUserId;
+    public long getMessageId() {
+        return messageId;
     }
 
-    public void setSentUserId(long sentUserId) {
-        this.sentUserId = sentUserId;
+    public void setMessageId(long messageId) {
+        this.messageId = messageId;
     }
 
-    public long getReceiverUserId() {
-        return receiverUserId;
+    public User getSentUser() {
+        return sentUser;
     }
 
-    public void setReceiverUserId(long receiverUserId) {
-        this.receiverUserId = receiverUserId;
+    public void setSentUser(User sentUser) {
+        this.sentUser = sentUser;
+    }
+
+    public User getReceiverUser() {
+        return receiverUser;
+    }
+
+    public void setReceiverUser(User receiverUser) {
+        this.receiverUser = receiverUser;
     }
 
     public String getMessage() {

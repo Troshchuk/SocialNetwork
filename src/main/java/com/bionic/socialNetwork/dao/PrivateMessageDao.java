@@ -1,5 +1,7 @@
 package com.bionic.socialNetwork.dao;
 
+import com.bionic.socialNetwork.models.PrivateMessage;
+
 /**
  * Private messages Dao
  *
@@ -7,7 +9,7 @@ package com.bionic.socialNetwork.dao;
  * @version 1.00  16.07.2014.
  */
 public interface PrivateMessageDao {
-    public String getMessage(long userId) throws Exception;
-
-    public void setMessage(long userId) throws Exception;
+    public PrivateMessage selectBySentId(long userId) throws Exception;
+    public PrivateMessage selectByReceiverId(long userId) throws Exception;
+    public void insert(PrivateMessage privateMessage) throws Exception;
 }

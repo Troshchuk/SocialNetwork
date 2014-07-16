@@ -18,7 +18,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;// **File** maybe
+    private User user;
 
 
     @Column(name = "Post")
