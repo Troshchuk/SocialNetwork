@@ -8,10 +8,16 @@ import javax.jws.soap.SOAPBinding;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test user's DAO
+ *
+ * @author Dmytro Troshchuk
+ * @version 1.00  16.07.14.
+ */
 public class UserDaoImplTest {
 
     @Test
-    public void testAddUser() throws Exception {
+    public void testInsert() throws Exception {
         User user = new User("root", "Admin", "Admin", "Administrator");
 
         UserDao userDao = new UserDaoImpl();
@@ -19,7 +25,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testGetUserById() throws Exception {
+    public void testSelectById() throws Exception {
         long id = 1;
         UserDao userDao = new UserDaoImpl();
         User user = userDao.selectById(id);
@@ -27,7 +33,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testGetUserByLogin() throws Exception {
+    public void testSelectByLogin() throws Exception {
         String login = "root";
         UserDao userDao = new UserDaoImpl();
         User user = userDao.selectByLogin(login);

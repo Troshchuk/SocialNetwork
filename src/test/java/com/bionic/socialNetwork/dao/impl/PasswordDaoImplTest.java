@@ -9,6 +9,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test password's DAO
+ *
+ * @author Dmytro Troshchuk
+ * @version 1.00  16.07.14.
+ */
 public class PasswordDaoImplTest {
     private PasswordDao passwordDao;
     private String pass = "Password";
@@ -26,13 +32,13 @@ public class PasswordDaoImplTest {
     }
 
     @Test
-    public void testGetPasswordById() throws Exception {
+    public void testSelectById() throws Exception {
         Password password = passwordDao.selectById(id);
         assertEquals(password.getPassword(), pass);
     }
 
     @Test
-    public void testSetPasswordById() throws Exception {
+    public void testSetUpdate() throws Exception {
         Password password = passwordDao.selectById(id);
         String newPassword = "NewPassword";
         assertNotEquals(password.getPassword(), newPassword);
