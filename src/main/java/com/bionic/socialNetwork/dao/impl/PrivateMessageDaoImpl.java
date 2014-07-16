@@ -1,6 +1,9 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PrivateMessageDao;
+import com.bionic.socialNetwork.models.PrivateMessage;
+import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Session;
 
 /**
  * Private messages Dao implementation
@@ -10,13 +13,29 @@ import com.bionic.socialNetwork.dao.PrivateMessageDao;
  */
 public class PrivateMessageDaoImpl implements PrivateMessageDao {
 
+
     @Override
-    public String getMessage(long userId) throws Exception {
-        return null;
+    public PrivateMessage selectBySentId(long id) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, id);
+        session.close();
+        return privateMessage;
     }
 
     @Override
-    public void setMessage(long userId) throws Exception {
+    public PrivateMessage selectByReceiverId(long id) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, id);
+        session.close();
+        return privateMessage;
+    }
 
+    @Override
+    public void insert(PrivateMessage privateMessage) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(privateMessage);
+        session.getTransaction().commit();
+        session.close();
     }
 }
