@@ -14,21 +14,38 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "post_id")
-    long postId;
+    private long postId;
 
-    @Column(name = "users_id")
-    long userId;
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private User user;// **File** maybe
+
 
     @Column(name = "Post")
-    String post;// **File** maybe
+    private String post;
 
-    Post(){
+    public Post() {
 
     }
 
-    Post(long postId, long userId, String post){
-        this.postId = postId;
-        this.userId = userId;
+    public Post(String post, User user) {
+        this.user = user;
+        this.post = post;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
         this.post = post;
     }
 
@@ -38,21 +55,5 @@ public class Post {
 
     public void setPostId(long postId) {
         this.postId = postId;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getPost() {
-        return post;
-    }
-
-    public void setPost(String post) {
-        this.post = post;
     }
 }
