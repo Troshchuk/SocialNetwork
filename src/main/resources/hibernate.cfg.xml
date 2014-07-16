@@ -23,5 +23,6 @@
         <mapping class="com.bionic.socialNetwork.models.User"/>
         <mapping class="com.bionic.socialNetwork.models.Password"/>
         <mapping class="com.bionic.socialNetwork.models.Post"/>
+        <mapping class="com.bionic.socialNetwork.models.Administrator" />
     </session-factory>
 </hibernate-configuration>
