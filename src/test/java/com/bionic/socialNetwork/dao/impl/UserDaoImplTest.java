@@ -15,14 +15,14 @@ public class UserDaoImplTest {
         User user = new User("root", "Admin", "Admin", "Administrator");
 
         UserDao userDao = new UserDaoImpl();
-        userDao.addUser(user);
+        userDao.insert(user);
     }
 
     @Test
     public void testGetUserById() throws Exception {
         long id = 1;
         UserDao userDao = new UserDaoImpl();
-        User user = userDao.getUserById(id);
+        User user = userDao.selectById(id);
         assertNotNull(user);
     }
 
@@ -30,7 +30,7 @@ public class UserDaoImplTest {
     public void testGetUserByLogin() throws Exception {
         String login = "root";
         UserDao userDao = new UserDaoImpl();
-        User user = userDao.getUserByLogin(login);
+        User user = userDao.selectByLogin(login);
         assertNotNull(user);
     }
 }

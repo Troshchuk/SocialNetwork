@@ -13,7 +13,7 @@ public class Login {
 
     public User getUser(String login, String password) {
         try {
-            user = userDaoImpl.getUserByLogin(login);
+            user = userDaoImpl.selectByLogin(login);
             if (user.getPassword().equals(password)) {
                 return user;
             }

@@ -11,32 +11,35 @@ import static org.junit.Assert.*;
 
 public class PasswordDaoImplTest {
     private PasswordDao passwordDao;
+    private String pass = "Password";
     private long id;
 
     @Before
     public void beginState() throws Exception {
         User user = new User("PasswordTest", "PasswordTest", "PasswordTest", "");
         UserDao userDao = new UserDaoImpl();
-        userDao.addUser(user);
+        userDao.insert(user);
         id = user.getId();
         passwordDao = new PasswordDaoImpl();
-        passwordDao.addPasswordById(id, "Password");
+        Password password = new Password(user.getId(), pass);
+        passwordDao.insert(password);
     }
 
     @Test
     public void testGetPasswordById() throws Exception {
-        String password = passwordDao.getPasswordById(id);
-        assertEquals(password, "Password");
+        Password password = passwordDao.selectById(id);
+        assertEquals(password.getPassword(), pass);
     }
 
     @Test
     public void testSetPasswordById() throws Exception {
-        String password = passwordDao.getPasswordById(id);
+        Password password = passwordDao.selectById(id);
         String newPassword = "NewPassword";
-        assertNotEquals(password, newPassword);
+        assertNotEquals(password.getPassword(), newPassword);
 
-        passwordDao.updatePasswordById(id, newPassword);
-        password = passwordDao.getPasswordById(id);
-        assertEquals(password, newPassword);
+        password.setPassword(newPassword);
+        passwordDao.update(password);
+        password = passwordDao.selectById(id);
+        assertEquals(password.getPassword(), newPassword);
     }
 }
