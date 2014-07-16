@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.*;
@@ -44,5 +45,29 @@ public class UserDaoImpl implements UserDao {
 
         session.close();
         return user;
+    }
+
+    @Override
+    public List<User> selectNext(long beginId) throws Exception {
+        int limit = 10;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Query query = session.createQuery(
+                "FROM User WHERE id >= " + beginId + " AND id < " +
+                (beginId + limit));
+        List<User> users = query.list();
+        session.close();
+
+        return users;
+    }
+
+    @Override
+    public void delete(User user) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        session.beginTransaction();
+        session.delete(user);
+        session.getTransaction().commit();
+        session.close();
     }
 }
