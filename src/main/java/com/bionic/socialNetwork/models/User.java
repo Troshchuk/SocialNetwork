@@ -24,14 +24,13 @@ public class User {
 
     private String surname;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Users_Interests", joinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "interests_id",
-            nullable = false, updatable = false)})
-    private Set<Interests> interests = new HashSet<Interests>(0);
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "Users_Interests",
+               joinColumns = {@JoinColumn(name = "user_id")},
+               inverseJoinColumns = {@JoinColumn(name = "interest_id")})
+    private Set<Interest> interests = new HashSet<Interest>(0);
 
     private String position;
-
-
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -44,11 +43,11 @@ public class User {
         return posts;
     }
 
-    public Set<Interests> getInterests() {
+    public Set<Interest> getInterests() {
         return interests;
     }
 
-    public void setInterests(Set<Interests> interests) {
+    public void setInterests(Set<Interest> interests) {
         this.interests = interests;
     }
 
