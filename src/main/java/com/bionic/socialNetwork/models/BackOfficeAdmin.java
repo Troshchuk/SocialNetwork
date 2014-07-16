@@ -1,15 +1,13 @@
 package com.bionic.socialNetwork.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * @author Dmytro Troshchuk
  * @version 1.00  16.07.14.
  */
-@Entity(name = "Back_Office_Administrators")
+@Entity
+@Table(name = "Back_Office_Administrators")
 public class BackOfficeAdmin {
     @Id
     private long id;

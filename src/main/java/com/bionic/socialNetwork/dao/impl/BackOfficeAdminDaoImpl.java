@@ -40,7 +40,7 @@ public class BackOfficeAdminDaoImpl implements BackOfficeAdminDao {
     public List<BackOfficeAdmin> selectAll() throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Back_Office_Administrators");
+        Query query = session.createQuery("FROM BackOfficeAdmin");
         List<BackOfficeAdmin> list = query.list();
         session.close();
         return list;

@@ -1,16 +1,14 @@
 package com.bionic.socialNetwork.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * @author Dmytro Troshchuk
  * @version 1.00  16.07.14.
  */
-@Entity(name = "Administrators")
+@Entity
+@Table(name = "Administrators")
 public class Administrator {
     @Id
     private long id;

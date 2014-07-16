@@ -39,7 +39,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
     public List<Administrator> selectAll() throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Administrators");
+        Query query = session.createQuery("FROM Administrator");
         List<Administrator> list = query.list();
         session.close();
         return list;
