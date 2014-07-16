@@ -4,7 +4,6 @@ import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.Before;
 import org.junit.Test;
 

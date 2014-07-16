@@ -1,7 +1,9 @@
 package com.bionic.socialNetwork.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User's entity
@@ -22,7 +24,14 @@ public class User {
 
     private String surname;
 
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "Users_Interests", joinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "interests_id",
+            nullable = false, updatable = false)})
+    private Set<Interests> interests = new HashSet<Interests>(0);
+
     private String position;
+
+
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -35,6 +44,14 @@ public class User {
         return posts;
     }
 
+    public Set<Interests> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(Set<Interests> interests) {
+        this.interests = interests;
+    }
+
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
@@ -42,6 +59,8 @@ public class User {
     public User() {
 
     }
+
+
 
     public User(String login, String name, String surname,
                 String position) {
