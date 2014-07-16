@@ -4,6 +4,7 @@ import com.bionic.socialNetwork.dao.AdministratorDao;
 import com.bionic.socialNetwork.models.Administrator;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -38,7 +39,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
     public List<Administrator> selectAll() throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
-        SQLQuery query = session.createSQLQuery("SELECT id FROM Users");
+        Query query = session.createQuery("FROM Administrators");
         List<Administrator> list = query.list();
         session.close();
         return list;

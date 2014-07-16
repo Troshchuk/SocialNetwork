@@ -8,6 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
+import java.util.List;
+
 /**
  * Test administrator's DAO
  *
@@ -19,21 +23,23 @@ public class AdministratorDaoImplTest {
     private AdministratorDao administratorDao;
 
     @Before
-    public void beginState() throws Exception {
+    public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
         user = new User("AdminTest", "", "", "");
         userDao.insert(user);
         administratorDao = new AdministratorDaoImpl();
-    }
-
-    @Test
-    public void testInsert() throws Exception {
-        UserDao userDao = new UserDaoImpl();
 
         Administrator administrator = new Administrator(user.getId());
         administratorDao.insert(administrator);
 
 
+    }
+
+    @Test
+    public void testSelectAll() throws Exception {
+        List<Administrator> administrators = administratorDao.selectAll();
+        Administrator administrator = administratorDao.selectAll().get(0);
+        assertNotNull(administrator);
     }
 
     @After
