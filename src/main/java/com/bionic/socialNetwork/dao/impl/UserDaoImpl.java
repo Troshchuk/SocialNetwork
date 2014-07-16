@@ -3,9 +3,11 @@ package com.bionic.socialNetwork.dao.impl;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
+
+import java.util.List;
 
 /**
  * @author Dmytro Troshchuk
@@ -37,8 +39,10 @@ public class UserDaoImpl implements UserDao {
 
         Query query = session.createQuery(
                 "SELECT id FROM User where login = '" + login + "'");
-        int id = query.getFirstResult();
-        User user = (User) session.load(User.class, id);
+        List list = query.list();
+
+        User user = getUserById((Long) list.get(0));
+
         session.close();
         return user;
     }

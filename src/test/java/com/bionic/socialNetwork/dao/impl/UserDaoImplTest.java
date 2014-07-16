@@ -12,7 +12,7 @@ public class UserDaoImplTest {
 
     @Test
     public void testAddUser() throws Exception {
-        User user = new User(1, "root", "Admin", "Admin", "Administrator");
+        User user = new User("root", "Admin", "Admin", "Administrator");
 
         UserDao userDao = new UserDaoImpl();
         userDao.addUser(user);
@@ -23,6 +23,14 @@ public class UserDaoImplTest {
         long id = 1;
         UserDao userDao = new UserDaoImpl();
         User user = userDao.getUserById(id);
+        assertNotNull(user);
+    }
+
+    @Test
+    public void testGetUserByLogin() throws Exception {
+        String login = "root";
+        UserDao userDao = new UserDaoImpl();
+        User user = userDao.getUserByLogin(login);
         assertNotNull(user);
     }
 }
