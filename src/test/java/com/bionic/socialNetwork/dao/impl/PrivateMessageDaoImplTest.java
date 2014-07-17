@@ -5,8 +5,11 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.PrivateMessage;
 import com.bionic.socialNetwork.models.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -35,7 +38,9 @@ public class PrivateMessageDaoImplTest {
 
         messageId = privateMessage.getMessageId();
         assertEquals(privateMessage.getMessageId(), privateMessageDao.selectBySentId(messageId).getMessageId());
+        assertEquals(privateMessage.getMessageId(), privateMessageDao.selectByReceiverId(messageId).getMessageId());
     }
+
 
     @Test
     public void testSelectByReceiverId() throws Exception {
@@ -48,4 +53,23 @@ public class PrivateMessageDaoImplTest {
         PrivateMessage privateMessage = privateMessageDao.selectBySentId(messageId);
         assertNotNull(privateMessage);
     }
+
+    @Test
+    public void testSelectNextSentId() throws Exception {
+        List<PrivateMessage> privateMessages = privateMessageDao.selectNextSentId(sentUser.getId());
+        assertEquals(messageId, privateMessages.get(0).getMessageId());
+    }
+
+    @Test
+    public void  testSelectReceiverId() throws  Exception {
+        List<PrivateMessage> privateMessages = privateMessageDao.selectNextReceiverId(receivedUser.getId());
+        assertEquals(messageId, privateMessages.get(0).getMessageId());
+    }
+
+    @After
+    public void testDelete() throws Exception {
+        privateMessageDao.delete(privateMessageDao.selectBySentId(messageId));
+        assertNull(privateMessageDao.selectBySentId(messageId));
+    }
+
 }

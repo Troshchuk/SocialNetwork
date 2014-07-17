@@ -5,8 +5,11 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
@@ -38,5 +41,17 @@ public class PostDaoImplTest {
     public void testSelectById() throws Exception {
         Post post = postDao.selectById(postId);
         assertNotNull(post);
+    }
+
+    @Test
+    public void testSelectNext() throws  Exception {
+        List<Post> posts = postDao.selectNext(postId);
+        assertEquals(postId, posts.get(0).getPostId());
+    }
+
+    @After
+    public void testDelete() throws Exception {
+        postDao.delete(postDao.selectById(postId));
+        assertNull(postDao.selectById(postId));
     }
 }
