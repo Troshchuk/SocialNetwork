@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.Login;
+import com.bionic.socialNetwork.logic.Registration;
 import com.bionic.socialNetwork.models.User;
 
 import javax.ws.rs.*;
@@ -32,6 +33,25 @@ public class UserRest {
         }else{
             return "{\"status\": false}";
         }
+
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
+    @Path("registration")
+    public String registration(@FormParam("login") String login, @FormParam("password") String password,
+                               @FormParam("name") String name, @FormParam("surname") String surname) {
+
+        Registration registration = new Registration();
+
+
+        if(registration.addUser(login,password,name,surname)){
+            return "{\"status\": true}";
+        }else {
+            return "{\"status\": false}";
+        }
+
 
     }
 
