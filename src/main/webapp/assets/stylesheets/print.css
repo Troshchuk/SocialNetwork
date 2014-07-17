@@ -1,0 +1,174 @@
+@media print {
+  /* line 3, ../sass/print.scss */
+  body {
+    background: none !important;
+    /* Brute force since user agents all print differently. */
+    color: #2b2b2b;
+    font-size: 12pt;
+  }
+
+  /* line 21, ../sass/print.scss */
+  .site,
+  .site-header,
+  .hentry,
+  .site-content .entry-header,
+  .site-content .entry-content,
+  .site-content .entry-summary,
+  .site-content .entry-meta,
+  .page-content,
+  .archive-header,
+  .page-header,
+  .contributor-info,
+  .comments-area,
+  .attachment .entry-attachment .attachment {
+    max-width: 100%;
+  }
+
+  /* line 40, ../sass/print.scss */
+  #site-header img,
+  .search-toggle,
+  .site-navigation,
+  .site-content nav,
+  .edit-link,
+  .page-links,
+  .widget-area,
+  .more-link,
+  .post-format-archive-link,
+  .comment-respond,
+  .comment-list .reply,
+  .comment-reply-login,
+  #secondary,
+  .site-footer,
+  .slider-control-paging,
+  .slider-direction-nav {
+    display: none;
+  }
+
+  /* line 48, ../sass/print.scss */
+  .site-title a,
+  .entry-meta,
+  .entry-meta a,
+  .featured-content .hentry,
+  .featured-content a {
+    color: #2b2b2b;
+  }
+
+  /* line 55, ../sass/print.scss */
+  .entry-content a,
+  .entry-summary a,
+  .page-content a,
+  .comment-content a {
+    text-decoration: none;
+  }
+
+  /* line 65, ../sass/print.scss */
+  .site-header,
+  .post-thumbnail,
+  a.post-thumbnail:hover,
+  .site-content .entry-header,
+  .site-footer,
+  .featured-content,
+  .featured-content .entry-header {
+    background: transparent;
+  }
+
+  /* line 69, ../sass/print.scss */
+  .header-main {
+    padding: 48px 10px;
+  }
+
+  /* line 73, ../sass/print.scss */
+  .site-title {
+    float: none;
+    font-size: 19pt;
+  }
+
+  /* line 78, ../sass/print.scss */
+  .content-area {
+    padding-top: 0;
+  }
+
+  /* line 82, ../sass/print.scss */
+  .list-view .site-content .hentry {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+  }
+
+  /* line 88, ../sass/print.scss */
+  .post-thumbnail img {
+    margin: 0 10px 24px;
+  }
+
+  /* line 92, ../sass/print.scss */
+  .site-content .has-post-thumbnail .entry-header {
+    padding-top: 0;
+  }
+
+  /* line 96, ../sass/print.scss */
+  .site-content footer.entry-meta {
+    margin: 24px auto;
+  }
+
+  /* line 100, ../sass/print.scss */
+  .entry-meta .tag-links a {
+    color: #fff;
+  }
+
+  /* line 104, ../sass/print.scss */
+  .singular .site-content .hentry.has-post-thumbnail {
+    margin-top: 0;
+  }
+
+  /* line 111, ../sass/print.scss */
+  .gallery-columns-1.gallery-size-medium,
+  .gallery-columns-1.gallery-size-thumbnail,
+  .gallery-columns-2.gallery-size-thumbnail,
+  .gallery-columns-3.gallery-size-thumbnail {
+    display: block;
+  }
+
+  /* line 116, ../sass/print.scss */
+  .archive-title,
+  .page-title {
+    margin: 0 10px 48px;
+  }
+
+  /* line 120, ../sass/print.scss */
+  .featured-content .hentry {
+    margin-bottom: 48px;
+  }
+
+  /* line 125, ../sass/print.scss */
+  .featured-content .post-thumbnail,
+  .slider .featured-content .post-thumbnail {
+    padding-top: 0;
+  }
+
+  /* line 129, ../sass/print.scss */
+  .featured-content .post-thumbnail img {
+    position: relative;
+  }
+
+  /* line 133, ../sass/print.scss */
+  .featured-content .entry-header {
+    padding: 0 10px 24px;
+  }
+
+  /* line 137, ../sass/print.scss */
+  .featured-content .entry-meta {
+    font-size: 9pt;
+    margin-bottom: 11px;
+  }
+
+  /* line 142, ../sass/print.scss */
+  .featured-content .cat-links {
+    font-weight: 900;
+  }
+
+  /* line 146, ../sass/print.scss */
+  .featured-content .entry-title {
+    font-size: 25pt;
+    line-height: 36px;
+  }
+}

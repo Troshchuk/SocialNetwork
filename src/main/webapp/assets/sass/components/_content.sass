@@ -1,0 +1,67 @@
+.content
+    font-size: $font-size
+    line-height: $text-line-height
+    word-wrap: break-word
+    p
+        margin-bottom: $text-line-height
+    h1
+        font-size: 150%
+        line-height: 1.5
+    h2
+        font-size: 128.5714286%
+        line-height: 1.6
+    h3
+        font-size: 114.2857143%
+    h4
+        font-size: 100%
+    h5
+        font-size: 92.8571429%
+    h6
+        font-size: 85.7142857%
+    ul
+        margin-left: $text-line-height
+        list-style: disc inside
+        margin-bottom: $text-line-height
+    ol
+        list-style: decimal inside
+        margin-left: $text-line-height
+        margin-bottom: $text-line-height
+    i, em
+        font-style: italic
+    strong, b
+        font-weight: 700
+    blockquote
+        p
+            text-align: right
+
+    sup, sub
+        font-size: 75%
+        line-height: 0
+        position: relative
+        vertical-align: baseline
+    sup
+        top: -0.5em
+    sub
+        bottom: -0.25em
+    a
+        color: $text-color
+        text-decoration: underline
+        &:hover
+            text-decoration: none
+    table
+        +table-scaffolding
+        +inner-table-borders(1px, $table-color)
+        +outer-table-borders(2px)
+        width: 100%
+        th
+            text-align: left
+    img
+        min-width: 100%
+        height: auto
+    dl
+        margin-bottom: $text-line-height
+    dt 
+        font-weight: 700
+
+    dd
+        margin-bottom: $text-line-height

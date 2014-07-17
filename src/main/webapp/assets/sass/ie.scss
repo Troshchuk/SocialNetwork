@@ -1,0 +1,23 @@
+textarea{
+	overflow: auto;
+}
+
+
+.ie-2n,
+.ie-3n,
+.ie-4n,
+.ie-5n{
+	margin-right: 0;
+}
+
+
+.ELEM{
+	background:rgb(255,255,255);
+	background: transparent\9;
+	background:rgba(255,255,255, 0.6);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4cFFFFFF,endColorstr=#4cFFFFFF);
+	zoom: 1;
+	&:nth-child(n) {
+		filter: none;
+	}
+}
