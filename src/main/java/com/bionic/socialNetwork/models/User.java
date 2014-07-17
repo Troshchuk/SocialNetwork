@@ -24,20 +24,35 @@ public class User {
 
     private String surname;
 
+    private String position;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",
                joinColumns = {@JoinColumn(name = "user_id")},
                inverseJoinColumns = {@JoinColumn(name = "interest_id")})
     private Set<Interest> interests = new HashSet<Interest>(0);
 
-    private String position;
-
     @OneToOne
     @JoinColumn(name = "id")
     private Password password;
 
+    @OneToMany(mappedBy = "receiverUser", targetEntity = PrivateMessage.class, fetch = FetchType.EAGER)
+    private List<PrivateMessage> privateMessages;
+
     @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
     private List<Post> posts;
+
+    public User() {
+
+    }
+
+    public User(String login, String name, String surname,
+                String position) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.position = position;
+    }
 
     public List<Post> getPosts() {
         return posts;
@@ -53,20 +68,6 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
-    }
-
-    public User() {
-
-    }
-
-
-
-    public User(String login, String name, String surname,
-                String position) {
-        this.login = login;
-        this.name = name;
-        this.surname = surname;
-        this.position = position;
     }
 
     public long getId() {
@@ -115,5 +116,13 @@ public class User {
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    public List<PrivateMessage> getPrivateMessages() {
+        return privateMessages;
+    }
+
+    public void setPrivateMessages(List<PrivateMessage> privateMessages) {
+        this.privateMessages = privateMessages;
     }
 }
