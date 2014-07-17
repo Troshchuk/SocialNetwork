@@ -3,6 +3,7 @@ package com.bionic.socialNetwork.dao.impl;
 import com.bionic.socialNetwork.dao.BackOfficeAdminDao;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.BackOfficeAdmin;
+import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class BackOfficeAdminDaoImplTest {
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
         user = new User("BackAdminTest", "", "", "");
-        userDao.insert(user);
+        userDao.insert(user, new Password("password"));
         backOfficeAdminDao = new BackOfficeAdminDaoImpl();
 
         BackOfficeAdmin backOfficeAdmin = new BackOfficeAdmin(user.getId());

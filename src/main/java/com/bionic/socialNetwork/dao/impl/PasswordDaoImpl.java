@@ -29,13 +29,4 @@ public class PasswordDaoImpl implements PasswordDao {
         session.close();
     }
 
-    @Override
-    public void insert(Password password) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-
-        session.save(password);
-        session.getTransaction().commit();
-        session.close();
-    }
 }

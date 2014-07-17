@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
 import org.junit.Before;
@@ -20,11 +21,10 @@ public class PostDaoImplTest {
     private long postId;
 
     @Before
-    @Test
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
         user = new User("PostUser", "", "", "");
-        userDao.insert(user);
+        userDao.insert(user, new Password("password"));
 
         postDao = new PostDaoImpl();
         Post post = new Post("Some Post", user);

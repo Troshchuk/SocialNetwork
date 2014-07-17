@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +28,8 @@ public class UserDaoImplTest {
     public void testInsert() throws Exception {
         userDao = new UserDaoImpl();
         User user = new User("root2", "Admin", "Admin", "Administrator");
-        userDao.insert(user);
+
+        userDao.insert(user, new Password("koks"));
         id = user.getId();
         login = user.getLogin();
     }

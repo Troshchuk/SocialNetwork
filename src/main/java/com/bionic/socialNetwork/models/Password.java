@@ -25,8 +25,7 @@ public class Password {
 
     }
 
-    public Password(long userId, String password) {
-        this.userId = userId;
+    public Password(String password) {
         this.password = password;
     }
 

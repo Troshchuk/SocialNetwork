@@ -9,5 +9,4 @@ import com.bionic.socialNetwork.models.Password;
 public interface PasswordDao {
     public Password selectById(long id) throws Exception;
     public void update(Password password) throws Exception;
-    public void insert(Password password) throws Exception;
 }
