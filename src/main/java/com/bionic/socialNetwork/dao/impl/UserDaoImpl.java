@@ -69,6 +69,7 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
+        session.delete(user.getPassword());
         session.delete(user);
         session.getTransaction().commit();
         session.close();
