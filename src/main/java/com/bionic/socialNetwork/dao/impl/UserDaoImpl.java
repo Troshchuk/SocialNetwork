@@ -2,13 +2,11 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PasswordDao;
 import com.bionic.socialNetwork.dao.UserDao;
-import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
-import org.hibernate.*;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -57,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 
         Query query = session.createQuery(
                 "FROM User WHERE id >= " + beginId + " AND id < " +
-                (beginId + limit));
+                        (beginId + limit));
         List<User> users = query.list();
         session.close();
 
