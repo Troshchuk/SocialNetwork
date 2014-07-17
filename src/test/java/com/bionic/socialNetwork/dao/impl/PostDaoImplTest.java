@@ -44,7 +44,7 @@ public class PostDaoImplTest {
     }
 
     @Test
-    public void testSelectNext() throws  Exception {
+    public void testSelectNext() throws Exception {
         List<Post> posts = postDao.selectNext(postId);
         assertEquals(postId, posts.get(0).getPostId());
     }

@@ -13,9 +13,9 @@ import java.util.List;
 public interface PostDao {
     public Post selectById(long userId) throws Exception;
 
-    public List<Post> selectNext(long beginId)throws Exception;
+    public List<Post> selectNext(long beginId) throws Exception;
 
     public void insert(Post post) throws Exception;
 
-    public  void delete(Post post) throws  Exception;
+    public void delete(Post post) throws Exception;
 }

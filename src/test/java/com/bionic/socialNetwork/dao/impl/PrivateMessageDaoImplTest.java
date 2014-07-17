@@ -61,7 +61,7 @@ public class PrivateMessageDaoImplTest {
     }
 
     @Test
-    public void  testSelectReceiverId() throws  Exception {
+    public void testSelectReceiverId() throws Exception {
         List<PrivateMessage> privateMessages = privateMessageDao.selectNextReceiverId(receivedUser.getId());
         assertEquals(messageId, privateMessages.get(0).getMessageId());
     }
