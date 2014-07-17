@@ -45,5 +45,6 @@ public class AdministratorDaoImplTest {
     public void testDelete() throws Exception {
         Administrator administrator = new Administrator(user.getId());
         administratorDao.delete(administrator);
+        new UserDaoImpl().delete(user);
     }
 }

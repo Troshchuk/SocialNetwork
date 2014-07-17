@@ -42,5 +42,6 @@ public class BackOfficeAdminDaoImplTest {
     public void testDelete() throws Exception {
         BackOfficeAdmin backOfficeAdmin = new BackOfficeAdmin(user.getId());
         backOfficeAdminDao.delete(backOfficeAdmin);
+        new UserDaoImpl().delete(user);
     }
 }
