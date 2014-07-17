@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Interest;
+import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.*;
@@ -16,11 +17,13 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
     @Override
-    public void insert(User user) throws Exception {
+    public void insert(User user, Password password) throws Exception {
         Session session;
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(user);
+        password.setUserId(user.getId());
+        session.save(password);
         session.getTransaction().commit();
         session.close();
     }
