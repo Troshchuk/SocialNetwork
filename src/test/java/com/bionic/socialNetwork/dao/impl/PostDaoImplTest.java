@@ -52,6 +52,7 @@ public class PostDaoImplTest {
     @After
     public void testDelete() throws Exception {
         postDao.delete(postDao.selectById(postId));
+        new UserDaoImpl().delete(user);
         assertNull(postDao.selectById(postId));
     }
 }

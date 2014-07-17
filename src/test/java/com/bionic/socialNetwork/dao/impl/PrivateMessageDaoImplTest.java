@@ -69,6 +69,8 @@ public class PrivateMessageDaoImplTest {
     @After
     public void testDelete() throws Exception {
         privateMessageDao.delete(privateMessageDao.selectBySentId(messageId));
+        new UserDaoImpl().delete(sentUser);
+        new UserDaoImpl().delete(receivedUser);
         assertNull(privateMessageDao.selectBySentId(messageId));
     }
 
