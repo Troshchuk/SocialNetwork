@@ -1,5 +1,6 @@
 package com.bionic.socialNetwork.dao.impl;
 
+import com.bionic.socialNetwork.dao.PasswordDao;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.Password;
@@ -45,7 +46,6 @@ public class UserDaoImpl implements UserDao {
                 "SELECT id FROM User where login = '" + login + "'");
         List<Long> list = query.list();
         User user = selectById(list.get(0));
-
         session.close();
         return user;
     }
@@ -68,8 +68,10 @@ public class UserDaoImpl implements UserDao {
     public void delete(User user) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
+        PasswordDao passwordDao = new PasswordDaoImpl();
+        Password password = passwordDao.selectById(user.getId());
         session.beginTransaction();
-        session.delete(new PasswordDaoImpl().selectById(user.getId()));
+        session.delete(password);
         session.delete(user);
         session.getTransaction().commit();
         session.close();
