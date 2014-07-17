@@ -14,7 +14,7 @@ jQuery(function( $ ) {
 		login = $('#form-login [type=text]').val()
 		pass = $('#form-login [type=password]').val()
 		if(login!="" && pass!="") {
-			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
+			$.post('rest/user/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					window.history.pushState([], [], 'list.html');
 					$("body").load('list.html');

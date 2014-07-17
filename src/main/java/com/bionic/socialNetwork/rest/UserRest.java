@@ -4,6 +4,7 @@ import com.bionic.socialNetwork.logic.Login;
 import com.bionic.socialNetwork.models.User;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Created by Bish_ua on 16.07.2014.
@@ -16,17 +17,20 @@ public class UserRest {
 
 
     @POST
-    @Produces("application/xml")
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
     @Path("login")
-    public String login(@FormParam("login") String login, @FormParam("password") String password) {
+    public String login(@FormParam("login") String login, @FormParam("pass") String password) {
         Login log = new Login();
         User user = log.getUser(login, password);
+
+
+
         String str = login +" " + password;
         if(user != null){
-            return str+ " " +"yes";
+            return "{\"status\": true}";
         }else{
-            return str + " " +"no";
+            return "{\"status\": false}";
         }
 
     }
