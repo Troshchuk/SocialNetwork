@@ -1,0 +1,46 @@
+package com.bionic.socialNetwork.dao;
+
+import com.bionic.socialNetwork.models.Interest;
+import com.bionic.socialNetwork.models.User;
+
+import java.util.List;
+
+/**
+ * Dao for Interest Entity
+ *
+ * @author Matvii Mitnitskyi
+ * @version 1.00 17.07.14
+ */
+public interface InterestDao {
+    /**
+     * Insert Interest Entity to database;
+     *
+     * @param interest Interest`s Entity
+     */
+    public void insert(Interest interest) throws Exception;
+
+    /**
+     * Select Interest Entity from database by id
+     *
+     * @return Interest
+     * @param id
+     */
+    public Interest selectById(long id) throws Exception;
+
+    /**
+     * Takes all Users with same interest
+     * from database.
+     *
+     * @return all users entities in List<User> form
+     * @param interest Interest`s Entity
+     */
+    public List<User> selectByInterest(Interest interest) throws Exception;
+
+    /**
+     * Deletes pointed interest from database;
+     *
+     * @throws Exception
+     * @param interest Interest`s Entity
+     */
+    public void delete (Interest interest) throws Exception;
+}
