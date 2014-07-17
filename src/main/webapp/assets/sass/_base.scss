@@ -1,0 +1,52 @@
+// .wrapper{
+// 	max-width: $desktop;
+// 	margin: 0 auto;
+// }
+
+@import "susy";
+
+// $total-columns : 12;
+// $column-width  : 54px;
+// $gutter-width  : 20px;
+// $grid-padding  : 40px;
+
+
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+
+body{
+	font-family: $base-font-family;
+	font-size: $font-size;
+	line-height: $text-line-height;
+}
+
+h1,
+h2,
+h3{
+	line-height: 1;
+}
+
+.title{
+	font-size: 50px;
+	text-align: center;
+	position: relative;
+	display: block;
+	position: relative;
+	&.decorated{
+		padding-bottom: 60px;
+		&:after{
+			content: '';
+			position: absolute;
+			width: 70px;
+			height: 0;
+			left: 50%;
+			bottom: 40px;
+			margin-left: -35px;
+			border-bottom: 2px solid;
+			text-align: center;
+		}
+	}
+}

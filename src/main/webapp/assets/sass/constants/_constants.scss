@@ -1,0 +1,46 @@
+@import "colors";
+@import "fonts";
+
+
+// colors
+$header-logo-background: rgba(255, 255, 255, .7);
+$header-navigation-background: rgba(255, 255, 255, .5);
+
+$content-background: rgba(0,0,0, 0.7);
+
+
+$menu-color: #000;
+$menu-current-color: #0a316e;
+
+$filter-background: #0a316e;
+$filter-background-current: #1c2c47;
+$filter-color: #fff;
+
+$button-color: #fff;
+$button-background: #051938;
+$button-background-hover: #1c2c47;
+
+$features-background: rgba(255,255,255, .13);
+
+$filter-tag-background: #676a6f;
+//fonts
+
+// $text-color: #ffffff;
+
+// grid
+$desktop: 960px;
+$tabs: 767px;
+$mobile: 568px;
+
+
+
+
+@include font-face('icon-fonts', font-files("fonts/icon-fonts.woff", "fonts/icon-fonts.ttf", "fonts/icon-fonts.svg"), "fonts/icon-fonts.eot");
+
+
+@mixin max-width($point) {
+	@media (max-width: $point) {
+		@content;
+
+	}
+}

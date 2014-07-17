@@ -1,0 +1,107 @@
+.login-section{
+	height: 800px;
+	background-image: url(../images/login-bg.jpg);
+	background-image: url(../images/background_lights_highlight.jpg);
+	background-position: center;
+	background-size: cover;
+
+	.wraper{
+		width: 960px;
+		margin: auto;
+	}
+	h1{
+		font-family: 'Roboto Condensed';
+		font-size: 45px;
+		padding-bottom: 30px;
+		color: #fff;
+	}
+
+	.login-image{
+		float: left;
+		width: 48%;
+		padding: 0 40px;
+		margin-top: 200px;
+		@include box-sizing(border-box);
+		img{
+			border: 2px solid #fff;
+			@include border-radius(1000px);
+			width: 100%;
+			display: block;
+		}
+	}
+
+	.login-form{
+		margin-top: 200px;
+		width: 48%;
+		padding: 40px 30px;
+		margin-bottom: 80px;
+		@include box-sizing(border-box);
+		float: right;
+		color: #fff;
+		@include border-radius(4px);
+	}
+	.to-login,
+	.to-register{
+		margin-bottom: 20px;
+	}
+	.to-register{
+		display: none;
+	}
+	.register{
+		padding-top: 40px;
+	}
+	.half{
+		width: 49%;
+		float: left;
+		margin-right: 2%;
+		@include box-sizing(border-box);
+		&:nth-child(even){
+			margin-right: 0;
+		}
+		.btn{
+			float: right;
+		}
+	}
+
+	input[type="text"],
+	input[type="password"],
+	input[type="email"]{
+		width: 100%;
+		padding: 20px 20px;
+		border: 1px solid #fff;
+		@include border-radius(4px);
+		@include box-sizing(border-box);
+		margin-bottom: 20px;
+		color: #fff;
+		background: rgba(0,0,0, .5);
+		font: 16px $base-font-family;
+	}
+	input[type="submit"]{
+		@extend .button;
+		font-family: $base-font-family;
+		font-size: 16px;
+	}
+
+	.btn-link{
+		@extend .button;
+		background: transparent;
+		color: #fff;
+		float: right;
+		&:hover{
+			background: #fff;
+			color: #000;
+		}
+	}
+}
+
+.description{
+	.wraper{
+		width: 960px;
+		padding: 60px 120px;
+		margin: auto;
+		@include box-sizing(border-box);
+		text-align: center;
+		.title{
+		}
+	}
+}
