@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.dao;
 
 import com.bionic.socialNetwork.models.Interest;
+import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 
 import java.util.List;
@@ -13,11 +14,11 @@ import java.util.List;
  */
 public interface UserDao {
     /**
-     * Insert user entity to database
+     * Insert user entity to database with password
      *
      * @param user User's entity
      */
-    public void insert(User user) throws Exception;
+    public void insert(User user, Password password) throws Exception;
 
     /**
      * Select user from database by id
