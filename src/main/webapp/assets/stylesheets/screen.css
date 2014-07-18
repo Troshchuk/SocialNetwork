@@ -1,4 +1,4 @@
-/* line 17, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -20,45 +20,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -302,49 +302,49 @@ a img.aligncenter {
   border: 2px solid black;
   width: 100%;
 }
-/* line 2, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
+/* line 2, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
 .content table th {
   text-align: center;
   font-weight: bold;
 }
-/* line 6, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
+/* line 6, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
 .content table td,
 .content table th {
   padding: 2px;
 }
-/* line 8, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
+/* line 8, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_scaffolding.scss */
 .content table td.numeric,
 .content table th.numeric {
   text-align: right;
 }
-/* line 14, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 14, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table th, .content table td {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   border-left-width: 0px;
   border-top-width: 0px;
 }
-/* line 21, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 21, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table th:last-child, .content table th.last, .content table td:last-child, .content table td.last {
   border-right-width: 0px;
 }
-/* line 29, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 29, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table tbody tr:last-child th, .content table tbody tr:last-child td, .content table tfoot tr:last-child th, .content table tfoot tr:last-child td {
   border-bottom-width: 0px;
 }
-/* line 32, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 32, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table tbody tr.last th, .content table tbody tr.last td, .content table tfoot tr.last th, .content table tfoot tr.last td {
   border-bottom-width: 0px;
 }
-/* line 4, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 4, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table thead th {
   border-bottom: 2px solid black;
 }
-/* line 7, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 7, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table tfoot th, .content table tfoot td {
   border-top: 2px solid black;
 }
-/* line 10, C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
+/* line 10, ../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/tables/_borders.scss */
 .content table th:first-child {
   border-right: 2px solid black;
 }
@@ -371,7 +371,7 @@ a img.aligncenter {
 }
 
 /* line 1, ../sass/components/_inputs.scss */
-.button, .login-section input[type="submit"], .login-section .btn-link {
+.button, .login-section .btn-full, .login-section .btn-empty {
   border: 1px solid #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -392,7 +392,7 @@ a img.aligncenter {
   cursor: pointer;
 }
 /* line 11, ../sass/components/_inputs.scss */
-.button:hover, .login-section input[type="submit"]:hover, .login-section .btn-link:hover {
+.button:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
   background: transparent;
   color: #fff;
 }
@@ -513,37 +513,25 @@ footer.main-footer .copyright {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 44, ../sass/layouts/partials/_login.scss */
-.login-section .to-login,
-.login-section .to-register {
-  margin-bottom: 20px;
-}
-/* line 47, ../sass/layouts/partials/_login.scss */
-.login-section .to-register {
-  display: none;
-}
-/* line 50, ../sass/layouts/partials/_login.scss */
-.login-section .register {
+/* line 43, ../sass/layouts/partials/_login.scss */
+.login-section .register-form {
+  width: 48%;
+  float: right;
   padding-top: 40px;
-}
-/* line 53, ../sass/layouts/partials/_login.scss */
-.login-section .half {
-  width: 49%;
-  float: left;
-  margin-right: 2%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: none;
 }
-/* line 58, ../sass/layouts/partials/_login.scss */
-.login-section .half:nth-child(even) {
-  margin-right: 0;
+/* line 51, ../sass/layouts/partials/_login.scss */
+.login-section .register-form input[type="text"],
+.login-section .register-form input[type="password"],
+.login-section .register-form input[type="email"] {
+  padding: 6px 20px;
+  width: 49%;
+  margin-right: 2%;
 }
-/* line 61, ../sass/layouts/partials/_login.scss */
-.login-section .half .btn {
-  float: right;
-}
-/* line 68, ../sass/layouts/partials/_login.scss */
+/* line 62, ../sass/layouts/partials/_login.scss */
 .login-section input[type="text"],
 .login-section input[type="password"],
 .login-section input[type="email"] {
@@ -563,24 +551,25 @@ footer.main-footer .copyright {
   background: rgba(0, 0, 0, 0.5);
   font: 16px "Open Sans", Verdana, Arial, sans-serif;
 }
-/* line 79, ../sass/layouts/partials/_login.scss */
-.login-section input[type="submit"] {
+/* line 74, ../sass/layouts/partials/_login.scss */
+.login-section .btn-full {
   font-family: "Open Sans", Verdana, Arial, sans-serif;
   font-size: 16px;
+  display: inline-block;
 }
-/* line 85, ../sass/layouts/partials/_login.scss */
-.login-section .btn-link {
+/* line 81, ../sass/layouts/partials/_login.scss */
+.login-section .btn-empty {
   background: transparent;
   color: #fff;
   float: right;
 }
-/* line 90, ../sass/layouts/partials/_login.scss */
-.login-section .btn-link:hover {
+/* line 86, ../sass/layouts/partials/_login.scss */
+.login-section .btn-empty:hover {
   background: #fff;
   color: #000;
 }
 
-/* line 98, ../sass/layouts/partials/_login.scss */
+/* line 94, ../sass/layouts/partials/_login.scss */
 .description .wraper {
   width: 960px;
   padding: 60px 120px;
