@@ -14,7 +14,8 @@ public class Login {
     public User getUser(String login, String password) {
         try {
             user = userDaoImpl.selectByLogin(login);
-            if (user.getPassword().equals(password)) {
+
+            if (user.getPassword().getPassword().equals(password)) {
                 return user;
             }
         } catch (Exception e) {

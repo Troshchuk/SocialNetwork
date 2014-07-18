@@ -54,8 +54,8 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(
-                "FROM User WHERE id >= " + beginId + " AND id < " +
-                        (beginId + limit));
+                "FROM User WHERE id >= " + beginId);
+        query.setMaxResults(10);
         List<User> users = query.list();
         session.close();
 

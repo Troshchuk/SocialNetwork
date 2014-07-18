@@ -27,5 +27,10 @@
         <mapping class="com.bionic.socialNetwork.models.BackOfficeAdmin" />
         <mapping class="com.bionic.socialNetwork.models.Interest" />
         <mapping class="com.bionic.socialNetwork.models.PrivateMessage" />
+        <mapping class="com.bionic.socialNetwork.models.Group" />
+        <mapping class="com.bionic.socialNetwork.models.GroupPost" />
+        <mapping class="com.bionic.socialNetwork.models.UserGroup" />
+        <mapping class="com.bionic.socialNetwork.models.SessionUser"/>
+        <mapping class="com.bionic.socialNetwork.models.AddUser"/>
     </session-factory>
 </hibernate-configuration>

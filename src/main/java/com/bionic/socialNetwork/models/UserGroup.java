@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Users_Groups")
 public class UserGroup {
+    @Id // Temprory annotation
     @Column(name = "user_id")
     private long userId;
 
@@ -42,5 +44,25 @@ public class UserGroup {
 
     public void setGroupId(long groupId) {
         this.groupId = groupId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserGroup userGroup = (UserGroup) o;
+
+        if (groupId != userGroup.groupId) return false;
+        if (userId != userGroup.userId) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (int) (groupId ^ (groupId >>> 32));
+        return result;
     }
 }
