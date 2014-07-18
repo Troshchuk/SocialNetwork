@@ -29,5 +29,6 @@
         <mapping class="com.bionic.socialNetwork.models.PrivateMessage" />
         <mapping class="com.bionic.socialNetwork.models.Group" />
         <mapping class="com.bionic.socialNetwork.models.GroupPost" />
+        <mapping class="com.bionic.socialNetwork.models.UserGroup" />
     </session-factory>
 </hibernate-configuration>

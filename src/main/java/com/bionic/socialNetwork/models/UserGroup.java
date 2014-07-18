@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Users_Groups")
 public class UserGroup {
+    @Id // Temprory annotation
     @Column(name = "user_id")
     private long userId;
 

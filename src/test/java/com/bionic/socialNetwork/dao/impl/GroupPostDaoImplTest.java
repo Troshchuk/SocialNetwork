@@ -34,7 +34,7 @@ public class GroupPostDaoImplTest {
     private GroupDAO<Group> groupDao;
 
     @Before
-    public void preExecute() throws Exception {
+    public void beforeTest() throws Exception {
 
         user = new User("PostUser", "", "", "");
         userDao = new UserDaoImpl();
@@ -47,7 +47,7 @@ public class GroupPostDaoImplTest {
         groupPostDao = new GroupPostDaoImpl();
         groupPostActual = new GroupPost(group.getGroupId(), user.getId(), "1 Post");
 
-        testInsertGroupPost();
+        insertGroupPost();
     }
 
     @Test
@@ -57,16 +57,13 @@ public class GroupPostDaoImplTest {
     }
 
     @After
-    public void postExecute() throws Exception {
-
+    public void afterTest() throws Exception {
         groupPostDao.delete(groupPostActual);
-
         groupDao.delete(group);
-
         userDao.delete(user);
     }
 
-    private void testInsertGroupPost() throws Exception {
+    private void insertGroupPost() throws Exception {
         groupPostDao.insert(groupPostActual);
         id = groupPostActual.getGroupPostId();
     }
