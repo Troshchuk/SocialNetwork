@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Sessions")
-public class Sessions {
+public class SessionUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "session_id")
@@ -21,8 +21,13 @@ public class Sessions {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Sessions() {
+    public SessionUser() {
 
+    }
+
+    public SessionUser(String session, User user) {
+        this.user = user;
+        this.session = session;
     }
 
 
