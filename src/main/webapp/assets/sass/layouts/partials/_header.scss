@@ -1,0 +1,35 @@
+header.main-header{
+	.logo{
+		font-size: 46px;
+		text-decoration: none;
+		color: #000;
+		display: inline-block;
+		padding: 10px 0 40px;
+		img{
+			width: 150px;
+			height: auto;
+		}
+	}
+
+	nav.main-nav{
+		background: #25292c;
+		color: #fff;
+	}
+}
+
+nav.main-nav{
+	ul{
+		float: right;
+	}
+	li{
+		float: left;
+		font: 26px $RobotoCondensed;
+		padding: 30px 20px;
+		cursor: pointer;
+		@include transition(background 0.3s, color 0.7s);
+		&:hover{
+			background: #4d9fcf;
+			color: #000;
+		}
+	}
+}

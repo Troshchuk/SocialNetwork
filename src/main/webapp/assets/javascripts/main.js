@@ -16,28 +16,30 @@ jQuery(function( $ ) {
 		login = $('#user-login').val()
 		pass = $('#user-password').val()
 		if(login!="" && pass!="") {
-			$.post('rest/user/login',{login:login,pass:pass},function(server_json){
+			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
+			// $.post('rest/user/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					window.history.pushState([], [], 'list.html');
 					$("body").load('list.html');
 
-					$.getJSON('ajax/users.json', {}, function(json){
-							// debugger
-						for (var i = 0; i < json.persons.length; i++) {
-							var list = '<div class="user-list">';
-							list += '<ul>';
+					// $.getJSON('ajax/users.json', {}, function(json) {
+					$.getJSON('rest/user2/users', {}, function(json) {
+						var list = '<div class="user-list">';
+						list += '<ul>';
+						for (var i = 0; i < json.users.length; i++) {
 							list += '<li class="user-entry">';
-							list += '<div class="image"><img src="images3.jpeg"></div>';
+							// list += '<div class="image"><img src="images3.jpeg"></div>';
 							list += '<div class="textual">';
-							list += '<div class="user-name"><span>Name </span>' + json.persons[i].name + '</div>';
-							list += '<div class="user-department"><span>Department </span>' + json.persons[i].department + '</div>';
-							list += '<div class="user-position"><span>Position </span>' + '</div>'
-
-							$('.user-name').eq(i).text(json.persons[i].name);
-							$('.user-department').eq(i).text(json.persons[i].department);
-							$('.user-position').eq(i).text(json.persons[i].position);
-							$('.user-age').eq(i).text(json.persons[i].age);
+							list += '<div class="user-name"><span>Name </span>' + json.users[i].name + '</div>';
+							list += '<div class="user-surname"><span>Surname </span>' + json.users[i].surname + '</div>';
+							list += '<div class="user-position"><span>Position </span>' + json.users[i].position + '</div>';
+							// list += '<div class="user-department"><span>Department </span>' + json.users[i].department + '</div>';
+							// list += '<div class="user-age"><span>Age </span>' + json.users[i].age + '</div>';
+							list += '</li>';
 						};
+						list += '</ul>';
+						list += '</div>';
+						$('body').append( $(list) );
 					});
 				}
 				else {alert('Wrong login or password')}

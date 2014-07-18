@@ -5,10 +5,7 @@
 	background-position: center;
 	background-size: cover;
 
-	.wraper{
-		width: 960px;
-		margin: auto;
-	}
+
 	h1{
 		font-family: 'Roboto Condensed';
 		font-size: 45px;
@@ -43,16 +40,13 @@
 	.register-form{
 		width: 48%;
 		float: right;
-		padding-top: 40px;
+		padding-top: 100px;
 		@include box-sizing(border-box);
 		display: none;
 		input[type="text"],
 		input[type="password"],
 		input[type="email"]{
 			padding: 6px 20px;
-			width: 49%;
-			margin-right: 2%;
-			// &:
 		}
 	}
 

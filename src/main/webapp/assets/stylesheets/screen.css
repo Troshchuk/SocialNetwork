@@ -419,6 +419,12 @@ h3 {
 }
 
 /* line 32, ../sass/_base.scss */
+.wraper {
+  width: 960px;
+  margin: auto;
+}
+
+/* line 38, ../sass/_base.scss */
 .title {
   font-size: 50px;
   text-align: center;
@@ -426,11 +432,11 @@ h3 {
   display: block;
   position: relative;
 }
-/* line 38, ../sass/_base.scss */
+/* line 44, ../sass/_base.scss */
 .title.decorated {
   padding-bottom: 60px;
 }
-/* line 40, ../sass/_base.scss */
+/* line 46, ../sass/_base.scss */
 .title.decorated:after {
   content: '';
   position: absolute;
@@ -441,6 +447,46 @@ h3 {
   margin-left: -35px;
   border-bottom: 2px solid;
   text-align: center;
+}
+
+/* line 2, ../sass/layouts/partials/_header.scss */
+header.main-header .logo {
+  font-size: 46px;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  padding: 10px 0 40px;
+}
+/* line 8, ../sass/layouts/partials/_header.scss */
+header.main-header .logo img {
+  width: 150px;
+  height: auto;
+}
+/* line 14, ../sass/layouts/partials/_header.scss */
+header.main-header nav.main-nav {
+  background: #25292c;
+  color: #fff;
+}
+
+/* line 21, ../sass/layouts/partials/_header.scss */
+nav.main-nav ul {
+  float: right;
+}
+/* line 24, ../sass/layouts/partials/_header.scss */
+nav.main-nav li {
+  float: left;
+  font: 26px "Roboto Condensed", Verdana, Arial, sans-serif;
+  padding: 30px 20px;
+  cursor: pointer;
+  -webkit-transition: background 0.3s, color 0.7s;
+  -moz-transition: background 0.3s, color 0.7s;
+  -o-transition: background 0.3s, color 0.7s;
+  transition: background 0.3s, color 0.7s;
+}
+/* line 30, ../sass/layouts/partials/_header.scss */
+nav.main-nav li:hover {
+  background: #4d9fcf;
+  color: #000;
 }
 
 /* line 1, ../sass/layouts/partials/_footer.scss */
@@ -463,19 +509,14 @@ footer.main-footer .copyright {
   background-position: center;
   background-size: cover;
 }
-/* line 8, ../sass/layouts/partials/_login.scss */
-.login-section .wraper {
-  width: 960px;
-  margin: auto;
-}
-/* line 12, ../sass/layouts/partials/_login.scss */
+/* line 9, ../sass/layouts/partials/_login.scss */
 .login-section h1 {
   font-family: 'Roboto Condensed';
   font-size: 45px;
   padding-bottom: 30px;
   color: #fff;
 }
-/* line 19, ../sass/layouts/partials/_login.scss */
+/* line 16, ../sass/layouts/partials/_login.scss */
 .login-section .login-image {
   float: left;
   width: 48%;
@@ -485,7 +526,7 @@ footer.main-footer .copyright {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 25, ../sass/layouts/partials/_login.scss */
+/* line 22, ../sass/layouts/partials/_login.scss */
 .login-section .login-image img {
   border: 2px solid #fff;
   -webkit-border-radius: 1000px;
@@ -496,7 +537,7 @@ footer.main-footer .copyright {
   width: 100%;
   display: block;
 }
-/* line 33, ../sass/layouts/partials/_login.scss */
+/* line 30, ../sass/layouts/partials/_login.scss */
 .login-section .login-form {
   margin-top: 200px;
   width: 48%;
@@ -513,25 +554,23 @@ footer.main-footer .copyright {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 43, ../sass/layouts/partials/_login.scss */
+/* line 40, ../sass/layouts/partials/_login.scss */
 .login-section .register-form {
   width: 48%;
   float: right;
-  padding-top: 40px;
+  padding-top: 100px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: none;
 }
-/* line 51, ../sass/layouts/partials/_login.scss */
+/* line 48, ../sass/layouts/partials/_login.scss */
 .login-section .register-form input[type="text"],
 .login-section .register-form input[type="password"],
 .login-section .register-form input[type="email"] {
   padding: 6px 20px;
-  width: 49%;
-  margin-right: 2%;
 }
-/* line 62, ../sass/layouts/partials/_login.scss */
+/* line 56, ../sass/layouts/partials/_login.scss */
 .login-section input[type="text"],
 .login-section input[type="password"],
 .login-section input[type="email"] {
@@ -551,25 +590,25 @@ footer.main-footer .copyright {
   background: rgba(0, 0, 0, 0.5);
   font: 16px "Open Sans", Verdana, Arial, sans-serif;
 }
-/* line 74, ../sass/layouts/partials/_login.scss */
+/* line 68, ../sass/layouts/partials/_login.scss */
 .login-section .btn-full {
   font-family: "Open Sans", Verdana, Arial, sans-serif;
   font-size: 16px;
   display: inline-block;
 }
-/* line 81, ../sass/layouts/partials/_login.scss */
+/* line 75, ../sass/layouts/partials/_login.scss */
 .login-section .btn-empty {
   background: transparent;
   color: #fff;
   float: right;
 }
-/* line 86, ../sass/layouts/partials/_login.scss */
+/* line 80, ../sass/layouts/partials/_login.scss */
 .login-section .btn-empty:hover {
   background: #fff;
   color: #000;
 }
 
-/* line 94, ../sass/layouts/partials/_login.scss */
+/* line 88, ../sass/layouts/partials/_login.scss */
 .description .wraper {
   width: 960px;
   padding: 60px 120px;
