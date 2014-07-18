@@ -4,8 +4,6 @@ import com.bionic.socialNetwork.logic.Login;
 import com.bionic.socialNetwork.logic.UsersList;
 import com.bionic.socialNetwork.models.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 
 import javax.ws.rs.core.Context;
