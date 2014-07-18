@@ -12,7 +12,7 @@ public interface SessionUserDao {
 
     public SessionUser selectById(long id) throws Exception;
 
-    //public SessionUser selectByUserId(long id) throws Exception;
+    public SessionUser selectBySession(String session) throws Exception;
 
     public void delete(SessionUser sessionUser) throws Exception;
 }

@@ -42,6 +42,12 @@ public class SessionUserDaoImplTest {
         assertNotNull(sessionUser);
     }
 
+    @Test
+    public void testSelectBySession() throws Exception {
+        SessionUser sessionUser = sessionUserDao.selectBySession("MySession");
+        assertNotNull(sessionUser);
+    }
+
     @After
     public void testDelete() throws Exception {
         sessionUserDao.delete(sessionUserDao.selectById(sessionId));
