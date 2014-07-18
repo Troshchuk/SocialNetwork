@@ -1,6 +1,9 @@
 package com.bionic.socialNetwork.models;
 
+
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,18 +16,20 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "Users")
+@XmlRootElement
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @XmlElement
     private String login;
 
     private String name;
 
     private String surname;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",
                joinColumns = {@JoinColumn(name = "user_id")},
                inverseJoinColumns = {@JoinColumn(name = "interest_id")})
@@ -34,6 +39,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "id")
+
     private Password password;
 
     @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
