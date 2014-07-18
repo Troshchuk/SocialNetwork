@@ -30,5 +30,6 @@
         <mapping class="com.bionic.socialNetwork.models.Group" />
         <mapping class="com.bionic.socialNetwork.models.GroupPost" />
         <mapping class="com.bionic.socialNetwork.models.UserGroup" />
+        <mapping class="com.bionic.socialNetwork.models.Sessions"/>
     </session-factory>
 </hibernate-configuration>
