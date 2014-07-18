@@ -27,6 +27,7 @@ public class GroupDaoImplTest {
 
         id = groupActual.getGroupId();
     }
+
     @Test
     public void testSelectGroupById() throws Exception {
         Group groupExpected = groupDao.selectById(id);
@@ -44,9 +45,5 @@ public class GroupDaoImplTest {
     public void testDeleteGroup() throws Exception {
         Group groupDeleted = groupDao.selectById(id);
         groupDao.delete(groupDeleted);
-    }
-
-    public long getId() {
-        return id;
     }
 }

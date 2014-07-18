@@ -89,5 +89,6 @@ public class GroupPost {
         result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + (post != null ? post.hashCode() : 0);
         return result;
+
     }
 }

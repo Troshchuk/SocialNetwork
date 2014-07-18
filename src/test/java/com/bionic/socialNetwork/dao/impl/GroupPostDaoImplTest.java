@@ -2,8 +2,12 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.GroupDAO;
 
+import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.GroupPost;
 
+import com.bionic.socialNetwork.models.Password;
+import com.bionic.socialNetwork.models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,14 +26,26 @@ public class GroupPostDaoImplTest {
     private long id;
     private GroupPost groupPostActual;
     private GroupDAO<GroupPost> groupPostDao;
-    private GroupDaoImplTest groupDaoImplTest;
+
+    private UserDao userDao;
+    private User user;
+
+    private Group group;
+    private GroupDAO<Group> groupDao;
 
     @Before
     public void preExecute() throws Exception {
-        groupDaoImplTest = new GroupDaoImplTest();
-        groupDaoImplTest.testInsertGroup();
+
+        user = new User("PostUser", "", "", "");
+        userDao = new UserDaoImpl();
+        userDao.insert(user, new Password("password"));
+
+        group = new Group("First");
+        groupDao = new GroupDaoImpl();
+        groupDao.insert(group);
+
         groupPostDao = new GroupPostDaoImpl();
-        groupPostActual = new GroupPost(groupDaoImplTest.getId(), 1, "1 Post");
+        groupPostActual = new GroupPost(group.getGroupId(), user.getId(), "1 Post");
 
         testInsertGroupPost();
     }
@@ -40,12 +56,14 @@ public class GroupPostDaoImplTest {
         assertEquals(groupPostExpected, groupPostActual);
     }
 
-
     @After
     public void postExecute() throws Exception {
-        GroupPost groupPostDeleted = groupPostDao.selectById(id);
-        groupPostDao.delete(groupPostDeleted);
-        groupDaoImplTest.testDeleteGroup();
+
+        groupPostDao.delete(groupPostActual);
+
+        groupDao.delete(group);
+
+        userDao.delete(user);
     }
 
     private void testInsertGroupPost() throws Exception {

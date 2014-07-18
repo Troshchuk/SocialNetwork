@@ -61,5 +61,6 @@ public class Group {
         int result = (int) (groupId ^ (groupId >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+
     }
 }
