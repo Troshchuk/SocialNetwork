@@ -1,6 +1,8 @@
 package com.bionic.socialNetwork.models;
 
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,10 +53,24 @@ public class User {
     @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.EAGER)
     private List<Post> sessions;
 
+    public User() {
+
+    }
+
+    public User(String login, String name, String surname,
+                String position) {
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+        this.position = position;
+    }
+
+    @JsonIgnore
     public List<Post> getPosts() {
         return posts;
     }
 
+    @JsonIgnore
     public Set<Interest> getInterests() {
         return interests;
     }
@@ -67,20 +83,7 @@ public class User {
         this.posts = posts;
     }
 
-    public User() {
-
-    }
-
-
-
-    public User(String login, String name, String surname,
-                String position) {
-        this.login = login;
-        this.name = name;
-        this.surname = surname;
-        this.position = position;
-    }
-
+    @JsonIgnore
     public long getId() {
         return id;
     }
@@ -89,6 +92,7 @@ public class User {
         this.id = id;
     }
 
+    @JsonIgnore
     public String getLogin() {
         return login;
     }
@@ -121,6 +125,7 @@ public class User {
         this.position = position;
     }
 
+    @JsonIgnore
     public Password getPassword() {
         return password;
     }
@@ -129,6 +134,7 @@ public class User {
         this.password = password;
     }
 
+    @JsonIgnore
     public List<Post> getSessions() {
         return sessions;
     }
