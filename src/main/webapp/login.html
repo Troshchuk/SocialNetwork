@@ -42,19 +42,34 @@
 				<h1>Welcome to Socialiser</h1>
 				<div class="to-login">
 					<form id="form-login" action="">
-						<input type="text" placeholder="Login">
-						<input type="password" placeholder="Password">
-						<input class="btn" type="submit" value="Login">
-						<span id="register-btn" class="btn-link">Register</span>
+						<input id="user-login" type="text" placeholder="Login">
+						<input id="user-password" type="password" placeholder="Password">
+						<span id="user-submit" class="btn-full">Login</span>
+						<span id="register-btn" class="btn-empty">Register</span>
 					</form>
 				</div>
-				<div class="to-register">
+<!-- 				<div class="to-register">
 					<form id="form-key" action="">
 						<input type="password" placeholder="Enter the Key">
-						<input class="btn" type="submit" value="Proceed with registration">
-						<span id="back-btn" class="btn-link">Back</span>
+						<input class="btn-full" type="submit" value="Proceed with registration">
+						
 					</form>
-				</div>
+				</div> -->
+			</div>
+
+			<div class="register-form">
+				<h1>Register</h1>
+				<form id="form-register" action="">
+					<input type="text" placeholder="Your Name">
+					<input type="text" placeholder="Surname">
+					<input type="text" placeholder="Patronymic"> 
+					<input type="email" placeholder="Email">
+					<input type="password" placeholder="Password">
+					<input type="password" placeholder="Password again">
+					<input type="password" placeholder="Enter Invite Key">
+					<input class="btn-full" type="submit" value="Register">
+					<span id="back-btn" class="btn-empty">Back</span>
+				</form>
 			</div>
 		</div>
 	</section>
