@@ -34,24 +34,21 @@ public class User {
     @JoinTable(name = "Users_Interests",
                joinColumns = {@JoinColumn(name = "user_id")},
                inverseJoinColumns = {@JoinColumn(name = "interest_id")})
-    @XmlTransient
     private Set<Interest> interests = new HashSet<Interest>(0);
 
     private String position;
 
     @OneToOne
     @JoinColumn(name = "id")
-    @XmlTransient
+
     private Password password;
 
     @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
-    @XmlTransient
     private List<Post> posts;
 
 
 
     @OneToMany(mappedBy = "user", targetEntity = Sessions.class, fetch = FetchType.LAZY)
-    @XmlTransient
     private List<Post> sessions;
 
     public List<Post> getPosts() {
