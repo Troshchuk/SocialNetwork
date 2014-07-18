@@ -16,8 +16,8 @@ jQuery(function( $ ) {
 		login = $('#user-login').val()
 		pass = $('#user-password').val()
 		if(login!="" && pass!="") {
-			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
-			// $.post('rest/user/login',{login:login,pass:pass},function(server_json){
+//			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
+			$.post('rest/user/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					window.history.pushState([], [], 'list.html');
 					$("body").load('list.html');

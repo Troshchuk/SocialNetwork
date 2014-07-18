@@ -1,15 +1,12 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.Login;
 import com.bionic.socialNetwork.logic.UsersList;
 import com.bionic.socialNetwork.models.User;
 
 import javax.ws.rs.*;
 
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author Dmytro Troshchuk
@@ -21,15 +18,28 @@ public class UserList {
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
 //    public String test(@Context HttpServletRequest request) {
-    public User test() {
+    public ListOfUsers getNextUsers() {
 //        HttpSession session = request.getSession();
 //        session.setAttribute();
 
+        Collection<User> users = new UsersList().getUserList();
+        ListOfUsers userList = new ListOfUsers(users);
 
-        UsersList userList = new UsersList();
-        List<User> users = userList.getUserList();
-        System.out.println(users);
-        return userList.getUserList().get(0);
+        return userList;
 
+
+
+    }
+
+    class ListOfUsers {
+        Collection<User> users;
+
+        public ListOfUsers(Collection users) {
+            this.users = users;
+        }
+
+        public Collection<User> getUsers() {
+            return users;
+        }
     }
 }

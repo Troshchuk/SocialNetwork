@@ -48,7 +48,7 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.EAGER)
     private List<Post> sessions;
 
     public List<Post> getPosts() {
