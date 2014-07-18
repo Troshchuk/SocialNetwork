@@ -39,6 +39,11 @@ public class User {
     @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
     private List<Post> posts;
 
+
+
+    @OneToMany(mappedBy = "user", targetEntity = Sessions.class, fetch = FetchType.LAZY)
+    private List<Post> sessions;
+
     public List<Post> getPosts() {
         return posts;
     }
@@ -115,5 +120,13 @@ public class User {
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    public List<Post> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<Post> sessions) {
+        this.sessions = sessions;
     }
 }
