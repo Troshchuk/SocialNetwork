@@ -43,9 +43,15 @@ public class UserDaoImpl implements UserDao {
         Query query = session.createQuery(
                 "SELECT id FROM User where login = '" + login + "'");
         List<Long> list = query.list();
-        User user = selectById(list.get(0));
         session.close();
-        return user;
+        if(list.size()!=0) {
+            User user = selectById(list.get(0));
+            return user;
+        }else {
+            return null;
+        }
+
+
     }
 
     @Override

@@ -12,15 +12,18 @@ public class Login {
 
 
     public User getUser(String login, String password) {
+
         try {
             user = userDaoImpl.selectByLogin(login);
-
-            if (user.getPassword().getPassword().equals(password)) {
-                return user;
-            }
         } catch (Exception e) {
-            //do nothing
+            e.printStackTrace();
         }
-        return null;
+
+        if(user !=null && password.equals(user.getPassword().getPassword())) {
+            return user;
+        }else {
+            return null;
+        }
+
     }
 }

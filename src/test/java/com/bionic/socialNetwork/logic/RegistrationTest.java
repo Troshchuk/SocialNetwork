@@ -11,48 +11,29 @@ import static junit.framework.TestCase.assertNull;
 
 public class RegistrationTest {
 
-    User user = null;
-    private String name = "loginza";
+    User user;
+    String name = "regTestLogin";
 
     @Before
     public void addUserTest(){
         Registration registration = new Registration();
         registration.addUser(name, "password","name","surname");
-
-
     }
 
 
     @Test
-    public void registerUserTest(){
+    public void registerUserTest() throws Exception {
         UserDaoImpl userDao = new UserDaoImpl();
         user = new User();
-        try {
-            user = userDao.selectByLogin(name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            assertNotNull(userDao.selectByLogin(name));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        user = userDao.selectByLogin(name);
+        assertNotNull(userDao.selectByLogin(name));
+
     }
     @After
-    public void deleteCreatedUserTest(){
+    public void deleteCreatedUserTest() throws Exception {
         UserDaoImpl userDao = new UserDaoImpl();
-        try {
-            userDao.delete(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            assertNull(userDao.selectByLogin(name));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        userDao.delete(user);
+        assertNull(userDao.selectByLogin(name));
     }
 
 }
