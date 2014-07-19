@@ -14,4 +14,4 @@ Installation for developpers
 - Clone, fork or download the source code from this Github page
 - Install [Maven 3](http://maven.apache.org/)
 - Run Tomcat7 from Maven : `mvn tomcat7:run`
-- Connect to the application at http://localhost:8080/SocialNetwork
+- Connect to the application at http://localhost:8080/

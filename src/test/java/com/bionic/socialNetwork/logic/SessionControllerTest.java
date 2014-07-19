@@ -16,41 +16,41 @@ import static org.junit.Assert.assertNull;
 
 public class SessionControllerTest {
 
-    User user;
-    UserDao userDao;
-    SessionUserDao sessionUserDao;
-    SessionUser sessionUser;
-    @Before
-    public void create() throws Exception {
-        user = new User("loginForTest","","","");
-        userDao = new UserDaoImpl();
-        Password password = new Password("password");
-        userDao.insert(user, password);
-    }
-
-
-    @Test
-    public void testSessionController() throws Exception {
-
-        SessionController sessionController = new SessionController();
-        sessionUser = sessionController.getNewSession(user);
-        assertNotNull(sessionUser);
-
-
-
-
-
-
-    }
-    @After
-    public void delete() throws Exception {
-
-        sessionUserDao = new SessionUserDaoImpl();
-        sessionUserDao.delete(sessionUser);
-        userDao.delete(user);
-        assertNull(userDao.selectByLogin("loginForTest"));
-
-    }
+//    User user;
+//    UserDao userDao;
+//    SessionUserDao sessionUserDao;
+//    SessionUser sessionUser;
+//    @Before
+//    public void create() throws Exception {
+//        user = new User("loginForTest","","","");
+//        userDao = new UserDaoImpl();
+//        Password password = new Password("password");
+//        userDao.insert(user, password);
+//    }
+//
+//
+//    @Test
+//    public void testSessionController() throws Exception {
+//
+//        SessionController sessionController = new SessionController();
+//        sessionUser = sessionController.getNewSession(user);
+//        assertNotNull(sessionUser);
+//
+//
+//
+//
+//
+//
+//    }
+//    @After
+//    public void delete() throws Exception {
+//
+//        sessionUserDao = new SessionUserDaoImpl();
+//        sessionUserDao.delete(sessionUser);
+//        userDao.delete(user);
+//        assertNull(userDao.selectByLogin("loginForTest"));
+//
+//    }
 
 
 }

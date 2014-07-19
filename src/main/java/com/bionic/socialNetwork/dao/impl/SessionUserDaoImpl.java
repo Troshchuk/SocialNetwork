@@ -36,9 +36,21 @@ public class SessionUserDaoImpl implements SessionUserDao {
         Query query = session.createQuery(
                 "SELECT sessionId FROM SessionUser where session = '" + sessionUserField + "'");
         List<Long> sessionId = query.list();
-        SessionUser sessionUser = (SessionUser) session.get(SessionUser.class, sessionId.get(0));
-        session.close();
-        return sessionUser;
+
+
+        try {
+            if (sessionId.size() != 0) {
+                SessionUser sessionUser = (SessionUser) session
+                        .get(SessionUser.class, sessionId.get(0));
+                return sessionUser;
+            } else {
+                return null;
+            }
+        } finally {
+            session.close();
+        }
+
+
     }
 
     @Override

@@ -1,0 +1,25 @@
+/* line 1, ../sass/ie.scss */
+textarea {
+  overflow: auto;
+}
+
+/* line 9, ../sass/ie.scss */
+.ie-2n,
+.ie-3n,
+.ie-4n,
+.ie-5n {
+  margin-right: 0;
+}
+
+/* line 14, ../sass/ie.scss */
+.ELEM {
+  background: white;
+  background: transparent\9;
+  background: rgba(255, 255, 255, 0.6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4cFFFFFF,endColorstr=#4cFFFFFF);
+  zoom: 1;
+}
+/* line 20, ../sass/ie.scss */
+.ELEM:nth-child(n) {
+  filter: none;
+}

@@ -5,6 +5,12 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+    <absolute-ordering>
+    <!--
+       Empty absolute ordering is necessary to completely desactivate classpath scanning
+        -->
+</absolute-ordering>
+
     <servlet>
         <servlet-name>jersey-serlvet</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
