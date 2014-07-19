@@ -20,7 +20,6 @@ import java.util.Collection;
 @Path("index")
 public class Index {
     @GET
-    @Path("getPage")
     @Produces(MediaType.TEXT_HTML)
     public InputStream test(@Context HttpServletRequest request) {
 
@@ -35,7 +34,6 @@ public class Index {
             return session.getServletContext()
                           .getResourceAsStream("/WEB-INF/pages/list.html");
         }
-
     }
 
 }

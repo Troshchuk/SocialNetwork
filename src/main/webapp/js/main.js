@@ -13,27 +13,18 @@ jQuery(function( $ ) {
 
 
 	$('#user-submit').click(function() {
-		login = $('#user-login').val()
-		pass = $('#user-password').val()
+		login = $('#user-login').val();
+		pass = $('#user-password').val();
 		if(login!="" && pass!="") {
 //			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
-			$.post('/rest/user/login',{login:login,pass:pass},function(server_json){
+			$.post('/sn/user/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					location.reload();
 				}
 				else {alert('Wrong login or password')}
 			},'json')
 		}
-	})
-
-
-
-
-
-
-
-
-
+	});
 
 	var $wrapper = $(".main-section"),
 		$header = $(".main-header"),
@@ -50,6 +41,4 @@ jQuery(function( $ ) {
 			}
 		});
 	});
-
-
 });

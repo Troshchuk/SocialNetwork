@@ -3,6 +3,7 @@ package com.bionic.socialNetwork.rest;
 import com.bionic.socialNetwork.logic.Login;
 import com.bionic.socialNetwork.logic.Registration;
 import com.bionic.socialNetwork.logic.SessionController;
+import com.bionic.socialNetwork.logic.UsersList;
 import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.util.Collection;
 
 /**
- * Created by Bish_ua on 16.07.2014.
+ * @author Dmytro Troshchuk, Igor Kozhevnikov
+ * @version 1.00  18.07.14.
  */
 
 
@@ -61,5 +64,35 @@ public class UserController {
         }
 
 
+    }
+
+    @GET
+    @Path("workers")
+    @Produces(MediaType.APPLICATION_JSON)
+//    public String test(@Context HttpServletRequest request) {
+    public ListOfUsers getNextUsers(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+        if (userId != -1) {
+            Collection<User> users = new UsersList().getUserList();
+            ListOfUsers userList = new ListOfUsers(users);
+            return userList;
+        } else {
+            return null;
+        }
+    }
+
+    class ListOfUsers {
+        Collection<User> users;
+
+        public ListOfUsers(Collection users) {
+            this.users = users;
+        }
+
+        public Collection<User> getUsers() {
+            return users;
+        }
     }
 }
