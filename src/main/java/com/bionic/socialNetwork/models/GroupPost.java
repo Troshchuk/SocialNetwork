@@ -9,29 +9,31 @@ import javax.persistence.*;
  * @version 1.00 16.07.14
  */
 @Entity
-@Table (name = "Groups_Posts")
+@Table (name = "Posts_Of_Groups")
 public class GroupPost {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "group_post_id")
     private long groupPostId;
 
-    @Column(name = "group_id")
-    private long groupId;
-
-    @Column(name = "user_id")
-    private long userId;
-
     @Column(name = "post")
     private String post;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public GroupPost() {
 
     }
 
-    public GroupPost(long groupId, long userId, String post) {
-        this.groupId = groupId;
-        this.userId = userId;
+    public GroupPost(Group group, User user,  String post) {
+        this.group = group;
+        this.user = user;
         this.post = post;
     }
 
@@ -43,22 +45,6 @@ public class GroupPost {
         this.groupPostId = groupPostId;
     }
 
-    public long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(long groupId) {
-        this.groupId = groupId;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
     public String getPost() {
         return post;
     }
@@ -67,28 +53,19 @@ public class GroupPost {
         this.post = post;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GroupPost groupPost = (GroupPost) o;
-
-        if (groupId != groupPost.groupId) return false;
-        if (groupPostId != groupPost.groupPostId) return false;
-        if (userId != groupPost.userId) return false;
-        if (post != null ? !post.equals(groupPost.post) : groupPost.post != null) return false;
-
-        return true;
+    public Group getGroup() {
+        return group;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) (groupPostId ^ (groupPostId >>> 32));
-        result = 31 * result + (int) (groupId ^ (groupId >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
-        result = 31 * result + (post != null ? post.hashCode() : 0);
-        return result;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

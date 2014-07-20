@@ -29,8 +29,7 @@
         <mapping class="com.bionic.socialNetwork.models.PrivateMessage" />
         <mapping class="com.bionic.socialNetwork.models.Group" />
         <mapping class="com.bionic.socialNetwork.models.GroupPost" />
-        <mapping class="com.bionic.socialNetwork.models.UserGroup" />
         <mapping class="com.bionic.socialNetwork.models.SessionUser"/>
-        <mapping class="com.bionic.socialNetwork.models.AddUser"/>
+        <mapping class="com.bionic.socialNetwork.models.Invite"/>
     </session-factory>
 </hibernate-configuration>

@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.models;
 
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.Session;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
@@ -19,7 +20,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "Users")
-@XmlRootElement
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,20 +38,26 @@ public class User {
                inverseJoinColumns = {@JoinColumn(name = "interest_id")})
     private Set<Interest> interests = new HashSet<Interest>(0);
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "Users_Groups",
+               joinColumns = {@JoinColumn(name = "user_id")},
+               inverseJoinColumns = {@JoinColumn(name = "group_id")})
+    private Set<Group> groups = new HashSet<Group>(0);
+
     private String position;
 
     @OneToOne
     @JoinColumn(name = "id")
-
     private Password password;
 
     @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
     private List<Post> posts;
 
-
-
     @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.EAGER)
-    private List<Post> sessions;
+    private List<SessionUser> sessions;
+
+    @OneToMany(mappedBy = "user", targetEntity = GroupPost.class, fetch = FetchType.EAGER)
+    private List<GroupPost> groupPosts;
 
     public User() {
 
@@ -135,11 +141,20 @@ public class User {
     }
 
     @JsonIgnore
-    public List<Post> getSessions() {
+    public List<SessionUser> getSessions() {
         return sessions;
     }
 
-    public void setSessions(List<Post> sessions) {
+    public void setSessions(List<SessionUser> sessions) {
         this.sessions = sessions;
+    }
+
+    @JsonIgnore
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 }

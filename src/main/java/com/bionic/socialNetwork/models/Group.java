@@ -1,6 +1,8 @@
 package com.bionic.socialNetwork.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Group entity
@@ -18,6 +20,16 @@ public class Group {
 
     @Column(name = "name")
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "group_id")
+    private GroupPost post;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "Users_Groups",
+               joinColumns = {@JoinColumn(name = "group_id")},
+               inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> userSet = new HashSet<User>(0);
 
     public Group() {
 
@@ -43,24 +55,19 @@ public class Group {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Group group = (Group) o;
-
-        if (groupId != group.groupId) return false;
-        if (name != null ? !name.equals(group.name) : group.name != null) return false;
-
-        return true;
+    public Set<User> getUserSet() {
+        return userSet;
     }
 
-    @Override
-    public int hashCode() {
-        int result = (int) (groupId ^ (groupId >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
+    }
 
+    public GroupPost getPost() {
+        return post;
+    }
+
+    public void setPost(GroupPost post) {
+        this.post = post;
     }
 }

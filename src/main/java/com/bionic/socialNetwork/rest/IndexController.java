@@ -18,7 +18,7 @@ import java.util.Collection;
  * @version 1.00  14.07.14.
  */
 @Path("index")
-public class Index {
+public class IndexController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream test(@Context HttpServletRequest request) {

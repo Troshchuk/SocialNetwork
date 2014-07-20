@@ -3,36 +3,34 @@ package com.bionic.socialNetwork.models;
 import javax.persistence.*;
 
 /**
- * Add_Users entity
- *
  * @author Denis
- * @version 1.00  18.07.2014.
+ * @version 1.0 18.07.14
  */
 @Entity
-@Table(name = "Add_Users")
-public class AddUser {
+@Table(name = "Invites")
+public class Invite {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "add_user_id")
-    private long addUserId;
+    @Column(name = "invite_id")
+    private long inviteId;
 
     @Column(name = "Invite")
     private String invite;
 
-    public AddUser() {
+    public Invite() {
 
     }
 
-    public AddUser(String invite) {
+    public Invite(String invite) {
         this.invite = invite;
     }
 
-    public long getAddUserId() {
-        return addUserId;
+    public long getInviteId() {
+        return inviteId;
     }
 
-    public void setAddUserId(long addUserId) {
-        this.addUserId = addUserId;
+    public void setInviteId(long inviteId) {
+        this.inviteId = inviteId;
     }
 
     public String getInvite() {
