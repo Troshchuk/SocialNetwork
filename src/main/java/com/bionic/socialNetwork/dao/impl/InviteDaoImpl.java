@@ -51,8 +51,14 @@ public class InviteDaoImpl implements InviteDao {
         Query query = session.createQuery(
                 "SELECT inviteId FROM Invite where invite = '" + inviteStr + "'");
         List<Long> inviteId = query.list();
-        Invite invite = (Invite) session.get(Invite.class, inviteId.get(0));
         session.close();
-        return invite;
+
+        if (inviteId.size()!=0) {
+            Invite invite = (Invite) session.get(Invite.class, inviteId.get(0));
+            return invite;
+        }else{
+            return null;
+        }
+
     }
 }

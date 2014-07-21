@@ -49,18 +49,22 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
     @Path("registration")
-    public String registration(@FormParam("login") String login,
+    public String registration(@FormParam("name") String name,
+                               @FormParam("surname") String surname,
+                               @FormParam("email") String login,
                                @FormParam("password") String password,
-                               @FormParam("name") String name,
-                               @FormParam("surname") String surname) {
+                               @FormParam("invite") String invite) {
 
         Registration registration = new Registration();
 
-
-        if (registration.addUser(login, password, name, surname)) {
-            return "{\"status\": true}";
-        } else {
-            return "{\"status\": false}";
+        if (registration.checkInviteCode(invite)) {
+            if (registration.addUser(name, surname, login, password)) {
+                return "{\"status\": true}";
+            } else {
+                return "{\"status\": false}";
+            }
+        }else{
+                return "{\"status\": noInvite}";
         }
 
 
