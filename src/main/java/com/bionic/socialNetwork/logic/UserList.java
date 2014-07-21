@@ -29,7 +29,7 @@ public class UserList {
         try {
             List<User> users = userDao.selectNext(beginId);
             beginId += users.size();
-            this.users =  users;
+            this.users = users;
         } catch (Exception e) {
             e.printStackTrace();
         }

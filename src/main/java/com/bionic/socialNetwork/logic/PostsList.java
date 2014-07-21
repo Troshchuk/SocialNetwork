@@ -3,7 +3,9 @@ package com.bionic.socialNetwork.logic;
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.models.Post;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -11,22 +13,29 @@ import java.util.List;
  * @version 1.00  21.07.2014.
  */
 public class PostsList {
+    @JsonIgnore
     private int beginId;
+    @JsonIgnore
     private PostDao postDao;
 
-    public PostsList() {
-        beginId = 0;
+    private Collection<Post> posts;
+
+    public PostsList(int beginId) {
+        this.beginId = beginId;
         postDao = new PostDaoImpl();
     }
 
-    public List<Post> getPostsList() {
+    public void next() {
         try {
             List<Post> posts = postDao.selectNext(beginId);
             beginId += posts.size();
-            return posts;
+            this.posts = posts;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public Collection<Post> getPosts() {
+        return posts;
     }
 }
