@@ -5,7 +5,9 @@ import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -25,6 +27,7 @@ public class UserController {
     @Consumes("application/x-www-form-urlencoded")
     @Path("login")
     public String login(@Context HttpServletRequest request,
+                        @Context HttpServletResponse response,
                         @FormParam("login") String login,
                         @FormParam("pass") String password) {
         HttpSession session = request.getSession();
@@ -34,6 +37,8 @@ public class UserController {
         if (user != null) {
             SessionController sessionController = new SessionController();
             session.setAttribute("user", sessionController.getNewSession(user));
+
+            response.addCookie(new Cookie("id", String.valueOf(user.getId())));
 
             return "{\"status\": true}";
         } else {
@@ -99,4 +104,6 @@ public class UserController {
             return null;
         }
     }
+
+//    public User getUser(@Context HttpServletRequest request, @PathParam(""))
 }
