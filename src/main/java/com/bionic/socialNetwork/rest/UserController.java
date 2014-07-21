@@ -129,7 +129,7 @@ public class UserController {
     @Path("post")
     @Produces(MediaType.APPLICATION_JSON)
     public PostsList getPosts(@Context HttpServletRequest request,
-                                     @PathParam("number") int number) {
+                              @PathParam("number") int number) {
         HttpSession session = request.getSession();
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         SessionController sessionController = new SessionController();
@@ -139,7 +139,57 @@ public class UserController {
             postsList.next();
             return postsList;
         } else {
-            return  null;
+            return null;
         }
+    }
+
+
+    //Create empty rest for News, Followings, Private message, Groups
+    @GET
+    @Path("news")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getNews(@Context HttpServletRequest request,
+                             @PathParam("number") int number) {
+        return null;
+    }
+
+    @GET
+    @Path("home")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getHomePage(@Context HttpServletRequest request,
+                                 @PathParam("number") int number) {
+        return null;
+    }
+
+    @GET
+    @Path("workers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getWorkers(@Context HttpServletRequest request,
+                                @PathParam("number") int number) {
+        return null;
+    }
+
+    @GET
+    @Path("following")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getFollowing(@Context HttpServletRequest request,
+                                  @PathParam("number") int number) {
+        return null;
+    }
+
+    @GET
+    @Path("private_message")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getPrivateMessage(@Context HttpServletRequest request,
+                                       @PathParam("number") int number) {
+        return null;
+    }
+
+    @GET
+    @Path("groups")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getGroups(@Context HttpServletRequest request,
+                               @PathParam("number") int number) {
+        return null;
     }
 }
