@@ -13,42 +13,59 @@ public class GroupPostDaoImpl implements GroupPostDao {
 
     @Override
     public GroupPost selectById(long id) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        GroupPost groupPost = (GroupPost) session.get(GroupPost.class, id);
-        session.close();
-        return groupPost;
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            GroupPost groupPost = (GroupPost) session.get(GroupPost.class, id);
+            return groupPost;
+        }finally {
+            session.close();
+        }
+
     }
 
     @Override
     public void insert(GroupPost groupPost) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(groupPost);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.save(groupPost);
 
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public void update(GroupPost groupPost) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
 
-        session.update(groupPost);
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(groupPost);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public void delete(GroupPost groupPost) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(groupPost);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.delete(groupPost);
 
-        session.getTransaction().commit();
-        session.close();
     }
 }

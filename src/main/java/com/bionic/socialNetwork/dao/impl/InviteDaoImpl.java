@@ -15,34 +15,44 @@ import java.util.List;
 public class InviteDaoImpl implements InviteDao {
     @Override
     public void insert(Invite invite) throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(invite);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.save(invite);
 
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public void delete(Invite invite) throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(invite);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.delete(invite);
-
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public Invite selectById(long inviteId) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Invite invite = (Invite) session.get(Invite.class, inviteId);
-        session.close();
-        return invite;
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Invite invite = (Invite) session.get(Invite.class, inviteId);
+            return invite;
+        }finally {
+            session.close();
+        }
+
     }
 
     @Override

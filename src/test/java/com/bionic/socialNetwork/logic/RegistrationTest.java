@@ -11,29 +11,29 @@ import static junit.framework.TestCase.assertNull;
 
 public class RegistrationTest {
 
-//    User user;
-//    String name = "regTestLogin";
-//
-//    @Before
-//    public void addUserTest(){
-//        Registration registration = new Registration();
-//        registration.addUser(name, "password","name","surname");
-//    }
-//
-//
-//    @Test
-//    public void registerUserTest() throws Exception {
-//        UserDaoImpl userDao = new UserDaoImpl();
-//        user = new User();
-//        user = userDao.selectByLogin(name);
-//        assertNotNull(userDao.selectByLogin(name));
-//
-//    }
-//    @After
-//    public void deleteCreatedUserTest() throws Exception {
-//        UserDaoImpl userDao = new UserDaoImpl();
-//        userDao.delete(user);
-//        assertNull(userDao.selectByLogin(name));
-//    }
+    User user;
+    String login = "regTestLogin";
+
+    @Before
+    public void addUserTest(){
+        Registration registration = new Registration();
+        registration.addUser("name", "surname",login,"surname");
+    }
+
+
+    @Test
+    public void registerUserTest() throws Exception {
+        UserDaoImpl userDao = new UserDaoImpl();
+        user = new User();
+        user = userDao.selectByLogin(login);
+        assertNotNull(userDao.selectByLogin(login));
+
+    }
+    @After
+    public void deleteCreatedUserTest() throws Exception {
+        UserDaoImpl userDao = new UserDaoImpl();
+        userDao.delete(user);
+        assertNull(userDao.selectByLogin(login));
+    }
 
 }

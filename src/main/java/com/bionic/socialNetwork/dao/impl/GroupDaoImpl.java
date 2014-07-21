@@ -12,42 +12,58 @@ import org.hibernate.Session;
 public class GroupDaoImpl implements GroupDao {
     @Override
     public Group selectById(long id) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Group groupE = (Group) session.get(Group.class, id);
-        session.close();
-        return groupE;
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Group groupE = (Group) session.get(Group.class, id);
+            return groupE;
+        }finally {
+            session.close();
+        }
+
     }
 
     @Override
     public void insert(Group group) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(group);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.save(group);
 
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public void update(Group group) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(group);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.update(group);
 
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override
     public void delete(Group group) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(group);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
 
-        session.delete(group);
-
-        session.getTransaction().commit();
-        session.close();
     }
 }

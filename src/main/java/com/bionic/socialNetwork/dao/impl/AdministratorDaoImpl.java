@@ -37,8 +37,6 @@ public class AdministratorDaoImpl implements AdministratorDao {
             session.beginTransaction();
             session.delete(administrator);
             session.getTransaction().commit();
-        }catch (Exception e){
-
         }finally {
             session.close();
         }
@@ -53,8 +51,6 @@ public class AdministratorDaoImpl implements AdministratorDao {
             Query query = session.createQuery("FROM Administrator");
             List<Administrator> list = query.list();
             return list;
-        }catch (Exception e){
-            return null;
         }finally {
             session.close();
 
@@ -66,15 +62,12 @@ public class AdministratorDaoImpl implements AdministratorDao {
     @Override
     public Administrator selectById(long id) throws Exception {
         Session session = null;
-
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Administrator administrator =
                     (Administrator) session.get(Administrator.class, id);
 
             return administrator;
-        }catch (Exception e){
-            return null;
         }finally {
             session.close();
         }

@@ -19,6 +19,7 @@ public class PrivateMessageDaoImpl implements PrivateMessageDao {
 
     @Override
     public PrivateMessage selectBySentId(long id) throws Exception {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, id);
         session.close();
