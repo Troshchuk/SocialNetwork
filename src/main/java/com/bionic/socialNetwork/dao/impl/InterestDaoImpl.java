@@ -41,14 +41,14 @@ public class InterestDaoImpl implements InterestDao {
     }
 
     @Override
-    public List<User> selectByInterest(Interest interest) throws Exception{
+    public Interest selectByInterest(String interest) throws Exception{
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(
-                "SELECT userSet FROM Interest where interest = '" + interest + "'");
-        List<User> user = query.list();
+                "FROM Interest where interest = '" + interest + "'");
+        List<Interest> interests = query.list();
         session.close();
-        return user;
+        return interests.get(0);
     }
 
     @Override

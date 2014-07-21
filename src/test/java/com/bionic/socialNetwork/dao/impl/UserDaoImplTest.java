@@ -27,7 +27,7 @@ public class UserDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         userDao = new UserDaoImpl();
-        User user = new User("root3", "Admin", "Admin", "Administrator");
+        User user = new User("userDaoTest", "Admin", "Admin", "Administrator");
 
         userDao.insert(user, new Password("koks"));
         id = user.getId();

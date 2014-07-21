@@ -28,13 +28,12 @@ public interface InterestDao {
     public Interest selectById(long id) throws Exception;
 
     /**
-     * Takes all Users with same interest
-     * from database.
+     * Take interest entity from database.
      *
-     * @return all users entities in List<User> form
-     * @param interest Interest`s Entity
+     * @return interest entity
+     * @param interest string interest
      */
-    public List<User> selectByInterest(Interest interest) throws Exception;
+    public Interest selectByInterest(String interest) throws Exception;
 
     /**
      * Deletes pointed interest from database;
