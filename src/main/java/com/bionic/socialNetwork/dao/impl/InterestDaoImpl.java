@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.InterestDao;
+import com.bionic.socialNetwork.models.Administrator;
 import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
@@ -52,6 +53,22 @@ public class InterestDaoImpl implements InterestDao {
         session.delete(interest);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Interest> selectByUser(User user) throws Exception {
+        Session session = null;
+        List<Interest> list;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            Query query = session.createQuery("FROM Interest");
+            list = query.list();
+        }finally {
+
+        }session.close();
+
+        return list;
     }
 
 }

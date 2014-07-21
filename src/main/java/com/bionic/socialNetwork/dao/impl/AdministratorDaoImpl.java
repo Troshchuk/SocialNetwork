@@ -17,41 +17,66 @@ import java.util.List;
 public class AdministratorDaoImpl implements AdministratorDao {
     @Override
     public void insert(Administrator administrator) {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(administrator);
-        session.getTransaction().commit();
-        session.close();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(administrator);
+            session.getTransaction().commit();
+        }finally {
+            session.close();
+        }
+
     }
 
     @Override
     public void delete(Administrator administrator) {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.delete(administrator);
-        session.getTransaction().commit();
-        session.close();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(administrator);
+            session.getTransaction().commit();
+        }catch (Exception e){
+
+        }finally {
+            session.close();
+        }
+
     }
 
     @Override
     public List<Administrator> selectAll() throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Administrator");
-        List<Administrator> list = query.list();
-        session.close();
-        return list;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery("FROM Administrator");
+            List<Administrator> list = query.list();
+            return list;
+        }catch (Exception e){
+            return null;
+        }finally {
+            session.close();
+
+        }
+
+
     }
 
     @Override
     public Administrator selectById(long id) throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        Administrator administrator =
-                (Administrator) session.get(Administrator.class, id);
-        session.close();
-        return administrator;
+        Session session = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Administrator administrator =
+                    (Administrator) session.get(Administrator.class, id);
+
+            return administrator;
+        }catch (Exception e){
+            return null;
+        }finally {
+            session.close();
+        }
     }
 }

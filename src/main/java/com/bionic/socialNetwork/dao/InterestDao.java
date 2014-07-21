@@ -43,4 +43,6 @@ public interface InterestDao {
      * @param interest Interest`s Entity
      */
     public void delete (Interest interest) throws Exception;
+
+    public List<Interest> selectByUser(User user) throws Exception;
 }
