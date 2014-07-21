@@ -33,9 +33,9 @@ public class User {
     private String surname;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "Friends", joinColumns = {@JoinColumn(name = "id")},
+    @JoinTable(name = "Friends", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
-    private Set <Friends> friends = new HashSet<Friends>(0);
+    private Set <User> friends = new HashSet<User>(0);
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
