@@ -18,59 +18,41 @@ public class BackOfficeAdminDaoImpl implements BackOfficeAdminDao {
 
     @Override
     public void insert(BackOfficeAdmin backOfficeAdmin) throws Exception {
-        Session session= null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(backOfficeAdmin);
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
-
-
+        Session session;
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(backOfficeAdmin);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void delete(BackOfficeAdmin backOfficeAdmin) throws Exception {
-        Session session=null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(backOfficeAdmin);
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
-
-
+        Session session;
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(backOfficeAdmin);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public List<BackOfficeAdmin> selectAll() throws Exception {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("FROM BackOfficeAdmin");
-            List<BackOfficeAdmin> list = query.list();
-            return list;
-        }finally {
-            session.close();
-        }
-
-
+        Session session;
+        session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("FROM BackOfficeAdmin");
+        List<BackOfficeAdmin> list = query.list();
+        session.close();
+        return list;
     }
 
     @Override
     public BackOfficeAdmin selectById(long id) throws Exception {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            BackOfficeAdmin backOfficeAdmin =
-                    (BackOfficeAdmin) session.get(BackOfficeAdmin.class, id);
-            return backOfficeAdmin;
-        }finally {
-            session.close();
-        }
+        Session session;
+        session = HibernateUtil.getSessionFactory().openSession();
+        BackOfficeAdmin backOfficeAdmin =
+                (BackOfficeAdmin) session.get(BackOfficeAdmin.class, id);
+        session.close();
+        return backOfficeAdmin;
     }
 }

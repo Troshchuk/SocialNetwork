@@ -16,61 +16,40 @@ import java.util.List;
 public class PostDaoImpl implements PostDao {
 
     @Override
-
     public Post selectById(long id) throws Exception {
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            Post post = (Post) session.get(Post.class, id);
-            return post;
-        }finally {
-            session.close();
-        }
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Post post = (Post) session.get(Post.class, id);
+        session.close();
+        return post;
     }
 
     @Override
     public List<Post> selectNext(long beginId) throws Exception {
         int limit = 10;
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery(
-                    "FROM Post WHERE postId >= " + beginId + " AND postId < " +
-                            (beginId + limit));
-            List<Post> posts = query.list();
-            return posts;
-        }finally {
-            session.close();
-        }
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(
+                "FROM Post WHERE postId >= " + beginId + " AND postId < " +
+                        (beginId + limit));
+        List<Post> posts = query.list();
+        session.close();
+        return posts;
     }
 
     @Override
     public void insert(Post post) throws Exception {
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(post);
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(post);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void delete(Post post) throws Exception {
-        Session session = null;
-        try{
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(post);
-            session.getTransaction().commit();
-        }finally {
-            session.close();
-        }
-
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(post);
+        session.getTransaction().commit();
+        session.close();
     }
 }

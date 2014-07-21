@@ -21,8 +21,8 @@ public class IndexController {
     public InputStream test(@Context HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        SessionUser sessionUser =
-                (SessionUser) session.getAttribute("user");
+        String sessionUser =
+                (String) session.getAttribute("user");
         if (sessionUser != null) {
 
             SessionController sessionController = new SessionController();

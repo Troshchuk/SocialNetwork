@@ -76,7 +76,7 @@ public class UserController {
     public UserList getNextUsers(@Context HttpServletRequest request,
                                  @PathParam("number") long number) {
         HttpSession session = request.getSession();
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
@@ -94,7 +94,7 @@ public class UserController {
     public InterestList getInterests(@Context HttpServletRequest request,
                                      @PathParam("id") long id) {
         HttpSession session = request.getSession();
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
@@ -112,7 +112,7 @@ public class UserController {
                            @PathParam("add_post") String addPost,
                            @PathParam("id") long id) throws Exception {
         HttpSession session = request.getSession();
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
@@ -131,7 +131,7 @@ public class UserController {
     public PostsList getPosts(@Context HttpServletRequest request,
                               @PathParam("number") int number) {
         HttpSession session = request.getSession();
-        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
