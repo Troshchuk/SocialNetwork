@@ -1,9 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.Login;
-import com.bionic.socialNetwork.logic.Registration;
-import com.bionic.socialNetwork.logic.SessionController;
-import com.bionic.socialNetwork.logic.UsersList;
+import com.bionic.socialNetwork.logic.*;
+import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
 
 /**
  * @author Dmytro Troshchuk, Igor Kozhevnikov
@@ -63,40 +60,43 @@ public class UserController {
             } else {
                 return "{\"status\": false}";
             }
-        }else{
-                return "{\"status\": noInvite}";
+        } else {
+            return "{\"status\": noInvite}";
         }
-
-
     }
 
     @GET
-    @Path("workers")
+    @Path("workers{number}")
     @Produces(MediaType.APPLICATION_JSON)
-//    public String test(@Context HttpServletRequest request) {
-    public ListOfUsers getNextUsers(@Context HttpServletRequest request) {
+    public UserList getNextUsers(@Context HttpServletRequest request,
+                                  @PathParam("number") long number) {
         HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
+        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
-            Collection<User> users = new UsersList().getUserList();
-            ListOfUsers userList = new ListOfUsers(users);
+            UserList userList = new UserList(number * 10);
+            userList.next();
             return userList;
         } else {
             return null;
         }
     }
 
-    class ListOfUsers {
-        Collection<User> users;
-
-        public ListOfUsers(Collection users) {
-            this.users = users;
-        }
-
-        public Collection<User> getUsers() {
-            return users;
+    @GET
+    @Path("interests{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public InterestList getInterests(@Context HttpServletRequest request,
+                                     @PathParam("id") long id) {
+        HttpSession session = request.getSession();
+        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+        if (userId != -1) {
+            InterestList interestList = new InterestList(id);
+            return interestList;
+        } else {
+            return null;
         }
     }
 }

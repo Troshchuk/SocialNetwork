@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  * Created by Bish_ua on 18.07.2014.
  */
 public class SessionController {
-    public String getNewSession(User user) {
+    public SessionUser getNewSession(User user) {
         SessionUserDao sessionDao = new SessionUserDaoImpl();
         String session  = generateSession();
         SessionUser sessionUser = new SessionUser(session, user);
@@ -21,7 +21,7 @@ public class SessionController {
             e.printStackTrace();
         }
 
-        return session;
+        return sessionUser;
     }
 
     /**
@@ -30,11 +30,11 @@ public class SessionController {
      * @param session
      * @return
      */
-    public long verifySession(String session) {
+    public long verifySession(SessionUser session) {
         SessionUser sessionUser = null;
         SessionUserDao sessionUserDao = new SessionUserDaoImpl();
         try {
-            sessionUser = sessionUserDao.selectBySession(session);
+            sessionUser = sessionUserDao.selectById(session.getSessionId());
         } catch (Exception e) {
             e.printStackTrace();
         }
