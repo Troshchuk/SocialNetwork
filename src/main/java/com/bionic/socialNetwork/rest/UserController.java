@@ -74,7 +74,7 @@ public class UserController {
     @Path("workers{number}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserList getNextUsers(@Context HttpServletRequest request,
-                                  @PathParam("number") long number) {
+                                 @PathParam("number") long number) {
         HttpSession session = request.getSession();
         SessionUser sessionUser = (SessionUser) session.getAttribute("user");
         SessionController sessionController = new SessionController();
@@ -122,6 +122,24 @@ public class UserController {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @POST
+    @Path("post")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PostsList getPosts(@Context HttpServletRequest request,
+                                     @PathParam("number") int number) {
+        HttpSession session = request.getSession();
+        SessionUser sessionUser = (SessionUser) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+        if (userId != -1) {
+            PostsList postsList = new PostsList(number * 10);
+            postsList.next();
+            return postsList;
+        } else {
+            return  null;
         }
     }
 }
