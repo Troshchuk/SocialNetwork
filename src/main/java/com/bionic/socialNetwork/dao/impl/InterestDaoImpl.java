@@ -65,9 +65,8 @@ public class InterestDaoImpl implements InterestDao {
             Query query = session.createQuery("FROM Interest");
             list = query.list();
         }finally {
-
-        }session.close();
-
+            session.close();
+        }
         return list;
     }
 

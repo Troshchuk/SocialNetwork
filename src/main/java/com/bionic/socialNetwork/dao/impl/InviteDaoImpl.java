@@ -47,18 +47,23 @@ public class InviteDaoImpl implements InviteDao {
 
     @Override
     public Invite selectByInvite(String inviteStr) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery(
-                "SELECT inviteId FROM Invite where invite = '" + inviteStr + "'");
-        List<Long> inviteId = query.list();
-        session.close();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery(
+                    "SELECT inviteId FROM Invite where invite = '" + inviteStr + "'");
+            List<Long> inviteId = query.list();
 
-        if (inviteId.size()!=0) {
-            Invite invite = (Invite) session.get(Invite.class, inviteId.get(0));
-            return invite;
-        }else{
-            return null;
+            if (inviteId.size() != 0) {
+                Invite invite = (Invite) session.get(Invite.class, inviteId.get(0));
+                return invite;
+            } else {
+                return null;
+            }
+        }finally {
+            session.close();
         }
+
 
     }
 }
