@@ -3,30 +3,39 @@ package com.bionic.socialNetwork.logic;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.User;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
  * @author Dmytro Troshchuk
  * @version 1.00  18.07.14.
  */
-public class UsersList {
-    private int beginId;
+public class UserList {
+    @JsonIgnore
+    private long beginId;
+    @JsonIgnore
     private UserDao userDao;
 
-    public UsersList() {
-        beginId = 0;
+    private Collection<User> users;
+
+    public UserList(long beginId) {
+        this.beginId = beginId;
         userDao = new UserDaoImpl();
     }
 
-    public List<User> getUserList() {
+    public void next() {
         try {
             List<User> users = userDao.selectNext(beginId);
             beginId += users.size();
-            return users;
+            this.users =  users;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
     }
 }

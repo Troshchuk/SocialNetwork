@@ -3,7 +3,7 @@
  */
 jQuery(function( $ ) {
     $('listOfUsers').ready(function() {
-        $.getJSON('/sn/user/workers', function (json) {
+        $.getJSON('/sn/user/workers0',function (json) {
             var list = '<div class="user-list">';
             list += '<ul>';
             for (var i = 0; i < json.users.length; i++) {
