@@ -106,6 +106,30 @@ public class UserController {
     }
 
     @GET
+    @Path("id{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUser(@Context HttpServletRequest request,
+                        @PathParam("id") long id) {
+
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+
+        if (userId != -1) {
+            User user = null;
+            try {
+                user = new UserDaoImpl().selectById(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    @GET
     @Path("post")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean addPost(@Context HttpServletRequest request,
