@@ -8,6 +8,9 @@ import com.bionic.socialNetwork.models.Invite;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
 /**
  * Created by Bish_ua on 17.07.2014.
  */
@@ -22,7 +25,10 @@ public class Registration {
         user.setSurname(surname);
 
         try {
-            userDao.insert(user, new Password(password));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes(), 0, password.length());
+            String md5 = new BigInteger(1, md.digest()).toString(16);
+            userDao.insert(user, new Password(md5));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
