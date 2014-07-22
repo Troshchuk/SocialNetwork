@@ -17,7 +17,8 @@ import java.security.MessageDigest;
 public class Registration {
 
 
-    public boolean addUser(String name, String surname, String login, String password){
+    public boolean addUser(String name, String surname, String login,
+                           String password) {
         UserDao userDao = new UserDaoImpl();
         User user = new User();
         user.setLogin(login);
@@ -38,19 +39,29 @@ public class Registration {
 
     }
 
-    public boolean checkInviteCode(String invite){
+    public boolean checkInviteCode(String invite) {
         InviteDao inviteDao = new InviteDaoImpl();
         try {
             Invite currentInvite = inviteDao.selectByInvite(invite);
-            if (currentInvite !=null){
+            if (currentInvite != null) {
+                deleteInvite(currentInvite);
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
         } catch (Exception e) {
-           return false;
+            return false;
         }
 
+    }
+
+    private void deleteInvite(Invite invite) {
+        InviteDao inviteDao = new InviteDaoImpl();
+        try {
+            inviteDao.delete(invite);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
