@@ -16,9 +16,6 @@ import java.util.List;
  * @version 1.00  21.07.14.
  */
 public class InterestList {
-    @JsonIgnore
-    private InterestDao interestDao;
-
     private Collection<Interest> interests;
 
     public InterestList(long id) {

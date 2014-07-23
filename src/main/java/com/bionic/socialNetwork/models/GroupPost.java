@@ -1,5 +1,7 @@
 package com.bionic.socialNetwork.models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -53,6 +55,7 @@ public class GroupPost {
         this.post = post;
     }
 
+    @JsonIgnore
     public Group getGroup() {
         return group;
     }

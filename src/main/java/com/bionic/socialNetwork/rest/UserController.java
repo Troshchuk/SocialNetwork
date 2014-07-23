@@ -10,6 +10,7 @@ import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -187,24 +188,24 @@ public class UserController {
         }
     }
 
-    @GET
-    @Path("received_messages{number}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PrivateMessageList getPrivateMessage(@Context HttpServletRequest request,
-                                                @PathParam("user_id") int id,
-                                                @PathParam("number") int number) {
-        HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
-        SessionController sessionController = new SessionController();
-        long userId = sessionController.verifySession(sessionUser);
-        if (userId != -1) {
-            PrivateMessageList privateMessageList = new PrivateMessageList(number, id);
-            privateMessageList.next();
-            return privateMessageList;
-        } else {
-            return null;
-        }
-    }
+//    @GET
+//    @Path("received_messages{number}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public PrivateMessageList getPrivateMessage(@Context HttpServletRequest request,
+//                                                @PathParam("user_id") int id,
+//                                                @PathParam("number") int number) {
+//        HttpSession session = request.getSession();
+//        String sessionUser = (String) session.getAttribute("user");
+//        SessionController sessionController = new SessionController();
+//        long userId = sessionController.verifySession(sessionUser);
+//        if (userId != -1) {
+//            PrivateMessageList privateMessageList = new PrivateMessageList(number, id);
+//            privateMessageList.next();
+//            return privateMessageList;
+//        } else {
+//            return null;
+//        }
+//    }
 
     //Create empty rest for News, Followings, Private message, Groups
     @GET

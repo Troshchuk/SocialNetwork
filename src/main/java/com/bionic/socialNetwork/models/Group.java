@@ -1,7 +1,10 @@
 package com.bionic.socialNetwork.models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,9 +24,8 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "group_id")
-    private GroupPost post;
+    @OneToMany(mappedBy = "group", targetEntity = GroupPost.class, fetch = FetchType.EAGER)
+    private List<GroupPost> groupPosts;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Groups",
@@ -55,6 +57,7 @@ public class Group {
         this.name = name;
     }
 
+    @JsonIgnore
     public Set<User> getUserSet() {
         return userSet;
     }
@@ -63,11 +66,12 @@ public class Group {
         this.userSet = userSet;
     }
 
-    public GroupPost getPost() {
-        return post;
+    @JsonIgnore
+    public List<GroupPost> getGroupPosts() {
+        return groupPosts;
     }
 
-    public void setPost(GroupPost post) {
-        this.post = post;
+    public void setGroupPosts(List<GroupPost> groupPosts) {
+        this.groupPosts = groupPosts;
     }
 }
