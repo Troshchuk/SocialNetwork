@@ -6,3 +6,6 @@
 
 #maven
 /target
+
+#ssas
+/src/main/webapp/assets/.sass-cache

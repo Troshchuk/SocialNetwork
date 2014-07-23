@@ -1,4 +1,15 @@
 header.main-header{
+	margin-bottom: 20px;
+	.exit-btn{
+		float: right;
+		margin-top: 50px; 
+		@extend .button;
+		background: lightblue;
+		&:hover{
+			background: darken(lightblue, 25%);
+		}
+
+	}
 	.logo{
 		font-size: 46px;
 		text-decoration: none;

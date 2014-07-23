@@ -3,7 +3,7 @@
 // 	margin: 0 auto;
 // }
 
-@import "susy";
+// @import "susy";
 
 // $total-columns : 12;
 // $column-width  : 54px;
@@ -29,9 +29,21 @@ h3{
 	line-height: 1;
 }
 
+
 .wraper{
 	width: 960px;
 	margin: auto;
+	padding: 0 20px;
+}
+
+#controls{
+	width: 30%;
+	float: left;
+}
+
+#content{
+	width: 70%;
+	float: left;
 }
 
 

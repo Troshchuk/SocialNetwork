@@ -32,7 +32,7 @@ public class IndexController {
                               .getResourceAsStream("/WEB-INF/pages/login.html");
             } else {
                 return session.getServletContext()
-                              .getResourceAsStream("/WEB-INF/pages/list.html");
+                              .getResourceAsStream("/WEB-INF/pages/home.html");
             }
         } else {
             return session.getServletContext()

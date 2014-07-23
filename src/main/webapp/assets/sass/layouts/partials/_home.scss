@@ -1,0 +1,27 @@
+.user{
+	
+	.user-image{
+		border: 1px solid #999;
+		@include box-sizing(border-box);
+		padding: 4px;
+		width: 200px;
+		float: left;
+		img{
+			width: 100%;
+			display: block;
+		}
+	}
+
+	.user-info{
+		margin-left: 220px;
+	}
+
+	.name{
+		padding: 5px 0 10px;
+		span{
+			font-size: 32px;
+		}
+	}
+	.position{}
+}
+
