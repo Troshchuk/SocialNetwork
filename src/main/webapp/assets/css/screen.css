@@ -504,8 +504,8 @@ footer.main-footer .copyright {
 /* line 1, ../sass/layouts/partials/_login.scss */
 .login-section {
   height: 800px;
-  background-image: url(../../img/login-bg.jpg);
-  background-image: url(../../img/background_lights_highlight.jpg);
+  background-image: url(/assets/img/login-bg.jpg);
+  background-image: url(/assets/img/background_lights_highlight.jpg);
   background-position: center;
   background-size: cover;
 }
