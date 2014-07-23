@@ -2,11 +2,8 @@ package com.bionic.socialNetwork.models;
 
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.Session;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.List;
@@ -35,19 +32,19 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Friends", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
-    private Set <User> friends = new HashSet<User>(0);
+    private Set<User> friends = new HashSet<User>(0);
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",
-               joinColumns = {@JoinColumn(name = "user_id")},
-               inverseJoinColumns = {@JoinColumn(name = "interest_id")})
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "interest_id")})
     private Set<Interest> interests = new HashSet<Interest>(0);
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Groups",
-               joinColumns = {@JoinColumn(name = "user_id")},
-               inverseJoinColumns = {@JoinColumn(name = "group_id")})
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "group_id")})
     private Set<Group> groups = new HashSet<Group>(0);
 
     private String position;
@@ -164,6 +161,7 @@ public class User {
         this.groups = groups;
     }
 
+    @JsonIgnore
     public Set<User> getFriends() {
         return friends;
     }
