@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Denis
+ * @author Denis Biyovskiy
  * @version 1.00  16.07.2014.
  */
 public class PrivateMessageDaoImplTest {
