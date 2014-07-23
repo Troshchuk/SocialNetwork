@@ -213,13 +213,6 @@ public class UserController {
         return null;
     }
 
-    @GET
-    @Path("following")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PostsList getFollowing(@Context HttpServletRequest request,
-                                  @PathParam("number") int number) {
-        return null;
-    }
 
     @GET
     @Path("private_message")
