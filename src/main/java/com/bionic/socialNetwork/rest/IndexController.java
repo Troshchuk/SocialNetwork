@@ -19,24 +19,21 @@ public class IndexController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream test(@Context HttpServletRequest request) {
-
         HttpSession session = request.getSession();
-        String sessionUser =
-                (String) session.getAttribute("user");
-        if (sessionUser != null) {
 
-            SessionController sessionController = new SessionController();
-            long userId = sessionController.verifySession(sessionUser);
-            if (userId == -1) {
+
+            Long userID = (Long) request.getAttribute("userID");
+
+            if(userID == null){
                 return session.getServletContext()
-                              .getResourceAsStream("/WEB-INF/pages/login.html");
-            } else {
+                        .getResourceAsStream("/WEB-INF/pages/login.html");
+            }else{
                 return session.getServletContext()
-                              .getResourceAsStream("/WEB-INF/pages/list.html");
+                        .getResourceAsStream("/WEB-INF/pages/list.html");
             }
-        } else {
-            return session.getServletContext()
-                          .getResourceAsStream("/WEB-INF/pages/login.html");
-        }
+
+
+
+
     }
 }

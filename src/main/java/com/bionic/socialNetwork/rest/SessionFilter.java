@@ -30,15 +30,16 @@ public class SessionFilter implements ContainerRequestFilter {
         SessionController sessionController = new SessionController();
         HttpSession httpSession = webRequest.getSession();
         long userID = sessionController.verifySession((String) httpSession.getAttribute("user"));
+        URI uri = request.getRequestUri();
 
-        System.out.println("session in filter: " + httpSession.getAttribute("user"));
 
         if (userID == -1) {
             try {
-                if (!request.getRequestUri().equals(new URI("http://localhost:8080/sn/user/login")) &&
-                        !request.getRequestUri().equals(new URI("http://localhost:8080/sn/user/registration"))) {
+                if (!request.getRequestUri().equals(new URI("http://" + uri.getHost() + ":" + uri.getPort() + "/sn/user/login")) &&
+                        !request.getRequestUri().equals(new URI("http://" + uri.getHost() + ":" + uri.getPort() + "/sn/user/registration"))) {
 
-                    request.setUris(request.getBaseUri(), new URI("http://localhost:8080/sn/index"));
+                   
+                    request.setUris(request.getBaseUri(), new URI("http://" + uri.getHost() + ":" + uri.getPort() + "/sn/index"));
 
                 }
 
@@ -47,6 +48,7 @@ public class SessionFilter implements ContainerRequestFilter {
             }
         } else {
             webRequest.setAttribute("userID", userID);
+
         }
         return request;
     }
