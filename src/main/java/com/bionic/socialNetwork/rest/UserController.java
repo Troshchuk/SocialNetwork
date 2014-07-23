@@ -216,4 +216,15 @@ public class UserController {
                                @PathParam("number") int number) {
         return null;
     }
+
+    @GET
+    @Path("exit")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String exit(@Context HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        sessionController.deleteSession(sessionUser);
+        return "";
+    }
 }

@@ -16,7 +16,8 @@ jQuery(function( $ ) {
             }
             list += '</ul>';
             list += '</div>';
-            document.write(list);
+            var listOfUsers = document.getElementById('listOfUsers');
+            listOfUsers.innerHTML = list;
         });
     });
 });
