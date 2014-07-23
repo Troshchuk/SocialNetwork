@@ -163,4 +163,8 @@ public class User {
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
+
+    public Set<User> getFriends() {
+        return friends;
+    }
 }
