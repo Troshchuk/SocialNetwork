@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.models;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Private messages entity
@@ -26,11 +27,14 @@ public class PrivateMessage {
 
     private String message;
 
+    private Date time;
+
     public PrivateMessage() {
 
     }
 
-    public PrivateMessage(User sentUser, User receiverUser, String message) {
+    public PrivateMessage(User sentUser, User receiverUser, String message, Date time) {
+        this.time = time;
         this.sentUser = sentUser;
         this.receiverUser = receiverUser;
         this.message = message;
@@ -66,5 +70,13 @@ public class PrivateMessage {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

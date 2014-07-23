@@ -29,19 +29,19 @@ public class User {
 
     private String surname;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Friends", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "friend_id")})
     private Set<User> friends = new HashSet<User>(0);
 
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "interest_id")})
     private Set<Interest> interests = new HashSet<Interest>(0);
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Groups",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "group_id")})
@@ -53,13 +53,13 @@ public class User {
     @JoinColumn(name = "id")
     private Password password;
 
-    @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", targetEntity = Post.class, fetch = FetchType.LAZY)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", targetEntity = SessionUser.class, fetch = FetchType.LAZY)
     private List<SessionUser> sessions;
 
-    @OneToMany(mappedBy = "user", targetEntity = GroupPost.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", targetEntity = GroupPost.class, fetch = FetchType.LAZY)
     private List<GroupPost> groupPosts;
 
     public User() {

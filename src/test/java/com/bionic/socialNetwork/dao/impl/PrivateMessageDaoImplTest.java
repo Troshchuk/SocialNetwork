@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -33,7 +34,7 @@ public class PrivateMessageDaoImplTest {
         userDao.insert(receivedUser, new Password("root"));
 
         privateMessageDao = new PrivateMessageDaoImpl();
-        PrivateMessage privateMessage = new PrivateMessage(sentUser, receivedUser, "Some message");
+        PrivateMessage privateMessage = new PrivateMessage(sentUser, receivedUser, "Some message", new Date(new java.util.Date().getTime()));
         privateMessageDao.insert(privateMessage);
 
         messageId = privateMessage.getMessageId();

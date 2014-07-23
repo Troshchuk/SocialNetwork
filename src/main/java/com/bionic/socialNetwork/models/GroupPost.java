@@ -3,6 +3,7 @@ package com.bionic.socialNetwork.models;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * GroupPost entity
@@ -29,14 +30,17 @@ public class GroupPost {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private Date time;
+
     public GroupPost() {
 
     }
 
-    public GroupPost(Group group, User user,  String post) {
+    public GroupPost(Group group, User user,  String post, Date time) {
         this.group = group;
         this.user = user;
         this.post = post;
+        this.time = time;
     }
 
     public long getGroupPostId() {
@@ -70,5 +74,13 @@ public class GroupPost {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

@@ -1,7 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.GroupLogic;
-import com.bionic.socialNetwork.logic.GroupPostList;
+import com.bionic.socialNetwork.logic.lists.GroupPostList;
 import com.bionic.socialNetwork.models.Group;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +38,9 @@ public class GroupController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("posts")
-    public GroupPostList getPosts(@PathParam("id") long id) {
-        return new GroupPostList(id);
+    @Path("posts{page}")
+    public GroupPostList getPosts(@PathParam("id") long id,
+                                  @PathParam("page") int page) {
+        return new GroupPostList(id, page);
     }
 }

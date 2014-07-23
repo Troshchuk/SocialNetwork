@@ -4,19 +4,18 @@ import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.logic.*;
-import com.bionic.socialNetwork.models.Interest;
+import com.bionic.socialNetwork.logic.lists.InterestList;
+import com.bionic.socialNetwork.logic.lists.PostsList;
+import com.bionic.socialNetwork.logic.lists.UserList;
 import com.bionic.socialNetwork.models.Post;
-import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.Collection;
-import java.util.Set;
+import java.sql.Date;
 
 /**
  * @author Dmytro Troshchuk, Igor Kozhevnikov, Denis Biyovskiy
@@ -143,7 +142,7 @@ public class UserController {
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
             PostDao postDao = new PostDaoImpl();
-            Post post = new Post(addPost, new UserDaoImpl().selectById(id));
+            Post post = new Post(addPost, new UserDaoImpl().selectById(id), new Date(new java.util.Date().getTime()));
             postDao.insert(post);
             return true;
         } else {

@@ -1,6 +1,9 @@
 package com.bionic.socialNetwork.dao;
 
+import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.GroupPost;
+
+import java.util.List;
 
 /**
  * @author Dmytro Troshchuk
@@ -11,4 +14,5 @@ public interface GroupPostDao {
     public void insert(GroupPost group) throws Exception;
     public void update(GroupPost group) throws Exception;
     public void delete(GroupPost group) throws Exception;
+    public List selectLastWith(Group group, int lot) throws Exception;
 }

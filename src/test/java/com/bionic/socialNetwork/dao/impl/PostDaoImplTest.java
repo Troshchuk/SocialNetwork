@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -30,7 +31,7 @@ public class PostDaoImplTest {
         userDao.insert(user, new Password("password"));
 
         postDao = new PostDaoImpl();
-        Post post = new Post("Some Post", user);
+        Post post = new Post("Some Post", user, new Date(new java.util.Date().getTime()));
         postDao.insert(post);
 
         postId = post.getPostId();

@@ -1,9 +1,15 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.GroupPostDao;
+import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.GroupPost;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 /**
  * @author yoalex5
@@ -51,4 +57,19 @@ public class GroupPostDaoImpl implements GroupPostDao {
         session.getTransaction().commit();
         session.close();
     }
+
+    @Override
+    public List<GroupPost> selectLastWith(Group group, int lot) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(GroupPost.class);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.eq("group.groupId", group.getGroupId()));
+        criteria.addOrder(Order.desc("time"));
+        criteria.setFirstResult(lot * 10);
+        List list = criteria.list();
+        session.close();
+        return list;
+    }
+
+
 }

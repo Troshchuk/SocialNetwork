@@ -1,4 +1,4 @@
-package com.bionic.socialNetwork.logic;
+package com.bionic.socialNetwork.logic.lists;
 
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;

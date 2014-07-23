@@ -13,6 +13,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
 
 
@@ -47,7 +51,8 @@ public class GroupPostDaoImplTest {
         groupDao.insert(group);
 
         groupPostDao = new GroupPostDaoImpl();
-        groupPostActual = new GroupPost(group, user, "1 Post");
+        groupPostActual = new GroupPost(group, user, "1 Post", new Date(
+                new java.util.Date().getTime()));
 
         groupPostDao.insert(groupPostActual);
         id = groupPostActual.getGroupPostId();
@@ -58,6 +63,30 @@ public class GroupPostDaoImplTest {
         GroupPost groupPostExpected = groupPostDao.selectById(id);
         assertEquals(groupPostExpected.getGroupPostId(),
                      groupPostActual.getGroupPostId());
+    }
+
+    @Test
+    public void testSelectLastWith() throws Exception {
+        List<GroupPost> groupPosts = new ArrayList<GroupPost>();
+
+        for (int i = 0; i < 9 ; i++) {
+            groupPosts.add(new GroupPost(group, user, "selectLast", new Date(
+                    new java.util.Date().getTime())));
+            groupPostDao.insert(groupPosts.get(i));
+        }
+
+        GroupPost groupPost = new GroupPost(group, user, "fsdf", new Date(
+                new java.util.Date().getTime()));
+
+        groupPostDao.insert(groupPost);
+        List<GroupPost> result = groupPostDao.selectLastWith(group, 1);
+
+        assertEquals(result.get(0).getGroupPostId(), groupPost.getGroupPostId());
+
+        for (int i = 0; i < 9 ; i++) {
+            groupPostDao.delete(groupPosts.get(i));
+        }
+        groupPostDao.delete(groupPost);
     }
 
     @After
