@@ -1,4 +1,4 @@
-package com.bionic.socialNetwork.rest;
+package com.bionic.socialNetwork.rest.filters;
 
 
 import com.bionic.socialNetwork.logic.SessionController;

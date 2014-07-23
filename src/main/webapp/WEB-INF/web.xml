@@ -20,11 +20,11 @@
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
+            <param-value>true</param-value>1
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.bionic.socialNetwork.rest.SessionFilter</param-value>
+            <param-value>com.bionic.socialNetwork.rest.filters.SessionFilter</param-value>
         </init-param>
 
 
