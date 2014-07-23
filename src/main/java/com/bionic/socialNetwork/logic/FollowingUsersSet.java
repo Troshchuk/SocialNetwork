@@ -28,13 +28,17 @@ public class FollowingUsersSet {
         this.userId = userId;
     }
 
-    public void pullFollowing(int beginId) throws Exception {
-        user = userDao.selectById(userId);
-        Set<User> followingUsersAll = user.getFriends();
-        Iterator itr = followingUsersAll.iterator();
-        for (int i = 0; i < beginId ; i++, itr.next());
-        for (int i = beginId; i < beginId + 10; i++) {
-            followingUsers.add((User)itr.next());
+    public void next() {
+        try {
+            user = userDao.selectById(userId);
+            Set<User> followingUsersAll = user.getFriends();
+            Iterator itr = followingUsersAll.iterator();
+            for (int i = 0; i < beginId; i++, itr.next()) ;
+            for (int i = beginId; i < beginId + 10; i++) {
+                followingUsers.add((User) itr.next());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
