@@ -180,12 +180,29 @@ public class UserController {
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
             FollowingUsersSet followingUsersSet = new FollowingUsersSet(number * 10, id);
-            followingUsersSet.getFollowingUsers();
+            followingUsersSet.next();
             return followingUsersSet;
         } else {
             return null;
         }
+    }
 
+    @GET
+    @Path("private_message")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PrivateMessageList getPrivateMessage(@Context HttpServletRequest request,
+                                                @PathParam("number") int number) {
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+        if (userId != -1) {
+            PrivateMessageList privateMessageList = new PrivateMessageList(number * 10);
+            privateMessageList.next();
+            return privateMessageList;
+        } else {
+            return null;
+        }
     }
 
     //Create empty rest for News, Followings, Private message, Groups
@@ -210,15 +227,6 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public PostsList getWorkers(@Context HttpServletRequest request,
                                 @PathParam("number") int number) {
-        return null;
-    }
-
-
-    @GET
-    @Path("private_message")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PostsList getPrivateMessage(@Context HttpServletRequest request,
-                                       @PathParam("number") int number) {
         return null;
     }
 
