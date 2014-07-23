@@ -15,6 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * @author Dmytro Troshchuk, Igor Kozhevnikov
@@ -129,7 +130,7 @@ public class UserController {
         }
     }
 
-    @GET
+    @POST
     @Path("post")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean addPost(@Context HttpServletRequest request,
@@ -149,7 +150,7 @@ public class UserController {
         }
     }
 
-    @POST
+    @GET
     @Path("post")
     @Produces(MediaType.APPLICATION_JSON)
     public PostsList getPosts(@Context HttpServletRequest request,
@@ -167,6 +168,25 @@ public class UserController {
         }
     }
 
+    @GET
+    @Path("following")
+    @Produces(MediaType.APPLICATION_JSON)
+    public FollowingUsersSet getFollowingUser(@Context HttpServletRequest request,
+                                              @PathParam("number") int number,
+                                              @PathParam("id") int id) {
+        HttpSession session = request.getSession();
+        String sessionUser = (String) session.getAttribute("user");
+        SessionController sessionController = new SessionController();
+        long userId = sessionController.verifySession(sessionUser);
+        if (userId != -1) {
+            FollowingUsersSet followingUsersSet = new FollowingUsersSet(number * 10, id);
+            followingUsersSet.getFollowingUsers();
+            return followingUsersSet;
+        } else {
+            return null;
+        }
+
+    }
 
     //Create empty rest for News, Followings, Private message, Groups
     @GET
