@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * @author Dmytro Troshchuk, Igor Kozhevnikov
+ * @author Dmytro Troshchuk, Igor Kozhevnikov, Denis Biyovskiy
  * @version 1.00  18.07.14.
  */
 
@@ -169,7 +169,7 @@ public class UserController {
     }
 
     @GET
-    @Path("following")
+    @Path("following{id}/{number}")
     @Produces(MediaType.APPLICATION_JSON)
     public FollowingUsersSet getFollowingUser(@Context HttpServletRequest request,
                                               @PathParam("number") int number,
@@ -179,7 +179,7 @@ public class UserController {
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
-            FollowingUsersSet followingUsersSet = new FollowingUsersSet(number * 10, id);
+            FollowingUsersSet followingUsersSet = new FollowingUsersSet(number , id);
             followingUsersSet.next();
             return followingUsersSet;
         } else {
@@ -188,16 +188,17 @@ public class UserController {
     }
 
     @GET
-    @Path("private_message")
+    @Path("received_messages{number}")
     @Produces(MediaType.APPLICATION_JSON)
     public PrivateMessageList getPrivateMessage(@Context HttpServletRequest request,
+                                                @PathParam("user_id") int id,
                                                 @PathParam("number") int number) {
         HttpSession session = request.getSession();
         String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
-            PrivateMessageList privateMessageList = new PrivateMessageList(number * 10);
+            PrivateMessageList privateMessageList = new PrivateMessageList(number, id);
             privateMessageList.next();
             return privateMessageList;
         } else {

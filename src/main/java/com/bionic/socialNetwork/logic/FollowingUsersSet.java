@@ -1,9 +1,11 @@
 package com.bionic.socialNetwork.logic;
 
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.User;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -24,6 +26,8 @@ public class FollowingUsersSet {
     private Set<User> followingUsers;
 
     public FollowingUsersSet(int beginId, int userId) {
+        userDao = new UserDaoImpl();
+        followingUsers = new HashSet<User>();
         this.beginId = beginId;
         this.userId = userId;
     }
@@ -33,10 +37,13 @@ public class FollowingUsersSet {
             user = userDao.selectById(userId);
             Set<User> followingUsersAll = user.getFriends();
             Iterator itr = followingUsersAll.iterator();
-            for (int i = 0; i < beginId; i++, itr.next()) ;
+            if (beginId > 1) {
+                for (int i = 0; i < beginId; i++, itr.next()) ;
+            }
             for (int i = beginId; i < beginId + 10; i++) {
                 followingUsers.add((User) itr.next());
             }
+            followingUsers = followingUsersAll;
         } catch (Exception e) {
             e.printStackTrace();
         }
