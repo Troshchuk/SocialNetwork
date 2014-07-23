@@ -7,8 +7,8 @@ import com.bionic.socialNetwork.models.Invite;
  * @version 1.0 18.07.14
  */
 public interface InviteDao {
-    public void insert(Invite potentionalUser) throws Exception;
-    public void delete(Invite potentionalUser) throws Exception;
+    public void insert(Invite invite) throws Exception;
+    public void delete(Invite invite) throws Exception;
     public Invite selectById(long addUserId) throws Exception;
     public Invite selectByInvite(String invite) throws Exception;
 }
