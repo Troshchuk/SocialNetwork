@@ -24,7 +24,7 @@ public class IndexController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream test(@Context HttpServletRequest request) {
-        Long userID = (Long) request.getAttribute("userID");
+        Long userID = (Long) request.getAttribute("userId");
 
         if (userID == null) {
             return context.getResourceAsStream("/WEB-INF/pages/login.html");

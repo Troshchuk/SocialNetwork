@@ -24,7 +24,7 @@
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-            <param-value>com.bionic.socialNetwork.rest.filters.SessionFilter</param-value>
+            <param-value>com.bionic.socialNetwork.rest.filters.AccessFilter</param-value>
         </init-param>
 
 

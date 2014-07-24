@@ -10,7 +10,9 @@ import com.bionic.socialNetwork.logic.lists.UserList;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -23,7 +25,7 @@ import java.sql.Date;
  */
 
 
-// not finished
+
 @Path("user")
 public class UserController {
     @POST
@@ -31,15 +33,19 @@ public class UserController {
     @Consumes("application/x-www-form-urlencoded")
     @Path("login")
     public String login(@Context HttpServletRequest request,
+                        @Context HttpServletResponse response,
                         @FormParam("login") String login,
                         @FormParam("pass") String password) {
-        HttpSession session = request.getSession();
+
         Login log = new Login();
         User user = log.getUser(login, password);
+        Cookie cookie;
 
         if (user != null) {
             SessionController sessionController = new SessionController();
-            session.setAttribute("user", sessionController.getNewSession(user));
+            cookie = new Cookie("sessionId", sessionController.getNewSession(user));
+            cookie.setPath("/");
+            response.addCookie(cookie);
 
             return "{\"status\": true}";
         } else {
