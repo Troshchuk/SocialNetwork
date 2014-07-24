@@ -3,7 +3,10 @@ package com.bionic.socialNetwork.rest;
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
-import com.bionic.socialNetwork.logic.*;
+import com.bionic.socialNetwork.logic.FollowingUsersSet;
+import com.bionic.socialNetwork.logic.Login;
+import com.bionic.socialNetwork.logic.Registration;
+import com.bionic.socialNetwork.logic.SessionController;
 import com.bionic.socialNetwork.logic.lists.InterestList;
 import com.bionic.socialNetwork.logic.lists.PostsList;
 import com.bionic.socialNetwork.logic.lists.UserList;
@@ -82,17 +85,9 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public UserList getNextUsers(@Context HttpServletRequest request,
                                  @PathParam("number") long number) {
-        HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
-        SessionController sessionController = new SessionController();
-        long userId = sessionController.verifySession(sessionUser);
-        if (userId != -1) {
             UserList userList = new UserList(number * 10);
             userList.next();
             return userList;
-        } else {
-            return null;
-        }
     }
 
     @GET
@@ -100,16 +95,8 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public InterestList getInterests(@Context HttpServletRequest request,
                                      @PathParam("id") long id) {
-        HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
-        SessionController sessionController = new SessionController();
-        long userId = sessionController.verifySession(sessionUser);
-        if (userId != -1) {
             InterestList interestList = new InterestList(id);
             return interestList;
-        } else {
-            return null;
-        }
     }
 
     @GET
@@ -117,13 +104,6 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public User getUser(@Context HttpServletRequest request,
                         @PathParam("id") long id) {
-
-        HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
-        SessionController sessionController = new SessionController();
-        long userId = sessionController.verifySession(sessionUser);
-
-        if (userId != -1) {
             User user = null;
             try {
                 user = new UserDaoImpl().selectById(id);
@@ -131,9 +111,7 @@ public class UserController {
                 e.printStackTrace();
             }
             return user;
-        } else {
-            return null;
-        }
+
     }
 
     @POST
