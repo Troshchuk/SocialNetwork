@@ -73,14 +73,19 @@ public class GroupPostDaoImplTest {
     public void testSelectLastWith() throws Exception {
         List<GroupPost> groupPosts = new ArrayList<GroupPost>();
 
+        GroupPost groupPost = new GroupPost(group, user, "fsdf", new Timestamp(
+                new java.util.Date().getTime()));
+
+        Thread.sleep(1000);
+
         for (int i = 0; i < 9 ; i++) {
             groupPosts.add(new GroupPost(group, user, "selectLast", new Timestamp(
                     new java.util.Date().getTime())));
             groupPostDao.insert(groupPosts.get(i));
+
         }
 
-        GroupPost groupPost = new GroupPost(group, user, "fsdf", new Timestamp(
-                new java.util.Date().getTime()));
+
 
         groupPostDao.insert(groupPost);
         List<GroupPost> result = groupPostDao.selectLastWith(group, 1);

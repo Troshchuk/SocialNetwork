@@ -51,14 +51,19 @@ public class PostDaoImplTest {
     public void testSelectLastWith() throws Exception {
         List<Post> posts = new ArrayList<Post>();
 
+        Post post = new Post("Test", user, new Timestamp(
+                new Date().getTime()));
+
+        Thread.sleep(1000);
+
         for (int i = 0; i < 9 ; i++) {
             posts.add(new Post("TestSelectWith", user, new Timestamp(
                     new Date().getTime())));
             postDao.insert(posts.get(i));
+
         }
 
-        Post post = new Post("Test", user, new Timestamp(
-                new Date().getTime()));
+
 
         postDao.insert(post);
         List<Post> result = postDao.selectLastWith(user, 1);
