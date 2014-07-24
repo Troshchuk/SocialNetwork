@@ -2,7 +2,9 @@ package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.SessionController;
 import com.bionic.socialNetwork.models.SessionUser;
+import com.sun.jersey.spi.container.ContainerRequest;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -16,23 +18,19 @@ import java.io.InputStream;
  */
 @Path("index")
 public class IndexController {
+    @Context
+    private ServletContext context;
+
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream test(@Context HttpServletRequest request) {
-        HttpSession session = request.getSession();
+        Long userID = (Long) request.getAttribute("userID");
 
-
-            Long userID = (Long) request.getAttribute("userID");
-
-            if(userID == null){
-                return session.getServletContext()
-                        .getResourceAsStream("/WEB-INF/pages/login.html");
-            }else{
-                return session.getServletContext()
-                              .getResourceAsStream("/WEB-INF/pages/home.html");
-            }
-
-
+        if (userID == null) {
+            return context.getResourceAsStream("/WEB-INF/pages/login.html");
+        } else {
+            return context.getResourceAsStream("/WEB-INF/pages/home.html");
+        }
 
 
     }
