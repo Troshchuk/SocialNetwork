@@ -26,18 +26,20 @@ public class AccessFilter implements ContainerRequestFilter {
     private HttpServletRequest webRequest;
     @Context
     HttpHeaders httpHeaders;
-    Long userId;
+
 
     @Override
     public ContainerRequest filter(ContainerRequest request) {
         Map cookies = httpHeaders.getCookies();
         Cookie cookie = (Cookie) cookies.get("sessionId");
         SessionController sessionController = new SessionController();
+        Long userId = -1l;
 
         if (cookie != null) {
             userId = sessionController.verifySession(cookie.getValue());
-            webRequest.setAttribute("userId", userId);
-        } else {
+        }
+
+        if (userId == -1) {
             try {
                 URI uri = request.getRequestUri();
                 if (!request.getRequestUri().equals(new URI(
@@ -55,6 +57,8 @@ public class AccessFilter implements ContainerRequestFilter {
                 e.printStackTrace();
             }
 
+        } else {
+            webRequest.setAttribute("userId", userId);
         }
 
 

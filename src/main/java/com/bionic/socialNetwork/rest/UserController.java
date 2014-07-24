@@ -19,8 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
-import java.sql.Date;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Map;
 
 /**
  * @author Dmytro Troshchuk, Igor Kozhevnikov, Denis Biyovskiy
@@ -126,7 +129,8 @@ public class UserController {
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
             PostDao postDao = new PostDaoImpl();
-            Post post = new Post(addPost, new UserDaoImpl().selectById(id), new Date(new java.util.Date().getTime()));
+            Post post = new Post(addPost, new UserDaoImpl().selectById(id),
+                                 new Timestamp(new Date().getTime()));
             postDao.insert(post);
             return true;
         } else {
@@ -138,15 +142,13 @@ public class UserController {
     @Path("post")
     @Produces(MediaType.APPLICATION_JSON)
     public PostsList getPosts(@Context HttpServletRequest request,
-                              @PathParam("number") int number) {
+                              @PathParam("page") int page) {
         HttpSession session = request.getSession();
         String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
-            PostsList postsList = new PostsList(number * 10);
-            postsList.next();
-            return postsList;
+            return new PostsList((Long) request.getAttribute("userId"), page);
         } else {
             return null;
         }
@@ -155,15 +157,17 @@ public class UserController {
     @GET
     @Path("following{id}/{number}")
     @Produces(MediaType.APPLICATION_JSON)
-    public FollowingUsersSet getFollowingUser(@Context HttpServletRequest request,
-                                              @PathParam("number") int number,
-                                              @PathParam("id") int id) {
+    public FollowingUsersSet getFollowingUser(
+            @Context HttpServletRequest request,
+            @PathParam("number") int number,
+            @PathParam("id") int id) {
         HttpSession session = request.getSession();
         String sessionUser = (String) session.getAttribute("user");
         SessionController sessionController = new SessionController();
         long userId = sessionController.verifySession(sessionUser);
         if (userId != -1) {
-            FollowingUsersSet followingUsersSet = new FollowingUsersSet(number , id);
+            FollowingUsersSet followingUsersSet =
+                    new FollowingUsersSet(number, id);
             followingUsersSet.next();
             return followingUsersSet;
         } else {
@@ -225,12 +229,12 @@ public class UserController {
 
     @GET
     @Path("exit")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String exit(@Context HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String sessionUser = (String) session.getAttribute("user");
-        SessionController sessionController = new SessionController();
-        sessionController.deleteSession(sessionUser);
+    @Produces(MediaType.TEXT_HTML)
+    public String exit(@Context HttpServletResponse response) {
+        Cookie cookie = new Cookie("sessionId", "0");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return "";
     }
 }
