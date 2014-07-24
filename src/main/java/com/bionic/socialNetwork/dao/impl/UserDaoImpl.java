@@ -5,9 +5,14 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -45,10 +50,10 @@ public class UserDaoImpl implements UserDao {
                 "SELECT id FROM User where login = '" + login + "'");
         List<Long> list = query.list();
         session.close();
-        if(list.size()!=0) {
+        if (list.size() != 0) {
             User user = selectById(list.get(0));
             return user;
-        }else {
+        } else {
             return null;
         }
 
@@ -79,6 +84,47 @@ public class UserDaoImpl implements UserDao {
         session.delete(password);
         session.delete(user);
         session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public List<User> selectFriendsNext(long beginId) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("friends", "friendsAlias");
+        criteria.setMaxResults(10);
+        criteria.addOrder(Order.asc("id"));
+        criteria.setFirstResult((int) beginId * 10);
+
+        List<User> list = criteria.list();
+        session.close();
+        return list;
+    }
+
+    @Override
+    public void insertFriend(User user, User hisFriend) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        SQLQuery query = session.createSQLQuery(
+                "INSERT INTO Friends VALUES (" + user.getId() + ", " +
+                hisFriend.getId() + ");");
+
+        query.executeUpdate();
+
+        session.close();
+    }
+
+    @Override
+    public void deleteFriend(User user, User hisFriend) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        SQLQuery query = session.createSQLQuery(
+                "DELETE FROM Friends WHERE user_id = " + user.getId() + " AND friend_id = " +
+                hisFriend.getId() + ");");
+
+        query.executeUpdate();
+
         session.close();
     }
 }

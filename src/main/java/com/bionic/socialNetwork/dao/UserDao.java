@@ -50,4 +50,10 @@ public interface UserDao {
      * @param user user which delete from database
      */
     public void delete(User user) throws Exception;
+
+    public List<User> selectFriendsNext(long beginId) throws Exception;
+
+    public void insertFriend(User user, User hisFriend) throws Exception;
+
+    public void deleteFriend(User user, User hisFriend) throws Exception;
 }
