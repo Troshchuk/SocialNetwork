@@ -10,7 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @author Bish_ua, Troshchuk Dmitry
  * @version 1.01 18.07.2014.
  */
-public class SessionController {
+public class SessionLogic {
     public String getNewSession(User user) {
         SessionUserDao sessionDao = new SessionUserDaoImpl();
         String session = generateSession();

@@ -1,11 +1,9 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.Admin;
-import com.bionic.socialNetwork.logic.SessionController;
+import com.bionic.socialNetwork.logic.AdminLogic;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,7 +23,7 @@ public class AdminController {
     @Produces(MediaType.TEXT_HTML)
     public InputStream getAdminPage(@Context HttpServletRequest request) {
         long userId = (Long)request.getAttribute("userId");
-        if (Admin.verifyAdministrator(userId)) {
+        if (AdminLogic.verifyAdministrator(userId)) {
             return context.getResourceAsStream("/WEB-INF/pages/admin.html");
         } else {
             return context.getResourceAsStream("/WEB-INF/pages/home.html");
@@ -37,8 +35,8 @@ public class AdminController {
     @Produces(MediaType.APPLICATION_JSON)
     public String createInvite(@Context HttpServletRequest request) {
         long userId = (Long)request.getAttribute("userId");
-        if (Admin.verifyAdministrator(userId)) {
-            String invite = Admin.createInvite();
+        if (AdminLogic.verifyAdministrator(userId)) {
+            String invite = AdminLogic.createInvite();
             return "{\"invite\": " + "\"" + invite + "\"}";
         } else {
             return "{\"invite\": null}";

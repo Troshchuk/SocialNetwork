@@ -9,15 +9,15 @@ import org.junit.Test;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 
-public class RegistrationTest {
+public class RegistrationLogicTest {
 
     User user;
     String login = "regTestLogin";
 
     @Before
     public void addUserTest(){
-        Registration registration = new Registration();
-        registration.addUser("name", "surname",login,"surname");
+        RegistrationLogic registrationLogic = new RegistrationLogic();
+        registrationLogic.addUser("name", "surname",login,"surname");
     }
 
 

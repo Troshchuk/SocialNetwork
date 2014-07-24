@@ -14,7 +14,7 @@ import java.security.MessageDigest;
 /**
  * Created by Bish_ua on 17.07.2014.
  */
-public class Registration {
+public class RegistrationLogic {
 
 
     public boolean addUser(String name, String surname, String login,

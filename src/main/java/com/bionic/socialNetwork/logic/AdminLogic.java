@@ -12,7 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @author Dmytro Troshchuk
  * @version 1.00  23.07.14.
  */
-public class Admin {
+public class AdminLogic {
     public static boolean verifyAdministrator(long id) {
         Administrator administrator = null;
         AdministratorDao administratorDao = new AdministratorDaoImpl();

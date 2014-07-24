@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 /**
  * Created by Bish_ua on 16.07.2014.
  */
-public class Login {
+public class LoginLogic {
     private UserDaoImpl userDaoImpl = new UserDaoImpl();
     private User user;
 

@@ -1,7 +1,7 @@
 package com.bionic.socialNetwork.rest.filters;
 
 
-import com.bionic.socialNetwork.logic.SessionController;
+import com.bionic.socialNetwork.logic.SessionLogic;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 
@@ -32,11 +32,11 @@ public class AccessFilter implements ContainerRequestFilter {
     public ContainerRequest filter(ContainerRequest request) {
         Map cookies = httpHeaders.getCookies();
         Cookie cookie = (Cookie) cookies.get("sessionId");
-        SessionController sessionController = new SessionController();
+        SessionLogic sessionLogic = new SessionLogic();
         Long userId = -1l;
 
         if (cookie != null) {
-            userId = sessionController.verifySession(cookie.getValue());
+            userId = sessionLogic.verifySession(cookie.getValue());
         }
 
         if (userId == -1) {
