@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * GroupPost entity
@@ -30,13 +31,13 @@ public class GroupPost {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Date time;
+    private Timestamp time;
 
     public GroupPost() {
 
     }
 
-    public GroupPost(Group group, User user,  String post, Date time) {
+    public GroupPost(Group group, User user,  String post, Timestamp time) {
         this.group = group;
         this.user = user;
         this.post = post;
@@ -76,11 +77,11 @@ public class GroupPost {
         this.user = user;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

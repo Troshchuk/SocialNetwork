@@ -2,16 +2,19 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.models.Post;
+import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.*;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
 /**
  * Posts Dao implementation
  *
- * @author Denis Biyovskiy
- * @version 1.00  16.07.2014.
+ * @author Denis Biyovskiy, Dmytro Troshchuk
+ * @version 1.10  16.07.2014.
  */
 public class PostDaoImpl implements PostDao {
 
@@ -21,18 +24,6 @@ public class PostDaoImpl implements PostDao {
         Post post = (Post) session.get(Post.class, id);
         session.close();
         return post;
-    }
-
-    @Override
-    public List<Post> selectNext(long beginId) throws Exception {
-        int limit = 10;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery(
-                "FROM Post WHERE postId >= " + beginId + " AND postId < " +
-                        (beginId + limit));
-        List<Post> posts = query.list();
-        session.close();
-        return posts;
     }
 
     @Override
@@ -51,5 +42,19 @@ public class PostDaoImpl implements PostDao {
         session.delete(post);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Post> selectLastWith(User user, int lot) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Post.class);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.eq("user.id", user.getId()
+                                    ));
+        criteria.addOrder(Order.desc("time"));
+        criteria.setFirstResult(lot * 10);
+        List<Post> list = criteria.list();
+        session.close();
+        return list;
     }
 }

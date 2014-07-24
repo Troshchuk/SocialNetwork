@@ -5,18 +5,21 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Denis
+ * @author Denis, Dmytro Troshchuk
  * @version 1.00  16.07.2014.
  */
 public class PostDaoImplTest {
@@ -31,7 +34,7 @@ public class PostDaoImplTest {
         userDao.insert(user, new Password("password"));
 
         postDao = new PostDaoImpl();
-        Post post = new Post("Some Post", user, new Date(new java.util.Date().getTime()));
+        Post post = new Post("Some Post", user, new Timestamp(new Date().getTime()));
         postDao.insert(post);
 
         postId = post.getPostId();
@@ -45,9 +48,28 @@ public class PostDaoImplTest {
     }
 
     @Test
-    public void testSelectNext() throws Exception {
-        List<Post> posts = postDao.selectNext(postId);
-        assertEquals(postId, posts.get(0).getPostId());
+    public void testSelectLastWith() throws Exception {
+        List<Post> posts = new ArrayList<Post>();
+
+        for (int i = 0; i < 9 ; i++) {
+            posts.add(new Post("TestSelectWith", user, new Timestamp(
+                    new Date().getTime())));
+            postDao.insert(posts.get(i));
+        }
+
+        Post post = new Post("Test", user, new Timestamp(
+                new Date().getTime()));
+
+        postDao.insert(post);
+        List<Post> result = postDao.selectLastWith(user, 1);
+
+        assertEquals(result.get(0).getPostId(),
+                     post.getPostId());
+
+        for (int i = 0; i < 9 ; i++) {
+            postDao.delete(posts.get(i));
+        }
+        postDao.delete(post);
     }
 
     @After

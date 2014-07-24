@@ -10,10 +10,9 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
-
 /**
- * @author yoalex5
- * @version 1.0 16.07.14
+ * @author yoalex5, Dmytro Troshchuk
+ * @version 1.1 16.07.14
  */
 public class GroupPostDaoImpl implements GroupPostDao {
 
@@ -70,6 +69,4 @@ public class GroupPostDaoImpl implements GroupPostDao {
         session.close();
         return list;
     }
-
-
 }

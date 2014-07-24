@@ -1,7 +1,7 @@
 package com.bionic.socialNetwork.models;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Posts entity
@@ -25,13 +25,13 @@ public class Post {
     @Column(name = "Post")
     private String post;
 
-    private Date time;
+    private Timestamp time;
 
     public Post() {
 
     }
 
-    public Post(String post, User user, Date time) {
+    public Post(String post, User user, Timestamp time) {
         this.time = time;
         this.user = user;
         this.post = post;
@@ -61,11 +61,11 @@ public class Post {
         this.postId = postId;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

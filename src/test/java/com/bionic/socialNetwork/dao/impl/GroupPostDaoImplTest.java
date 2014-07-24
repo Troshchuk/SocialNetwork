@@ -7,12 +7,15 @@ import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.GroupPost;
 
+import com.mysql.jdbc.MysqlDataTruncation;
+
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +54,8 @@ public class GroupPostDaoImplTest {
         groupDao.insert(group);
 
         groupPostDao = new GroupPostDaoImpl();
-        groupPostActual = new GroupPost(group, user, "1 Post", new Date(
+
+        groupPostActual = new GroupPost(group, user, "1 Post", new Timestamp(
                 new java.util.Date().getTime()));
 
         groupPostDao.insert(groupPostActual);
@@ -70,12 +74,12 @@ public class GroupPostDaoImplTest {
         List<GroupPost> groupPosts = new ArrayList<GroupPost>();
 
         for (int i = 0; i < 9 ; i++) {
-            groupPosts.add(new GroupPost(group, user, "selectLast", new Date(
+            groupPosts.add(new GroupPost(group, user, "selectLast", new Timestamp(
                     new java.util.Date().getTime())));
             groupPostDao.insert(groupPosts.get(i));
         }
 
-        GroupPost groupPost = new GroupPost(group, user, "fsdf", new Date(
+        GroupPost groupPost = new GroupPost(group, user, "fsdf", new Timestamp(
                 new java.util.Date().getTime()));
 
         groupPostDao.insert(groupPost);
