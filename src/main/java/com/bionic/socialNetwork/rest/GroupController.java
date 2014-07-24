@@ -4,6 +4,7 @@ import com.bionic.socialNetwork.logic.GroupLogic;
 import com.bionic.socialNetwork.logic.lists.GroupPostList;
 import com.bionic.socialNetwork.models.Group;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.GET;
@@ -20,13 +21,13 @@ import java.io.InputStream;
  */
 @Path("group{id}")
 public class GroupController {
+    @Context
+    private ServletContext context;
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream getPage(@Context HttpServletRequest request,
                                @PathParam("id") long id) {
-        HttpSession session = request.getSession();
-        return session.getServletContext()
-                      .getResourceAsStream("/WEB-INF/pages/group.html");
+        return context.getResourceAsStream("/WEB-INF/pages/group.html");
     }
 
     @GET
