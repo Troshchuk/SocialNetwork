@@ -4,9 +4,14 @@ header.main-header{
 		float: right;
 		margin-top: 50px; 
 		@extend .button;
-		background: lightblue;
+		background: $btn-bg;
+		color: $btn-color;
+		@include border-radius(0px);
 		&:hover{
-			background: darken(lightblue, 25%);
+			background: $btn-bg-hover;
+		}
+		&:active{
+			background: $btn-bg-active;
 		}
 
 	}

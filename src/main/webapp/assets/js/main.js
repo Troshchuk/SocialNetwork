@@ -12,10 +12,11 @@ jQuery(function( $ ) {
 
 
 	$('#exit').on('click', function(){
-		console.log('exit');
-		$.get('/sn/user/exit', function(){
+		// console.log('exit');
+		$.get('/sn/user/exit', function(text){
+			console.log(text);
 		});
-		location.reload();
+		// location.reload();
 	});
 
 

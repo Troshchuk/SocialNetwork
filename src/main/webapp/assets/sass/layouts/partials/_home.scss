@@ -1,15 +1,11 @@
 .user{
-	
+	margin-bottom: 30px;
 	.user-image{
-		border: 1px solid #999;
+		border: 1px solid $border-color;
 		@include box-sizing(border-box);
 		padding: 4px;
 		width: 200px;
 		float: left;
-		img{
-			width: 100%;
-			display: block;
-		}
 	}
 
 	.user-info{

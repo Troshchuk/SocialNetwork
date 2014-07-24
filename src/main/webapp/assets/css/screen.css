@@ -371,7 +371,7 @@ a img.aligncenter {
 }
 
 /* line 1, ../sass/components/_inputs.scss */
-.button, header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
+.button, header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty, .wall .new-wall-post .wall-submit {
   border: 1px solid #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -392,7 +392,7 @@ a img.aligncenter {
   cursor: pointer;
 }
 /* line 11, ../sass/components/_inputs.scss */
-.button:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
+.button:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover, .wall .new-wall-post .wall-submit:hover {
   background: transparent;
   color: #fff;
 }
@@ -418,26 +418,52 @@ h3 {
   line-height: 1;
 }
 
-/* line 33, ../sass/_base.scss */
+/* line 32, ../sass/_base.scss */
+textarea {
+  font-family: "Open Sans", Verdana, Arial, sans-serif;
+  font-size: 12px;
+}
+
+/* line 37, ../sass/_base.scss */
+img {
+  width: 100%;
+  display: block;
+}
+
+/* line 42, ../sass/_base.scss */
+a {
+  color: #004a58;
+  text-decoration: none;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
+}
+/* line 46, ../sass/_base.scss */
+a:hover {
+  color: #00aac8;
+}
+
+/* line 51, ../sass/_base.scss */
 .wraper {
   width: 960px;
   margin: auto;
   padding: 0 20px;
 }
 
-/* line 39, ../sass/_base.scss */
+/* line 57, ../sass/_base.scss */
 #controls {
   width: 30%;
   float: left;
 }
 
-/* line 44, ../sass/_base.scss */
+/* line 62, ../sass/_base.scss */
 #content {
   width: 70%;
   float: left;
 }
 
-/* line 50, ../sass/_base.scss */
+/* line 68, ../sass/_base.scss */
 .title {
   font-size: 50px;
   text-align: center;
@@ -445,11 +471,11 @@ h3 {
   display: block;
   position: relative;
 }
-/* line 56, ../sass/_base.scss */
+/* line 74, ../sass/_base.scss */
 .title.decorated {
   padding-bottom: 60px;
 }
-/* line 58, ../sass/_base.scss */
+/* line 76, ../sass/_base.scss */
 .title.decorated:after {
   content: '';
   position: absolute;
@@ -470,13 +496,23 @@ header.main-header {
 header.main-header .exit-btn {
   float: right;
   margin-top: 50px;
-  background: lightblue;
+  background: #008ab8;
+  color: white;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
 }
-/* line 8, ../sass/layouts/partials/_header.scss */
+/* line 10, ../sass/layouts/partials/_header.scss */
 header.main-header .exit-btn:hover {
-  background: #4baac8;
+  background: #004a78;
 }
 /* line 13, ../sass/layouts/partials/_header.scss */
+header.main-header .exit-btn:active {
+  background: #002a58;
+}
+/* line 18, ../sass/layouts/partials/_header.scss */
 header.main-header .logo {
   font-size: 46px;
   text-decoration: none;
@@ -484,22 +520,22 @@ header.main-header .logo {
   display: inline-block;
   padding: 10px 0 40px;
 }
-/* line 19, ../sass/layouts/partials/_header.scss */
+/* line 24, ../sass/layouts/partials/_header.scss */
 header.main-header .logo img {
   width: 150px;
   height: auto;
 }
-/* line 25, ../sass/layouts/partials/_header.scss */
+/* line 30, ../sass/layouts/partials/_header.scss */
 header.main-header nav.main-nav {
   background: #25292c;
   color: #fff;
 }
 
-/* line 32, ../sass/layouts/partials/_header.scss */
+/* line 37, ../sass/layouts/partials/_header.scss */
 nav.main-nav ul {
   float: right;
 }
-/* line 35, ../sass/layouts/partials/_header.scss */
+/* line 40, ../sass/layouts/partials/_header.scss */
 nav.main-nav li {
   float: left;
   font: 26px "Roboto Condensed", Verdana, Arial, sans-serif;
@@ -510,7 +546,7 @@ nav.main-nav li {
   -o-transition: background 0.3s, color 0.7s;
   transition: background 0.3s, color 0.7s;
 }
-/* line 41, ../sass/layouts/partials/_header.scss */
+/* line 46, ../sass/layouts/partials/_header.scss */
 nav.main-nav li:hover {
   background: #4d9fcf;
   color: #000;
@@ -717,9 +753,13 @@ footer.main-footer .copyright {
   box-sizing: border-box;
 }
 
+/* line 1, ../sass/layouts/partials/_home.scss */
+.user {
+  margin-bottom: 30px;
+}
 /* line 3, ../sass/layouts/partials/_home.scss */
 .user .user-image {
-  border: 1px solid #999;
+  border: 1px solid #cccccc;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -727,20 +767,157 @@ footer.main-footer .copyright {
   width: 200px;
   float: left;
 }
-/* line 9, ../sass/layouts/partials/_home.scss */
-.user .user-image img {
-  width: 100%;
-  display: block;
-}
-/* line 15, ../sass/layouts/partials/_home.scss */
+/* line 11, ../sass/layouts/partials/_home.scss */
 .user .user-info {
   margin-left: 220px;
 }
-/* line 19, ../sass/layouts/partials/_home.scss */
+/* line 15, ../sass/layouts/partials/_home.scss */
 .user .name {
   padding: 5px 0 10px;
 }
-/* line 21, ../sass/layouts/partials/_home.scss */
+/* line 17, ../sass/layouts/partials/_home.scss */
 .user .name span {
   font-size: 32px;
+}
+
+/* line 2, ../sass/layouts/partials/_wall.scss */
+.wall .wall-posts-quentity {
+  background: #004a58;
+  padding: 5px 20px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+/* line 9, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #004a58;
+  border-left: none;
+  border-right: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fcfdfd;
+}
+/* line 17, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post textarea {
+  border: 1px solid #cccccc;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  resize: none;
+  min-height: 70px;
+}
+/* line 25, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-submit {
+  float: right;
+  background: #008ab8;
+  color: white;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+}
+/* line 31, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-submit:hover {
+  background: #004a78;
+}
+/* line 34, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-submit:active {
+  background: #002a58;
+}
+
+/* line 3, ../sass/layouts/partials/wall/_post.scss */
+.wall .post {
+  position: relative;
+  width: 50%;
+  padding: 15px 20px 0;
+  clear: both;
+  border-top: 1px solid #afd8ff;
+  margin-top: -30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 11, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:nth-child(odd) {
+  float: left;
+  border-right: 4px solid #e2f1ff;
+  right: -2px;
+}
+/* line 15, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:nth-child(odd):after {
+  right: -12px;
+}
+/* line 19, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:nth-child(even) {
+  float: right;
+  border-left: 4px solid #e2f1ff;
+  left: -2px;
+}
+/* line 23, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:nth-child(even):after {
+  left: -12px;
+}
+/* line 27, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:first-of-type {
+  margin-top: 0;
+  background: red;
+}
+/* line 31, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+  background: #c8e5ff;
+  position: absolute;
+  top: -11px;
+}
+/* line 42, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-photo {
+  width: 80px;
+  float: left;
+  background: #fff;
+  border: 1px solid #cccccc;
+  overflow: hidden;
+}
+/* line 48, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-photo img {
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+/* line 50, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-photo img:hover {
+  -webkit-transform: scale(1.2, 1.2);
+  -moz-transform: scale(1.2, 1.2);
+  -ms-transform: scale(1.2, 1.2);
+  -o-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
+}
+/* line 57, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-name {
+  font-weight: bold;
+  font-size: 14px;
+}
+/* line 62, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-message {
+  margin-left: 100px;
+  font-size: 14px;
+  line-height: 18px;
+}
+/* line 68, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .post-meta {
+  font-size: 10px;
+  color: #999999;
 }
