@@ -21,6 +21,8 @@
 	<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
 
 	<script src="/assets/js/jquery-1.11.0.min.js"></script>
+	<script src="/assets/js/jquery.cookie.js"></script>
+	<script src="/assets/js/jquery.form-validator.js"></script>
 	<script src="/assets/js/jquery.flexslider.js"></script>
 	<script src="/assets/js/jquery.prettyPhoto.js"></script>
 	<script src="/assets/js/main.js"></script>
@@ -53,12 +55,12 @@
 	<div class="wraper clearfix main-section">
 		<aside id="controls">
 			<ul>
-				<li><a href="/sn/news.html">News</a></li>
-				<li><a href="/sn/home.html">Home</a></li>
-				<li><a href="/sn/workers.html">Workers</a></li>
-				<li><a href="/sn/messages.html">Private Messages</a></li>
-				<li><a href="/sn/followings.html">Followings</a></li>
-				<li><a href="/sn/groups.html">Groups</a></li>
+				<li><a href="/sn/news">News</a></li>
+				<li><a href="/sn/home">Home</a></li>
+				<li><a href="/sn/workers">Workers</a></li>
+				<li><a href="/sn/messages">Private Messages</a></li>
+				<li><a href="/sn/followings">Followings</a></li>
+				<li><a href="/sn/groups">Groups</a></li>
 			</ul>
 		</aside>
 
@@ -69,28 +71,28 @@
 				</div>
 				<div class="user-info">
 					<p class="name">
-						<span>Alina</span>
-						<span>Franchuk</span>
+						<span id="user-name"></span>
+						<span id="user-surname"></span>
 					</p>
-					<p class="position"><span>Position </span>Specialist</p>
-					<p class="hobbies"><span>Hobbies </span>italian art, french literature, traveling, dansing, horse-riding</p>
+					<p class="position" >Position: <span id="user-position"></span></p>
+					<p class="hobbies">Hobbies: <span id="user-hobbies"> </span></p>
 				</div>
 			</div>
 
-			<div id="" class="wall clearfix">
-				<p class="wall-posts-quentity">14 wall posts</p>
+			<div id="wall" class="wall clearfix">
+				<p class="wall-posts-quentity">wall posts</p>
 				<div class="new-wall-post clearfix">
 					<p>Write a message</p>
 					<form action="home_submit" method="get" accept-charset="utf-8">
-						<textarea></textarea>
-						<button class="wall-submit" type="submit">Submit</button>
+						<textarea id="wall-message"></textarea>
+						<button id="wall-submit" class="wall-submit" type="submit">Submit</button>
 					</form>
 				</div>
 
-				<div class="post">
+<!-- 				<div class="post">
 					<div class="post-photo">
 						<a href="#">
-							<img src="http://cs.cmle.ru/pp/c616622/v616622278/129c5/sXO3vhPKQ3E.jpg" alt="">
+							<img src="/assets/img/post-user1.jpg" alt="">
 						</a>
 					</div>
 					<div class="post-message">
@@ -103,7 +105,7 @@
 				<div class="post">
 					<div class="post-photo">
 						<a href="#">
-							<img src="http://cs.cmle.ru/pp/c410828/v410828036/8c2a/mzUK01sLino.jpg" alt="">
+							<img src="/assets/img/post-user2.jpg" alt="">
 						</a>
 					</div>
 					<div class="post-message">
@@ -116,7 +118,7 @@
 				<div class="post">
 					<div class="post-photo">
 						<a href="#">
-							<img src="http://cs.cmle.ru/pp/c605325/v605325490/6aea/x15RgVtLToE.jpg" alt="">
+							<img src="/assets/img/post-user3.jpg" alt="">
 						</a>
 					</div>
 					<div class="post-message">
@@ -129,7 +131,7 @@
 				<div class="post">
 					<div class="post-photo">
 						<a href="#">
-							<img src="http://cs.cmle.ru/pp/c619720/v619720040/7eb9/edXB8mVjdpo.jpg" alt="">
+							<img src="/assets/img/post-user4.jpg" alt="">
 						</a>
 					</div>
 					<div class="post-message">
@@ -137,7 +139,7 @@
 						<p>Our greatest happiness does not depend on the condition of life in which chance has placed us, but is always the result of a good conscience, good health, occupation, and freedom in all just pursuits.</p>
 						<span class="post-meta">at 18:09 on Tuesday, 15.08.2014</span>
 					</div>
-				</div>	
+				</div> -->
 			</div>
 		</div>
 	</div>

@@ -21,6 +21,8 @@
 	<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
 
 	<script src="/assets/js/jquery-1.11.0.min.js"></script>
+	<script src="/assets/js/jquery.cookie.js"></script>
+	<script src="/assets/js/jquery.form-validator.js"></script>
 	<script src="/assets/js/jquery.flexslider.js"></script>
 	<script src="/assets/js/jquery.prettyPhoto.js"></script>
 	<script src="/assets/js/main.js"></script>
@@ -44,8 +46,8 @@
 				<h1>Welcome to Socialiser</h1>
 				<div class="to-login">
 					<form id="form-login" action="">
-						<input id="user-login" type="text" placeholder="Login">
-						<input id="user-password" type="password" placeholder="Password">
+						<input id="user-login" type="text" placeholder="Login" required>
+						<input id="user-password" type="password" placeholder="Password" required>
 						<span id="user-submit" class="btn-full">Login</span>
 						<span id="register-btn" class="btn-empty">Register</span>
 					</form>
@@ -55,12 +57,13 @@
 			<div class="register-form">
 				<h1>Register</h1>
 				<form id="form-register" action="">
-					<input id="name" type="text" placeholder="Your Name">
-					<input id="surname" type="text" placeholder="Surname">
-					<input id="email" type="email" placeholder="Email">
-					<input id="pass" type="password" placeholder="Password">
-					<input type="password" placeholder="Password again">
-					<input id="invite" type="password" placeholder="Enter Invite Key">
+					<input id="name" type="text" placeholder="Your Name" required>
+					<input id="surname" type="text" placeholder="Surname" required>
+					<input id="position" type="text" placeholder="Position" required>
+					<input id="email" type="email" placeholder="Email" required>
+					<input id="pass" type="password" placeholder="Password" required>
+					<input type="password" placeholder="Password again" required>
+					<input id="invite" type="password" placeholder="Enter Invite Key" required>
                     <span id="register-btn2" class="btn-empty">Register</span>
 
 					<span id="back-btn" class="btn-empty">Back</span>

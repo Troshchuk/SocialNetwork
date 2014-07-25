@@ -837,7 +837,7 @@ footer.main-footer .copyright {
   padding: 15px 20px 0;
   clear: both;
   border-top: 1px solid #afd8ff;
-  margin-top: -30px;
+  margin-top: -40px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -862,12 +862,7 @@ footer.main-footer .copyright {
 .wall .post:nth-child(even):after {
   left: -12px;
 }
-/* line 27, ../sass/layouts/partials/wall/_post.scss */
-.wall .post:first-of-type {
-  margin-top: 0;
-  background: red;
-}
-/* line 31, ../sass/layouts/partials/wall/_post.scss */
+/* line 28, ../sass/layouts/partials/wall/_post.scss */
 .wall .post:after {
   content: '';
   display: block;
@@ -882,7 +877,7 @@ footer.main-footer .copyright {
   position: absolute;
   top: -11px;
 }
-/* line 42, ../sass/layouts/partials/wall/_post.scss */
+/* line 39, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo {
   width: 80px;
   float: left;
@@ -890,14 +885,14 @@ footer.main-footer .copyright {
   border: 1px solid #cccccc;
   overflow: hidden;
 }
-/* line 48, ../sass/layouts/partials/wall/_post.scss */
+/* line 45, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo img {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 50, ../sass/layouts/partials/wall/_post.scss */
+/* line 47, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo img:hover {
   -webkit-transform: scale(1.2, 1.2);
   -moz-transform: scale(1.2, 1.2);
@@ -905,19 +900,23 @@ footer.main-footer .copyright {
   -o-transform: scale(1.2, 1.2);
   transform: scale(1.2, 1.2);
 }
-/* line 57, ../sass/layouts/partials/wall/_post.scss */
+/* line 53, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-name {
   font-weight: bold;
   font-size: 14px;
 }
-/* line 62, ../sass/layouts/partials/wall/_post.scss */
+/* line 58, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-message {
   margin-left: 100px;
   font-size: 14px;
   line-height: 18px;
 }
-/* line 68, ../sass/layouts/partials/wall/_post.scss */
+/* line 64, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-meta {
   font-size: 10px;
   color: #999999;
+}
+/* line 69, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:nth-of-type(2) {
+  margin-top: 0;
 }

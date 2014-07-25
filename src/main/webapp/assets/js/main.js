@@ -1,20 +1,20 @@
 jQuery(function( $ ) {
+	'use strict';
 
 	$('#register-btn').click( function() {
 		$('.login-form').hide();
 		$('.register-form').fadeIn();
 	});
-
 	$('#back-btn').click( function() {
 		$('.register-form').hide();
 		$('.login-form').fadeIn();
 	});
 
+
 	$('#user-submit').click(function() {
 		login = $('#user-login').val();
 		pass = $('#user-password').val();
 		if(login!="" && pass!="") {
-//			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
 			$.post('/sn/index/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					location.reload();
@@ -36,36 +36,95 @@ jQuery(function( $ ) {
         email = $('#email').val();
         pass = $('#pass').val();
         invite = $('#invite').val();
-//        if(login!="" && pass!="") {
-////			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
-            $.post('/sn/index/registration',{name:name,surname:surname,email:email,password:pass,invite:invite},function(server_json){
-                if(server_json.status==true) {
-                    location.reload();
-                }
-                else {alert('Wrong login or password')}
-            },'json');
-//        }
+        $.post('/sn/index/registration',{name:name,surname:surname,position:position,email:email,password:pass,invite:invite},function(server_json){
+            if(server_json.status==true) {
+                location.reload();
+            }
+            else {alert('Wrong login or password')}
+        },'json');
     });
+
+
+	$('#exit').click('click', function() {
+		$.get('/sn/user' +getUserId()+ '/exit', {}, function(server_json){
+			location.reload();
+		},'json')
+	});
+
+
+
+	$('#wall-submit').on('click', function(event){
+		event.preventDefault();
+		var msg = $('#wall-message').val();
+		$.post('/sn/user' +getUserId()+ '/createPost', {msg:msg}, function(){
+			location.reload();
+		});
+	});
+
+
+
+
+
+
+
+	function formatDate(msec) {
+		var date = new Date(msec);
+		// var year = date.getFullYear();
+		// var month = date.getMonth()+1;
+		// var date = date.getDate();
+		var formated = 'at ' + date.getHours() + ':' + date.getMinutes() + ' on ' + date.getDate() + '.' + date.getMonth()+1 + '.' + date.getFullYear();
+		return formated;
+	};
+
+	function getUserId() {
+		var userId = $.cookie("userId");
+		return userId;
+	}
+
+
+
 
 
 	function setupHomePage() {
 		console.log('Setup Home');
-		$.getJSON('/sn/user117', {}, function(json) {
-		// $.getJSON('rest/', {}, function(json) {
-			var node = '<div>';
-			node += '<p>' + json.name + '</p>';
-			node += '<p>' + json.surname + '</p>';
-			node += '<p>' + json.position + '</p>';
-			node += '</div>';
-			$('#content').append( $(node) );
+		var fullname = '';
+		$.getJSON('/sn/user'+ getUserId() +'/getUser', {}, function(json) {
+			$('#user-name').text( json.name );
+			$('#user-surname').text( json.surname );
+			$('#user-position').text( json.position );
+			fullname = json.name + ' ' + json.surname;
+		});
+
+		$.getJSON('/sn/user' +getUserId()+ '/interests', {}, function(json) {
+			// console.log(json.interests.length);
+			var str = [];
+			for (var i = 0; i < json.interests.length; i++) {
+				str.push( json.interests[i].interest );
+			};
+			str = str.join(', ');
+			$('#user-hobbies').text( str );
+		});
+
+		$.getJSON('/sn/user' + getUserId()+ '/posts0' , {}, function(json) {
+			for (var i = 0; i < json.posts.length; i++) {
+				console.log(json.posts[i].post);
+				// Things[i]
+				var node = '<div class="post">';
+					node += '<div class="post-photo">';
+					node +=	'<a href="#">';
+					node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
+					node += '</a>';
+					node += '</div>';
+					node += '<div class="post-message">';
+					node += '<p class="post-name"><a href="">' + fullname + '</a></p>';
+					node +=	'<p>' +json.posts[i].post+ '</p>';
+					node += '<span class="post-meta">'+formatDate( json.posts[i].time )+'</span>';
+					node += '</div>';
+					node += '</div>';
+					$('#wall').append( node );
+			};
 		});
 	}
-
-    $('#exit').click('click', function() {
-        $.get('/sn/user117/exit',{},function(server_json){
-            location.reload();
-        },'json')
-    });
 
 	function setupMessagesPage() {
 		console.log('Setup Home');
