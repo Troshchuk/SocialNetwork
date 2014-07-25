@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.lists.UserList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -9,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.io.InputStream;
 
 /**
  * @author Dmytro Troshchuk
@@ -16,7 +18,10 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("workers")
 public class WorkerController {
-
+    @GET
+    public InputStream getPage(@Context ServletContext context) {
+        return context.getResourceAsStream("/WEB-INF/pages/workers.html");
+    }
 
     @GET
     @Path("getWorkers{page}")
