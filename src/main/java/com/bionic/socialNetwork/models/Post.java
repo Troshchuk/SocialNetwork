@@ -1,5 +1,7 @@
 package com.bionic.socialNetwork.models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -37,6 +39,7 @@ public class Post {
         this.post = post;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }

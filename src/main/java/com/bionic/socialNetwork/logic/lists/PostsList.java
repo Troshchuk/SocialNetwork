@@ -21,7 +21,7 @@ public class PostsList {
         try {
             PostDao postDao = new PostDaoImpl();
             User user = new UserDaoImpl().selectById(id);
-            postDao.selectLastWith(user, page);
+            posts = postDao.selectLastWith(user, page);
         } catch (Exception e) {
             e.printStackTrace();
         }
