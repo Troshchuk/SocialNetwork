@@ -46,9 +46,20 @@ public class UserController {
     @POST
     @Path("createPost")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addPost(@PathParam("id") long id,
-                           @FormParam("msg") String msg) {
-        return "{\"status\": " + new UserLogic().createPost(id, msg) + "}";
+    public String addPost(@Context HttpServletRequest request,
+                          @FormParam("msg") String msg) {
+        return "{\"status\": " + new UserLogic()
+                .createPost((Long) request.getAttribute("userId"), msg) + "}";
+    }
+
+    @POST
+    @Path("deletePost")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deletePost(@Context HttpServletRequest request,
+                             @FormParam("postId") long postId) {
+        return "{\"status\": " + new UserLogic()
+                .deletePost((Long) request.getAttribute("userId"), postId) +
+               "}";
     }
 
     @GET
@@ -74,7 +85,7 @@ public class UserController {
     @Path("groups{page}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserGroupsList getGroups(@PathParam("id") long id,
-                               @PathParam("page") int page) {
+                                    @PathParam("page") int page) {
         return new UserGroupsList(id, page);
     }
 

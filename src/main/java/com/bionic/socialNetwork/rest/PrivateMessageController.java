@@ -32,7 +32,6 @@ public class PrivateMessageController {
             @PathParam("page") int page) {
         return new ReceivedMessageList((Long) request.getAttribute("userId"),
                                        page);
-
     }
 
     @GET

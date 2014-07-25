@@ -35,4 +35,18 @@ public class UserLogic {
             return false;
         }
     }
+
+    public boolean deletePost(long userId, long postId) {
+        try {
+            PostDao postDao = new PostDaoImpl();
+            Post post = postDao.selectById(postId);
+            if (post.getUser().getId() == userId) {
+                postDao.delete(post);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
