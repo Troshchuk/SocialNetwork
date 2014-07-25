@@ -92,7 +92,6 @@ public class User {
         this.posts = posts;
     }
 
-    @JsonIgnore
     public long getId() {
         return id;
     }
