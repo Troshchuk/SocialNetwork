@@ -16,35 +16,28 @@ import java.util.Collection;
  */
 public class NewsList {
     @JsonIgnore
-    private int beginIndex = 0;
+    private int newsListNumber = 1;
     @JsonIgnore
     private PostDaoImpl postDao;
 
     private Collection<Post> posts;
 
     public NewsList(int begin) {
-        this.beginIndex = begin;
-        postDao = new PostDaoImpl();
-        next();
-    }
-
-    public void next() {
+        this.newsListNumber = begin;
         try {
-            BackOfficeAdminDaoImpl backOfficeAdminDao =
-                    new BackOfficeAdminDaoImpl();
-            posts = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(),
-                                                  beginIndex);
-            beginIndex += (long) posts.size();
+        BackOfficeAdminDaoImpl backOfficeAdminDao =
+                new BackOfficeAdminDaoImpl();
+        postDao = new PostDaoImpl();
+        posts = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(),
+                                              newsListNumber);
+        newsListNumber += posts.size();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public Collection<Post> getPosts() {
         return posts;
-    }
-
-    public void setPosts(Collection<Post> posts) {
-        this.posts = posts;
     }
 }
