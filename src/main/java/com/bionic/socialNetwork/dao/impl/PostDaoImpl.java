@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PostDao;
+import com.bionic.socialNetwork.models.BackOfficeAdmin;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
@@ -49,8 +50,28 @@ public class PostDaoImpl implements PostDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Post.class);
         criteria.setMaxResults(10);
-        criteria.add(Restrictions.eq("user.id", user.getId()
-                                    ));
+        criteria.add(Restrictions.eq("user.id", user.getId()));
+        criteria.addOrder(Order.desc("time"));
+        criteria.setFirstResult(lot * 10);
+        List<Post> list = criteria.list();
+        session.close();
+        return list;
+    }
+
+    @Override
+    public List<Post> selectLastBeckOffWith (List<BackOfficeAdmin> backOfficeAdmins,
+                                             int lot) throws Exception {
+        int i = 0;
+        Long [] arr = new Long[backOfficeAdmins.size()];
+        for(BackOfficeAdmin backOff:backOfficeAdmins) {
+            arr[i] = backOff.getUser().getId();
+            ++i;
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Post.class);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.in("user.id", arr));
         criteria.addOrder(Order.desc("time"));
         criteria.setFirstResult(lot * 10);
         List<Post> list = criteria.list();

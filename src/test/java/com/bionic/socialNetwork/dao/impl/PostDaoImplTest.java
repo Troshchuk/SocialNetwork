@@ -1,7 +1,9 @@
 package com.bionic.socialNetwork.dao.impl;
 
+import com.bionic.socialNetwork.dao.BackOfficeAdminDao;
 import com.bionic.socialNetwork.dao.PostDao;
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.BackOfficeAdmin;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
@@ -26,6 +28,9 @@ public class PostDaoImplTest {
     private User user;
     private PostDao postDao;
     private long postId;
+//    private Post post;
+    private BackOfficeAdminDao backOfficeAdminDao;
+    private BackOfficeAdmin backOfficeAdmin;
 
     @Before
     public void testInsert() throws Exception {
@@ -36,6 +41,11 @@ public class PostDaoImplTest {
         postDao = new PostDaoImpl();
         Post post = new Post("Some Post", user, new Timestamp(new Date().getTime()));
         postDao.insert(post);
+
+        backOfficeAdmin = new BackOfficeAdmin(user.getId());
+        backOfficeAdminDao = new BackOfficeAdminDaoImpl();
+        backOfficeAdminDao.insert(backOfficeAdmin);
+//        Thread.sleep(1500);
 
         postId = post.getPostId();
         assertEquals(post.getPostId(), postDao.selectById(postId).getPostId());
@@ -54,6 +64,7 @@ public class PostDaoImplTest {
         Post post = new Post("Test", user, new Timestamp(
                 new Date().getTime()));
 
+        postDao.insert(post);
         Thread.sleep(1000);
 
         for (int i = 0; i < 9 ; i++) {
@@ -64,14 +75,38 @@ public class PostDaoImplTest {
         }
 
 
-
-        postDao.insert(post);
         List<Post> result = postDao.selectLastWith(user, 1);
-
-        assertEquals(result.get(0).getPostId(),
-                     post.getPostId());
+        assertEquals(result.get(0).getPost(),
+                     post.getPost());
 
         for (int i = 0; i < 9 ; i++) {
+            postDao.delete(posts.get(i));
+        }
+        postDao.delete(post);
+    }
+
+    @Test
+    public void testSelectBackOffLastWith() throws Exception {
+        List<Post> posts = new ArrayList<Post>();
+        Post post = new Post("Test", user, new Timestamp(
+                new Date().getTime()));
+
+
+        Thread.sleep(1000);
+
+        for (int i = 0; i < 9 ; i++) {
+            posts.add(new Post("TestSelectWith",user,
+                               new Timestamp(new Date().getTime())));
+            postDao.insert(posts.get(i));
+        }
+
+
+
+        postDao.insert(post);
+        List<Post> result = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(), 1);
+        assertEquals(result.get(0).getPost(), post.getPost());
+
+            for (int i = 0; i < 9 ; i++) {
             postDao.delete(posts.get(i));
         }
         postDao.delete(post);
@@ -80,7 +115,9 @@ public class PostDaoImplTest {
     @After
     public void testDelete() throws Exception {
         postDao.delete(postDao.selectById(postId));
+        backOfficeAdminDao.delete(backOfficeAdmin);
         new UserDaoImpl().delete(user);
         assertNull(postDao.selectById(postId));
+
     }
 }
