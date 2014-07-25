@@ -28,7 +28,7 @@ public class PostDaoImplTest {
     private User user;
     private PostDao postDao;
     private long postId;
-//    private Post post;
+    //    private Post post;
     private BackOfficeAdminDao backOfficeAdminDao;
     private BackOfficeAdmin backOfficeAdmin;
 
@@ -39,7 +39,8 @@ public class PostDaoImplTest {
         userDao.insert(user, new Password("password"));
 
         postDao = new PostDaoImpl();
-        Post post = new Post("Some Post", user, new Timestamp(new Date().getTime()));
+        Post post = new Post("Some Post", user,
+                             new Timestamp(new Date().getTime()));
         postDao.insert(post);
 
         backOfficeAdmin = new BackOfficeAdmin(user.getId());
@@ -66,7 +67,7 @@ public class PostDaoImplTest {
         postDao.insert(post);
         Thread.sleep(1000);
 
-        for (int i = 0; i < 9 ; i++) {
+        for (int i = 0; i < 9; i++) {
             posts.add(new Post("TestSelectWith", user, new Timestamp(
                     new Date().getTime())));
             postDao.insert(posts.get(i));
@@ -75,10 +76,10 @@ public class PostDaoImplTest {
 
 
         List<Post> result = postDao.selectLastWith(user, 1);
-        assertEquals(result.get(0).getPost(),
-                     post.getPost());
+        assertEquals(result.get(0).getPostId(),
+                     post.getPostId());
 
-        for (int i = 0; i < 9 ; i++) {
+        for (int i = 0; i < 9; i++) {
             postDao.delete(posts.get(i));
         }
         postDao.delete(post);
@@ -93,19 +94,19 @@ public class PostDaoImplTest {
 
         Thread.sleep(1000);
 
-        for (int i = 0; i < 9 ; i++) {
-            posts.add(new Post("TestSelectWith",user,
+        for (int i = 0; i < 9; i++) {
+            posts.add(new Post("TestSelectWith", user,
                                new Timestamp(new Date().getTime())));
             postDao.insert(posts.get(i));
         }
 
 
+        List<Post> result =
+                postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(),
+                                              1);
+        assertEquals(result.get(0).getPostId(), post.getPostId());
 
-
-        List<Post> result = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(), 1);
-        assertEquals(result.get(0).getPost(), post.getPost());
-
-            for (int i = 0; i < 9 ; i++) {
+        for (int i = 0; i < 9; i++) {
             postDao.delete(posts.get(i));
         }
         postDao.delete(post);
