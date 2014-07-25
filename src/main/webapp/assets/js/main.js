@@ -33,6 +33,7 @@ jQuery(function( $ ) {
     $('#register-btn2').click(function() {
         var name = $('#name').val();
         var surname = $('#surname').val();
+        var position = $('#position').val(); 
         var email = $('#email').val();
         var pass = $('#pass').val();
         var invite = $('#invite').val();
@@ -129,13 +130,12 @@ jQuery(function( $ ) {
 		$.getJSON('ajax/messages.json', {}, function(json) {
 		// $.getJSON('rest/', {}, function(json) {
 			//CODE FOR HOME;
-		});
-	}
+		});C	}
 
-	function setupFriendsPage() {
-		console.log('Setup Friends');
+	function setupColleaguesPage() {
+		console.log('Setup Colleagues');
 		// $.getJSON('ajax/users.json', {}, function(json) {
-		$.getJSON('/sn/user/workers0', {}, function (json) {
+		$.getJSON('/sn/workers/getWorkers0', {}, function (json) {
 			var list = '<ul>';
 			for (var i = 0; i < json.users.length; i++) {
 				list += '<li class="user-entry">';
@@ -159,7 +159,7 @@ jQuery(function( $ ) {
 				break;
 			case 'colleagues':
 				console.log('Сolleagues-page detected');
-				setupFriendsPage();
+				setupColleaguesPage();
 				break;
 			case 'messages':
 				console.log('Messages-page detected');
