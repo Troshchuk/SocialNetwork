@@ -1,10 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.lists.FollowingUsersList;
+import com.bionic.socialNetwork.logic.lists.*;
 import com.bionic.socialNetwork.logic.UserLogic;
-import com.bionic.socialNetwork.logic.lists.InterestList;
-import com.bionic.socialNetwork.logic.lists.PostsList;
-import com.bionic.socialNetwork.logic.lists.ReceivedMessageList;
 import com.bionic.socialNetwork.models.User;
 
 import javax.servlet.ServletContext;
@@ -34,7 +31,7 @@ public class UserController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream getPage(@Context ServletContext context) {
-            return context.getResourceAsStream("/WEB-INF/pages/user.html");
+        return context.getResourceAsStream("/WEB-INF/pages/user.html");
 
 
     }
@@ -76,38 +73,19 @@ public class UserController {
     @GET
     @Path("received_messages{page}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ReceivedMessageList getPrivateMessage(@PathParam("id") int id,
+    public ReceivedMessageList getPrivateMessage(@PathParam("id") long id,
                                                  @PathParam("page") int page) {
 
-        ReceivedMessageList receivedMessageList =
-                new ReceivedMessageList(id, page);
-        return receivedMessageList;
+        return new ReceivedMessageList(id, page);
 
     }
 
-    //Create empty rest for News, Followings, Private message, Groups
     @GET
-    @Path("news")
+    @Path("groups{page}")
     @Produces(MediaType.APPLICATION_JSON)
-    public PostsList getNews(@Context HttpServletRequest request,
-                             @PathParam("number") int number) {
-        return null;
-    }
-
-    @GET
-    @Path("home")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PostsList getHomePage(@Context HttpServletRequest request,
-                                 @PathParam("number") int number) {
-        return null;
-    }
-
-    @GET
-    @Path("groups")
-    @Produces(MediaType.APPLICATION_JSON)
-    public PostsList getGroups(@Context HttpServletRequest request,
-                               @PathParam("number") int number) {
-        return null;
+    public UserGroupsList getGroups(@PathParam("id") long id,
+                               @PathParam("page") int page) {
+        return new UserGroupsList(id, page);
     }
 
     @GET

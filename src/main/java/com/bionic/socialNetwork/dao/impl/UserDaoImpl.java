@@ -2,6 +2,8 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PasswordDao;
 import com.bionic.socialNetwork.dao.UserDao;
+import com.bionic.socialNetwork.models.Group;
+import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
@@ -121,10 +123,39 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Friends WHERE user_id = " + user.getId() +
-                " AND friend_id = " + hisFriend.getId() + ");");
+                " AND friend_id = " + hisFriend.getId() + ";");
 
         query.executeUpdate();
 
         session.close();
+    }
+
+    @Override
+    public List<Group> selectUserGroupsNext(long id, int lot) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("groups", "groupsAlias");
+        criteria.setMaxResults(10);
+        criteria.addOrder(Order.asc("id"));
+        criteria.setFirstResult(lot * 10);
+
+        List<Group> list = criteria.list();
+        session.close();
+        return list;
+    }
+
+    @Override
+    public List<Interest> selectAllInterests(long id) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("interests", "interestsAlias");
+        criteria.setMaxResults(10);
+        criteria.addOrder(Order.asc("id"));
+
+        List<Interest> list = criteria.list();
+        session.close();
+        return list;
     }
 }

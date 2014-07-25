@@ -1,5 +1,7 @@
 package com.bionic.socialNetwork.dao;
 
+import com.bionic.socialNetwork.models.Group;
+import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
 
@@ -55,4 +57,8 @@ public interface UserDao {
     public void insertFriend(User user, User hisFriend) throws Exception;
 
     public void deleteFriend(User user, User hisFriend) throws Exception;
+
+    public List<Group> selectUserGroupsNext(long id, int lot) throws Exception;
+
+    public List<Interest> selectAllInterests(long id) throws Exception;
 }

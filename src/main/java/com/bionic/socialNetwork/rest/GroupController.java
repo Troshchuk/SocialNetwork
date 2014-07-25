@@ -7,10 +7,7 @@ import com.bionic.socialNetwork.models.Group;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
@@ -44,4 +41,26 @@ public class GroupController {
                                   @PathParam("page") int page) {
         return new GroupPostList(id, page);
     }
+
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("createPost")
+    public boolean createPost(@Context HttpServletRequest request,
+                              @PathParam("id") long id,
+                              @FormParam("msg") String msg) {
+        return new GroupLogic()
+                .createPost(id, (Long) request.getAttribute("id"), msg);
+    }
+
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("deletePost")
+    public boolean deletePost(@Context HttpServletRequest request,
+                              @PathParam("id") long id,
+                              @FormParam("postId") long postId) {
+        return new GroupLogic()
+                .deletePost((Long) request.getAttribute("id"), postId);
+    }
+
+
 }

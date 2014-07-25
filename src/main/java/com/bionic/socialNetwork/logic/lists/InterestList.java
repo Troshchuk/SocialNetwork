@@ -21,8 +21,8 @@ public class InterestList {
     public InterestList(long id) {
         try {
             UserDao userDao = new UserDaoImpl();
-            User user = userDao.selectById(id);
-            interests = user.getInterests();
+            interests = userDao.selectAllInterests(id);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
