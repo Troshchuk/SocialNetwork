@@ -165,4 +165,8 @@ public class User {
     public Set<User> getFriends() {
         return friends;
     }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
 }
