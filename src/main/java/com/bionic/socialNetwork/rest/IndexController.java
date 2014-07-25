@@ -77,15 +77,9 @@ public class IndexController {
 
         RegistrationLogic registrationLogic = new RegistrationLogic();
 
-        if (registrationLogic.checkInviteCode(invite)) {
-            if (registrationLogic.addUser(name, surname, login, password, position)) {
-                return "{\"status\": true}";
-            } else {
-                return "{\"status\": false}";
-            }
-        } else {
-            return "{\"status\": noInvite}";
-        }
+        String result = registrationLogic.register(name, surname, login, password, position, invite);
+
+        return result;
     }
 
 
