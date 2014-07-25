@@ -44,10 +44,10 @@ public class AccessFilter implements ContainerRequestFilter {
                 URI uri = request.getRequestUri();
                 if (!request.getRequestUri().equals(new URI(
                         "http://" + uri.getHost() + ":" + uri.getPort() +
-                        "/sn/user/login")) &&
+                        "/sn/index/login")) &&
                     !request.getRequestUri().equals(new URI(
                             "http://" + uri.getHost() + ":" + uri.getPort() +
-                            "/sn/user/registration"))) {
+                            "/sn/index/registration"))) {
                     request.setUris(request.getBaseUri(),
                                     new URI("http://" + uri.getHost() + ":" +
                                             uri.getPort() + "/sn/index"));

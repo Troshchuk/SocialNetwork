@@ -1,12 +1,14 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.SessionController;
-import com.bionic.socialNetwork.models.SessionUser;
-import com.sun.jersey.spi.container.ContainerRequest;
+import com.bionic.socialNetwork.logic.LoginLogic;
+import com.bionic.socialNetwork.logic.RegistrationLogic;
+import com.bionic.socialNetwork.logic.SessionLogic;
+import com.bionic.socialNetwork.models.User;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -23,15 +25,63 @@ public class IndexController {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public InputStream test(@Context HttpServletRequest request) {
+    public InputStream getPage(@Context HttpServletRequest request) {
         Long userID = (Long) request.getAttribute("userId");
 
         if (userID == null) {
             return context.getResourceAsStream("/WEB-INF/pages/login.html");
         } else {
-            return context.getResourceAsStream("/WEB-INF/pages/home.html");
+            return context.getResourceAsStream("/WEB-INF/pages/user.html");
         }
-
-
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
+    @Path("login")
+    public String login(@Context HttpServletRequest request,
+                        @Context HttpServletResponse response,
+                        @FormParam("login") String login,
+                        @FormParam("pass") String password) {
+
+        LoginLogic log = new LoginLogic();
+        User user = log.getUser(login, password);
+        Cookie cookie;
+
+        if (user != null) {
+            SessionLogic sessionLogic = new SessionLogic();
+            cookie = new Cookie("sessionId", sessionLogic.getNewSession(user));
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return "{\"status\": true}";
+        } else {
+            return "{\"status\": false}";
+        }
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/x-www-form-urlencoded")
+    @Path("registration")
+    public String registration(@FormParam("name") String name,
+                               @FormParam("surname") String surname,
+                               @FormParam("email") String login,
+                               @FormParam("password") String password,
+                               @FormParam("invite") String invite) {
+
+        RegistrationLogic registrationLogic = new RegistrationLogic();
+
+        if (registrationLogic.checkInviteCode(invite)) {
+            if (registrationLogic.addUser(name, surname, login, password)) {
+                return "{\"status\": true}";
+            } else {
+                return "{\"status\": false}";
+            }
+        } else {
+            return "{\"status\": noInvite}";
+        }
+    }
+
+
 }

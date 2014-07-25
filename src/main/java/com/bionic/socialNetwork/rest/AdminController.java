@@ -26,7 +26,7 @@ public class AdminController {
         if (AdminLogic.verifyAdministrator(userId)) {
             return context.getResourceAsStream("/WEB-INF/pages/admin.html");
         } else {
-            return context.getResourceAsStream("/WEB-INF/pages/home.html");
+            return context.getResourceAsStream("/WEB-INF/pages/user.html");
         }
     }
 

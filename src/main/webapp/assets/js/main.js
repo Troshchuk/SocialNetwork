@@ -10,22 +10,12 @@ jQuery(function( $ ) {
 		$('.login-form').fadeIn();
 	});
 
-
-	$('#exit').on('click', function(){
-		// console.log('exit');
-		$.get('/sn/user/exit', function(text){
-			console.log(text);
-		});
-		// location.reload();
-	});
-
-
 	$('#user-submit').click(function() {
 		login = $('#user-login').val();
 		pass = $('#user-password').val();
 		if(login!="" && pass!="") {
 //			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
-			$.post('/sn/user/login',{login:login,pass:pass},function(server_json){
+			$.post('/sn/index/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
 					location.reload();
 				}
@@ -48,7 +38,7 @@ jQuery(function( $ ) {
         invite = $('#invite').val();
 //        if(login!="" && pass!="") {
 ////			$.post('ajax/index.php',{login:login,pass:pass},function(server_json){
-            $.post('/sn/user/registration',{name:name,surname:surname,email:email,password:pass,invite:invite},function(server_json){
+            $.post('/sn/index/registration',{name:name,surname:surname,email:email,password:pass,invite:invite},function(server_json){
                 if(server_json.status==true) {
                     location.reload();
                 }
@@ -58,35 +48,9 @@ jQuery(function( $ ) {
     });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	function setupHomePage() {
 		console.log('Setup Home');
-		$.getJSON('user/id85', {}, function(json) {
+		$.getJSON('/sn/user117', {}, function(json) {
 		// $.getJSON('rest/', {}, function(json) {
 			var node = '<div>';
 			node += '<p>' + json.name + '</p>';
@@ -95,7 +59,13 @@ jQuery(function( $ ) {
 			node += '</div>';
 			$('#content').append( $(node) );
 		});
-	};
+	}
+
+    $('#exit').click('click', function() {
+        $.get('/sn/user117/exit',{},function(server_json){
+            location.reload();
+        },'json')
+    });
 
 	function setupMessagesPage() {
 		console.log('Setup Home');
@@ -103,7 +73,7 @@ jQuery(function( $ ) {
 		// $.getJSON('rest/', {}, function(json) {
 			//CODE FOR HOME;
 		});
-	};
+	}
 
 	function setupFriendsPage() {
 		console.log('Setup Friends');
@@ -141,7 +111,7 @@ jQuery(function( $ ) {
 			default:
 				console.log('Custom-page');
 		}
-	};
+	}
 
 	determinePage();
 
@@ -155,14 +125,14 @@ jQuery(function( $ ) {
 		// 		console.log('new Message');
 		// 	}
 		// });
-	};
+	}
 	function updateFriends() {
 		// $.get('ajax/friend.json', function(response){
 		// 	if ( response.new == true ) {
 		// 		console.log('new Friend');
 		// 	} 
 		// });
-	};
+	}
 
 	setInterval( function(){ updateMessages(); } , 5000);
 	setInterval( function(){ updateFriends(); } , 10000);

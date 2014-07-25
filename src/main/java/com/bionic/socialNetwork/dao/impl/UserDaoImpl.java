@@ -88,14 +88,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectFriendsNext(long beginId) throws Exception {
+    public List<User> selectFriendsNext(int lot) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
         criteria.createAlias("friends", "friendsAlias");
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
-        criteria.setFirstResult((int) beginId * 10);
+        criteria.setFirstResult(lot * 10);
 
         List<User> list = criteria.list();
         session.close();
@@ -120,8 +120,8 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         SQLQuery query = session.createSQLQuery(
-                "DELETE FROM Friends WHERE user_id = " + user.getId() + " AND friend_id = " +
-                hisFriend.getId() + ");");
+                "DELETE FROM Friends WHERE user_id = " + user.getId() +
+                " AND friend_id = " + hisFriend.getId() + ");");
 
         query.executeUpdate();
 

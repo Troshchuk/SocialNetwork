@@ -4,7 +4,7 @@
 jQuery(function( $ ) {
     $('#user-exit').click(function() {
             $.post('/sn/user/exit',{},function(server_json){
-                alert('lol')
+                location.reload();
             },'json')
     });
 });
