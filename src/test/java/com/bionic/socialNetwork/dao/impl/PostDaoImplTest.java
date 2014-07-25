@@ -45,7 +45,6 @@ public class PostDaoImplTest {
         backOfficeAdmin = new BackOfficeAdmin(user.getId());
         backOfficeAdminDao = new BackOfficeAdminDaoImpl();
         backOfficeAdminDao.insert(backOfficeAdmin);
-//        Thread.sleep(1500);
 
         postId = post.getPostId();
         assertEquals(post.getPostId(), postDao.selectById(postId).getPostId());
@@ -90,7 +89,7 @@ public class PostDaoImplTest {
         List<Post> posts = new ArrayList<Post>();
         Post post = new Post("Test", user, new Timestamp(
                 new Date().getTime()));
-
+        postDao.insert(post);
 
         Thread.sleep(1000);
 
@@ -102,7 +101,7 @@ public class PostDaoImplTest {
 
 
 
-        postDao.insert(post);
+
         List<Post> result = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(), 1);
         assertEquals(result.get(0).getPost(), post.getPost());
 
