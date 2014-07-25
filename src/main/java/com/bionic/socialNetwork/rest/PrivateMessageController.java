@@ -21,7 +21,7 @@ public class PrivateMessageController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public InputStream getPage(@Context ServletContext context) {
-        return context.getResourceAsStream("/WEB-INF/pages/group.html");
+        return context.getResourceAsStream("/WEB-INF/pages/pm.html");
     }
 
     @GET
