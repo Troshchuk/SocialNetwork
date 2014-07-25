@@ -151,7 +151,7 @@ public class UserDaoImpl implements UserDao {
 
         Criteria criteria = session.createCriteria(Interest.class);
         criteria.createAlias("users", "usersAlias");
-
+        criteria.add(Restrictions.eq("usersAlias.id", id));
         List<Interest> list = criteria.list();
         session.close();
         return list;
