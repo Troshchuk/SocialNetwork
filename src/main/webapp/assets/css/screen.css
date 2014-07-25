@@ -1,3 +1,4 @@
+@charset "IBM866";
 /* line 17, ../../../../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.7/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -554,10 +555,11 @@ nav.main-nav li:hover {
 
 /* line 1, ../sass/layouts/partials/_footer.scss */
 footer.main-footer {
+  margin-top: 40px;
   height: 140px;
   background: #25292c;
 }
-/* line 4, ../sass/layouts/partials/_footer.scss */
+/* line 5, ../sass/layouts/partials/_footer.scss */
 footer.main-footer .copyright {
   padding-top: 90px;
   color: #fff;
@@ -669,8 +671,14 @@ footer.main-footer .copyright {
   background: #fff;
   color: #000;
 }
+/* line 85, ../sass/layouts/partials/_login.scss */
+.login-section .register-error-msg {
+  color: #fff;
+  font-size: 18px;
+  display: none;
+}
 
-/* line 87, ../sass/layouts/partials/_login.scss */
+/* line 93, ../sass/layouts/partials/_login.scss */
 .description .wraper {
   width: 960px;
   padding: 60px 120px;
@@ -917,6 +925,16 @@ footer.main-footer .copyright {
   color: #999999;
 }
 /* line 69, ../sass/layouts/partials/wall/_post.scss */
+.wall .post p:last-of-type:before {
+  content: "“";
+  color: orange;
+  font-size: 45px;
+  font-family: arial;
+  position: relative;
+  top: 18px;
+  margin-right: 10px;
+}
+/* line 80, ../sass/layouts/partials/wall/_post.scss */
 .wall .post:nth-of-type(2) {
   margin-top: 0;
 }

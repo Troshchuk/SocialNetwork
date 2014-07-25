@@ -38,10 +38,20 @@ jQuery(function( $ ) {
         var pass = $('#pass').val();
         var invite = $('#invite').val();
         $.post('/sn/index/registration',{name:name,surname:surname,position:position,email:email,password:pass,invite:invite},function(server_json){
-            if(server_json.status==true) {
+            if ( server_json.status == true ) {
                 location.reload();
+                $('#register-error-msg').hide();
+            } else if ( server_json.status == false) {
+				var msg = 'Server responded with error';
+				$('#register-error-msg').text(msg).fadeIn(500);
+            } else if ( server_json.status == 'wrongInviteCode' ) {
+				var msg = 'Wrong invite code';
+				$('#register-error-msg').text(msg).fadeIn(500);
+            } else if ( server_json.status == 'wrongLoginPass' ) {
+				var msg = 'Wrong login or password';
+				$('#register-error-msg').text(msg).fadeIn(500);
             }
-            else {alert('Wrong login or password')}
+            // else {alert('Wrong login or password')}
         },'json');
     });
 
@@ -104,6 +114,7 @@ jQuery(function( $ ) {
 			};
 			str = str.join(', ');
 			$('#user-hobbies').text( str );
+			console.log(str);
 		});
 
 		$.getJSON('/sn/user' + getUserId()+ '/posts0' , {}, function(json) {
