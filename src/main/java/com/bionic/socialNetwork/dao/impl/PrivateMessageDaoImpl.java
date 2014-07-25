@@ -92,4 +92,18 @@ public class PrivateMessageDaoImpl implements PrivateMessageDao {
         session.close();
         return list;
     }
+
+    @Override
+    public List<PrivateMessage> selectSentNextWith(User user, int lot)
+    throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(PrivateMessage.class);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.eq("sentUser.id", user.getId()));
+        criteria.addOrder(Order.desc("time"));
+        criteria.setFirstResult(lot * 10);
+        List list = criteria.list();
+        session.close();
+        return list;
+    }
 }

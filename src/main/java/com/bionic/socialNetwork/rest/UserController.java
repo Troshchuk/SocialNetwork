@@ -46,9 +46,9 @@ public class UserController {
     @POST
     @Path("createPost")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean addPost(@PathParam("id") long id,
+    public String addPost(@PathParam("id") long id,
                            @FormParam("msg") String msg) {
-        return new UserLogic().createPost(id, msg);
+        return "{\"status\": " + new UserLogic().createPost(id, msg) + "}";
     }
 
     @GET
@@ -67,16 +67,6 @@ public class UserController {
                                                @PathParam("page") int page) {
 
         return new FollowingUsersList(id, page);
-
-    }
-
-    @GET
-    @Path("received_messages{page}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ReceivedMessageList getPrivateMessage(@PathParam("id") long id,
-                                                 @PathParam("page") int page) {
-
-        return new ReceivedMessageList(id, page);
 
     }
 

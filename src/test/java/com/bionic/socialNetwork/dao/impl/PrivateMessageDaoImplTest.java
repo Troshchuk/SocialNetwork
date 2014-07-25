@@ -85,20 +85,16 @@ public class PrivateMessageDaoImplTest {
     public void testSelectReceivedNextWith() throws Exception {
         List<PrivateMessage> privateMessages = new ArrayList<PrivateMessage>();
 
-
         PrivateMessage privateMessage =
                 new PrivateMessage(sentUser, receivedUser, "fsdf",
-                                   new Timestamp(
-                                           new java.util.Date().getTime())
-                );
+                                   new Timestamp(new Date().getTime()));
 
         Thread.sleep(1000);
 
         for (int i = 0; i < 9; i++) {
             privateMessages.add(new PrivateMessage(sentUser, receivedUser,
-                                                   "selectLast", new Timestamp(
-                    new Date().getTime())
-            ));
+                                "selectLast", new Timestamp(
+                                                        new Date().getTime())));
             privateMessageDao.insert(privateMessages.get(i));
 
         }
@@ -118,13 +114,13 @@ public class PrivateMessageDaoImplTest {
         privateMessageDao.delete(privateMessage);
     }
 
-        @After
-        public void testDelete ()throws Exception {
-            privateMessageDao
-                    .delete(privateMessageDao.selectBySentId(messageId));
-            new UserDaoImpl().delete(sentUser);
-            new UserDaoImpl().delete(receivedUser);
-            assertNull(privateMessageDao.selectBySentId(messageId));
-        }
-
+    @After
+    public void testDelete() throws Exception {
+        privateMessageDao
+                .delete(privateMessageDao.selectBySentId(messageId));
+        new UserDaoImpl().delete(sentUser);
+        new UserDaoImpl().delete(receivedUser);
+        assertNull(privateMessageDao.selectBySentId(messageId));
     }
+
+}

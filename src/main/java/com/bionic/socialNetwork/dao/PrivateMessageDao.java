@@ -27,4 +27,7 @@ public interface PrivateMessageDao {
 
     public List<PrivateMessage> selectReceivedNextWith(User user, int lot)
     throws Exception;
+
+    public List<PrivateMessage> selectSentNextWith(User user, int lot)
+    throws Exception;
 }
