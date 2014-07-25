@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+	<title>Social Network</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'> 
+	<!-- font-family: 'Roboto', sans-serif; -->
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>  
+	<!-- font-family: 'Roboto Condensed', sans-serif; -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<!-- font-family: 'Open Sans', sans-serif; -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+	<!-- font-family: 'Open Sans Condensed', sans-serif; -->
+
+	<link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<!--[if lte IE 9]>
+    <link href="/assets/css/ie.css" media="screen, projection" rel="stylesheet"
+          type="text/css"/>  <![endif]-->
+	<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+
+	<script src="/assets/js/jquery-1.11.0.min.js"></script>
+	<script src="/assets/js/jquery.cookie.js"></script>
+	<script src="/assets/js/jquery.form-validator.js"></script>
+	<script src="/assets/js/jquery.flexslider.js"></script>
+	<script src="/assets/js/jquery.prettyPhoto.js"></script>
+	<script src="/assets/js/main.js"></script>
+
+	<!--[if lte IE 9]>
+		<script src="assets/javascripts/legacy/html5shiv.js"></script>
+		<script src="assets/javascripts/legacy/legacy.js"></script>
+		<script src="assets/javascripts/legacy/jquery.placeholder.js"></script>
+	<![endif]-->
+</head>
+<body id="home">
+	
+	<header class="main-header">
+		<div class="wraper clearfix">
+		<button id="exit" class="exit-btn">Exit</button>
+			<a class="logo" href=""><img src="/assets/img/logo.png" alt="">Socialiser</a>
+		</div>
+		<nav class="main-nav clearfix">
+			<div class="wraper clearfix">
+				<ul class="clearfix">
+					<li>My Page</li>
+					<li>Friends</li>
+					<li>Messages</li>
+					<li>Groups</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div class="wraper clearfix main-section">
+		<aside id="controls">
+			<ul>
+				<li><a href="/sn/news">News</a></li>
+				<li><a href="/sn/home">Home</a></li>
+				<li><a href="/sn/workers">Workers</a></li>
+				<li><a href="/sn/messages">Private Messages</a></li>
+				<li><a href="/sn/followings">Followings</a></li>
+				<li><a href="/sn/groups">Groups</a></li>
+			</ul>
+		</aside>
+
+		<div id="content">
+			<div id="listOfUsers" class="user-list"></div>
+		</div>
+	</div>
+
+
+
+
+	<footer class="main-footer">
+		<div class="copyright">Bionic University. Social Network Project 2014</div>
+	</footer>
+</body>
+</html>

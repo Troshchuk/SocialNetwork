@@ -12,8 +12,8 @@ jQuery(function( $ ) {
 
 
 	$('#user-submit').click(function() {
-		login = $('#user-login').val();
-		pass = $('#user-password').val();
+		var login = $('#user-login').val();
+		var pass = $('#user-password').val();
 		if(login!="" && pass!="") {
 			$.post('/sn/index/login',{login:login,pass:pass},function(server_json){
 				if(server_json.status==true) {
@@ -31,11 +31,11 @@ jQuery(function( $ ) {
 //        @FormParam("invite") String invite) {
 //
     $('#register-btn2').click(function() {
-        name = $('#name').val();
-        surname = $('#surname').val();
-        email = $('#email').val();
-        pass = $('#pass').val();
-        invite = $('#invite').val();
+        var name = $('#name').val();
+        var surname = $('#surname').val();
+        var email = $('#email').val();
+        var pass = $('#pass').val();
+        var invite = $('#invite').val();
         $.post('/sn/index/registration',{name:name,surname:surname,position:position,email:email,password:pass,invite:invite},function(server_json){
             if(server_json.status==true) {
                 location.reload();
@@ -88,6 +88,7 @@ jQuery(function( $ ) {
 	function setupHomePage() {
 		console.log('Setup Home');
 		var fullname = '';
+		var position = '';
 		$.getJSON('/sn/user'+ getUserId() +'/getUser', {}, function(json) {
 			$('#user-name').text( json.name );
 			$('#user-surname').text( json.surname );
@@ -96,7 +97,6 @@ jQuery(function( $ ) {
 		});
 
 		$.getJSON('/sn/user' +getUserId()+ '/interests', {}, function(json) {
-			// console.log(json.interests.length);
 			var str = [];
 			for (var i = 0; i < json.interests.length; i++) {
 				str.push( json.interests[i].interest );
@@ -107,8 +107,6 @@ jQuery(function( $ ) {
 
 		$.getJSON('/sn/user' + getUserId()+ '/posts0' , {}, function(json) {
 			for (var i = 0; i < json.posts.length; i++) {
-				console.log(json.posts[i].post);
-				// Things[i]
 				var node = '<div class="post">';
 					node += '<div class="post-photo">';
 					node +=	'<a href="#">';
@@ -156,19 +154,19 @@ jQuery(function( $ ) {
 		var pageId = $('body').attr('id');
 		switch(pageId) {
 			case 'home': 
-				console.log('Home-page');
+				console.log('Home-page detected');
 				setupHomePage();
 				break;
-			case 'friends':
-				console.log('Friends-page');
+			case 'colleagues':
+				console.log('Сolleagues-page detected');
 				setupFriendsPage();
 				break;
 			case 'messages':
-				console.log('Messages-page');
+				console.log('Messages-page detected');
 				setupMessagesPage();
 				break;
 			default:
-				console.log('Custom-page');
+				console.log('Custom-page detected');
 		}
 	}
 
