@@ -17,7 +17,7 @@ public class RegistrationLogicTest {
     @Before
     public void addUserTest(){
         RegistrationLogic registrationLogic = new RegistrationLogic();
-        registrationLogic.addUser("name", "surname",login,"surname");
+        registrationLogic.addUser("name", "surname",login,"surname", "director");
     }
 
 

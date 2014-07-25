@@ -47,12 +47,16 @@ public class IndexController {
         LoginLogic log = new LoginLogic();
         User user = log.getUser(login, password);
         Cookie cookie;
+        Cookie userIdCookie;
 
         if (user != null) {
             SessionLogic sessionLogic = new SessionLogic();
             cookie = new Cookie("sessionId", sessionLogic.getNewSession(user));
             cookie.setPath("/");
             response.addCookie(cookie);
+            userIdCookie = new Cookie("userId", String.valueOf(user.getId()));
+            userIdCookie.setPath("/");
+            response.addCookie(userIdCookie);
 
             return "{\"status\": true}";
         } else {
@@ -66,6 +70,7 @@ public class IndexController {
     @Path("registration")
     public String registration(@FormParam("name") String name,
                                @FormParam("surname") String surname,
+                               @FormParam("position") String position,
                                @FormParam("email") String login,
                                @FormParam("password") String password,
                                @FormParam("invite") String invite) {
@@ -73,7 +78,7 @@ public class IndexController {
         RegistrationLogic registrationLogic = new RegistrationLogic();
 
         if (registrationLogic.checkInviteCode(invite)) {
-            if (registrationLogic.addUser(name, surname, login, password)) {
+            if (registrationLogic.addUser(name, surname, login, password, position)) {
                 return "{\"status\": true}";
             } else {
                 return "{\"status\": false}";

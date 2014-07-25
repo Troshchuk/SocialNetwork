@@ -118,6 +118,10 @@ public class UserController {
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
+        Cookie userIdCookie = new Cookie("userId", "0");
+        userIdCookie.setPath("/");
+        userIdCookie.setMaxAge(0);
+        response.addCookie(userIdCookie);
         return "{\"status\": true}";
     }
 }

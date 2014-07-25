@@ -18,12 +18,13 @@ public class RegistrationLogic {
 
 
     public boolean addUser(String name, String surname, String login,
-                           String password) {
+                           String password, String position) {
         UserDao userDao = new UserDaoImpl();
         User user = new User();
         user.setLogin(login);
         user.setName(name);
         user.setSurname(surname);
+        user.setPosition(position);
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
