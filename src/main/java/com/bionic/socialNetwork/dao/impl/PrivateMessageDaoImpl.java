@@ -2,9 +2,13 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.PrivateMessageDao;
 import com.bionic.socialNetwork.models.PrivateMessage;
+import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -73,5 +77,19 @@ public class PrivateMessageDaoImpl implements PrivateMessageDao {
         session.delete(privateMessage);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<PrivateMessage> selectReceivedNextWith(User user, int lot)
+    throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(PrivateMessage.class);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.eq("receiverUser.id", user.getId()));
+        criteria.addOrder(Order.desc("time"));
+        criteria.setFirstResult(lot * 10);
+        List list = criteria.list();
+        session.close();
+        return list;
     }
 }
