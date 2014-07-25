@@ -453,14 +453,14 @@ a:hover {
 }
 
 /* line 57, ../sass/_base.scss */
-#controls {
-  width: 30%;
+#aside {
+  width: 25%;
   float: left;
 }
 
 /* line 62, ../sass/_base.scss */
 #content {
-  width: 70%;
+  width: 75%;
   float: left;
 }
 
@@ -830,10 +830,18 @@ footer.main-footer .copyright {
   border-radius: 0px;
 }
 /* line 31, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-submit.inactive {
+  background: #999999;
+}
+/* line 33, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-submit.inactive:hover {
+  background: #999999;
+}
+/* line 37, ../sass/layouts/partials/_wall.scss */
 .wall .new-wall-post .wall-submit:hover {
   background: #004a78;
 }
-/* line 34, ../sass/layouts/partials/_wall.scss */
+/* line 40, ../sass/layouts/partials/_wall.scss */
 .wall .new-wall-post .wall-submit:active {
   background: #002a58;
 }
@@ -888,19 +896,20 @@ footer.main-footer .copyright {
 /* line 39, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo {
   width: 80px;
+  height: 90px;
   float: left;
   background: #fff;
   border: 1px solid #cccccc;
   overflow: hidden;
 }
-/* line 45, ../sass/layouts/partials/wall/_post.scss */
+/* line 46, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo img {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 47, ../sass/layouts/partials/wall/_post.scss */
+/* line 48, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-photo img:hover {
   -webkit-transform: scale(1.2, 1.2);
   -moz-transform: scale(1.2, 1.2);
@@ -908,23 +917,27 @@ footer.main-footer .copyright {
   -o-transform: scale(1.2, 1.2);
   transform: scale(1.2, 1.2);
 }
-/* line 53, ../sass/layouts/partials/wall/_post.scss */
+/* line 54, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-name {
   font-weight: bold;
   font-size: 14px;
 }
-/* line 58, ../sass/layouts/partials/wall/_post.scss */
+/* line 59, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-message {
   margin-left: 100px;
   font-size: 14px;
   line-height: 18px;
 }
-/* line 64, ../sass/layouts/partials/wall/_post.scss */
+/* line 65, ../sass/layouts/partials/wall/_post.scss */
 .wall .post .post-meta {
   font-size: 10px;
   color: #999999;
 }
-/* line 69, ../sass/layouts/partials/wall/_post.scss */
+/* line 70, ../sass/layouts/partials/wall/_post.scss */
+.wall .post p:last-of-type:first-letter {
+  text-transform: uppercase;
+}
+/* line 73, ../sass/layouts/partials/wall/_post.scss */
 .wall .post p:last-of-type:before {
   content: "“";
   color: orange;
@@ -934,7 +947,45 @@ footer.main-footer .copyright {
   top: 18px;
   margin-right: 10px;
 }
-/* line 80, ../sass/layouts/partials/wall/_post.scss */
+/* line 84, ../sass/layouts/partials/wall/_post.scss */
 .wall .post:nth-of-type(2) {
   margin-top: 0;
+}
+
+/* line 2, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li {
+  margin-bottom: 10px;
+}
+/* line 4, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-size: 100%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+/* line 11, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-news {
+  background-image: url(../img/news-icon.png);
+}
+/* line 14, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-index {
+  background-image: url(../img/home-icon.png);
+}
+/* line 17, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-workers {
+  background-image: url(../img/friend-icon.png);
+}
+/* line 20, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-messages {
+  background-image: url(../img/message-icon.png);
+}
+/* line 23, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-followings {
+  background-image: url(../img/follower-icon.png);
+}
+/* line 26, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-groups {
+  background-image: url(../img/group-icon.png);
 }

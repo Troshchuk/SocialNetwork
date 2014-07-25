@@ -38,6 +38,7 @@
 
 		.post-photo{
 			width: 80px;
+			height: 90px;
 			float: left;
 			background: #fff;
 			border: 1px solid $border-color;
@@ -66,6 +67,9 @@
 			color: $text-light-color;
 		}
 		p:last-of-type{
+			&:first-letter{
+				text-transform: uppercase;
+			}
 			&:before{
 				content: "“";
 				color: orange;

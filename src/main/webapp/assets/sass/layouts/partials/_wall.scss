@@ -28,6 +28,12 @@
 			background: $btn-bg;
 			color: $btn-color;
 			@include border-radius(0px);
+			&.inactive{
+				background: $btn-bg-inactive;
+				&:hover{
+					background: $btn-bg-inactive;
+				}
+			}
 			&:hover{
 				background: $btn-bg-hover;
 			}
