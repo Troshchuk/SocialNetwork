@@ -134,8 +134,8 @@ public class UserDaoImpl implements UserDao {
     public List<Group> selectUserGroupsNext(long id, int lot) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.createAlias("groups", "groupsAlias");
+        Criteria criteria = session.createCriteria(Group.class);
+        criteria.createAlias("followers", "followersAlias");
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
@@ -149,10 +149,8 @@ public class UserDaoImpl implements UserDao {
     public List<Interest> selectAllInterests(long id) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.createAlias("interests", "interestsAlias");
-        criteria.setMaxResults(10);
-        criteria.addOrder(Order.asc("id"));
+        Criteria criteria = session.createCriteria(Interest.class);
+        criteria.createAlias("users", "usersAlias");
 
         List<Interest> list = criteria.list();
         session.close();

@@ -31,7 +31,7 @@ public class Group {
     @JoinTable(name = "Users_Groups",
                joinColumns = {@JoinColumn(name = "group_id")},
                inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> userSet = new HashSet<User>(0);
+    private Set<User> followers = new HashSet<User>(0);
 
     public Group() {
 
@@ -58,12 +58,12 @@ public class Group {
     }
 
     @JsonIgnore
-    public Set<User> getUserSet() {
-        return userSet;
+    public Set<User> getFollowers() {
+        return followers;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setFollowers(Set<User> userSet) {
+        this.followers = userSet;
     }
 
     @JsonIgnore

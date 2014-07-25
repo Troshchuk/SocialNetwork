@@ -3,6 +3,8 @@ package com.bionic.socialNetwork.models;
 
 //import org.hibernate.annotations.Columns;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.GenerationType;
 import java.lang.String;
@@ -33,7 +35,7 @@ public class Interest {
     @JoinTable(name = "Users_Interests",
                joinColumns = {@JoinColumn(name = "interest_id")},
                inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> userSet = new HashSet<User>(0);
+    private Set<User> users = new HashSet<User>(0);
 
     public Interest() {
 
@@ -44,12 +46,13 @@ public class Interest {
         this.interests_id = intrst_id;
     }
 
-    public Set<User> getUserSet() {
-        return userSet;
+    @JsonIgnore
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setUsers(Set<User> userSet) {
+        this.users = userSet;
     }
 
     public void setInterests_id(long interests_id) {
