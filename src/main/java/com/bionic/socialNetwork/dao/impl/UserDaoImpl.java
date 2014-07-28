@@ -60,6 +60,8 @@ public class UserDaoImpl implements UserDao {
         } else {
             return null;
         }
+
+
     }
 
     @Override
@@ -110,7 +112,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectFriendsNext(int lot) throws Exception {
+    public List<User> selectFollowingsNext(int lot) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
@@ -125,12 +127,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void insertFriend(User user, User hisFriend) throws Exception {
+    public void insertFollowing(User user, User hisFriend) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         SQLQuery query = session.createSQLQuery(
-                "INSERT INTO Friends VALUES (" + user.getId() + ", " +
-                        hisFriend.getId() + ");");
+                "INSERT INTO Followings VALUES (" + user.getId() + ", " +
+                hisFriend.getId() + ");");
 
         query.executeUpdate();
 
@@ -138,12 +140,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteFriend(User user, User hisFriend) throws Exception {
+    public void deleteFollowing(User user, User hisFollowing) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         SQLQuery query = session.createSQLQuery(
-                "DELETE FROM Friends WHERE user_id = " + user.getId() +
-                        " AND friend_id = " + hisFriend.getId() + ";");
+                "DELETE FROM Followings WHERE follower_id = " + user.getId() +
+                " AND following_id = " + hisFollowing.getId() + ";");
 
         query.executeUpdate();
 

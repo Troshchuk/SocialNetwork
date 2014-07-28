@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +39,8 @@ public class InterestDaoImplTest {
         interest = new Interest(1, "Unit testing in Java");
         interestDao.insert(interest);
         User user =
-                new User("interestUserTest", "Admin", "Admin", "Administrator");
+                new User("interestUserTest", "Admin", "Admin", "Administrator",
+                         new Date(0));
         Password password = new Password("password");
         userDao.insert(user, password);
         interestName = interest.getInterest();

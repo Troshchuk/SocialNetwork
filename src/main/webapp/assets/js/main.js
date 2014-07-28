@@ -58,10 +58,14 @@ jQuery(function( $ ) {
 	$('#exit').click('click', function() {
 		$.get('/sn/user' +getUserId()+ '/exit', {}, function(response){
 			if( response.status == true ) {
-				location.reload();	
+				location.reload();
 			}
 		},'json')
 	});
+
+
+
+
 
 
 
@@ -90,6 +94,9 @@ jQuery(function( $ ) {
 
 
 
+
+
+
 	function formatDate(msec) {
 		var date = new Date(msec);
 		var formated = 'at ' + date.getHours() + ':' + date.getMinutes() + ' on ' + date.getDate() + '.' + date.getMonth()+1 + '.' + date.getFullYear();
@@ -105,11 +112,16 @@ jQuery(function( $ ) {
 		}
 		var id = url.slice(pos+4);
 		return id;
-		// var userId = $.cookie("userId");
-		// var id = (urlId != userId ) ? urlId : userId;
-		// console.log(' id - '+ id);
-		// return id;
 	}
+
+	function removePost(id) {
+		// console.log(id);
+		$.post('/sn/user' +getUserId()+ '/deletePost', {postId: id}, function(response){
+			if(response.status == true ) {
+				location.reload();
+			}
+		});
+	};
 
 
 
@@ -138,7 +150,7 @@ jQuery(function( $ ) {
 
 		$.getJSON('/sn/user' + getUserId()+ '/posts0' , {}, function(json) {
 			for (var i = 0; i < json.posts.length; i++) {
-				var node = '<div class="post">';
+				var node = '<div class="post" id="' + json.posts[i].postId + '">';
 					node += '<div class="post-photo">';
 					node +=	'<a href="#">';
 					node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
@@ -146,25 +158,38 @@ jQuery(function( $ ) {
 					node += '</div>';
 					node += '<div class="post-message">';
 					node += '<p class="post-name"><a href="">' + fullname + '</a></p>';
-					node +=	'<p>' +json.posts[i].post+ '</p>';
+					node += '<span class="remove-post"></span>';
+					node +=	'<p>' + json.posts[i].post + '</p>';
 					node += '<span class="post-meta">'+formatDate( json.posts[i].time )+'</span>';
 					node += '</div>';
 					node += '</div>';
 					$('#wall').append( node );
 			};
+			$('.remove-post').on('click', function(){
+				var id = $(this).parents('.post').attr('id');
+				removePost(id);
+			});
 		});
 	}
 
 	function setupMessagesPage() {
 		console.log('Setup Home');
 		$.getJSON('ajax/messages.json', {}, function(json) {
-		// $.getJSON('rest/', {}, function(json) {
-			//CODE FOR HOME;
-		});C	}
+			for (var i = 0; i < json.messages.length; i++) {
+				var node = '<div class="message">';
+				node += '<div class="user-image"><a href=""><img src="" alt=""></a></div>'
+				node += '<div class="message-text">';
+				node += '<p>' + json + '</p>';
+				node += '<span class="meta">' + formatDate( getjson.date )+ '</span>';
+				node += '</div>';
+				node += '</div>';
+				$('#incoming').append( $(node) );
+			};
+		});
+	}
 
 	function setupColleaguesPage() {
 		console.log('Setup Colleagues');
-		// $.getJSON('ajax/users.json', {}, function(json) {
 		$.getJSON('/sn/workers/getWorkers0', {}, function (json) {
 			var list = '<ul>';
 			for (var i = 0; i < json.users.length; i++) {
@@ -179,7 +204,7 @@ jQuery(function( $ ) {
 		});
 	};
 
-// /sn/user+id
+
 
 	function determinePage() {
 		var pageId = $('body').attr('id');
@@ -221,7 +246,6 @@ jQuery(function( $ ) {
 		// 	} 
 		// });
 	}
-
 	setInterval( function(){ updateMessages(); } , 5000);
 	setInterval( function(){ updateFriends(); } , 10000);
 

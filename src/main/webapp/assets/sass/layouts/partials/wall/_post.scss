@@ -80,7 +80,25 @@
 				margin-right: 10px;
 			}
 		}
+		.remove-post{
+			opacity: 0;
+			float: right;
+			background: url(../img/delete.png);
+			width: 15px;
+			height: 15px;
+			background-size: cover;
+			@include transition(opacity .4s);
+			cursor: pointer;
+		}
+		&:hover{
+			.remove-post{
+				opacity: .5;
+				
+			}
+
+		}
 	}
+
 	.post:nth-of-type(2){
 		margin-top: 0;
 	}

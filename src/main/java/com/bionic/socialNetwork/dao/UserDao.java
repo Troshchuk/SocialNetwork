@@ -61,11 +61,11 @@ public interface UserDao {
      */
     public void delete(User user) throws Exception;
 
-    public List<User> selectFriendsNext(int lot) throws Exception;
+    public List<User> selectFollowingsNext(int lot) throws Exception;
 
-    public void insertFriend(User user, User hisFriend) throws Exception;
+    public void insertFollowing(User user, User hisFollowing) throws Exception;
 
-    public void deleteFriend(User user, User hisFriend) throws Exception;
+    public void deleteFollowing(User user, User hisFollowing) throws Exception;
 
     public List<Group> selectUserGroupsNext(long id, int lot) throws Exception;
 

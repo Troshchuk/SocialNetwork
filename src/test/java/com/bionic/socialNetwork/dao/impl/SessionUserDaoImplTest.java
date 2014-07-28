@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -25,7 +27,7 @@ public class SessionUserDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
-        user = new User("SessionUser", "", "", "");
+        user = new User("SessionUser", "", "", "", new Date(0));
         userDao.insert(user, new Password("root"));
 
         sessionUserDao = new SessionUserDaoImpl();
@@ -33,7 +35,8 @@ public class SessionUserDaoImplTest {
         sessionUserDao.insert(sessionUser);
 
         sessionId = sessionUser.getSessionId();
-        assertEquals(sessionUser.getSessionId(), sessionUserDao.selectById(sessionId).getSessionId());
+        assertEquals(sessionUser.getSessionId(),
+                     sessionUserDao.selectById(sessionId).getSessionId());
     }
 
     @Test

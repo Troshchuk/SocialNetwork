@@ -1,10 +1,15 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.GroupDao;
+import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.models.Group;
+import com.bionic.socialNetwork.models.Password;
+import com.bionic.socialNetwork.models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,10 +23,16 @@ public class GroupDaoImplTest {
     private long id;
     private Group groupActual;
     private GroupDao groupDao;
+    private User user;
+    private UserDao userDao;
 
     @Before
     public void testInsertGroup() throws Exception {
-        groupActual = new Group("First");
+        user = new User("GroupTest", "", "", "", new Date(0));
+        userDao = new UserDaoImpl();
+        userDao.insert(user, new Password("lol"));
+
+        groupActual = new Group("First", user);
         groupDao = new GroupDaoImpl();
         groupDao.insert(groupActual);
 
@@ -45,5 +56,6 @@ public class GroupDaoImplTest {
     @After
     public void testDeleteGroup() throws Exception {
         groupDao.delete(groupActual);
+        userDao.delete(user);
     }
 }

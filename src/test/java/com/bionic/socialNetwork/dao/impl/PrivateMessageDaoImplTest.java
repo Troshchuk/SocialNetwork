@@ -30,9 +30,9 @@ public class PrivateMessageDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
-        sentUser = new User("PostUser", "", "", "");
+        sentUser = new User("PostUser", "", "", "", new java.sql.Date(0));
         userDao.insert(sentUser, new Password("root"));
-        receivedUser = new User("PostUser", "", "", "");
+        receivedUser = new User("PostUser", "", "", "", new java.sql.Date(0));
         userDao.insert(receivedUser, new Password("root"));
 
         privateMessageDao = new PrivateMessageDaoImpl();
@@ -93,8 +93,9 @@ public class PrivateMessageDaoImplTest {
 
         for (int i = 0; i < 9; i++) {
             privateMessages.add(new PrivateMessage(sentUser, receivedUser,
-                                "selectLast", new Timestamp(
-                                                        new Date().getTime())));
+                                                   "selectLast", new Timestamp(
+                    new Date().getTime())
+            ));
             privateMessageDao.insert(privateMessages.get(i));
 
         }

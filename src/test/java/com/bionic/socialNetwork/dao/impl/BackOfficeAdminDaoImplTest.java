@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -21,7 +22,7 @@ public class BackOfficeAdminDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
-        user = new User("BackAdminTest", "", "", "");
+        user = new User("BackAdminTest", "", "", "", new Date(0));
         userDao.insert(user, new Password("password"));
         backOfficeAdminDao = new BackOfficeAdminDaoImpl();
 

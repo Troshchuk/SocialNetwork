@@ -10,6 +10,7 @@ import com.bionic.socialNetwork.models.User;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,6 +61,8 @@ public class RegistrationLogic {
             user.setName(name);
             user.setSurname(surname);
             user.setPosition(position);
+            user.setBirthday(new Date(0));
+            user.setPathToAvatar("/WEB-INF/avatars/noneava.jpg");
 
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");

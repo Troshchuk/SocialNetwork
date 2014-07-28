@@ -33,12 +33,17 @@ public class Group {
                inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private Set<User> followers = new HashSet<User>(0);
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User author;
+
     public Group() {
 
     }
 
-    public Group(String name) {
+    public Group(String name, User author) {
         this.name = name;
+        this.author = author;
     }
 
     public long getGroupId() {
@@ -73,5 +78,13 @@ public class Group {
 
     public void setGroupPosts(List<GroupPost> groupPosts) {
         this.groupPosts = groupPosts;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthorId(User author) {
+        this.author = author;
     }
 }

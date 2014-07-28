@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class AdministratorDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
-        user = new User("AdminTest", "", "", "");
+        user = new User("AdminTest", "", "", "", new Date(0));
         userDao.insert(user, new Password("password"));
         administratorDao = new AdministratorDaoImpl();
 

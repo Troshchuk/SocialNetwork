@@ -7,8 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.jws.soap.SOAPBinding;
-
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -27,7 +26,8 @@ public class UserDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         userDao = new UserDaoImpl();
-        User user = new User("userDaoTest", "Admin", "Admin", "Administrator");
+        User user = new User("userDaoTest", "Admin", "Admin", "Administrator",
+                             new Date(0));
 
         userDao.insert(user, new Password("koks"));
         id = user.getId();
@@ -60,21 +60,21 @@ public class UserDaoImplTest {
 
     @Test
     public void testSelectFriendsNext() throws Exception {
-        User user = new User("user", "user", "user", "user");
-        User friend1 = new User("temp", "temp", "temp", "temp");
-        User friend2 = new User("temp", "temp", "temp", "temp");
+        User user = new User("user", "user", "user", "user", new Date(0));
+        User friend1 = new User("temp", "temp", "temp", "temp", new Date(0));
+        User friend2 = new User("temp", "temp", "temp", "temp", new Date(0));
 
         userDao.insert(user, new Password("1"));
         userDao.insert(friend1, new Password("1"));
         userDao.insert(friend2, new Password("1"));
 
-        userDao.insertFriend(user, friend1);
-        userDao.insertFriend(user, friend2);
-        List<User> users = userDao.selectFriendsNext(0);
+        userDao.insertFollowing(user, friend1);
+        userDao.insertFollowing(user, friend2);
+        List<User> users = userDao.selectFollowingsNext(0);
         assertEquals(users.size(), 2);
 
-        userDao.deleteFriend(user, friend1);
-        userDao.deleteFriend(user, friend2);
+        userDao.deleteFollowing(user, friend1);
+        userDao.deleteFollowing(user, friend2);
         userDao.delete(user);
         userDao.delete(friend1);
         userDao.delete(friend2);
