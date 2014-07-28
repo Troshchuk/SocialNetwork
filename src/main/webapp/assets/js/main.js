@@ -51,7 +51,6 @@ jQuery(function( $ ) {
 				var msg = 'Wrong login or password';
 				$('#register-error-msg').text(msg).fadeIn(500);
             }
-            // else {alert('Wrong login or password')}
         },'json');
     });
 
@@ -93,16 +92,23 @@ jQuery(function( $ ) {
 
 	function formatDate(msec) {
 		var date = new Date(msec);
-		// var year = date.getFullYear();
-		// var month = date.getMonth()+1;
-		// var date = date.getDate();
 		var formated = 'at ' + date.getHours() + ':' + date.getMinutes() + ' on ' + date.getDate() + '.' + date.getMonth()+1 + '.' + date.getFullYear();
 		return formated;
 	};
 
 	function getUserId() {
-		var userId = $.cookie("userId");
-		return userId;
+		var url = window.location.href;
+		var pos = url.indexOf('user');
+		if ( pos == -1) {
+			var id = $.cookie("userId");
+			return id;
+		}
+		var id = url.slice(pos+4);
+		return id;
+		// var userId = $.cookie("userId");
+		// var id = (urlId != userId ) ? urlId : userId;
+		// console.log(' id - '+ id);
+		// return id;
 	}
 
 
