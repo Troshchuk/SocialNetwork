@@ -14,7 +14,9 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -62,19 +64,19 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> selectByName(String name, String surname, long beginId) throws Exception {
-        List<User> returnUser = null;
-        User user;
         int limit = 10;
+        List<User> returnUser = new ArrayList<User>();
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(
                 "FROM User WHERE name = '" + name + "' AND surname = '" + surname + "' AND id >= " + beginId);
         List<User> list = query.list();
         session.close();
-        while (list.iterator().hasNext() && returnUser.size() < limit) {
-            user = list.iterator().next();
-            if (user.getName() == name && user.getSurname() == surname) {
-                returnUser.add(user);
+        int pos = 0;
+        for(User user: list) {
+            if (user.getName().equals(name) && user.getSurname().equals(surname)) {
+                returnUser.add(pos, user);
+                pos++;
             }
         }
         return returnUser;
