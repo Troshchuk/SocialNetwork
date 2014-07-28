@@ -29,6 +29,8 @@ public class PrivateMessage {
 
     private Timestamp time;
 
+    private boolean read;
+
     public PrivateMessage() {
 
     }
@@ -39,6 +41,7 @@ public class PrivateMessage {
         this.sentUser = sentUser;
         this.receiverUser = receiverUser;
         this.message = message;
+        this.read = false;
     }
 
     public long getMessageId() {
@@ -80,4 +83,8 @@ public class PrivateMessage {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+
+    public boolean isRead() { return read; }
+
+    public void setRead(boolean read) { this.read = read; }
 }
