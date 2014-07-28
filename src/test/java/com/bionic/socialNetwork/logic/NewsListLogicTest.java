@@ -82,10 +82,17 @@ public class NewsListLogicTest {
      */
     @Test
     public void testNewsList() throws Exception{
+        Thread.sleep(1000);
+        User user1 = new User("dfgfd", "gdf", "gfd", "gdfgd");
+        userDao.insert(user1, new Password("fds"));
+        Post post = new Post("fds", user1, new Timestamp(new Date().getTime()));
+        postDao.insert(post);
         NewsList newsList = new NewsList(0);
         List<Post> postPull =  newsList.getPosts();
         assertFalse(postPull.isEmpty());
         assertEquals(postVerify.getPostId() , postPull.get(0).getPostId());
+        postDao.delete(post);
+        userDao.delete(user1);
     }
 
     @After
