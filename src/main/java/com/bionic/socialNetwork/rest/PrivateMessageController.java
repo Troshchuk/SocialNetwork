@@ -31,7 +31,7 @@ public class PrivateMessageController {
             @Context HttpServletRequest request,
             @PathParam("page") int page) {
         return new ReceivedMessageList((Long) request.getAttribute("userId"),
-                                       page);
+                page);
     }
 
     @GET
