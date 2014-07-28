@@ -38,6 +38,15 @@ public interface UserDao {
     public User selectByLogin(String login) throws Exception;
 
     /**
+     * Select users searching by name
+     *
+     * @param name
+     * @return List<User>
+     * @throws Exception
+     */
+    public List<User> selectByName(String name, String surname, long beginId) throws Exception;
+
+    /**
      * Select next 10 (or less) users begin with id
      *
      * @param beginId id at which to begin select

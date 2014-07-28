@@ -58,8 +58,26 @@ public class UserDaoImpl implements UserDao {
         } else {
             return null;
         }
+    }
 
+    @Override
+    public List<User> selectByName(String name, String surname, long beginId) throws Exception {
+        List<User> returnUser = null;
+        User user;
+        int limit = 10;
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
+        Query query = session.createQuery(
+                "FROM User WHERE name = '" + name + "' AND surname = '" + surname + "' AND id >= " + beginId);
+        List<User> list = query.list();
+        session.close();
+        while (list.iterator().hasNext() && returnUser.size() < limit) {
+            user = list.iterator().next();
+            if (user.getName() == name && user.getSurname() == surname) {
+                returnUser.add(user);
+            }
+        }
+        return returnUser;
     }
 
     @Override
@@ -110,7 +128,7 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "INSERT INTO Friends VALUES (" + user.getId() + ", " +
-                hisFriend.getId() + ");");
+                        hisFriend.getId() + ");");
 
         query.executeUpdate();
 
@@ -123,7 +141,7 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Friends WHERE user_id = " + user.getId() +
-                " AND friend_id = " + hisFriend.getId() + ";");
+                        " AND friend_id = " + hisFriend.getId() + ";");
 
         query.executeUpdate();
 

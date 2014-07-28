@@ -47,8 +47,14 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testSelectNext() throws Exception {
+     public void testSelectNext() throws Exception {
         List<User> users = userDao.selectNext(id);
+        assertEquals(id, users.get(0).getId());
+    }
+
+    @Test
+    public void testSelectByName() throws Exception {
+        List<User> users = userDao.selectByName("Admin","Admin", 0);
         assertEquals(id, users.get(0).getId());
     }
 
