@@ -59,7 +59,7 @@ public class UserDaoImplTest {
     }
 
     @Test
-    public void testSelectFriendsNext() throws Exception {
+    public void testSelectFollowingsNext() throws Exception {
         User user = new User("user", "user", "user", "user", new Date(0));
         User friend1 = new User("temp", "temp", "temp", "temp", new Date(0));
         User friend2 = new User("temp", "temp", "temp", "temp", new Date(0));

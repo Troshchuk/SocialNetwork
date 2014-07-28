@@ -116,7 +116,7 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
-        criteria.createAlias("friends", "friendsAlias");
+        criteria.createAlias("followings", "followingsAlias");
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);

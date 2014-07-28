@@ -29,6 +29,7 @@ public class PrivateMessage {
 
     private Timestamp time;
 
+    @Column(name = "`read`")
     private boolean read;
 
     public PrivateMessage() {
@@ -84,7 +85,7 @@ public class PrivateMessage {
         this.time = time;
     }
 
-    public boolean isRead() { return read; }
+    public boolean getRead() { return read; }
 
     public void setRead(boolean read) { this.read = read; }
 }
