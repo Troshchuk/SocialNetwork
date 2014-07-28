@@ -947,7 +947,25 @@ footer.main-footer .copyright {
   top: 18px;
   margin-right: 10px;
 }
-/* line 84, ../sass/layouts/partials/wall/_post.scss */
+/* line 83, ../sass/layouts/partials/wall/_post.scss */
+.wall .post .remove-post {
+  opacity: 0;
+  float: right;
+  background: url(../img/delete.png);
+  width: 15px;
+  height: 15px;
+  background-size: cover;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  cursor: pointer;
+}
+/* line 94, ../sass/layouts/partials/wall/_post.scss */
+.wall .post:hover .remove-post {
+  opacity: .5;
+}
+/* line 102, ../sass/layouts/partials/wall/_post.scss */
 .wall .post:nth-of-type(2) {
   margin-top: 0;
 }
