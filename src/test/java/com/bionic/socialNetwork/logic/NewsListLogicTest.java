@@ -21,17 +21,22 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Matvey on 26.07.2014.
+ * Test for NewsListLogic
+ *
+ * @ author  Matvey Mitnitskyi
+ * @ version 1.00  26.07.14.
  */
 public class NewsListLogicTest {
     private User user;
+    private long [] id;
+    private int postNumber = 20;
     private String login = "matvey@matvey.com";
     private BackOfficeAdmin backOfficeAdmin;
     private PostDao postDao = new PostDaoImpl();
     private UserDao userDao = new UserDaoImpl();
     private BackOfficeAdminDao backOfficeAdminDao =
             new BackOfficeAdminDaoImpl();
-    private Post post;
+    private Post postVerify;
 
     @Before
     public void testInsert() throws Exception {
@@ -42,22 +47,52 @@ public class NewsListLogicTest {
         backOfficeAdmin = new BackOfficeAdmin(user.getId());
         backOfficeAdminDao.insert(backOfficeAdmin);
 
-        post = new Post("News Post", user,
+        /**
+         * Creating 10 posts belong to User
+         * postNumber-1 in loop and 1 outside with thread delay 1000ms
+         * the last one "postVerify" always must be the first in ordered list
+         * after executing newsList.getPost() method.
+         */
+        id = new long[postNumber];
+        for (int i = 0; i < postNumber-1; i++) {
+            Post post = new Post("News Post", user,
+                                 new Timestamp(new Date().getTime()));
+            postDao.insert(post);
+            id [i] = post.getPostId();
+        }
+
+         Thread.sleep(1000);
+
+        /**
+         *
+         * Creating and saving test variable postVerify.
+         */
+        postVerify = new Post("Verify Post", user,
                              new Timestamp(new Date().getTime()));
-        postDao.insert(post);
-        assertNotNull(post);
+        postDao.insert(postVerify);
+        id [postNumber-1] = postVerify.getPostId();
+
+        assertNotNull(id);
     }
 
+    /**
+     * Getting 10 last posts with the help of
+     * newsList.getPost() method, comparing result with the test
+     * postVerify variable.
+     */
     @Test
     public void testNewsList() throws Exception{
-        NewsList newsList = new NewsList(1);
+        NewsList newsList = new NewsList(0);
         List<Post> postPull =  newsList.getPosts();
         assertFalse(postPull.isEmpty());
-        assertEquals(post , postPull.get(0));
+        assertEquals(postVerify.getPostId() , postPull.get(0).getPostId());
     }
+
     @After
     public void testDelete() throws Exception {
-        postDao.delete(post);
+        for(int i = 0; i < postNumber; i++) {
+            postDao.delete(postDao.selectById(id [i]));
+        }
         backOfficeAdminDao.delete(backOfficeAdmin);
         userDao.delete(user);
         }

@@ -30,11 +30,11 @@ public class RegistrationLogicTest {
 
 
    @Test
-    public void registerUserTest() throws Exception {
-        UserDaoImpl userDao = new UserDaoImpl();
-        user = new User();
-        user = userDao.selectByLogin(login);
-        assertNotNull(userDao.selectByLogin(login));
+       public void registerUserTest() throws Exception {
+           UserDaoImpl userDao = new UserDaoImpl();
+           user = new User();
+           user = userDao.selectByLogin(login);
+           assertNotNull(userDao.selectByLogin(login));
 
     }
     @After

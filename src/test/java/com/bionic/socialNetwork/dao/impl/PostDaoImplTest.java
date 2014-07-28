@@ -64,7 +64,7 @@ public class PostDaoImplTest {
         Post post = new Post("Test", user, new Timestamp(
                 new Date().getTime()));
 
-        postDao.insert(post);
+
         Thread.sleep(1000);
 
         for (int i = 0; i < 9; i++) {
@@ -74,7 +74,7 @@ public class PostDaoImplTest {
 
         }
 
-
+        postDao.insert(post);
         List<Post> result = postDao.selectLastWith(user, 1);
         assertEquals(result.get(0).getPostId(),
                      post.getPostId());
@@ -90,7 +90,6 @@ public class PostDaoImplTest {
         List<Post> posts = new ArrayList<Post>();
         Post post = new Post("Test", user, new Timestamp(
                 new Date().getTime()));
-        postDao.insert(post);
 
         Thread.sleep(1000);
 
@@ -100,7 +99,7 @@ public class PostDaoImplTest {
             postDao.insert(posts.get(i));
         }
 
-
+        postDao.insert(post);
         List<Post> result =
                 postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(),
                                               1);

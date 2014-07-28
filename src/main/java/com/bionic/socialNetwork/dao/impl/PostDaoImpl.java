@@ -63,15 +63,15 @@ public class PostDaoImpl implements PostDao {
                                              int lot) throws Exception {
         int i = 0;
         Long [] arr = new Long[backOfficeAdmins.size()];
-        for(BackOfficeAdmin backOff:backOfficeAdmins) {
-            arr[i] = backOff.getUser().getId();
-            ++i;
+            for(BackOfficeAdmin backOff:backOfficeAdmins) {
+                arr[i] = backOff.getUser().getId();
+                i++;
         }
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(Post.class);
         criteria.setMaxResults(10);
-        criteria.add(Restrictions.in("user.id", arr));
+        criteria.add(Restrictions.in("user.id" , arr));
         criteria.addOrder(Order.desc("time"));
         criteria.setFirstResult(lot * 10);
         List<Post> list = criteria.list();
