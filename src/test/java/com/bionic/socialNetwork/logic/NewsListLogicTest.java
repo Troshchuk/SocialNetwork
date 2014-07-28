@@ -11,7 +11,9 @@ import com.bionic.socialNetwork.models.BackOfficeAdmin;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
+
 import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,7 @@ import java.util.List;
  */
 public class NewsListLogicTest {
     private User user;
-    private long [] id;
+    private long[] id;
     private int postNumber = 20;
     private String login = "matvey@matvey.com";
     private BackOfficeAdmin backOfficeAdmin;
@@ -41,7 +43,7 @@ public class NewsListLogicTest {
     @Before
     public void testInsert() throws Exception {
 
-        user = new User(login, "BackOffUser", " ", " ");
+        user = new User(login, "BackOffUser", " ", " ", new java.sql.Date(0));
         userDao.insert(user, new Password("password"));
 
         backOfficeAdmin = new BackOfficeAdmin(user.getId());
@@ -54,23 +56,23 @@ public class NewsListLogicTest {
          * after executing newsList.getPost() method.
          */
         id = new long[postNumber];
-        for (int i = 0; i < postNumber-1; i++) {
+        for (int i = 0; i < postNumber - 1; i++) {
             Post post = new Post("News Post", user,
                                  new Timestamp(new Date().getTime()));
             postDao.insert(post);
-            id [i] = post.getPostId();
+            id[i] = post.getPostId();
         }
 
-         Thread.sleep(1000);
+        Thread.sleep(1000);
 
         /**
          *
          * Creating and saving test variable postVerify.
          */
         postVerify = new Post("Verify Post", user,
-                             new Timestamp(new Date().getTime()));
+                              new Timestamp(new Date().getTime()));
         postDao.insert(postVerify);
-        id [postNumber-1] = postVerify.getPostId();
+        id[postNumber - 1] = postVerify.getPostId();
 
         assertNotNull(id);
     }
@@ -81,27 +83,28 @@ public class NewsListLogicTest {
      * postVerify variable.
      */
     @Test
-    public void testNewsList() throws Exception{
+    public void testNewsList() throws Exception {
         Thread.sleep(1000);
-        User user1 = new User("dfgfd", "gdf", "gfd", "gdfgd");
+        User user1 =
+                new User("dfgfd", "gdf", "gfd", "gdfgd", new java.sql.Date(0));
         userDao.insert(user1, new Password("fds"));
         Post post = new Post("fds", user1, new Timestamp(new Date().getTime()));
         postDao.insert(post);
         NewsList newsList = new NewsList(0);
-        List<Post> postPull =  newsList.getPosts();
+        List<Post> postPull = newsList.getPosts();
         assertFalse(postPull.isEmpty());
-        assertEquals(postVerify.getPostId() , postPull.get(0).getPostId());
+        assertEquals(postVerify.getPostId(), postPull.get(0).getPostId());
         postDao.delete(post);
         userDao.delete(user1);
     }
 
     @After
     public void testDelete() throws Exception {
-        for(int i = 0; i < postNumber; i++) {
-            postDao.delete(postDao.selectById(id [i]));
+        for (int i = 0; i < postNumber; i++) {
+            postDao.delete(postDao.selectById(id[i]));
         }
         backOfficeAdminDao.delete(backOfficeAdmin);
         userDao.delete(user);
-        }
+    }
 
 }

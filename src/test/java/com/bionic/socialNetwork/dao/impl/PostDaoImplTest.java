@@ -35,7 +35,7 @@ public class PostDaoImplTest {
     @Before
     public void testInsert() throws Exception {
         UserDao userDao = new UserDaoImpl();
-        user = new User("PostUser", "", "", "");
+        user = new User("PostUser", "", "", "", new java.sql.Date(0));
         userDao.insert(user, new Password("password"));
 
         postDao = new PostDaoImpl();

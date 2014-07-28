@@ -5,6 +5,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,17 +23,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @XmlTransient
     private String login;
 
     private String name;
 
     private String surname;
 
+    private Date birthday;
+
+    @Column(name = "avatar", nullable = false)
+    private String pathToAvatar;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Friends", joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "friend_id")})
-    private Set<User> friends = new HashSet<User>(0);
+    @JoinTable(name = "Followings", joinColumns = {@JoinColumn(name = "follower_id")},
+            inverseJoinColumns = {@JoinColumn(name = "following_id")})
+    private Set<User> followings = new HashSet<User>(0);
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -62,16 +67,21 @@ public class User {
     @OneToMany(mappedBy = "user", targetEntity = GroupPost.class, fetch = FetchType.LAZY)
     private List<GroupPost> groupPosts;
 
+    @OneToMany(mappedBy = "author", targetEntity = Group.class, fetch = FetchType.LAZY)
+    private List<Group> createdGroups;
+
     public User() {
 
     }
 
     public User(String login, String name, String surname,
-                String position) {
+                String position, Date birthday) {
+        this.birthday = birthday;
         this.login = login;
         this.name = name;
         this.surname = surname;
         this.position = position;
+        this.pathToAvatar = "/WEB-INF/avatars/noneava.jpg";
     }
 
     @JsonIgnore
@@ -161,11 +171,43 @@ public class User {
     }
 
     @JsonIgnore
-    public Set<User> getFriends() {
-        return friends;
+    public Set<User> getFollowings() {
+        return followings;
     }
 
-    public void setFriends(Set<User> friends) {
-        this.friends = friends;
+    public void setFollowings(Set<User> followings) {
+        this.followings = followings;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPathToAvatar() {
+        return pathToAvatar;
+    }
+
+    public void setPathToAvatar(String pathToAvatar) {
+        this.pathToAvatar = pathToAvatar;
+    }
+
+    public List<GroupPost> getGroupPosts() {
+        return groupPosts;
+    }
+
+    public void setGroupPosts(List<GroupPost> groupPosts) {
+        this.groupPosts = groupPosts;
+    }
+
+    public List<Group> getCreatedGroups() {
+        return createdGroups;
+    }
+
+    public void setCreatedGroups(List<Group> createdGroups) {
+        this.createdGroups = createdGroups;
     }
 }
