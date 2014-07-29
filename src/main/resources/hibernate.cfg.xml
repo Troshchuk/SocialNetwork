@@ -14,6 +14,8 @@
 
         <property name="format_sql">true</property>
 
+        <property name="hibernate.connection.isolation">1</property>
+
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
