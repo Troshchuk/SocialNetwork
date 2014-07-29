@@ -39,6 +39,10 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "following_id")})
     private Set<User> followings = new HashSet<User>(0);
 
+    @ManyToMany(mappedBy = "followings")
+    private Set<User> myFollowings = new HashSet<User>(0);
+
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Interests",

@@ -72,16 +72,6 @@ public class UserController {
     }
 
     @GET
-    @Path("followings{page}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public FollowingUsersList getFollowingUser(@PathParam("id") long id,
-                                               @PathParam("page") int page) {
-
-        return new FollowingUsersList(id, page);
-
-    }
-
-    @GET
     @Path("groups{page}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserGroupsList getGroups(@PathParam("id") long id,

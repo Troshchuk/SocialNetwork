@@ -12,7 +12,9 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,11 +76,12 @@ public class UserDaoImpl implements UserDao {
                 "FROM User WHERE name = '" + name + "' AND surname = '" + surname + "' AND id >= " + beginId);
         List<User> list = query.list();
         session.close();
-        int pos = 0;
-        for(User user: list) {
-            if (user.getName().equals(name) && user.getSurname().equals(surname)) {
-                returnUser.add(pos, user);
-                pos++;
+        for (User user : list) {
+            if (user.getName().equals(name)
+                    && user.getSurname().equals(surname)
+                    && returnUser.size() < limit
+                    ) {
+                returnUser.add(user);
             }
         }
         return returnUser;
@@ -116,7 +119,7 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
-        criteria.createAlias("followings", "followingsAlias");
+        criteria.createAlias("myFollowings", "followingsAlias");
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
@@ -127,12 +130,38 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("myFollowings", "followingsAlias");
+        criteria.setMaxResults(10);
+        criteria.addOrder(Order.asc("id"));
+        criteria.setFirstResult(lot * 10);
+
+        List<User> list = criteria.list();
+        List<User> resultList = new ArrayList<User>();
+        session.close();
+        for (User user : list) {
+            System.out.println(user.getName() + " "+ user.getSurname());
+            System.out.println("out if: " + user.getName().equals(name) + " " + user.getSurname().equals(surname) + " " + (resultList.size() < 10) );
+            if (user.getName().equals(name)
+                    && user.getSurname().equals(surname)
+                    && resultList.size() < 10) {
+                System.out.println("in if: " + user.getName().equals(name));
+                resultList.add(user);
+            }
+        }
+        return resultList;
+    }
+
+    @Override
     public void insertFollowing(User user, User hisFriend) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         SQLQuery query = session.createSQLQuery(
                 "INSERT INTO Followings VALUES (" + user.getId() + ", " +
-                hisFriend.getId() + ");");
+                        hisFriend.getId() + ");");
 
         query.executeUpdate();
 
@@ -145,7 +174,7 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Followings WHERE follower_id = " + user.getId() +
-                " AND following_id = " + hisFollowing.getId() + ";");
+                        " AND following_id = " + hisFollowing.getId() + ";");
 
         query.executeUpdate();
 
