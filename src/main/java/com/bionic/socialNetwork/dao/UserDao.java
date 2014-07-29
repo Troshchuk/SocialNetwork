@@ -61,6 +61,10 @@ public interface UserDao {
      */
     public void delete(User user) throws Exception;
 
+    public void update(User user) throws Exception;
+
+    public void deleteInterests(Interest interest, User user) throws Exception;
+
     public List<User> selectFollowingsNext(int lot) throws Exception;
 
     public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception ;

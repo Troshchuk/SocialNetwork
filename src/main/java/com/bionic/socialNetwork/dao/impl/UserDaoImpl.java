@@ -115,6 +115,28 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void update(User user) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(user);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public void deleteInterests(Interest interest, User user) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        SQLQuery query = session.createSQLQuery(
+                "DELETE FROM users_interests WHERE user_id = " + user.getId() +
+                        " AND interest_id = " + interest.getInterests_id() + ";");
+
+        query.executeUpdate();
+
+        session.close();
+    }
+
+    @Override
     public List<User> selectFollowingsNext(int lot) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 

@@ -1,5 +1,6 @@
 package com.bionic.socialNetwork.rest;
 
+import com.bionic.socialNetwork.logic.EditUserProfileLogic;
 import com.bionic.socialNetwork.logic.lists.*;
 import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.models.User;
@@ -77,6 +78,21 @@ public class UserController {
     public UserGroupsList getGroups(@PathParam("id") long id,
                                     @PathParam("page") int page) {
         return new UserGroupsList(id, page);
+    }
+
+    @POST
+    @Path("edit")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String editUser(@Context HttpServletRequest request,
+                           @FormParam("interests") String interests,
+                           @FormParam("name") String name,
+                           @FormParam("surname") String surname,
+                           @FormParam("position") String position){
+        long userId = (Long) request.getAttribute("userId");
+        EditUserProfileLogic editUserProfile = new EditUserProfileLogic();
+        editUserProfile.edit(userId, name, surname, position, interests);
+        return "{\"status\": true}";
+
     }
 
     @GET

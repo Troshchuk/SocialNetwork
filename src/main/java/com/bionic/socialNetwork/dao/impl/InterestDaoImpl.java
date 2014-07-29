@@ -48,7 +48,12 @@ public class InterestDaoImpl implements InterestDao {
                 "FROM Interest where interest = '" + interest + "'");
         List<Interest> interests = query.list();
         session.close();
-        return interests.get(0);
+        if(interests.size() == 0){
+            return null;
+        }else{
+            return interests.get(0);
+        }
+
     }
 
     @Override
@@ -81,6 +86,14 @@ public class InterestDaoImpl implements InterestDao {
         }
     }
 
+    @Override
+    public void update(Interest interest) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(interest);
+        session.getTransaction().commit();
+        session.close();
+    }
 
 
 }

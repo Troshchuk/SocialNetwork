@@ -43,5 +43,7 @@ public interface InterestDao {
      */
     public void delete (Interest interest) throws Exception;
 
+    public void update (Interest interest) throws Exception;
+
     public List<Interest> selectByUser(User user) throws Exception;
 }
