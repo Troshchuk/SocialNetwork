@@ -26,7 +26,7 @@ jQuery(function( $ ) {
     $('#register-btn2').click(function() {
         var name = $('#name').val();
         var surname = $('#surname').val();
-        var position = $('#position').val(); 
+        var position = $('#position').val();
         var email = $('#email').val();
         var birthday = $('#birthday').val();
         var pass = $('#pass').val();
