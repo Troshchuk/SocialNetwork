@@ -85,7 +85,7 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.position = position;
-        this.pathToAvatar = "/WEB-INF/avatars/noneava.jpg";
+        this.pathToAvatar = "/WEB-INF/avatars/noavatar.png";
     }
 
     @JsonIgnore

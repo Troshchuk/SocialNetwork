@@ -1,9 +1,14 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.EditUserProfileLogic;
-import com.bionic.socialNetwork.logic.lists.*;
+import com.bionic.socialNetwork.logic.UserAvatarLogic;
 import com.bionic.socialNetwork.logic.UserLogic;
+import com.bionic.socialNetwork.logic.lists.InterestList;
+import com.bionic.socialNetwork.logic.lists.PostsList;
+import com.bionic.socialNetwork.logic.lists.UserGroupsList;
 import com.bionic.socialNetwork.models.User;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -12,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -94,6 +101,35 @@ public class UserController {
         return "{\"status\": true}";
 
     }
+
+    @POST
+    @Path("setAvatar")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public String setAvatar(@FormDataParam("file") InputStream uploadedInputStream,
+                         @FormDataParam("file") FormDataContentDisposition fileDetail,
+                         @Context HttpServletRequest request,
+                         @Context ServletContext context){
+
+        long userId = (Long)request.getAttribute("userId");
+        String uploadedFileLocation = context.getRealPath("/WEB-INF");
+        UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
+        userAvatarLogic.saveAvatar(uploadedInputStream, uploadedFileLocation, fileDetail.getFileName(), userId);
+        return "{\"status\": true}";
+    }
+
+    @GET
+    @Path("getAvatar")
+    @Produces({"image/png", "image/jpeg"})
+    public Response getAvatar(@Context ServletContext context,
+                              @Context HttpServletRequest request){
+        UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
+        long userId = (Long)request.getAttribute("userId");
+
+
+        File file = userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), userId);
+        return  Response.ok(file).build();
+    }
+
 
     @GET
     @Path("exit")
