@@ -28,6 +28,7 @@ jQuery(function( $ ) {
         var surname = $('#surname').val();
         var position = $('#position').val(); 
         var email = $('#email').val();
+        var birthday = $('#birthday').val();
         var pass = $('#pass').val();
         var invite = $('#invite').val();
         $.post('/sn/index/registration',{name:name,surname:surname,position:position,birthday:birthday,email:email,password:pass,invite:invite},function(server_json){
