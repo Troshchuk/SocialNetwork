@@ -134,6 +134,19 @@ jQuery(function( $ ) {
 	};
 
 
+	function sendPrivateMessage() {
+		var url = window.location.href;
+		var pos = url.indexOf('user');
+		var id = url.slice(pos+4);
+		$.post('/sn/pm/sendMessage', {to:1, msg:"thids idsbfb dgdg fgdg df"}, function(json) {
+
+		});
+	};
+
+
+	sendPrivateMessage();
+
+
 	var page = 1;
 	function loadMorePosts() {
 		var fullname = '';
@@ -217,9 +230,10 @@ jQuery(function( $ ) {
 	}
 
 	function setupMessagesPage() {
-		console.log('Setup Home');
-		$.getJSON('ajax/messages.json', {}, function(json) {
-			for (var i = 0; i < json.messages.length; i++) {
+		console.log('Setup Messages');
+		$.getJSON('/sn/pm/received0', {}, function(json) {
+			for (var i = 0; i < json.privateMessages.length; i++) {
+				var node = '<span><span>';
 				var node = '<div class="message">';
 					node += '<div class="user-image"><a href=""><img src="" alt=""></a></div>'
 					node += '<div class="message-text">';
@@ -230,7 +244,16 @@ jQuery(function( $ ) {
 				$('#incoming').append( $(node) );
 			};
 		});
+		$.getJSON('/sn/pm/sent0', {}, function(json) {
+			for (var i = 0; i < json.privateMessages.length; i++) {
+
+			};
+		});
 	}
+
+
+
+
 
 	function setupColleaguesPage() {
 		console.log('Setup Colleagues');

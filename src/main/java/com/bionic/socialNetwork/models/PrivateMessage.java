@@ -55,6 +55,7 @@ public class PrivateMessage {
         this.messageId = messageId;
     }
 
+    @JsonIgnore
     public User getSentUser() {
         return sentUser;
     }
@@ -63,6 +64,7 @@ public class PrivateMessage {
         this.sentUser = sentUser;
     }
 
+    @JsonIgnore
     public User getReceiverUser() {
         return receiverUser;
     }
