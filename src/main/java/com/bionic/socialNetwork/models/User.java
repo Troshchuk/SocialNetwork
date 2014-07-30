@@ -191,6 +191,7 @@ public class User {
         this.birthday = birthday;
     }
 
+    @JsonIgnore
     public String getPathToAvatar() {
         return pathToAvatar;
     }
@@ -199,6 +200,7 @@ public class User {
         this.pathToAvatar = pathToAvatar;
     }
 
+    @JsonIgnore
     public List<GroupPost> getGroupPosts() {
         return groupPosts;
     }
@@ -207,6 +209,7 @@ public class User {
         this.groupPosts = groupPosts;
     }
 
+    @JsonIgnore
     public List<Group> getCreatedGroups() {
         return createdGroups;
     }

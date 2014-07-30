@@ -4,6 +4,8 @@ package com.bionic.socialNetwork.rest.filters;
 import com.bionic.socialNetwork.logic.SessionLogic;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -20,7 +22,7 @@ import java.util.Map;
 
 @Provider
 public class AccessFilter implements ContainerRequestFilter {
-
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Context
     private HttpServletRequest webRequest;
@@ -30,6 +32,10 @@ public class AccessFilter implements ContainerRequestFilter {
 
     @Override
     public ContainerRequest filter(ContainerRequest request) {
+        String logging = webRequest.getRemoteAddr() +
+                         " " + webRequest.getMethod() +
+                         " " + webRequest.getRequestURI();
+
         Map cookies = httpHeaders.getCookies();
         Cookie cookie = (Cookie) cookies.get("sessionId");
         SessionLogic sessionLogic = new SessionLogic();
@@ -37,7 +43,9 @@ public class AccessFilter implements ContainerRequestFilter {
 
         if (cookie != null) {
             userId = sessionLogic.verifySession(cookie.getValue());
+            logging += " sessionId: " + cookie.getValue() + " userId: " + userId;
         }
+        LOGGER.info(logging);
 
         if (userId == -1) {
             try {
