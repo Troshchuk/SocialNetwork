@@ -73,11 +73,12 @@ public class IndexController {
                                @FormParam("position") String position,
                                @FormParam("email") String login,
                                @FormParam("password") String password,
+                               @FormParam("birthday") long birthday,
                                @FormParam("invite") String invite) {
 
         RegistrationLogic registrationLogic = new RegistrationLogic();
 
-        String result = registrationLogic.register(name, surname, login, password, position, invite);
+        String result = registrationLogic.register(name, surname, login, password, position, birthday, invite);
 
         return result;
     }
