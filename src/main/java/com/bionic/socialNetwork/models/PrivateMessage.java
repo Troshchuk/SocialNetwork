@@ -1,5 +1,7 @@
 package com.bionic.socialNetwork.models;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -69,6 +71,7 @@ public class PrivateMessage {
         this.receiverUser = receiverUser;
     }
 
+    @JsonIgnore
     public String getMessage() {
         return message;
     }

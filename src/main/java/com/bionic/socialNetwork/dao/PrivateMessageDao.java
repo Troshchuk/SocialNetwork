@@ -12,14 +12,9 @@ import java.util.List;
  * @version 1.00  16.07.2014.
  */
 public interface PrivateMessageDao {
-    public PrivateMessage selectBySentId(long userId) throws Exception;
+    public PrivateMessage selectById(long msgId) throws Exception;
 
-    public PrivateMessage selectByReceiverId(long userId) throws Exception;
-
-    public List<PrivateMessage> selectNextSentId(long beginId) throws Exception;
-
-    public List<PrivateMessage> selectNextReceiverId(long beginId)
-    throws Exception;
+    public void update(PrivateMessage privateMessage) throws Exception;
 
     public void insert(PrivateMessage privateMessage) throws Exception;
 

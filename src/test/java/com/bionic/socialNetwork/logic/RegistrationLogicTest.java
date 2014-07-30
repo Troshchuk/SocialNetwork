@@ -25,7 +25,7 @@ public class RegistrationLogicTest {
         InviteDao inviteDao = new InviteDaoImpl();
         invite = new Invite("123");
         inviteDao.insert(new Invite("123"));
-        registrationLogic.register("name", "surname", login, "Password1", "director", "123");
+        registrationLogic.register("name", "surname", login, "Password1", "director", 0, "123");
     }
 
 

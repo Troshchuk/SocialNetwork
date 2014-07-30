@@ -17,21 +17,41 @@ import java.util.Date;
  */
 public class PrivateMessageLogic {
     private static final Logger LOGGER =
-            LogManager.getLogger(PrivateMessageLogic.LOGGER.getName());
+            LogManager.getLogger(PrivateMessageLogic.class.getName());
 
     public boolean createPm(long id, long toUserId, String msg) {
         try {
             PrivateMessageDao privateMessageDao = new PrivateMessageDaoImpl();
             User user = new UserDaoImpl().selectById(id);
             User toUser = new UserDaoImpl().selectById(toUserId);
-            PrivateMessage post = new PrivateMessage(user, toUser, msg,
+            PrivateMessage pm = new PrivateMessage(user, toUser, msg,
                                                      new Timestamp(new Date()
                                                                            .getTime()));
-            privateMessageDao.insert(post);
+            privateMessageDao.insert(pm);
             return true;
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             return false;
+        }
+    }
+
+    public String readPm(long userId, long msgId) {
+        try {
+            User user = new UserDaoImpl().selectById(userId);
+            PrivateMessageDao privateMessageDao = new PrivateMessageDaoImpl();
+            PrivateMessage pm = privateMessageDao.selectById(msgId);
+            if (pm.getReceiverUser().getId() == userId) {
+                pm.setRead(true);
+                privateMessageDao.update(pm);
+                return pm.getMessage();
+            } else if (pm.getSentUser().getId() == userId) {
+                return pm.getMessage();
+            }
+
+            return "";
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return "";
         }
     }
 }

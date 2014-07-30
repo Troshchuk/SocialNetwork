@@ -43,42 +43,7 @@ public class PrivateMessageDaoImplTest {
 
         messageId = privateMessage.getMessageId();
         assertEquals(privateMessage.getMessageId(),
-                     privateMessageDao.selectBySentId(messageId)
-                                      .getMessageId()
-                    );
-        assertEquals(privateMessage.getMessageId(),
-                     privateMessageDao.selectByReceiverId(messageId)
-                                      .getMessageId()
-                    );
-    }
-
-
-    @Test
-    public void testSelectByReceiverId() throws Exception {
-        PrivateMessage privateMessage =
-                privateMessageDao.selectByReceiverId(messageId);
-        assertNotNull(privateMessage);
-    }
-
-    @Test
-    public void testSelectBySentId() throws Exception {
-        PrivateMessage privateMessage =
-                privateMessageDao.selectBySentId(messageId);
-        assertNotNull(privateMessage);
-    }
-
-    @Test
-    public void testSelectNextSentId() throws Exception {
-        List<PrivateMessage> privateMessages =
-                privateMessageDao.selectNextSentId(sentUser.getId());
-        assertEquals(messageId, privateMessages.get(0).getMessageId());
-    }
-
-    @Test
-    public void testSelectReceiverId() throws Exception {
-        List<PrivateMessage> privateMessages =
-                privateMessageDao.selectNextReceiverId(receivedUser.getId());
-        assertEquals(messageId, privateMessages.get(0).getMessageId());
+                     privateMessageDao.selectById(messageId).getMessageId());
     }
 
     @Test
@@ -118,10 +83,10 @@ public class PrivateMessageDaoImplTest {
     @After
     public void testDelete() throws Exception {
         privateMessageDao
-                .delete(privateMessageDao.selectBySentId(messageId));
+                .delete(privateMessageDao.selectById(messageId));
         new UserDaoImpl().delete(sentUser);
         new UserDaoImpl().delete(receivedUser);
-        assertNull(privateMessageDao.selectBySentId(messageId));
+        assertNull(privateMessageDao.selectById(messageId));
     }
 
 }

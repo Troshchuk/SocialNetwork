@@ -19,46 +19,21 @@ import java.util.List;
  * @version 1.00  16.07.2014.
  */
 public class PrivateMessageDaoImpl implements PrivateMessageDao {
-
-
     @Override
-    public PrivateMessage selectBySentId(long id) throws Exception {
+    public PrivateMessage selectById(long msgId) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, id);
+        PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, msgId);
         session.close();
         return privateMessage;
     }
 
     @Override
-    public PrivateMessage selectByReceiverId(long id) throws Exception {
+    public void update(PrivateMessage privateMessage) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        PrivateMessage privateMessage = (PrivateMessage) session.get(PrivateMessage.class, id);
+        session.beginTransaction();
+        session.update(privateMessage);
+        session.getTransaction().commit();
         session.close();
-        return privateMessage;
-    }
-
-    @Override
-    public List<PrivateMessage> selectNextSentId(long beginId) throws Exception {
-        int limit = 10;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery(
-                "FROM PrivateMessage WHERE sentUser >= " + beginId + " AND sentUser < " +
-                        (beginId + limit));
-        List<PrivateMessage> privateMessages = query.list();
-        session.close();
-        return privateMessages;
-    }
-
-    @Override
-    public List<PrivateMessage> selectNextReceiverId(long beginId) throws Exception {
-        int limit = 10;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery(
-                "FROM PrivateMessage WHERE receiverUser >= " + beginId + " AND receiverUser < " +
-                        (beginId + limit));
-        List<PrivateMessage> privateMessages = query.list();
-        session.close();
-        return privateMessages;
     }
 
     @Override

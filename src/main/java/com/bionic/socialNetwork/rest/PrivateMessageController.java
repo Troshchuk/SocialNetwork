@@ -31,7 +31,7 @@ public class PrivateMessageController {
             @Context HttpServletRequest request,
             @PathParam("page") int page) {
         return new ReceivedMessageList((Long) request.getAttribute("userId"),
-                page);
+                                       page);
     }
 
     @GET
@@ -50,5 +50,14 @@ public class PrivateMessageController {
                               @FormParam("msg") String msg) {
         return "{\"result\": " + new PrivateMessageLogic()
                 .createPm((Long) request.getAttribute("userId"), toUserId, msg);
+    }
+
+    @GET
+    @Path("getMessage{msgId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getMessage(@Context HttpServletRequest request,
+                             @PathParam("msgId") long msgId) {
+        return "{\"message\": " + new PrivateMessageLogic()
+                .readPm((Long) request.getAttribute("userId"), msgId);
     }
 }
