@@ -5,6 +5,8 @@ import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.User;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * @version 1.0 on 30.07.2014.
@@ -13,14 +15,15 @@ import java.io.*;
 public class UserAvatarLogic {
 
     final String AVATAR_DIR = "\\avatar\\";
+    final String NO_AVATAR = "/avatar/noavatar.png";
 
     public void saveAvatar(InputStream uploadedInputStream,
                            String uploadedFileLocation,
                            String uploadedFileName,
                            long userId) {
 
-        String filePath = uploadedFileLocation + AVATAR_DIR + userId + uploadedFileName;
-        System.out.println(uploadedFileLocation + AVATAR_DIR + userId + uploadedFileName);
+        String filePath = uploadedFileLocation +
+                AVATAR_DIR + userId + uploadedFileName;
         try {
             OutputStream out = new FileOutputStream(new File(
                     filePath));
@@ -45,6 +48,13 @@ public class UserAvatarLogic {
             user = userDao.selectById(userId);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        //deleting previous avatar from fileSystem
+        if (!user.getPathToAvatar().equals(NO_AVATAR)) {
+            File file = new File(uploadedFileLocation +
+                    user.getPathToAvatar());
+            file.delete();
         }
 
         user.setPathToAvatar(AVATAR_DIR + userId + uploadedFileName);

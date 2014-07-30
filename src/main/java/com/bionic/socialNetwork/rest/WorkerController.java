@@ -37,7 +37,7 @@ public class WorkerController {
     @GET
     @Path("getWorkersByName{name}/{surname}/{page}")
     @Produces(MediaType.APPLICATION_JSON)
-    public UserList getNexrUsers(@Context HttpServletRequest request,
+    public UserList getNextUsers(@Context HttpServletRequest request,
                                  @PathParam("name") String name,
                                  @PathParam("surname") String surname,
                                  @PathParam("page") long number) {

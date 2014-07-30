@@ -121,12 +121,11 @@ public class UserController {
     @Path("getAvatar")
     @Produces({"image/png", "image/jpeg"})
     public Response getAvatar(@Context ServletContext context,
-                              @Context HttpServletRequest request){
+                              @PathParam("id") long id){
+
+
         UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
-        long userId = (Long)request.getAttribute("userId");
-
-
-        File file = userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), userId);
+        File file = userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), id);
         return  Response.ok(file).build();
     }
 
