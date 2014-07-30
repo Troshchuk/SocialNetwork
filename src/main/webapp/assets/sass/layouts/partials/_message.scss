@@ -1,0 +1,22 @@
+.messages{
+	h1{
+		font-size: 32px;
+		margin-bottom: 10px;
+	}
+	.messages-wrap{
+		border-top: 1px solid $tab-bg-active;
+		padding: 10px 20px 0;
+		@include box-sizing(border-box);
+	}
+	.message-label{
+		font-size: 20px;
+		display: inline-block;
+	}
+	.tab{
+		margin-bottom: -1px;
+		margin-left: 10px;
+	}
+	.messages-tab-content.sent{
+		display: none;
+	}
+}

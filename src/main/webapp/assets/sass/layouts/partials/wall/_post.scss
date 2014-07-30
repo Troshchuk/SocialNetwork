@@ -3,7 +3,7 @@
 	.post{
 		position: relative;
 		width: 50%;
-		padding: 15px 20px 0;
+		padding: 15px 15px 0;
 		clear: both;
 		border-top: 1px solid darken($wall-tree-color, 10%);
 		margin-top: -40px;
@@ -36,21 +36,6 @@
 			top: -11px;
 		}
 
-		.post-photo{
-			width: 80px;
-			height: 90px;
-			float: left;
-			background: #fff;
-			border: 1px solid $border-color;
-			overflow: hidden;
-			img{
-				@include transition(all 0.2s);
-				&:hover{
-					@include transform(scale(1.2, 1.2));
-				}
-			}
-		}
-
 		.post-name{
 			font-weight: bold;
 			font-size: 14px;
@@ -62,10 +47,6 @@
 			line-height: 18px;
 		}
 
-		.post-meta{
-			font-size: 10px;
-			color: $text-light-color;
-		}
 		p:last-of-type{
 			&:first-letter{
 				text-transform: uppercase;
@@ -77,7 +58,7 @@
 				font-family: arial;
 				position: relative;
 				top: 18px;
-				margin-right: 10px;
+				margin-right: 5px;
 			}
 		}
 		.remove-post{
@@ -93,9 +74,7 @@
 		&:hover{
 			.remove-post{
 				opacity: .5;
-				
 			}
-
 		}
 	}
 

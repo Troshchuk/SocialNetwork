@@ -86,3 +86,89 @@ a{
 		}
 	}
 }
+
+
+.wait{
+	text-align: center;
+	clear: both;
+	display: block;
+	padding-top: 20px;
+	img{
+		width: auto;
+		margin: auto;
+	}
+}
+
+
+
+.new-wall-post{
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	border: 1px solid $wall-border-color;
+	border-left: none;
+	border-right: none;
+	@include box-sizing(border-box);
+	background: $wall-new-post-bg;
+	textarea{
+		border: 1px solid $border-color;
+		width: 100%;
+		@include box-sizing(border-box);
+		padding: 5px 5px;
+		resize: none;
+		min-height: 70px;
+	}
+	.wall-submit{
+		float: right;
+		@extend .button;
+		background: $btn-bg;
+		color: $btn-color;
+		@include border-radius(0px);
+		&.inactive{
+			background: $btn-bg-inactive;
+			cursor: default;
+			&:hover{
+				background: $btn-bg-inactive;
+			}
+		}
+		&:hover{
+			background: $btn-bg-hover;
+		}
+		&:active{
+			background: $btn-bg-active;
+		}
+	}
+}
+
+
+
+.post-photo{
+	width: 80px;
+	height: 90px;
+	float: left;
+	border: 1px solid $border-color;
+	overflow: hidden;
+	img{
+		@include transition(all 0.2s);
+		&:hover{
+			@include transform(scale(1.2, 1.2));
+		}
+	}
+}
+.post-meta{
+	font-size: 10px;
+	color: $text-light-color;
+}
+
+
+.tab{
+	display: inline-block;
+	padding: 5px 20px;
+	background: $tab-bg;
+	color: $tab-color;
+	border: 1px solid $tab-bg-active;
+	&.active{
+		background: $tab-bg-active;
+		color: $tab-color-active;
+		border: 1px solid $tab-bg-active;
+	}
+}

@@ -1,0 +1,36 @@
+.group{
+	.primary{
+		width: 70%;
+		margin-right: 30%;
+		@include box-sizing(border-box);
+		padding: 0 20px;
+	}
+	.secondary{
+		width: 30%;
+		float: right;
+	}
+	h1{
+		font-size: 32px;
+		margin-bottom: 10px;
+	}
+	.description{
+		font-size: 16px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.details{
+		margin-bottom: 10px;
+	}
+	.members-quantity{
+		padding: 10px 0;
+		font-weight: bold;
+		color: $main-color;
+	}
+
+	.post-message{
+		margin-left: 100px;
+	}
+	.post-name{
+		font-weight: bold;
+	}
+}
