@@ -32,7 +32,7 @@ public class GroupDaoImplTest {
         userDao = new UserDaoImpl();
         userDao.insert(user, new Password("lol"));
 
-        groupActual = new Group("First", user);
+        groupActual = new Group("First","Description", user);
         groupDao = new GroupDaoImpl();
         groupDao.insert(groupActual);
 

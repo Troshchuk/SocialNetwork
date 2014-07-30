@@ -24,6 +24,9 @@ public class Group {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @OneToMany(mappedBy = "group", targetEntity = GroupPost.class, fetch = FetchType.EAGER)
     private List<GroupPost> groupPosts;
 
@@ -41,7 +44,7 @@ public class Group {
 
     }
 
-    public Group(String name, User author) {
+    public Group(String name, String description, User author) {
         this.name = name;
         this.author = author;
     }
@@ -86,5 +89,13 @@ public class Group {
 
     public void setAuthorId(User author) {
         this.author = author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

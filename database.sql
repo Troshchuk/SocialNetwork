@@ -84,6 +84,7 @@ CREATE  TABLE IF NOT EXISTS `SocialNetwork`.`Groups` (
   `group_id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `author_id` INT NOT NULL ,
+  `description` BLOB NOT NULL,
   PRIMARY KEY (`group_id`) ,
   INDEX `fk_Groups_1_idx` (`author_id` ASC) ,
   CONSTRAINT `fk_Groups_1`

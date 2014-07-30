@@ -49,7 +49,7 @@ public class GroupPostDaoImplTest {
         userDao = new UserDaoImpl();
         userDao.insert(user, new Password("password"));
 
-        group = new Group("First", user);
+        group = new Group("First","Description", user);
         groupDao = new GroupDaoImpl();
         groupDao.insert(group);
 
