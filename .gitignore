@@ -9,3 +9,6 @@
 
 #ssas
 /src/main/webapp/assets/.sass-cache
+
+#Project
+/logs
