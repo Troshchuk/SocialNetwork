@@ -24,7 +24,8 @@ public class RegistrationLogic {
             LogManager.getLogger(RegistrationLogic.class.getName());
 
     public String register(String name, String surname, String login,
-                           String password, String position, String invite) {
+                           String password, String position, long birthday,
+                           String invite) {
 
         if (!checkInviteCode(invite)) {
             return "{\"status\": \"wrongInviteCode\"}";
@@ -32,7 +33,7 @@ public class RegistrationLogic {
         if (!match(login, password)) {
             return "{\"status\": \"wrongLoginPass\"}";
         }
-        if (addUser(name, surname, login, password, position)) {
+        if (addUser(name, surname, login, password, birthday, position)) {
             InviteDao inviteDao = new InviteDaoImpl();
             deleteInvite(invite);
             return "{\"status\": true}";
@@ -43,7 +44,7 @@ public class RegistrationLogic {
 
 
     private boolean addUser(String name, String surname, String login,
-                            String password, String position) {
+                            String password, long birthday, String position) {
         UserDao userDao = new UserDaoImpl();
         User alreadyUsedLogin = null;
 
@@ -59,7 +60,7 @@ public class RegistrationLogic {
             user.setName(name);
             user.setSurname(surname);
             user.setPosition(position);
-            user.setBirthday(new Date(0));
+            user.setBirthday(new Date(birthday));
             user.setPathToAvatar("/WEB-INF/avatars/noneava.jpg");
 
             try {
