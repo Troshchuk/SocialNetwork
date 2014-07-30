@@ -10,7 +10,6 @@ jQuery(function( $ ) {
 		$('.login-form').fadeIn();
 	});
 
-
 	$('#user-submit').click(function() {
 		var login = $('#user-login').val();
 		var pass = $('#user-password').val();
@@ -31,7 +30,7 @@ jQuery(function( $ ) {
         var email = $('#email').val();
         var pass = $('#pass').val();
         var invite = $('#invite').val();
-        $.post('/sn/index/registration',{name:name,surname:surname,position:position,email:email,password:pass,invite:invite},function(server_json){
+        $.post('/sn/index/registration',{name:name,surname:surname,position:position,birthday:birthday,email:email,password:pass,invite:invite},function(server_json){
             if ( server_json.status == true ) {
                 location.reload();
                 $('#register-error-msg').hide();
@@ -101,6 +100,12 @@ jQuery(function( $ ) {
 
 
 
+
+
+
+
+
+
 	function formatDate(msec) {
 		var date = new Date(msec);
 		var month = ( '0' + ( date.getMonth()+1 ) ).slice(-2);
@@ -127,8 +132,8 @@ jQuery(function( $ ) {
 		});
 	};
 
-var page = 1;
 
+	var page = 1;
 	function loadMorePosts() {
 		var fullname = '';
 		var position = '';
@@ -162,7 +167,7 @@ var page = 1;
 		page++;
 	};
 
-	setInterval( function(){ loadMorePosts(); } , 5000);
+	// setInterval( function(){ loadMorePosts(); } , 5000);
 
 
 	function setupHomePage() {
