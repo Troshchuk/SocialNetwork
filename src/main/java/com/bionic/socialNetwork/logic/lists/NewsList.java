@@ -4,6 +4,8 @@ import com.bionic.socialNetwork.dao.impl.BackOfficeAdminDaoImpl;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.models.BackOfficeAdmin;
 import com.bionic.socialNetwork.models.Post;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 
@@ -21,18 +23,24 @@ public class NewsList {
     private int newsListNumber;
     @JsonIgnore
     private PostDaoImpl postDao;
+
     private List<Post> posts;
+
+    @JsonIgnore
+    private static final Logger LOGGER =
+            LogManager.getLogger(NewsList.class.getName());
 
     public NewsList(int newsNumber) {
         this.newsListNumber = newsNumber;
         try {
-        BackOfficeAdminDaoImpl backOfficeAdminDao =
-                new BackOfficeAdminDaoImpl();
-        postDao = new PostDaoImpl();
-        posts = postDao.selectLastBeckOffWith(backOfficeAdminDao.selectAll(),
-                                              newsListNumber);
+            BackOfficeAdminDaoImpl backOfficeAdminDao =
+                    new BackOfficeAdminDaoImpl();
+            postDao = new PostDaoImpl();
+            posts = postDao.selectLastBeckOffWith(
+                    backOfficeAdminDao.selectAll(),
+                    newsListNumber);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
     }

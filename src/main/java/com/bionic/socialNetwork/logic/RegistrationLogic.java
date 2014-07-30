@@ -7,6 +7,8 @@ import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Invite;
 import com.bionic.socialNetwork.models.Password;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -18,34 +20,30 @@ import java.util.regex.Pattern;
  * Created by Bish_ua on 17.07.2014.
  */
 public class RegistrationLogic {
+    private static final Logger LOGGER =
+            LogManager.getLogger(RegistrationLogic.class.getName());
 
     public String register(String name, String surname, String login,
-                           String password, String position, String invite){
+                           String password, String position, String invite) {
 
-        if(!checkInviteCode(invite)){
+        if (!checkInviteCode(invite)) {
             return "{\"status\": \"wrongInviteCode\"}";
         }
-        if(!match(login,password)){
+        if (!match(login, password)) {
             return "{\"status\": \"wrongLoginPass\"}";
         }
-        if(addUser(name, surname, login, password, position)){
+        if (addUser(name, surname, login, password, position)) {
             InviteDao inviteDao = new InviteDaoImpl();
             deleteInvite(invite);
             return "{\"status\": true}";
-        }else{
+        } else {
             return "{\"status\": false}";
         }
-
-
-
     }
 
 
     private boolean addUser(String name, String surname, String login,
-                           String password, String position) {
-
-
-
+                            String password, String position) {
         UserDao userDao = new UserDaoImpl();
         User alreadyUsedLogin = null;
 
@@ -55,7 +53,7 @@ public class RegistrationLogic {
             e.printStackTrace();
         }
 
-        if (alreadyUsedLogin == null){
+        if (alreadyUsedLogin == null) {
             User user = new User();
             user.setLogin(login);
             user.setName(name);
@@ -71,7 +69,7 @@ public class RegistrationLogic {
                 userDao.insert(user, new Password(md5));
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage());
                 return false;
             }
 
@@ -92,6 +90,7 @@ public class RegistrationLogic {
             }
 
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return false;
         }
 
@@ -103,22 +102,24 @@ public class RegistrationLogic {
             Invite currentInvite = inviteDao.selectByInvite(invite);
             inviteDao.delete(currentInvite);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
-    private boolean match(String login, String password){
+
+    private boolean match(String login, String password) {
 
         //matching login & password
         Pattern loginPattern = Pattern.
-                compile("^([a-z0-9_\\.-]{1,20})@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$");
+                                              compile("^([a-z0-9_\\.-]{1,20})@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$");
         Matcher loginMatcher = loginPattern.matcher(login);
         //At least one upper case, one digit and consist of 4-10 symbols
-        Pattern passwordPattern = Pattern.compile("^.*(?=.{4,10})(?=.*\\d)(?=.*[a-zA-Z]).*$");
+        Pattern passwordPattern =
+                Pattern.compile("^.*(?=.{4,10})(?=.*\\d)(?=.*[a-zA-Z]).*$");
         Matcher passwordMatcher = passwordPattern.matcher(password);
 
-        if(loginMatcher.matches() && passwordMatcher.matches()){
+        if (loginMatcher.matches() && passwordMatcher.matches()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

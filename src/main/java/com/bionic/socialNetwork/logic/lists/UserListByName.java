@@ -3,6 +3,8 @@ package com.bionic.socialNetwork.logic.lists;
 import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.Collection;
@@ -24,6 +26,10 @@ public class UserListByName {
 
     private Collection<User> users;
 
+    @JsonIgnore
+    private static final Logger LOGGER =
+            LogManager.getLogger(UserListByName.class.getName());
+
     public UserListByName(String name, String surname, long beginId) {
         this.beginId = beginId;
         this.name = name;
@@ -37,7 +43,7 @@ public class UserListByName {
             beginId += users.size();
             this.users = users;
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 

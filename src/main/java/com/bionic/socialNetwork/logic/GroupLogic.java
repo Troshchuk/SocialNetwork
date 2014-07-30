@@ -9,6 +9,8 @@ import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.GroupPost;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -23,6 +25,9 @@ public class GroupLogic {
     private GroupDao groupDao;
     private GroupPostDao groupPostDao;
 
+    private static final Logger LOGGER =
+            LogManager.getLogger(GroupLogic.class.getName());
+
     public GroupLogic() {
         groupDao = new GroupDaoImpl();
         groupPostDao = new GroupPostDaoImpl();
@@ -32,6 +37,7 @@ public class GroupLogic {
         try {
             return groupDao.selectById(id);
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return null;
 
         }
@@ -51,6 +57,7 @@ public class GroupLogic {
 
             return true;
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return false;
         }
     }
@@ -69,6 +76,7 @@ public class GroupLogic {
             groupPostDao.delete(groupPost);
             return true;
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return false;
         }
     }

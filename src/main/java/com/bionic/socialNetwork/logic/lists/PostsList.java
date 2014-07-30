@@ -5,6 +5,8 @@ import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.Collection;
@@ -17,13 +19,17 @@ import java.util.List;
 public class PostsList {
     private Collection<Post> posts;
 
+    @JsonIgnore
+    private static final Logger LOGGER =
+            LogManager.getLogger(PostsList.class.getName());
+
     public PostsList(long id, int page) {
         try {
             PostDao postDao = new PostDaoImpl();
             User user = new UserDaoImpl().selectById(id);
             posts = postDao.selectLastWith(user, page);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 

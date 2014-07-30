@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="WARN">
+<configuration status="INFO">
     <appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <File name="Info1File" fileName="logs/app.log">
+        <File name="Info1File" fileName="logs/infos.log">
+            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="ErrorFile" fileName="logs/errors.log">
             <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </appenders>
@@ -13,7 +17,8 @@
     <loggers>
         <root level="debug">
             <appender-ref ref="Console" level="info"/>
-            <appender-ref ref="MyFile" level="info"/>
+            <appender-ref ref="Info1File" level="info"/>
+            <appender-ref ref="ErrorFile" level="error"/>
         </root>
     </loggers>
 </configuration>

@@ -5,15 +5,21 @@ import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Post;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Timestamp;
 import java.util.Date;
+
 
 /**
  * @author Dmytro Troshchuk
  * @version 1.00  24.07.14.
  */
 public class UserLogic {
+    private static final Logger LOGGER =
+            LogManager.getLogger(UserLogic.class.getName());
+
     public User getUser(long id) {
         User user = null;
         try {

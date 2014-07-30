@@ -6,6 +6,9 @@ import com.bionic.socialNetwork.dao.impl.GroupDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.List;
 
@@ -14,15 +17,18 @@ import java.util.List;
  * @version 1.00  25.07.14.
  */
 public class UserGroupsList {
-
     private List<Group> groups;
+
+    @JsonIgnore
+    private static final Logger LOGGER =
+            LogManager.getLogger(UserGroupsList.class.getName());
 
     public UserGroupsList(long id, int page) {
         UserDao userDao = new UserDaoImpl();
         try {
             groups = userDao.selectUserGroupsNext(id, page);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 

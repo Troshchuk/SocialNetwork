@@ -5,12 +5,17 @@ import com.bionic.socialNetwork.dao.impl.SessionUserDaoImpl;
 import com.bionic.socialNetwork.models.SessionUser;
 import com.bionic.socialNetwork.models.User;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author Bish_ua, Troshchuk Dmitry
  * @version 1.01 18.07.2014.
  */
 public class SessionLogic {
+    private static final Logger LOGGER =
+            LogManager.getLogger(SessionLogic.class.getName());
+
     public String getNewSession(User user) {
         SessionUserDao sessionDao = new SessionUserDaoImpl();
         String session = generateSession();
@@ -19,9 +24,8 @@ public class SessionLogic {
         try {
             sessionDao.insert(sessionUser);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
-
         return session;
     }
 
@@ -35,7 +39,7 @@ public class SessionLogic {
         try {
             sessionUser = sessionUserDao.selectBySession(session);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
         if (sessionUser != null) {
             return sessionUser.getUser().getId();
@@ -53,7 +57,7 @@ public class SessionLogic {
                 sessionUserDao.delete(sessionUser);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
