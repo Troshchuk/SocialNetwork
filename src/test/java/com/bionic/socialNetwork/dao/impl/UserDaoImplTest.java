@@ -92,7 +92,6 @@ public class UserDaoImplTest {
 
         userDao.insertFollowing(user, friend1);
         userDao.insertFollowing(user, friend2);
-        System.out.println(friend1.getName() + "   aaaandddd    " + friend2.getName());
         List<User> users = userDao.selectFollowingsByName("temp", "temp", user.getId(), 0);
         assertEquals(users.size(), 2);
 

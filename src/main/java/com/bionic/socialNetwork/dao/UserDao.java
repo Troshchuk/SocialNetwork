@@ -75,5 +75,7 @@ public interface UserDao {
 
     public List<Group> selectUserGroupsNext(long id, int lot) throws Exception;
 
+    public List<Group> selectUserGroupsByName(long id, int lot, String name) throws Exception;
+
     public List<Interest> selectAllInterests(long id) throws Exception;
 }

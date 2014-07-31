@@ -162,16 +162,13 @@ public class UserDaoImpl implements UserDao {
         criteria.setFirstResult(lot * 10);
 
         List<User> list = criteria.list();
-        List<User> resultList = new ArrayList<User>();
+        List<User> resultList = new LinkedList<User>();
         session.close();
         for (User user : list) {
-            System.out.println(user.getName() + " "+ user.getSurname());
-            System.out.println("out if: " + user.getName().equals(name) + " " + user.getSurname().equals(surname) + " " + (resultList.size() < 10) );
-            if (user.getName().equals(name)
+             if (user.getName().equals(name)
                     && user.getSurname().equals(surname)
                     && resultList.size() < 10) {
-                System.out.println("in if: " + user.getName().equals(name));
-                resultList.add(user);
+                 resultList.add(user);
             }
         }
         return resultList;
@@ -216,6 +213,27 @@ public class UserDaoImpl implements UserDao {
         List<Group> list = criteria.list();
         session.close();
         return list;
+    }
+
+    @Override
+    public List<Group> selectUserGroupsByName(long id, int lot, String name) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(Group.class);
+        criteria.createAlias("followers", "followersAlias");
+        criteria.addOrder(Order.asc("id"));
+        criteria.setFirstResult(lot * 10);
+
+        List<Group> list = criteria.list();
+        List<Group> resultList = new LinkedList<Group>();
+        session.close();
+        for(Group group : list) {
+            if(group.getName().equals(name)
+                    && resultList.size() < 10){
+                resultList.add(group);
+            }
+        }
+        return resultList;
     }
 
     @Override

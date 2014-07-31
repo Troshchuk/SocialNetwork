@@ -7,10 +7,12 @@ import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.logic.lists.InterestList;
 import com.bionic.socialNetwork.logic.lists.PostsList;
 import com.bionic.socialNetwork.logic.lists.UserGroupsList;
+import com.bionic.socialNetwork.logic.lists.UserGroupsListByName;
 import com.bionic.socialNetwork.models.User;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
+import javax.print.attribute.standard.Media;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +70,7 @@ public class UserController {
                              @FormParam("postId") long postId) {
         return "{\"status\": " + new UserLogic()
                 .deletePost((Long) request.getAttribute("userId"), postId) +
-               "}";
+                "}";
     }
 
     @GET
@@ -88,6 +90,15 @@ public class UserController {
         return new UserGroupsList(id, page);
     }
 
+    @GET
+    @Path("getGroupByName{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserGroupsListByName getGroups(@PathParam("id") long id,
+                                          @PathParam("page") int page,
+                                          @PathParam("name") String name) {
+        return new UserGroupsListByName(id, page, name);
+    }
+
     @POST
     @Path("edit")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,7 +106,7 @@ public class UserController {
                            @FormParam("interests") String interests,
                            @FormParam("name") String name,
                            @FormParam("surname") String surname,
-                           @FormParam("position") String position){
+                           @FormParam("position") String position) {
         long userId = (Long) request.getAttribute("userId");
         EditUserProfileLogic editUserProfile = new EditUserProfileLogic();
         editUserProfile.edit(userId, name, surname, position, interests);
@@ -107,11 +118,11 @@ public class UserController {
     @Path("setAvatar")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public String setAvatar(@FormDataParam("file") InputStream uploadedInputStream,
-                         @FormDataParam("file") FormDataContentDisposition fileDetail,
-                         @Context HttpServletRequest request,
-                         @Context ServletContext context){
+                            @FormDataParam("file") FormDataContentDisposition fileDetail,
+                            @Context HttpServletRequest request,
+                            @Context ServletContext context) {
 
-        long userId = (Long)request.getAttribute("userId");
+        long userId = (Long) request.getAttribute("userId");
         String uploadedFileLocation = context.getRealPath("/WEB-INF");
         UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
         userAvatarLogic.saveAvatar(uploadedInputStream, uploadedFileLocation, fileDetail.getFileName(), userId);
@@ -122,12 +133,12 @@ public class UserController {
     @Path("getAvatar")
     @Produces({"image/png", "image/jpeg"})
     public Response getAvatar(@Context ServletContext context,
-                              @PathParam("id") long id){
+                              @PathParam("id") long id) {
 
 
         UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
         File file = userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), id);
-        return  Response.ok(file).build();
+        return Response.ok(file).build();
     }
 
 
