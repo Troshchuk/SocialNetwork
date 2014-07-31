@@ -1,13 +1,12 @@
 package com.bionic.socialNetwork.rest;
 
+import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
+import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.logic.lists.FollowingUsersList;
 import com.bionic.socialNetwork.logic.lists.FollowingUsersListByName;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -17,6 +16,24 @@ import javax.ws.rs.core.MediaType;
 
 @Path("following{id}")
 public class FollowingController {
+
+    @POST
+    @Path("subscribe{id}/{following_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public boolean subscribeOnGroup(@PathParam("id") long id,
+                                    @PathParam("following_id") long followingId) {
+        return new UserLogic().subscribeOnUser(id, followingId);
+    }
+    
+    @GET
+    @Path("unsubscribe{id}/{following_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public  boolean unsubscribeUser(@PathParam("id") long id,
+                                    @PathParam("following_id") long followingId) {
+        return new UserLogic().unsubscribeUser(id, followingId);
+    }
+    
+    
 
 
     @GET

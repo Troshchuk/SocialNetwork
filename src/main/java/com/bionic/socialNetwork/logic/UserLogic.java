@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.logic;
 
 import com.bionic.socialNetwork.dao.PostDao;
+import com.bionic.socialNetwork.dao.UserDao;
 import com.bionic.socialNetwork.dao.impl.PostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Post;
@@ -34,7 +35,7 @@ public class UserLogic {
         try {
             PostDao postDao = new PostDaoImpl();
             Post post = new Post(msg, new UserDaoImpl().selectById(id),
-                                 new Timestamp(new Date().getTime()));
+                    new Timestamp(new Date().getTime()));
             postDao.insert(post);
             return true;
         } catch (Exception e) {
@@ -52,6 +53,32 @@ public class UserLogic {
             }
             return false;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean subscribeOnUser(long userId, long followingId ) {
+        try {
+            UserDao userDao = new UserDaoImpl();
+            User user = userDao.selectById(userId);
+            User following = userDao.selectById(followingId);
+            userDao.insertFollowing(user, following);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean unsubscribeUser(long userId, long followingId) {
+        try{
+            UserDao userDao = new UserDaoImpl();
+            User user = userDao.selectById(userId);
+            User following = userDao.selectById(followingId);
+            userDao.deleteFollowing(user, following);
+            return true;
+        }
+        catch (Exception e) {
             return false;
         }
     }
