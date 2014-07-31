@@ -47,6 +47,7 @@ public class Group {
     public Group(String name, String description, User author) {
         this.name = name;
         this.author = author;
+        this.description = description;
     }
 
     public long getGroupId() {
