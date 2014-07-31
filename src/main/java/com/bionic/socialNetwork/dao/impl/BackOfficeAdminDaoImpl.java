@@ -1,11 +1,9 @@
 package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.BackOfficeAdminDao;
-import com.bionic.socialNetwork.models.Administrator;
 import com.bionic.socialNetwork.models.BackOfficeAdmin;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -38,21 +36,35 @@ public class BackOfficeAdminDaoImpl implements BackOfficeAdminDao {
 
     @Override
     public List<BackOfficeAdmin> selectAll() throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM BackOfficeAdmin");
-        List<BackOfficeAdmin> list = query.list();
-        session.close();
-        return list;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery("FROM BackOfficeAdmin");
+            List<BackOfficeAdmin> list = query.list();
+            session.close();
+            return list;
+        }
+        finally {
+            if(session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public BackOfficeAdmin selectById(long id) throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        BackOfficeAdmin backOfficeAdmin =
-                (BackOfficeAdmin) session.get(BackOfficeAdmin.class, id);
-        session.close();
-        return backOfficeAdmin;
+        Session session =null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            BackOfficeAdmin backOfficeAdmin =
+                    (BackOfficeAdmin) session.get(BackOfficeAdmin.class, id);
+            session.close();
+            return backOfficeAdmin;
+        }
+        finally {
+            if (session!= null && session.isOpen()){
+                session.close();
+            }
+        }
     }
 }

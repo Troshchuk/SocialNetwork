@@ -18,10 +18,17 @@ public class GroupPostDaoImpl implements GroupPostDao {
 
     @Override
     public GroupPost selectById(long id) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        GroupPost groupPost = (GroupPost) session.get(GroupPost.class, id);
-        session.close();
-        return groupPost;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            GroupPost groupPost = (GroupPost) session.get(GroupPost.class, id);
+            return groupPost;
+        }
+        finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
@@ -37,13 +44,20 @@ public class GroupPostDaoImpl implements GroupPostDao {
 
     @Override
     public void update(GroupPost groupPost) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
 
-        session.update(groupPost);
+            session.update(groupPost);
 
-        session.getTransaction().commit();
-        session.close();
+            session.getTransaction().commit();
+        }
+        finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
@@ -59,14 +73,21 @@ public class GroupPostDaoImpl implements GroupPostDao {
 
     @Override
     public List<GroupPost> selectLastWith(Group group, int lot) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(GroupPost.class);
-        criteria.setMaxResults(10);
-        criteria.add(Restrictions.eq("group.groupId", group.getGroupId()));
-        criteria.addOrder(Order.desc("time"));
-        criteria.setFirstResult(lot * 10);
-        List list = criteria.list();
-        session.close();
-        return list;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(GroupPost.class);
+            criteria.setMaxResults(10);
+            criteria.add(Restrictions.eq("group.groupId", group.getGroupId()));
+            criteria.addOrder(Order.desc("time"));
+            criteria.setFirstResult(lot * 10);
+            List list = criteria.list();
+            return list;
+        }
+        finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }

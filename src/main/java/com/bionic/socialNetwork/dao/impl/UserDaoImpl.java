@@ -12,12 +12,9 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -41,15 +38,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User selectById(long id) throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        User user = (User) session.get(User.class, id);
-        session.close();
-        return user;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            User user = (User) session.get(User.class, id);
+            return user;
+        }
+        finally {
+            if(session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public User selectByLogin(String login) throws Exception {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Query query = session.createQuery(

@@ -24,10 +24,17 @@ public class SessionUserDaoImpl implements SessionUserDao {
 
     @Override
     public SessionUser selectById(long id) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        SessionUser sessionUser = (SessionUser) session.get(SessionUser.class, id);
-        session.close();
-        return sessionUser;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            SessionUser sessionUser =
+                    (SessionUser) session.get(SessionUser.class, id);
+            return sessionUser;
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override

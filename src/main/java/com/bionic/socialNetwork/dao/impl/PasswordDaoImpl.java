@@ -21,12 +21,18 @@ public class PasswordDaoImpl implements PasswordDao {
 
     @Override
     public void update(Password password) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
 
-        session.update(password);
-        session.getTransaction().commit();
-        session.close();
+            session.update(password);
+            session.getTransaction().commit();
+        } finally {
+             if (session!= null && session.isOpen()) {
+                 session.close();
+             }
+        }
     }
 
 }

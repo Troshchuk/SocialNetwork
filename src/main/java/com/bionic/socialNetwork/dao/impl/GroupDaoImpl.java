@@ -31,13 +31,21 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void update(Group group) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
 
-        session.update(group);
+            session.beginTransaction();
 
-        session.getTransaction().commit();
-        session.close();
+            session.update(group);
+
+            session.getTransaction().commit();
+        }
+        finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override

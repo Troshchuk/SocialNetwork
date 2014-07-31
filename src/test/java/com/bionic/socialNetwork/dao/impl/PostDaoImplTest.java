@@ -87,6 +87,8 @@ public class PostDaoImplTest {
 
     @Test
     public void testSelectBackOffLastWith() throws Exception {
+        postDao = new PostDaoImpl();
+
         List<Post> posts = new ArrayList<Post>();
         Post post = new Post("Test", user, new Timestamp(
                 new Date().getTime()));
@@ -116,6 +118,7 @@ public class PostDaoImplTest {
         postDao.delete(postDao.selectById(postId));
         backOfficeAdminDao.delete(backOfficeAdmin);
         new UserDaoImpl().delete(user);
+
         assertNull(postDao.selectById(postId));
 
     }

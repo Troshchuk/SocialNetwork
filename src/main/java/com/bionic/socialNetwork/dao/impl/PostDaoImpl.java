@@ -21,10 +21,17 @@ public class PostDaoImpl implements PostDao {
 
     @Override
     public Post selectById(long id) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Post post = (Post) session.get(Post.class, id);
-        session.close();
-        return post;
+        Session session = null;
+        try {
+            session  = HibernateUtil.getSessionFactory().openSession();
+            Post post = (Post) session.get(Post.class, id);
+            session.close();
+            return post;
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
@@ -47,35 +54,49 @@ public class PostDaoImpl implements PostDao {
 
     @Override
     public List<Post> selectLastWith(User user, int lot) throws Exception {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Post.class);
-        criteria.setMaxResults(10);
-        criteria.add(Restrictions.eq("user.id", user.getId()));
-        criteria.addOrder(Order.desc("time"));
-        criteria.setFirstResult(lot * 10);
-        List<Post> list = criteria.list();
-        session.close();
-        return list;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Post.class);
+            criteria.setMaxResults(10);
+            criteria.add(Restrictions.eq("user.id", user.getId()));
+            criteria.addOrder(Order.desc("time"));
+            criteria.setFirstResult(lot * 10);
+            List<Post> list = criteria.list();
+            session.close();
+            return list;
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
     public List<Post> selectLastBeckOffWith (List<BackOfficeAdmin> backOfficeAdmins,
                                              int lot) throws Exception {
-        int i = 0;
-        Long [] arr = new Long[backOfficeAdmins.size()];
+        Session session = null;
+        try {
+            int i = 0;
+            Long [] arr = new Long[backOfficeAdmins.size()];
             for(BackOfficeAdmin backOff:backOfficeAdmins) {
                 arr[i] = backOff.getUser().getId();
                 i++;
-        }
+            }
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Post.class);
-        criteria.setMaxResults(10);
-        criteria.add(Restrictions.in("user.id" , arr));
-        criteria.addOrder(Order.desc("time"));
-        criteria.setFirstResult(lot * 10);
-        List<Post> list = criteria.list();
-        session.close();
-        return list;
+            session = HibernateUtil.getSessionFactory().openSession();
+            Criteria criteria = session.createCriteria(Post.class);
+            criteria.setMaxResults(10);
+            criteria.add(Restrictions.in("user.id" , arr));
+            criteria.addOrder(Order.desc("time"));
+            criteria.setFirstResult(lot * 10);
+            List<Post> list = criteria.list();
+            session.close();
+            return list;
+        } finally {
+            if (session!= null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }

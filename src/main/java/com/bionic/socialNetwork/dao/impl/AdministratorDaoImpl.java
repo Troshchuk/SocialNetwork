@@ -2,10 +2,8 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.AdministratorDao;
 import com.bionic.socialNetwork.models.Administrator;
-import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -37,12 +35,17 @@ public class AdministratorDaoImpl implements AdministratorDao {
 
     @Override
     public List<Administrator> selectAll() throws Exception {
-        Session session;
-        session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery("FROM Administrator");
-        List<Administrator> list = query.list();
-        session.close();
-        return list;
+            Session session  = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query query = session.createQuery("FROM Administrator");
+            List<Administrator> list = query.list();
+            return list;
+        }finally {
+            if(session!= null && session.isOpen()){
+                session.close();
+            }
+        }
     }
 
     @Override
