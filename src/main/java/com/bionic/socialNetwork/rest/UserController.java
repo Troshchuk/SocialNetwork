@@ -106,10 +106,13 @@ public class UserController {
                            @FormParam("interests") String interests,
                            @FormParam("name") String name,
                            @FormParam("surname") String surname,
-                           @FormParam("position") String position) {
+                           @FormParam("position") String position,
+                           @FormParam("year") String year,
+                           @FormParam("day") String day,
+                           @FormParam("month") String month) {
         long userId = (Long) request.getAttribute("userId");
         EditUserProfileLogic editUserProfile = new EditUserProfileLogic();
-        editUserProfile.edit(userId, name, surname, position, interests);
+        editUserProfile.edit(userId, name, surname, position, interests, day, month, year);
         return "{\"status\": true}";
 
     }

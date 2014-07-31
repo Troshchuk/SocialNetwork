@@ -7,7 +7,10 @@ import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Interest;
 import com.bionic.socialNetwork.models.User;
 
+
+import java.sql.Date;
 import java.util.*;
+
 
 /**
  * @version 1.0 on 28.07.2014.
@@ -16,12 +19,11 @@ import java.util.*;
 public class EditUserProfileLogic {
 
 
-
-
     public void edit(long userId, String name, String surname,
-                     String position, String interests) {
+                     String position, String interests, String day,
+                     String month, String year) {
         try {
-            logic(userId,name,surname,position,interests);
+            logic(userId, name, surname, position, interests, day, month, year);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,17 +31,26 @@ public class EditUserProfileLogic {
     }
 
     private void logic(long userId, String name, String surname,
-                       String position, String interests) throws Exception {
+                       String position, String interests, String day,
+                       String month, String year) throws Exception {
         UserDao userDao = new UserDaoImpl();
         User user = userDao.selectById(userId);
-        if (name != null) user.setName(name);
-        if (surname != null) user.setSurname(surname);
-        if (position !=null) user.setPosition(position);
+        if (!name.equals("")) user.setName(name);
+        if (!surname.equals("")) user.setSurname(surname);
+        if (!position.equals("")) user.setPosition(position);
+
+        Date date = null;
+        date = parseBirthday(day, month, year);
+        if (date != null) {
+            user.setBirthday(date);
+        } else {
+            user.setBirthday(null);
+        }
+
         userDao.update(user);
 
         editInterests(userId, interests);
     }
-
 
 
     private void editInterests(long userId, String interest) throws Exception {
@@ -107,6 +118,31 @@ public class EditUserProfileLogic {
 
                 }
             }
+        }
+    }
+
+    public java.sql.Date parseBirthday(String day, String month, String year) {
+        int intDay;
+        int intMonth;
+        int intYear;
+        try {
+            intDay = Integer.parseInt(day);
+            intMonth = Integer.parseInt(month);
+            intYear = Integer.parseInt(year);
+        } catch (Exception e) {
+            return null;
+        }
+
+
+        if (intDay < 32 && intDay > 0 &&
+                intMonth < 12 && intMonth > 0 &&
+                intYear > 1920 && intYear <2020) {
+            //month -- because int sqlDate first month is 0
+            Calendar calendar = new GregorianCalendar(intYear, --intMonth, intDay);
+            Date date = new Date(calendar.getTimeInMillis());
+            return date;
+        } else {
+            return null;
         }
     }
 }
