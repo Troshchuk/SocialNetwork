@@ -132,7 +132,7 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         SQLQuery query = session.createSQLQuery(
-                "DELETE FROM users_interests WHERE user_id = " + user.getId() +
+                "DELETE FROM Users_Interests WHERE user_id = " + user.getId() +
                         " AND interest_id = " + interest.getInterests_id() + ";");
 
         query.executeUpdate();
