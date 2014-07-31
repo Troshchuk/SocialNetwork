@@ -80,7 +80,7 @@ public class IndexController {
 
         RegistrationLogic registrationLogic = new RegistrationLogic();
 
-        String result = registrationLogic.register(name, surname, login, password, position, birthday, invite);
+        String result = registrationLogic.register(name, surname, login, password, invite);
 
         return result;
     }

@@ -22,13 +22,13 @@ import java.util.regex.Pattern;
 public class RegistrationLogic {
 
     private final String NO_AVATAR_PATH = "/WEB-INF/avatar/noavatar.png";
+    private final String DEFAULT_POSITION = "employee";
 
     private static final Logger LOGGER =
             LogManager.getLogger(RegistrationLogic.class.getName());
 
     public String register(String name, String surname, String login,
-                           String password, String position, long birthday,
-                           String invite) {
+                           String password, String invite) {
 
         if (!checkInviteCode(invite)) {
             return Responses.JSON_RESPONSE_WRONG_INVITE_CODE;
@@ -36,7 +36,7 @@ public class RegistrationLogic {
         if (!match(login, password)) {
             return Responses.JSON_RESPONSE_WRONG_LOGIN_PASS;
         }
-        if (addUser(name, surname, login, password, birthday, position)) {
+        if (addUser(name, surname, login, password)) {
             InviteDao inviteDao = new InviteDaoImpl();
             deleteInvite(invite);
             return Responses.JSON_RESPONSE_TRUE;
@@ -47,7 +47,7 @@ public class RegistrationLogic {
 
 
     private boolean addUser(String name, String surname, String login,
-                            String password, long birthday, String position) {
+                            String password) {
         UserDao userDao = new UserDaoImpl();
         User alreadyUsedLogin = null;
 
@@ -62,8 +62,8 @@ public class RegistrationLogic {
             user.setLogin(login);
             user.setName(name);
             user.setSurname(surname);
-            user.setPosition(position);
-            user.setBirthday(new Date(birthday));
+            user.setPosition(DEFAULT_POSITION);
+            user.setBirthday(new Date(0));
             user.setPathToAvatar(NO_AVATAR_PATH);
 
             try {
