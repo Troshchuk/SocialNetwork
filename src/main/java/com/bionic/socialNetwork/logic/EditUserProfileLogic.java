@@ -43,8 +43,6 @@ public class EditUserProfileLogic {
         date = parseBirthday(day, month, year);
         if (date != null) {
             user.setBirthday(date);
-        } else {
-            user.setBirthday(null);
         }
 
         userDao.update(user);

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  */
 public class RegistrationLogic {
 
-    private final String NO_AVATAR_PATH = "/WEB-INF/avatar/noavatar.png";
+    private final String NO_AVATAR_PATH = "/avatar/noavatar.png";
     private final String DEFAULT_POSITION = "employee";
 
     private static final Logger LOGGER =

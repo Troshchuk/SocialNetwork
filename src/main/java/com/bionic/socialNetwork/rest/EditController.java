@@ -14,7 +14,7 @@ import java.io.InputStream;
  * @version 1.0 on 31.07.2014.
  * @autor Bish_UA
  */
-@Path("edit")
+@Path("change")
 public class EditController {
     @Context
     private ServletContext context;
