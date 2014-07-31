@@ -7,7 +7,7 @@ Presentation
 Socialnetwork is an Open Source enterprise social network for workers;
 
 A public installation of  SocialNetwork is provided by [Amazon Web Services](http://http://aws.amazon.com/) at : 
-[SocialNetwork](http://54.187.174.199:8080/)
+[SocialNetwork](http://54.187.174.199:8080/) (invite: invite)
 
 SoccialNetwork is made with the following technologies :
 
