@@ -41,12 +41,18 @@ public class CreateGroupLogicTest {
     @Test
     public void createGroupTest() throws Exception{
         groupDao = new GroupDaoImpl();
+        /**
+         * CreateGroupLogic creates group using 3 name, description & authors Id
+         * createGroupLogic includes the groupDao.insert(Group group) method
+         */
         createGroupLogic = new CreateGroupLogic("Group name",
                                                 "Group description", user.getId());
         group = createGroupLogic.getGroup();
         group_id = group.getGroupId();
 
         assertNotNull(group);
+        System.out.print(createGroupLogic.getResponse());
+        assertEquals("{\"isCreated\": \"true\"}",createGroupLogic.getResponse());
         assertEquals( user.getId() , group.getAuthor().getId());
 
         groupDao.delete(group);

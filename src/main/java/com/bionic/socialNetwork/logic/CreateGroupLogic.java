@@ -8,10 +8,14 @@ import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.User;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * CreateGroupLogic
+ *
  * @author Matvey Mitnitskyi
- * @version 1.00 30.07.14.
+ * @version 1.01 31.07.14.
  */
 
 public class CreateGroupLogic {
@@ -27,8 +31,13 @@ public class CreateGroupLogic {
             this.group.setName(name);
             this.group.setDescription(description);
             this.group.setAuthorId(user);
-            boolean isCreated = addGroup(group);
-                response = "{\"isCreated\": " + "\""+ isCreated  + "\"}";
+            if (Match(name)) {
+                boolean isCreated = addGroup(group);
+                response = "{\"isCreated\": " + "\"" + isCreated + "\"}";
+            }
+            else  { response = "{\"groupName\": "
+                               + "\"groupName is incorrect\"}";
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,6 +53,13 @@ public class CreateGroupLogic {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean Match (String name) {
+
+        Pattern namePattern = Pattern.compile("([\\w]|[\\s])+");
+        Matcher matcher = namePattern.matcher(name);
+        return matcher.matches();
     }
 
     public String getResponse() { return response; }
