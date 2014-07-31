@@ -20,6 +20,9 @@ import java.util.regex.Pattern;
  * Created by Bish_ua on 17.07.2014.
  */
 public class RegistrationLogic {
+
+    private final String NO_AVATAR_PATH = "/WEB-INF/avatar/noavatar.png";
+
     private static final Logger LOGGER =
             LogManager.getLogger(RegistrationLogic.class.getName());
 
@@ -28,17 +31,17 @@ public class RegistrationLogic {
                            String invite) {
 
         if (!checkInviteCode(invite)) {
-            return "{\"status\": \"wrongInviteCode\"}";
+            return Responses.JSON_RESPONSE_WRONG_INVITE_CODE;
         }
         if (!match(login, password)) {
-            return "{\"status\": \"wrongLoginPass\"}";
+            return Responses.JSON_RESPONSE_WRONG_LOGIN_PASS;
         }
         if (addUser(name, surname, login, password, birthday, position)) {
             InviteDao inviteDao = new InviteDaoImpl();
             deleteInvite(invite);
-            return "{\"status\": true}";
+            return Responses.JSON_RESPONSE_TRUE;
         } else {
-            return "{\"status\": false}";
+            return Responses.JSON_RESPONSE_FALSE;
         }
     }
 
@@ -61,7 +64,7 @@ public class RegistrationLogic {
             user.setSurname(surname);
             user.setPosition(position);
             user.setBirthday(new Date(birthday));
-            user.setPathToAvatar("/WEB-INF/avatars/noneava.jpg");
+            user.setPathToAvatar(NO_AVATAR_PATH);
 
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
@@ -111,11 +114,15 @@ public class RegistrationLogic {
 
         //matching login & password
         Pattern loginPattern = Pattern.
-                                              compile("^([a-z0-9_\\.-]{1,20})@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$");
+                compile("^([a-z0-9_\\.-]{1,20})@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$");
         Matcher loginMatcher = loginPattern.matcher(login);
-        //At least one upper case, one digit and consist of 4-10 symbols
+        // At least 4 latin symbols or digits and _ -
         Pattern passwordPattern =
-                Pattern.compile("^.*(?=.{4,10})(?=.*\\d)(?=.*[a-zA-Z]).*$");
+                Pattern.compile("^[a-zA-Z0-9_-]{4,16}$");
+
+        //At least one upper case, one digit and consist of 4-10 symbols
+        // ("^.*(?=.{4,10})(?=.*\\d)(?=.*[a-zA-Z]).*$");
+
         Matcher passwordMatcher = passwordPattern.matcher(password);
 
         if (loginMatcher.matches() && passwordMatcher.matches()) {

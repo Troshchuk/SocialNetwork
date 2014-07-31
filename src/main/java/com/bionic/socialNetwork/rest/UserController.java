@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.EditUserProfileLogic;
+import com.bionic.socialNetwork.logic.Responses;
 import com.bionic.socialNetwork.logic.UserAvatarLogic;
 import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.logic.lists.InterestList;
@@ -114,7 +115,7 @@ public class UserController {
         String uploadedFileLocation = context.getRealPath("/WEB-INF");
         UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
         userAvatarLogic.saveAvatar(uploadedInputStream, uploadedFileLocation, fileDetail.getFileName(), userId);
-        return "{\"status\": true}";
+        return Responses.JSON_RESPONSE_TRUE;
     }
 
     @GET
@@ -142,6 +143,6 @@ public class UserController {
         userIdCookie.setPath("/");
         userIdCookie.setMaxAge(0);
         response.addCookie(userIdCookie);
-        return "{\"status\": true}";
+        return Responses.JSON_RESPONSE_TRUE;
     }
 }

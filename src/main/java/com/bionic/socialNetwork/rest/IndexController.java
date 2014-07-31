@@ -2,6 +2,7 @@ package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.LoginLogic;
 import com.bionic.socialNetwork.logic.RegistrationLogic;
+import com.bionic.socialNetwork.logic.Responses;
 import com.bionic.socialNetwork.logic.SessionLogic;
 import com.bionic.socialNetwork.models.User;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 /**
@@ -58,9 +60,9 @@ public class IndexController {
             userIdCookie.setPath("/");
             response.addCookie(userIdCookie);
 
-            return "{\"status\": true}";
+            return Responses.JSON_RESPONSE_TRUE;
         } else {
-            return "{\"status\": false}";
+            return Responses.JSON_RESPONSE_FALSE;
         }
     }
 
