@@ -14,7 +14,7 @@ import java.util.Date;
 
 
 /**
- * @author Dmytro Troshchuk
+ * @author Dmytro Troshchuk, Denis Biyovskiy
  * @version 1.00  24.07.14.
  */
 public class UserLogic {
@@ -57,28 +57,26 @@ public class UserLogic {
         }
     }
 
-    public boolean subscribeOnUser(long userId, long followingId ) {
+    public boolean subscribeOnUser(long userId, long followingId) {
         try {
             UserDao userDao = new UserDaoImpl();
             User user = userDao.selectById(userId);
             User following = userDao.selectById(followingId);
             userDao.insertFollowing(user, following);
             return true;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
     public boolean unsubscribeUser(long userId, long followingId) {
-        try{
+        try {
             UserDao userDao = new UserDaoImpl();
             User user = userDao.selectById(userId);
             User following = userDao.selectById(followingId);
             userDao.deleteFollowing(user, following);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }

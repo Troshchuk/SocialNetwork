@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * DAO for User's entity
  *
- * @author Dmytro Troshchuk
+ * @author Dmytro Troshchuk, Denis Biyovskiy
  * @version 1.00  14.07.14.
  */
 public interface UserDao {
@@ -67,7 +67,7 @@ public interface UserDao {
 
     public List<User> selectFollowingsNext(int lot) throws Exception;
 
-    public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception ;
+    public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception;
 
     public void insertFollowing(User user, User hisFollowing) throws Exception;
 

@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Dmytro Troshchuk
+ * @author Dmytro Troshchuk, Denis Biyovskiy
  * @version 1.00  14.07.14.
  */
 public class UserDaoImpl implements UserDao {
@@ -165,10 +165,10 @@ public class UserDaoImpl implements UserDao {
         List<User> resultList = new LinkedList<User>();
         session.close();
         for (User user : list) {
-             if (user.getName().equals(name)
+            if (user.getName().equals(name)
                     && user.getSurname().equals(surname)
                     && resultList.size() < 10) {
-                 resultList.add(user);
+                resultList.add(user);
             }
         }
         return resultList;
@@ -227,9 +227,9 @@ public class UserDaoImpl implements UserDao {
         List<Group> list = criteria.list();
         List<Group> resultList = new LinkedList<Group>();
         session.close();
-        for(Group group : list) {
-            if(group.getName().equals(name)
-                    && resultList.size() < 10){
+        for (Group group : list) {
+            if (group.getName().equals(name)
+                    && resultList.size() < 10) {
                 resultList.add(group);
             }
         }
