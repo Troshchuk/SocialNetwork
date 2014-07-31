@@ -1,6 +1,59 @@
 jQuery(function( $ ) {
 	'use strict';
 
+	$('#formlogin').validate({
+
+		submitHandler: function(form) {
+			var login = $('#userlogin').val();
+			var pass = $('#userpassword').val();
+				$.post('/sn/index/login',{login:login,pass:pass},function(server_json){
+					if(server_json.status==true) {
+						location.reload();
+					}
+					// else {alert('Wrong login or password')}
+				},'json')
+		}
+	});
+
+	$('#formregister').validate({
+
+		submitHandler: function(form) {
+			var name = $('#name').val();
+			var surname = $('#surname').val();
+			var position = $('#position').val();
+			var email = $('#email').val();
+			var birthday = $('#birthday').val();
+			var pass = $('#pass').val();
+			var invite = $('#invite').val();
+			$.post('/sn/index/registration',{name:name,surname:surname,position:position,birthday:birthday,email:email,password:pass,invite:invite},function(response){
+				if ( response.status == true ) {
+					location.reload();
+					$('#register-error-msg').hide();
+				} else if ( response.status == false) {
+					var msg = 'Server responded with error';
+					$('#register-error-msg').text(msg).fadeIn(500);
+				} else if ( response.status == 'wrongInviteCode' ) {
+					var msg = 'Wrong invite code';
+					$('#register-error-msg').text(msg).fadeIn(500);
+				} else if ( response.status == 'wrongLoginPass' ) {
+					var msg = 'Wrong login or password';
+					$('#register-error-msg').text(msg).fadeIn(500);
+				}
+			},'json');
+		},
+		rules: {
+			pass: {
+				required: true,
+				rangelength: [4, 16]
+			},
+			passagain: {
+      			equalTo: "#pass"
+    		}
+		}
+	});
+
+
+
 	$('#register-btn').click( function() {
 		$('.login-form').hide();
 		$('.register-form').fadeIn();
@@ -10,43 +63,7 @@ jQuery(function( $ ) {
 		$('.login-form').fadeIn();
 	});
 
-	$('#user-submit').click(function() {
-		var login = $('#user-login').val();
-		var pass = $('#user-password').val();
-		if(login!="" && pass!="") {
-			$.post('/sn/index/login',{login:login,pass:pass},function(server_json){
-				if(server_json.status==true) {
-					location.reload();
-				}
-				else {alert('Wrong login or password')}
-			},'json')
-		}
-	});
 
-    $('#register-btn2').click(function() {
-        var name = $('#name').val();
-        var surname = $('#surname').val();
-        var position = $('#position').val();
-        var email = $('#email').val();
-        var birthday = $('#birthday').val();
-        var pass = $('#pass').val();
-        var invite = $('#invite').val();
-        $.post('/sn/index/registration',{name:name,surname:surname,position:position,birthday:birthday,email:email,password:pass,invite:invite},function(server_json){
-            if ( server_json.status == true ) {
-                location.reload();
-                $('#register-error-msg').hide();
-            } else if ( server_json.status == false) {
-				var msg = 'Server responded with error';
-				$('#register-error-msg').text(msg).fadeIn(500);
-            } else if ( server_json.status == 'wrongInviteCode' ) {
-				var msg = 'Wrong invite code';
-				$('#register-error-msg').text(msg).fadeIn(500);
-            } else if ( server_json.status == 'wrongLoginPass' ) {
-				var msg = 'Wrong login or password';
-				$('#register-error-msg').text(msg).fadeIn(500);
-            }
-        },'json');
-    });
 
 	$('.messages-tab').click(function(event){
 		event.preventDefault();
@@ -142,52 +159,23 @@ jQuery(function( $ ) {
 
 		});
 	};
+	// sendPrivateMessage();
 
 
-	sendPrivateMessage();
 
 
-	var page = 1;
-	function loadMorePosts() {
-		var fullname = '';
-		var position = '';
-		$('#wall').append( '<div class="wait"><img src="/assets/img/wait.gif" alt=""></div>' );
-		setTimeout( function(){ 
-			$.getJSON('/sn/user' + getUserId() + '/posts'+page , {}, function(json) {
-				for (var i = 0; i < json.posts.length; i++) {
-					var node = '<div class="post" id="' + json.posts[i].postId + '">';
-						node += '<div class="post-photo">';
-						node +=	'<a href="#">';
-						node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
-						node += '</a>';
-						node += '</div>';
-						node += '<div class="post-message">';
-						node += '<p class="post-name"><a href="">' + fullname + '</a></p>';
-						node += '<span class="remove-post"></span>';
-						node +=	'<p>' + json.posts[i].post + '</p>';
-						node += '<span class="post-meta">'+formatDate( json.posts[i].time )+'</span>';
-						node += '</div>';
-						node += '</div>';
-						$('.wait').remove();
-						$('#wall').append( node );
-				};
-				$('.remove-post').on('click', function(){
-					var id = $(this).parents('.post').attr('id');
-					removePost(id);
-				});
-			});
-		}, 300 );
 
-		page++;
-	};
 
-	// setInterval( function(){ loadMorePosts(); } , 5000);
 
+
+	
 
 	function setupHomePage() {
 		console.log('Setup Home');
+		var page = 0;
 		var fullname = '';
 		var position = '';
+
 		$.getJSON('/sn/user'+ getUserId() +'/getUser', {}, function(json) {
 			$('#user-name').text( json.name );
 			$('#user-surname').text( json.surname );
@@ -205,7 +193,14 @@ jQuery(function( $ ) {
 		});
 
 
-		$.getJSON('/sn/user' + getUserId() + '/posts0' , {}, function(json) {
+		function _loadWallPosts () {
+			$.getJSON('/sn/user' + getUserId() + '/posts'+ page , {}, function(json) {
+				_makeupWallPosts(json);
+			});
+			page++;
+		};
+
+		function _makeupWallPosts(json) {
 			for (var i = 0; i < json.posts.length; i++) {
 				var node = '<div class="post" id="' + json.posts[i].postId + '">';
 					node += '<div class="post-photo">';
@@ -226,21 +221,22 @@ jQuery(function( $ ) {
 				var id = $(this).parents('.post').attr('id');
 				removePost(id);
 			});
-		});
+		};
+
+		_loadWallPosts();
+
+		setTimeout( function(){ _loadWallPosts(); } , 5000);
+
 	}
+
+
 
 	function setupMessagesPage() {
 		console.log('Setup Messages');
 		$.getJSON('/sn/pm/received0', {}, function(json) {
 			for (var i = 0; i < json.privateMessages.length; i++) {
 				var node = '<span><span>';
-				var node = '<div class="message">';
-					node += '<div class="user-image"><a href=""><img src="" alt=""></a></div>'
-					node += '<div class="message-text">';
-					node += '<p>' + json + '</p>';
-					node += '<span class="meta">' + formatDate( getjson.date )+ '</span>';
-					node += '</div>';
-					node += '</div>';
+
 				$('#incoming').append( $(node) );
 			};
 		});
@@ -309,6 +305,11 @@ jQuery(function( $ ) {
 	};
 
 
+
+
+
+
+
 	function determinePage() {
 		var pageId = $('body').attr('id');
 		switch(pageId) {
@@ -349,15 +350,6 @@ jQuery(function( $ ) {
 
 
 
-// console.log( $(document).scrollTop() + $(document).height() );
-// console.log( $(window).height() );
-
-
-	// setInterval( function(){ 
-
-	// 	console.log( $('#content').scrollTop() );
-
-	//  } , 2000);
 
 
 
@@ -370,22 +362,6 @@ jQuery(function( $ ) {
 
 
 
-	// function updateMessages() {
-		// $.get('ajax/message.json', function(response){
-		// 	if ( response.new == true ) {
-		// 		console.log('new Message');
-		// 	}
-		// });
-	// }
-	// function updateFriends() {
-		// $.get('ajax/friend.json', function(response){
-		// 	if ( response.new == true ) {
-		// 		console.log('new Friend');
-		// 	} 
-		// });
-	// }
-	// setInterval( function(){ updateMessages(); } , 5000);
-	// setInterval( function(){ updateFriends(); } , 10000);
 
 
 

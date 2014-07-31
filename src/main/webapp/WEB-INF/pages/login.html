@@ -22,7 +22,7 @@
 
 	<script src="/assets/js/jquery-1.11.0.min.js"></script>
 	<script src="/assets/js/jquery.cookie.js"></script>
-	<script src="/assets/js/jquery.form-validator.js"></script>
+	<script src="/assets/js/jquery.validate.js"></script>
 	<script src="/assets/js/jquery.prettyPhoto.js"></script>
 	<script src="/assets/js/main.js"></script>
 
@@ -38,35 +38,56 @@
 		<div class="wraper clearfix">
 			<div class="login-image">
 				<img src="/assets/img/cooperation.jpg" alt="">
-				<!-- <img src="/img/stock-footage-montage-of-elderly-couples-in-different-situations.jpg" alt=""> -->
 			</div>
 
 			<div class="login-form">
 				<h1>Welcome to Socialiser</h1>
 				<div class="to-login">
-					<form id="form-login" action="">
-						<input id="user-login" type="text" placeholder="Login" required>
-						<input id="user-password" type="password" placeholder="Password" required>
-						<span id="user-submit" class="btn-full">Login</span>
-						<span id="register-btn" class="btn-empty">Register</span>
+					<form id="formlogin" action="">
+						<input id="userlogin" type="email" name="userlogin" placeholder="Login" required/>
+						<input id="userpassword" type="password" name="userpassword" placeholder="Password" required/> <!-- AZ az 09 -_ -->
+						<div class="controls">
+							<input id="user-submit" class="btn-full submit" type="submit" value="Login">
+							<span id="register-btn" class="btn-empty"> Go to Register</span>
+						</div>
 					</form>
 				</div>
 			</div>
 
 			<div class="register-form">
 				<h1>Register</h1>
-				<form id="form-register" action="">
-					<input id="name" type="text" placeholder="Your Name" required>
-					<input id="surname" type="text" placeholder="Surname" required>
-					<input id="position" type="text" placeholder="Position" required>
-					<input id="email" type="email" placeholder="Email" required>
-					<input id="birthday" type="text" placeholder="Birthday" required>
-					<input id="pass" type="password" placeholder="Password" required>
-					<input type="password" placeholder="Password again" required>
-					<input id="invite" type="password" placeholder="Enter Invite Key" required>
+				<form id="formregister" action="">
+					<div class="input-block">
+						<input type="text" id="name" name="name" placeholder="Your Name" required/>
+						<span class="hint">Your name</span>
+					</div>
+					<div class="input-block">
+						<input type="text" id="surname" name="surname" 	placeholder="Your Surname" required/>
+						<span class="hint">Your surname</span>
+					</div>
+								<!-- <input type="text" id="position" name="position" placeholder="Position" required/> -->
+					<div class="input-block">
+						<input type="email" id="email" name="email" placeholder="Email" required/>
+						<span class="hint">Ex: email@domain.com</span>
+					</div>
+								<!-- <input type="text" id="birthday" name="birthday" placeholder="Birthday" required/> -->
+					<div class="input-block">
+						<input type="password" id="pass" name="pass" placeholder="Password" required/>
+						<span class="hint">Must contain from 4 to 16 Latin symbols, digits and symbols: '_', '-'</span>
+					</div>
+					<div class="input-block">
+						<input type="password" id="passagain" name="passagain" placeholder="Password again" required/>
+						<span class="hint">Type the same password again</span>
+					</div>
+					<div class="input-block">
+						<input type="password" id="invite" placeholder="Enter Invite Key" required/>
+						<span class="hint">Type valid Invite Code</span>
+					</div>
 
-                    <span id="register-btn2" class="btn-empty">Register</span>
-					<span id="back-btn" class="btn-empty">Back</span>
+                    <div class="controls">
+                    	<input type="submit" id="register-btn" class="btn-full submit" value="Register">
+						<span id="back-btn" class="btn-empty">Go Back</span>
+                    </div>
 					<span id="register-error-msg" class="register-error-msg"></span>
 				</form>
 			</div>

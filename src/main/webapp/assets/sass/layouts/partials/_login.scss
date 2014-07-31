@@ -8,7 +8,7 @@
 	h1{
 		font-family: 'Roboto Condensed';
 		font-size: 45px;
-		padding-bottom: 30px;
+		padding-bottom: 10px;
 		color: #fff;
 	}
 
@@ -36,12 +36,15 @@
 		color: #fff;
 		@include border-radius(4px);
 	}
+
 	.register-form{
 		width: 48%;
 		float: right;
-		padding-top: 100px;
+		margin-top: 80px;
+		padding: 40px 30px;
 		@include box-sizing(border-box);
 		display: none;
+		color: #fff;
 		input[type="text"],
 		input[type="password"],
 		input[type="email"]{
@@ -58,7 +61,7 @@
 		border: 1px solid #fff;
 		@include border-radius(4px);
 		@include box-sizing(border-box);
-		margin-bottom: 20px;
+		margin-top: 20px;
 		color: #fff;
 		background: rgba(0,0,0, .5);
 		font: 16px $base-font-family;
@@ -82,10 +85,52 @@
 		}
 	}
 
+	.controls{
+		margin-top: 20px;
+	}
+
 	.register-error-msg{
 		color: #fff;
 		font-size: 18px;
 		display: none;
+	}
+
+	.input-block{
+		position: relative;
+	}
+
+	input:hover + .hint{
+		visibility: visible;
+		opacity: 1;
+	}
+	.hint{
+		position: absolute;
+		top: 0;
+		left: 60%;
+		padding: 5px 10px;
+		@include border-radius(10px);
+		background: #FFFFCC;
+		color: #000;
+		visibility: hidden;
+		opacity: 0;
+		line-height: 20px;
+		z-index: 1;
+		&:before{
+			background: inherit;
+			content: '';
+			display: block;
+			width: 10px;
+			height: 10px;
+			@include border-radius(20px);
+			position: absolute;
+			top: 9px;
+			left: -13px;
+		}
+		@include transition(opacity .5s);
+		&:hover{
+			visibility: visible;
+			opacity: 1;
+		}
 	}
 }
 
