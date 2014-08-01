@@ -189,6 +189,7 @@ jQuery(function ($) {
         var str = '/sn/user' + getUserId() + '/getAvatar';
         document.getElementById("avatar").src = str;
 
+
         $.getJSON('/sn/user' + getUserId() + '/interests', {}, function (json) {
             var str = [];
             for (var i = 0; i < json.interests.length; i++) {
@@ -212,7 +213,7 @@ jQuery(function ($) {
                 var node = '<div class="post" id="' + json.posts[i].postId + '">';
                 node += '<div class="post-photo">';
                 node += '<a href="#">';
-                node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
+                node += '<img id="avatar">';
                 node += '</a>';
                 node += '</div>';
                 node += '<div class="post-message">';
