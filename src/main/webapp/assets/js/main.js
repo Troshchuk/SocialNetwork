@@ -140,17 +140,22 @@ jQuery(function ($) {
     };
 
 
-    function sendPrivateMessage() {
+    function sendPrivateMessage(msg) {
         var url = window.location.href;
         var pos = url.indexOf('user');
         var id = url.slice(pos + 4);
-        $.post('/sn/pm/sendMessage', {to: 1, msg: "thids idsbfb dfgdfgdfgdfd d fgdgdg fgdg df"}, function (json) {
+        $.post('/sn/pm/sendMessage', {to:id, msg:msg}, function (json) {
 
         });
     };
     // sendPrivateMessage();
 
-
+    $('.submit-submit').click(function(event){
+        event.preventDefault();
+        var mesage = $('.message-message').val();
+        $('.message-message').val('');
+        sendPrivateMessage(mesage);
+    });
 
 
 
@@ -237,12 +242,41 @@ jQuery(function ($) {
 
     function setupMessagesPage() {
         console.log('Setup Messages');
+
+
+
         $.getJSON('/sn/pm/sent0', {}, function (json) {
             var node = '<ul>'
             for (var i = 0; i < json.privateMessages.length; i++) {
                 var name = json.privateMessages[i].receiverUser.name + ' ' + json.privateMessages[i].receiverUser.surname;
                 node += '<li id="'+ json.privateMessages[i].messageId +'" class="message ' + json.privateMessages[i].read + '">';
-                node += '<p'+json.privateMessages[i].receiverUser.id + '" > Sent to <span>' + name + '</span></p>';
+                node += '<p'+json.privateMessages[i].receiverUser.id + '" > Sent to <span class="name">' + name + '</span></p>';
+                node += '<div class="message-container"></div>';
+                node += '</li>';
+            };
+            node += '</ul>';
+            $('#sent').append( $(node) );
+            $('.message').on('click', function(event){
+                event.stopPropagation();
+                var thisEl = $(this);
+                var message = thisEl.find('.message-container');
+                if(thisEl.hasClass('cl')) return;
+                thisEl.addClass('cl');
+                var id = thisEl.attr('id');
+                $.get('pm/getMessage'+id, {}, function (response) {
+                    var msg = '<p class="message-text">' + response.message + '<span class="close"></span></p>';
+                    $(message).append( msg );
+                });
+            });
+        });
+
+        $.getJSON('/sn/pm/received0', {}, function (json) {
+            var node = '<ul>'
+            for (var i = 0; i < json.privateMessages.length; i++) {
+                var name = json.privateMessages[i].sentUser.name + ' ' + json.privateMessages[i].sentUser.surname;
+                node += '<li id="'+ json.privateMessages[i].messageId +'" class="message ' + json.privateMessages[i].read + '">';
+                node += '<p'+json.privateMessages[i].receiverUser.id + '" > From <span class="name">' + name + '</span></p>';
+                node += '<div class="message-container"></div>';
                 node += '</li>';
             };
             node += '</ul>';
@@ -250,23 +284,15 @@ jQuery(function ($) {
             $('.message').on('click', function(event){
                 event.stopPropagation();
                 var thisEl = $(this);
+                var message = thisEl.find('.message-container');
                 if(thisEl.hasClass('cl')) return;
                 thisEl.addClass('cl');
                 var id = thisEl.attr('id');
-                console.log(id);
                 $.get('pm/getMessage'+id, {}, function (response) {
-                    console.log(response.message);
-                    var msg = '<p>' + response.message + '</p>';
-                    $(msg).insertAfter( thisEl );
+                    var msg = '<p class="message-text">' + response.message + '<span class="close"></span></p>';
+                    $(message).append( msg );
                 });
-
             });
-        });
-
-        $.getJSON('/sn/pm/received0', {}, function (json) {
-            for (var i = 0; i < json.privateMessages.length; i++) {
-
-            };
         });
     }
 

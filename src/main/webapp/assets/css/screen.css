@@ -1176,16 +1176,31 @@ footer.main-footer .copyright {
 .messages .messages-tab-content.sent {
   display: none;
 }
-/* line 24, ../sass/layouts/partials/_message.scss */
-.messages .inbox .message {
+/* line 23, ../sass/layouts/partials/_message.scss */
+.messages .message {
+  cursor: pointer;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
 }
-/* line 27, ../sass/layouts/partials/_message.scss */
-.messages .inbox .message span {
+/* line 28, ../sass/layouts/partials/_message.scss */
+.messages .message .name {
   font-weight: bold;
 }
-/* line 30, ../sass/layouts/partials/_message.scss */
-.messages .inbox .message.false {
-  background: #eef;
+/* line 31, ../sass/layouts/partials/_message.scss */
+.messages .message.false {
+  background: #efefff;
+}
+/* line 36, ../sass/layouts/partials/_message.scss */
+.messages .close {
+  float: right;
+  background: url(../img/delete.png);
+  width: 15px;
+  height: 15px;
+  background-size: cover;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  cursor: pointer;
 }
