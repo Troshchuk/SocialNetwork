@@ -15,27 +15,29 @@ import java.util.List;
  * @version 1.00  18.07.14.
  */
 public class UserList {
-    @JsonIgnore
-    private long beginId;
-    @JsonIgnore
-    private UserDao userDao;
-
     private Collection<User> users;
 
     @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(UserList.class.getName());
 
-    public UserList(long beginId) {
-        this.beginId = beginId;
-        userDao = new UserDaoImpl();
+    public UserList(int page) {
+        UserDao userDao = new UserDaoImpl();
+
+        try {
+            users = userDao.selectNext(page);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
     }
 
-    public void next() {
+    public UserList(String fullName, int page) {
+        UserDao userDao = new UserDaoImpl();
+        String[] arr = fullName.split(" ");
+        String name = arr[0];
+        String surname = arr[1];
         try {
-            List<User> users = userDao.selectNext(beginId);
-            beginId += users.size();
-            this.users = users;
+            users = userDao.selectByFullName(name, surname, page);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }

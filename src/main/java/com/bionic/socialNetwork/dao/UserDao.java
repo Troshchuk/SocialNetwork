@@ -50,10 +50,10 @@ public interface UserDao {
     /**
      * Select next 10 (or less) users begin with id
      *
-     * @param beginId id at which to begin select
+     * @param page id at which to begin select
      * @return List 10 (or less) of users
      */
-    public List<User> selectNext(long beginId) throws Exception;
+    public List<User> selectNext(int page) throws Exception;
 
     /**
      * Delete user from database

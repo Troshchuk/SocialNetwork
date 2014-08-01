@@ -84,14 +84,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectNext(long beginId) throws Exception {
+    public List<User> selectNext(int page) throws Exception {
         int limit = 10;
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Query query = session.createQuery(
-                "FROM User WHERE id >= " + beginId);
-        query.setMaxResults(10);
-        List<User> users = query.list();
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.setMaxResults(10).setFirstResult(10 * page);
+        List<User> users = criteria.list();
         session.close();
 
         return users;

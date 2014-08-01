@@ -1,7 +1,6 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.logic.lists.UserList;
-import com.bionic.socialNetwork.logic.lists.UserListByName;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +27,8 @@ public class WorkerController {
     @Path("getWorkers{page}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserList getNextUsers(@Context HttpServletRequest request,
-                                 @PathParam("page") long number) {
-        UserList userList = new UserList(number * 10);
-        userList.next();
+                                 @PathParam("page") int page) {
+        UserList userList = new UserList(page);
         return userList;
     }
 
@@ -39,9 +37,7 @@ public class WorkerController {
     @Produces(MediaType.APPLICATION_JSON)
     public UserList getNextUsers(@Context HttpServletRequest request,
                                  @PathParam("fullname") String fullName,
-                                 @PathParam("page") long number) {
-        UserListByName userListByName =
-                new UserListByName(fullName, number * 10);
-        return null;
+                                 @PathParam("page") int page) {
+        return new UserList(fullName, page);
     }
 }
