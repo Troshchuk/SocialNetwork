@@ -2,9 +2,65 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <link href="/assets/css/adminp/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="/assets/css/adminp/print.css" media="print" rel="stylesheet" type="text/css" />
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' type='text/javascript'></script>
+<script type="text/javascript" src="/assets/js/adminjs.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-1.11.0.min.js"></script>
+    <title>Social Network - Admin </title>
+
 </head>
-<body>
+
+<body id="home">
+	<header class="main-header">
+		<div class="wraper clearfix">
+			<a class="logo" href=""><img src="/assets/img/logo.png" alt="">Socialiser</a>
+		</div>
+		<div class="nav-line"> 
+			<p class="textnav"> Admin working place  </p>
+		</div> 
+	</header>
+	
+
+	<div class="main-admin" align="center">
+	<p>Press the button to generate new invite code </p>
+		<br><br>
+		<div id="result" />  </div>
+			<form method="GET" id="forms" >
+				<input type="text" id="#mydata" name="mydata" class="geninp" style="" value="" hidden="hidden" />
+				<br>
+				<input type="button" id="genbtn" class="generate-btn"  value="Generate" onclick="send();" />
+			</form>
+				<br>
+<!-- <script type="text/javascript">
+
+function send()
+{
+
+var data = $('#mydata').val()
+       $.ajax({
+                type: "GET",
+                
+                url: "/sn/admin/createInvite",
+                data: "data="+data,
+                success: function(html) {
+                       $("#result").empty();
+                       $("#result").append(html.invite);
+                }
+
+        });
+ document.getElementById('genbtn').style.display = 'none'; 
+}
+</script> -->
+
+		</div>
+
+
+			<footer class="main-footer">
+				<div class="copyright">Bionic University. Social Network Project 2014</div>
+			</footer>
+
+
 
 </body>
 </html>
