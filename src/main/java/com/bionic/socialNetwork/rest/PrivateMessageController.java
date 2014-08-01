@@ -57,7 +57,7 @@ public class PrivateMessageController {
     @Produces(MediaType.APPLICATION_JSON)
     public String getMessage(@Context HttpServletRequest request,
                              @PathParam("msgId") long msgId) {
-        return "{\"message\": " + new PrivateMessageLogic()
-                .readPm((Long) request.getAttribute("userId"), msgId);
+        return "{\"message\": \"" + new PrivateMessageLogic()
+                .readPm((Long) request.getAttribute("userId"), msgId) + "\"}";
     }
 }

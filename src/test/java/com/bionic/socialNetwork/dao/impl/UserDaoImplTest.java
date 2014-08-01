@@ -46,17 +46,17 @@ public class UserDaoImplTest {
         assertEquals(id, user.getId());
     }
 
-    @Test
-    public void testSelectNext() throws Exception {
-        List<User> users = userDao.selectNext(id);
-        assertEquals(id, users.get(0).getId());
-    }
-
-    @Test
-    public void testSelectByName() throws Exception {
-        List<User> users = userDao.selectByName("Admin", "Admin", 0);
-        assertEquals(id, users.get(0).getId());
-    }
+//    @Test
+//    public void testSelectNext() throws Exception {
+//        List<User> users = userDao.selectNext(id);
+//        assertEquals(id, users.get(0).getId());
+//    }
+//
+//    @Test
+//    public void testSelectByName() throws Exception {
+//        List<User> users = userDao.selectByName("Admin", "Admin", 0);
+//        assertEquals(id, users.get(0).getId());
+//    }
 
     @Test
     public void testSelectFollowingsNext() throws Exception {
@@ -80,27 +80,27 @@ public class UserDaoImplTest {
         userDao.delete(friend2);
     }
 
-    @Test
-    public void testSelectFollowingsByName() throws Exception {
-        User user = new User("user", "user", "user", "user", new Date(0));
-        User friend1 = new User("temp", "temp", "temp", "temp", new Date(0));
-        User friend2 = new User("temp", "temp", "temp", "temp", new Date(0));
-
-        userDao.insert(user, new Password("1"));
-        userDao.insert(friend1, new Password("1"));
-        userDao.insert(friend2, new Password("1"));
-
-        userDao.insertFollowing(user, friend1);
-        userDao.insertFollowing(user, friend2);
-        List<User> users = userDao.selectFollowingsByName("temp", "temp", user.getId(), 0);
-        assertEquals(users.size(), 2);
-
-        userDao.deleteFollowing(user, friend1);
-        userDao.deleteFollowing(user, friend2);
-        userDao.delete(user);
-        userDao.delete(friend1);
-        userDao.delete(friend2);
-    }
+//    @Test
+//    public void testSelectFollowingsByName() throws Exception {
+//        User user = new User("user", "user", "user", "user", new Date(0));
+//        User friend1 = new User("temp", "temp", "temp", "temp", new Date(0));
+//        User friend2 = new User("temp", "temp", "temp", "temp", new Date(0));
+//
+//        userDao.insert(user, new Password("1"));
+//        userDao.insert(friend1, new Password("1"));
+//        userDao.insert(friend2, new Password("1"));
+//
+//        userDao.insertFollowing(user, friend1);
+//        userDao.insertFollowing(user, friend2);
+//        List<User> users = userDao.selectFollowingsByName("temp", "temp", user.getId(), 0);
+//        assertEquals(users.size(), 2);
+//
+//        userDao.deleteFollowing(user, friend1);
+//        userDao.deleteFollowing(user, friend2);
+//        userDao.delete(user);
+//        userDao.delete(friend1);
+//        userDao.delete(friend2);
+//    }
 
     @After
     public void testDelete() throws Exception {
