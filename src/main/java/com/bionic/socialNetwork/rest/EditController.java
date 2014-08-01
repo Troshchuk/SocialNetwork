@@ -40,6 +40,7 @@ public class EditController {
     @POST
     @Path("setAvatar")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+
     public String setAvatar(@FormDataParam("file") InputStream uploadedInputStream,
                             @FormDataParam("file") FormDataContentDisposition fileDetail,
                             @Context HttpServletRequest request,
