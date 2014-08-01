@@ -625,28 +625,32 @@ header.main-header .exit-btn:active {
 }
 /* line 18, ../sass/layouts/partials/_header.scss */
 header.main-header .logo {
-  font-size: 46px;
+  font-size: 36px;
   text-decoration: none;
-  color: #000;
+  color: #777;
   display: inline-block;
-  padding: 10px 0 40px;
+  padding: 10px 0 30px;
 }
 /* line 24, ../sass/layouts/partials/_header.scss */
 header.main-header .logo img {
-  width: 150px;
+  width: 100px;
   height: auto;
 }
 /* line 30, ../sass/layouts/partials/_header.scss */
 header.main-header nav.main-nav {
   background: #25292c;
   color: #fff;
+  overflow: hidden;
+  height: 0px;
+  margin-bottom: 60px;
+  border-bottom: 1px solid #ccc;
 }
 
-/* line 37, ../sass/layouts/partials/_header.scss */
+/* line 41, ../sass/layouts/partials/_header.scss */
 nav.main-nav ul {
   float: right;
 }
-/* line 40, ../sass/layouts/partials/_header.scss */
+/* line 44, ../sass/layouts/partials/_header.scss */
 nav.main-nav li {
   float: left;
   font: 26px "Roboto Condensed", Verdana, Arial, sans-serif;
@@ -657,7 +661,7 @@ nav.main-nav li {
   -o-transition: background 0.3s, color 0.7s;
   transition: background 0.3s, color 0.7s;
 }
-/* line 46, ../sass/layouts/partials/_header.scss */
+/* line 50, ../sass/layouts/partials/_header.scss */
 nav.main-nav li:hover {
   background: #4d9fcf;
   color: #000;
@@ -943,15 +947,15 @@ footer.main-footer .copyright {
   width: 200px;
   float: left;
 }
-/* line 11, ../sass/layouts/partials/_home.scss */
+/* line 14, ../sass/layouts/partials/_home.scss */
 .user .user-info {
   margin-left: 220px;
 }
-/* line 15, ../sass/layouts/partials/_home.scss */
+/* line 18, ../sass/layouts/partials/_home.scss */
 .user .name {
   padding: 5px 0 10px;
 }
-/* line 17, ../sass/layouts/partials/_home.scss */
+/* line 20, ../sass/layouts/partials/_home.scss */
 .user .name span {
   font-size: 32px;
 }
@@ -1065,8 +1069,8 @@ footer.main-footer .copyright {
 }
 /* line 4, ../sass/layouts/partials/_side-menu.scss */
 .side-menu li span {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
   background-size: 100%;
   vertical-align: middle;
@@ -1095,6 +1099,10 @@ footer.main-footer .copyright {
 /* line 26, ../sass/layouts/partials/_side-menu.scss */
 .side-menu li span.lnk-groups {
   background-image: url(../img/group-icon.png);
+}
+/* line 29, ../sass/layouts/partials/_side-menu.scss */
+.side-menu li span.lnk-settings {
+  background-image: url(../img/settings-icon.png);
 }
 
 /* line 2, ../sass/layouts/partials/_groups.scss */

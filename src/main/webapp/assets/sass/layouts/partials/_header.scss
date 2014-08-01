@@ -16,13 +16,13 @@ header.main-header{
 
 	}
 	.logo{
-		font-size: 46px;
+		font-size: 36px;
 		text-decoration: none;
-		color: #000;
+		color: #777;
 		display: inline-block;
-		padding: 10px 0 40px;
+		padding: 10px 0 30px;
 		img{
-			width: 150px;
+			width: 100px;
 			height: auto;
 		}
 	}
@@ -30,6 +30,10 @@ header.main-header{
 	nav.main-nav{
 		background: #25292c;
 		color: #fff;
+		overflow: hidden;
+		height: 0px;
+		margin-bottom: 60px;
+		border-bottom: 1px solid #ccc; 
 	}
 }
 

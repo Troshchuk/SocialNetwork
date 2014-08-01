@@ -101,6 +101,18 @@ jQuery(function ($) {
     });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     function formatDate(msec) {
         var date = new Date(msec);
         var month = ( '0' + ( date.getMonth() + 1 ) ).slice(-2);
@@ -132,11 +144,27 @@ jQuery(function ($) {
         var url = window.location.href;
         var pos = url.indexOf('user');
         var id = url.slice(pos + 4);
-        $.post('/sn/pm/sendMessage', {to: 1, msg: "thids idsbfb dgdg fgdg df"}, function (json) {
+        $.post('/sn/pm/sendMessage', {to: 1, msg: "thids idsbfb dfgdfgdfgdfd d fgdgdg fgdg df"}, function (json) {
 
         });
     };
-    // sendPrivateMessage();
+    sendPrivateMessage();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function setupHomePage() {
@@ -211,8 +239,8 @@ jQuery(function ($) {
         console.log('Setup Messages');
         $.getJSON('/sn/pm/received0', {}, function (json) {
             for (var i = 0; i < json.privateMessages.length; i++) {
-                var node = '<span><span>';
 
+                var node = '<span><span>';
                 $('#incoming').append($(node));
             }
             ;

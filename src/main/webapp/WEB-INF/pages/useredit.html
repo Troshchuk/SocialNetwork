@@ -24,6 +24,7 @@
 	<script src="/assets/js/jquery.cookie.js"></script>
 	<script src="../../assets/js/jquery.validate.js"></script>
 	<script src="/assets/js/jquery.prettyPhoto.js"></script>
+	<script src="/assets/js/jquery.fileupload.js"></script>
 	<script src="../../assets/js/main.js"></script>
 
 	<!--[if lte IE 9]>
@@ -44,42 +45,53 @@
 				<li><a href="/sn/pm"><span class="lnk-messages"></span>Private Messages</a></li>
 				<li><a href="/sn/followings"><span class="lnk-followings"></span>Followings</a></li>
 				<li><a href="/sn/group0"><span class="lnk-groups"></span>Groups</a></li>
+				<li><a href="/sn/change"><span class="lnk-settings"></span>Settings</a></li>
 			</ul>
 		</aside>
 
 		<div id="content">
 			
-			<form id="usereditform" method="post">
-				<fieldset>	
+			<form id="usereditform" method="post" data-url="sn/change/user0/setAvatar">
+				<h1>Edit Personal Information</h1>
+				<fieldset>
 					<div>
 						<input type="text" id="username" name="username" value="" placeholder="Name" required>
 					</div>
 					<div>
 						<input type="text" id="usersurname" name="usersurname" value="" placeholder="Surname" required>
 					</div>
+
+					<div class="birthday">
+						Your birthday
+						<div>
+							<input type="text" id="userdate" name="userdate" value="" placeholder="date" required>
+						</div>
+						<div>
+							<input type="text" id="usermonth" name="usermonth" value="" placeholder="month" required>
+						</div>
+						<div>
+							<input type="text" id="useryear" name="useryear" value="" placeholder="year" required>
+						</div>
+					</div>
 				</fieldset>
-				<div>
-					<input type="text" id="userinterests" name="userinterests" value="" placeholder="Interests" required>
-				</div>
-				<div>
-					<input type="text" id="userposition" name="userposition" value="" placeholder="Position" required>
-				</div>
-				<div>
-					<input type="text" id="userdate" name="userdate" value="" placeholder="date" required>
-				</div>
-				<div>
-					<input type="text" id="usermonth" name="usermonth" value="" placeholder="month" required>
-				</div>
-				<div>
-					<input type="text" id="useryear" name="useryear" value="" placeholder="year" required>
-				</div>
+
+				<fieldset>
+					<div>
+						<input type="text" id="userinterests" name="userinterests" value="" placeholder="Interests" required>
+					</div>
+					<div>
+						<input type="text" id="userposition" name="userposition" value="" placeholder="Position" required>
+					</div>
+				</fieldset>
 				<input type="submit" value="Update">
 			</form> 
 
-			<form enctype="multipart/form-data" method="post">
-				<input type="file" id="useravatar" name="useravatar">
-				<input type="submit" value="Update">
-			</form> 
+			<!-- <form id="avatarupload" enctype="multipart/form-data" method="post"> -->
+				<!-- <input type="file" id="useravatar" name="useravatar"> -->
+				<!-- <input type="submit" value="Update"> -->
+			<!-- </form>  -->
+
+			<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
 
 		</div>
 	</div>
@@ -90,5 +102,20 @@
 	<footer class="main-footer">
 		<div class="copyright">Bionic University. Social Network Project 2014</div>
 	</footer>
+	<script>
+	jQuery(function ($) {
+    'use strict';
+
+		 $('#fileupload').fileupload({
+		        dataType: 'json',
+		        done: function (e, data) {
+		            $.each(data.result.files, function (index, file) {
+		                $('<p/>').text(file.name).appendTo(document.body);
+		            });
+		        }
+		    });
+
+	});
+	</script>
 </body>
 </html>
