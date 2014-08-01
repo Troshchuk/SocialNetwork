@@ -51,7 +51,7 @@ public class CreateGroupLogicTest {
         group_id = group.getGroupId();
 
         assertNotNull(group);
-        System.out.print(createGroupLogic.getResponse());
+//        System.out.print(createGroupLogic.getResponse());
         assertEquals("{\"isCreated\": \"true\"}",createGroupLogic.getResponse());
         assertEquals( user.getId() , group.getAuthor().getId());
 

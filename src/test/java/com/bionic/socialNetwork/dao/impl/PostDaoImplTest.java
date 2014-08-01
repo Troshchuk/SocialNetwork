@@ -59,6 +59,7 @@ public class PostDaoImplTest {
 
     @Test
     public void testSelectLastWith() throws Exception {
+        postDao = new PostDaoImpl();
         List<Post> posts = new ArrayList<Post>();
 
         Post post = new Post("Test", user, new Timestamp(

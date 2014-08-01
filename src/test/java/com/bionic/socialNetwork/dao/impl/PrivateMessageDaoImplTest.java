@@ -48,6 +48,7 @@ public class PrivateMessageDaoImplTest {
 
     @Test
     public void testSelectReceivedNextWith() throws Exception {
+        privateMessageDao = new PrivateMessageDaoImpl();
         List<PrivateMessage> privateMessages = new ArrayList<PrivateMessage>();
 
         PrivateMessage privateMessage =
