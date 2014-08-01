@@ -113,9 +113,9 @@ public class UserController {
         long userId = (Long) request.getAttribute("userId");
         EditUserProfileLogic editUserProfile = new EditUserProfileLogic();
         if(editUserProfile.edit(userId, name, surname, position, interests, day, month, year)) {
-        return "{\"status\": true}";}
-        else  {
-            return "{\"status\": false}";
+            return Responses.JSON_RESPONSE_TRUE;
+        }else  {
+            return Responses.JSON_RESPONSE_FALSE;
         }
     }
 
