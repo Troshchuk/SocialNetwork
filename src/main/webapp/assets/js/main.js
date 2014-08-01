@@ -148,7 +148,7 @@ jQuery(function ($) {
 
         });
     };
-    sendPrivateMessage();
+    // sendPrivateMessage();
 
 
 
@@ -237,19 +237,36 @@ jQuery(function ($) {
 
     function setupMessagesPage() {
         console.log('Setup Messages');
+        $.getJSON('/sn/pm/sent0', {}, function (json) {
+            var node = '<ul>'
+            for (var i = 0; i < json.privateMessages.length; i++) {
+                var name = json.privateMessages[i].receiverUser.name + ' ' + json.privateMessages[i].receiverUser.surname;
+                node += '<li id="'+ json.privateMessages[i].messageId +'" class="message ' + json.privateMessages[i].read + '">';
+                node += '<p'+json.privateMessages[i].receiverUser.id + '" > Sent to <span>' + name + '</span></p>';
+                node += '</li>';
+            };
+            node += '</ul>';
+            $('#inbox').append( $(node) );
+            $('.message').on('click', function(event){
+                event.stopPropagation();
+                var thisEl = $(this);
+                if(thisEl.hasClass('cl')) return;
+                thisEl.addClass('cl');
+                var id = thisEl.attr('id');
+                console.log(id);
+                $.get('pm/getMessage'+id, {}, function (response) {
+                    console.log(response.message);
+                    var msg = '<p>' + response.message + '</p>';
+                    $(msg).insertAfter( thisEl );
+                });
+
+            });
+        });
+
         $.getJSON('/sn/pm/received0', {}, function (json) {
             for (var i = 0; i < json.privateMessages.length; i++) {
 
-                var node = '<span><span>';
-                $('#incoming').append($(node));
-            }
-            ;
-        });
-        $.getJSON('/sn/pm/sent0', {}, function (json) {
-            for (var i = 0; i < json.privateMessages.length; i++) {
-
-            }
-            ;
+            };
         });
     }
 
@@ -354,10 +371,6 @@ jQuery(function ($) {
         });
     };
 
-
-// var name = '<p>'+ json.name + '<p>';
-
-// var img = '<img src="' + json.image + ' ">';
 
 
     function determinePage() {

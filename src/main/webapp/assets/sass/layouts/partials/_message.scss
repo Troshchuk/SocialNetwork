@@ -19,4 +19,17 @@
 	.messages-tab-content.sent{
 		display: none;
 	}
+
+	.inbox{
+		.message{
+			padding: 10px 20px;
+			border-bottom: 1px solid #ccc;
+			span{
+				font-weight: bold;
+			}
+			&.false{
+				background: #eef;
+			}
+		}
+	}
 }

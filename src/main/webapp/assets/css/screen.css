@@ -1176,3 +1176,16 @@ footer.main-footer .copyright {
 .messages .messages-tab-content.sent {
   display: none;
 }
+/* line 24, ../sass/layouts/partials/_message.scss */
+.messages .inbox .message {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+/* line 27, ../sass/layouts/partials/_message.scss */
+.messages .inbox .message span {
+  font-weight: bold;
+}
+/* line 30, ../sass/layouts/partials/_message.scss */
+.messages .inbox .message.false {
+  background: #eef;
+}
