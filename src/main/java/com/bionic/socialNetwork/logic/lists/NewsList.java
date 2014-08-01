@@ -21,6 +21,10 @@ import java.util.List;
 public class NewsList {
     @JsonIgnore
     private int newsListNumber;
+
+    @JsonIgnore
+    private boolean resolved;
+
     @JsonIgnore
     private PostDaoImpl postDao;
 
@@ -39,10 +43,20 @@ public class NewsList {
             posts = postDao.selectLastBeckOffWith(
                     backOfficeAdminDao.selectAll(),
                     newsListNumber);
-        } catch (Exception e) {
+            resolved = true;
+        } catch (NullPointerException e) {
+            resolved = false;
+            posts = null;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
+            resolved = false;
         }
 
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 
     public List<Post> getPosts() {

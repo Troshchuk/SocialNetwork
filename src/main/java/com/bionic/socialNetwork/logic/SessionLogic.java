@@ -23,7 +23,11 @@ public class SessionLogic {
 
         try {
             sessionDao.insert(sessionUser);
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            return "{\"status\":false}";
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
         return session;
@@ -38,7 +42,12 @@ public class SessionLogic {
         SessionUserDao sessionUserDao = new SessionUserDaoImpl();
         try {
             sessionUser = sessionUserDao.selectBySession(session);
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
         if (sessionUser != null) {

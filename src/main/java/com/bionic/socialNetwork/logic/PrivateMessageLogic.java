@@ -29,7 +29,11 @@ public class PrivateMessageLogic {
                                                                            .getTime()));
             privateMessageDao.insert(pm);
             return true;
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
             return false;
         }
@@ -49,7 +53,11 @@ public class PrivateMessageLogic {
             }
 
             return "";
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            return "false}";
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
             return "";
         }

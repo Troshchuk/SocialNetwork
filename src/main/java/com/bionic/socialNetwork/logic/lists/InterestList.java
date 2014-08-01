@@ -21,6 +21,9 @@ public class InterestList {
     private Collection<Interest> interests;
 
     @JsonIgnore
+    private boolean resolved;
+
+    @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(InterestList.class.getName());
 
@@ -28,13 +31,21 @@ public class InterestList {
         try {
             UserDao userDao = new UserDaoImpl();
             interests = userDao.selectAllInterests(id);
-
-        } catch (Exception e) {
+            resolved = true;
+        } catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
+            resolved = false;
         }
     }
 
     public Collection<Interest> getInterests() {
         return interests;
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 }

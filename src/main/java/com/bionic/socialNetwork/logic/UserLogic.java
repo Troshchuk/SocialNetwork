@@ -56,4 +56,28 @@ public class UserLogic {
             return false;
         }
     }
+
+    public boolean subscribeOnUser(long userId, long followingId) {
+        try {
+            UserDao userDao = new UserDaoImpl();
+            User user = userDao.selectById(userId);
+            User following = userDao.selectById(followingId);
+            userDao.insertFollowing(user, following);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean unsubscribeUser(long userId, long followingId) {
+        try {
+            UserDao userDao = new UserDaoImpl();
+            User user = userDao.selectById(userId);
+            User following = userDao.selectById(followingId);
+            userDao.deleteFollowing(user, following);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

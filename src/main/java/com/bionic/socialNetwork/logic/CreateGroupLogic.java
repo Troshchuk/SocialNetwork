@@ -6,8 +6,11 @@ import com.bionic.socialNetwork.dao.impl.GroupDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.models.User;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.logging.log4j.LogManager;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +27,21 @@ public class CreateGroupLogic {
 
     private String response;
 
+    @JsonIgnore
+    private static final org.apache.logging.log4j.Logger LOGGER =
+            LogManager.getLogger(CreateGroupLogic.class.getName());
+
+    /**
+     * Creating group instance when rest is calling logic
+     * Initialization proceeds in class constructor which change response of
+     * creating group action.
+     *
+     * @param name - group name;
+     * @param description - group description;
+     * @param user_id - group authors Id.
+     */
      public CreateGroupLogic(String name, String description, long user_id) {
+
         try {
             UserDao userDao = new UserDaoImpl();
             User user = userDao.selectById(user_id);
@@ -33,24 +50,29 @@ public class CreateGroupLogic {
             this.group.setAuthorId(user);
             if (Match(name)) {
                 boolean isCreated = addGroup(group);
-                response = "{\"isCreated\": " + "\"" + isCreated + "\"}";
+                response = "{\"status\": " + "\"" + isCreated + "\"}";
             }
-            else  { response = "{\"groupName\": "
+            else  { response = "{\"status\": "
                                + "\"groupName is incorrect\"}";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        catch (NullPointerException e) {
+            response = "{\"status\":\"Could not create an object\"}";
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+
     }
 
     public boolean addGroup(Group group) {
         try {
-
             GroupDao groupDao = new GroupDaoImpl();
             groupDao.insert(group);
             return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
             return false;
         }
     }

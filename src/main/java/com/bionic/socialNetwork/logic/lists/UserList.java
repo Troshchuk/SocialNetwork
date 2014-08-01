@@ -18,6 +18,9 @@ public class UserList {
     private Collection<User> users;
 
     @JsonIgnore
+    private boolean resolved;
+
+    @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(UserList.class.getName());
 
@@ -26,9 +29,14 @@ public class UserList {
 
         try {
             users = userDao.selectNext(page);
+        }
+        catch (NullPointerException e) {
+            resolved = false;
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
+            resolved = false;
         }
+        resolved = true;
     }
 
     public UserList(String fullName, int page) {
@@ -38,12 +46,22 @@ public class UserList {
         String surname = arr[1];
         try {
             users = userDao.selectByFullName(name, surname, page);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
         }
+        catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            resolved = false;
+        }
+        resolved = true;
     }
 
     public Collection<User> getUsers() {
         return users;
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 }

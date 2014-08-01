@@ -24,17 +24,27 @@ public class GroupPostList {
     private static final Logger LOGGER =
             LogManager.getLogger(GroupPostList.class.getName());
 
+    @JsonIgnore
+    private boolean created;
+
     public GroupPostList(long id, int page) {
         try {
             GroupPostDao groupPostDao = new GroupPostDaoImpl();
             Group group = new GroupDaoImpl().selectById(id);
             groupPostDao.selectLastWith(group, page);
-        } catch (Exception e) {
+            created = true;
+        } catch (NullPointerException e) {
+            created = false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
+            created = false;
         }
     }
 
     public Collection<GroupPost> getGroupPosts() {
         return groupPosts;
     }
+
+    public boolean isCreated() { return created; }
 }

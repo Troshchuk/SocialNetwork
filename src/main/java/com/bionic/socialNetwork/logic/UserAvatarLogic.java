@@ -25,8 +25,7 @@ public class UserAvatarLogic {
         String filePath = uploadedFileLocation +
                 AVATAR_DIR + userId + uploadedFileName;
         try {
-            OutputStream out = new FileOutputStream(new File(
-                    filePath));
+            OutputStream out = new FileOutputStream(new File(filePath));
             int read = 0;
             byte[] bytes = new byte[1024];
 

@@ -26,7 +26,11 @@ public class FollowingLogic {
             User hisFollowing = userDao.selectById(followingId);
             userDao.insertFollowing(user, hisFollowing);
             return true;
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e ){
+            return false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
         return false;
@@ -38,7 +42,10 @@ public class FollowingLogic {
             User hisFollowing = userDao.selectById(followingId);
             userDao.deleteFollowing(user, hisFollowing);
             return true;
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
         return false;

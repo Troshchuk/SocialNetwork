@@ -24,7 +24,11 @@ public class FollowingUsersList {
         UserDao userDao = new UserDaoImpl();
         try {
             followingUsers = userDao.selectFollowingsNext(page);
-        } catch (Exception e) {
+        }
+//        catch (NullPointerException e) {
+//            followingUsers = null;
+//        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
     }

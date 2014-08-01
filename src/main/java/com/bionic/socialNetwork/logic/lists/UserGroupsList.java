@@ -20,6 +20,9 @@ public class UserGroupsList {
     private List<Group> groups;
 
     @JsonIgnore
+    private boolean resolved;
+
+    @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(UserGroupsList.class.getName());
 
@@ -27,12 +30,22 @@ public class UserGroupsList {
         UserDao userDao = new UserDaoImpl();
         try {
             groups = userDao.selectUserGroupsNext(id, page);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
         }
+        catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            resolved = false;
+        }
+        resolved = true;
     }
 
     public List<Group> getGroups() {
         return groups;
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 }

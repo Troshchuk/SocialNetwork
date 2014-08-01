@@ -33,8 +33,8 @@ public class LoginLogic {
                 return null;
             }
 
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
 

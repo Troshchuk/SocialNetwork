@@ -52,7 +52,7 @@ public class CreateGroupLogicTest {
 
         assertNotNull(group);
 //        System.out.print(createGroupLogic.getResponse());
-        assertEquals("{\"isCreated\": \"true\"}",createGroupLogic.getResponse());
+        assertEquals("{\"status\": \"true\"}",createGroupLogic.getResponse());
         assertEquals( user.getId() , group.getAuthor().getId());
 
         groupDao.delete(group);

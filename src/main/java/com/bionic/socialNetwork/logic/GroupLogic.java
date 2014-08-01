@@ -36,7 +36,11 @@ public class GroupLogic {
     public Group getGroup(long id) {
         try {
             return groupDao.selectById(id);
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e){
+            return null;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
             return null;
 
@@ -56,7 +60,11 @@ public class GroupLogic {
                     new java.util.Date().getTime())));
 
             return true;
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
             return false;
         }
@@ -75,7 +83,8 @@ public class GroupLogic {
 
             groupPostDao.delete(groupPost);
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
             return false;
         }

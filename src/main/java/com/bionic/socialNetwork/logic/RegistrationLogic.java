@@ -29,20 +29,24 @@ public class RegistrationLogic {
 
     public String register(String name, String surname, String login,
                            String password, String invite) {
-
-        if (!checkInviteCode(invite)) {
-            return Responses.JSON_RESPONSE_WRONG_INVITE_CODE;
-        }
-        if (!match(login, password)) {
-            return Responses.JSON_RESPONSE_WRONG_LOGIN_PASS;
-        }
-        if (addUser(name, surname, login, password)) {
-            InviteDao inviteDao = new InviteDaoImpl();
-            deleteInvite(invite);
-            return Responses.JSON_RESPONSE_TRUE;
-        } else {
-            return Responses.JSON_RESPONSE_FALSE;
-        }
+            try {
+                if (!checkInviteCode(invite)) {
+                    return Responses.JSON_RESPONSE_WRONG_INVITE_CODE;
+                }
+                if (!match(login, password)) {
+                    return Responses.JSON_RESPONSE_WRONG_LOGIN_PASS;
+                }
+                if (addUser(name, surname, login, password)) {
+                    InviteDao inviteDao = new InviteDaoImpl();
+                    deleteInvite(invite);
+                    return Responses.JSON_RESPONSE_TRUE;
+                } else {
+                    return Responses.JSON_RESPONSE_FALSE;
+                }
+            }
+            catch (NullPointerException e) {
+                return Responses.JSON_RESPONSE_FALSE;
+            }
     }
 
 
@@ -72,7 +76,11 @@ public class RegistrationLogic {
                 String md5 = new BigInteger(1, md.digest()).toString(16);
                 userDao.insert(user, new Password(md5));
                 return true;
-            } catch (Exception e) {
+            }
+            catch (NullPointerException e) {
+                return false;
+            }
+            catch (Exception e) {
                 LOGGER.error(e.getMessage());
                 return false;
             }
@@ -105,7 +113,8 @@ public class RegistrationLogic {
         try {
             Invite currentInvite = inviteDao.selectByInvite(invite);
             inviteDao.delete(currentInvite);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
     }

@@ -20,6 +20,9 @@ public class PostsList {
     private Collection<Post> posts;
 
     @JsonIgnore
+    private boolean resolved;
+
+    @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(PostsList.class.getName());
 
@@ -28,12 +31,24 @@ public class PostsList {
             PostDao postDao = new PostDaoImpl();
             User user = new UserDaoImpl().selectById(id);
             posts = postDao.selectLastWith(user, page);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage());
+            resolved = true;
         }
+        catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            resolved = false;
+        }
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 
     public Collection<Post> getPosts() {
         return posts;
     }
+
+
 }

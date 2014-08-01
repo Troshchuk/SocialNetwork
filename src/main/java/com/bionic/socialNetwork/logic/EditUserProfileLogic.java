@@ -19,15 +19,21 @@ import java.util.*;
 public class EditUserProfileLogic {
 
 
-    public void edit(long userId, String name, String surname,
+    public boolean edit(long userId, String name, String surname,
                      String position, String interests, String day,
                      String month, String year) {
         try {
             logic(userId, name, surname, position, interests, day, month, year);
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
 
+        return true;
     }
 
     private void logic(long userId, String name, String surname,

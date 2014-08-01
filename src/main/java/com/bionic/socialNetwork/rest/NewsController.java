@@ -39,8 +39,8 @@ public class NewsController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
-    public NewsList getNextNews(@PathParam("begins") int begin){
+    public NewsList getNextNews(@PathParam("begins") int begin) {
         NewsList newsList = new NewsList(begin);
-               return newsList;
-        }
+        return newsList;
+    }
 }

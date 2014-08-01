@@ -19,6 +19,9 @@ public class ReceivedMessageList {
     private Collection<PrivateMessage> receivedMessages;
 
     @JsonIgnore
+    private boolean resolved;
+
+    @JsonIgnore
     private static final Logger LOGGER =
             LogManager.getLogger(ReceivedMessageList.class.getName());
 
@@ -28,13 +31,21 @@ public class ReceivedMessageList {
             User user = new UserDaoImpl().selectById(id);
             receivedMessages =
                     privateMessageDao.selectReceivedNextWith(user, page);
-        } catch (Exception e) {
+        }
+        catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
     }
 
     public Collection<PrivateMessage> getPrivateMessages() {
         return receivedMessages;
+    }
+
+    public boolean isResolved() {
+        return resolved;
     }
 }
 
