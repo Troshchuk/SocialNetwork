@@ -83,4 +83,18 @@ public class UserAvatarLogic {
         return file;
     }
 
+    public void delAvatar(long userId){
+
+        try {
+            UserDao userDao = new UserDaoImpl();
+            User user = userDao.selectById(userId);
+            user.setPathToAvatar(NO_AVATAR);
+            userDao.update(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

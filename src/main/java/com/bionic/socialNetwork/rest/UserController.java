@@ -117,20 +117,7 @@ public class UserController {
 
     }
 
-    @POST
-    @Path("setAvatar")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public String setAvatar(@FormDataParam("file") InputStream uploadedInputStream,
-                            @FormDataParam("file") FormDataContentDisposition fileDetail,
-                            @Context HttpServletRequest request,
-                            @Context ServletContext context) {
 
-        long userId = (Long) request.getAttribute("userId");
-        String uploadedFileLocation = context.getRealPath("/WEB-INF");
-        UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
-        userAvatarLogic.saveAvatar(uploadedInputStream, uploadedFileLocation, fileDetail.getFileName(), userId);
-        return Responses.JSON_RESPONSE_TRUE;
-    }
 
     @GET
     @Path("getAvatar")
