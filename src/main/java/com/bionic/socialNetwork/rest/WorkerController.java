@@ -35,13 +35,13 @@ public class WorkerController {
     }
 
     @GET
-    @Path("getWorkersByName{name}/{surname}/{page}")
+    @Path("getWorkersByName{fullname}/{page}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserList getNextUsers(@Context HttpServletRequest request,
-                                 @PathParam("name") String name,
-                                 @PathParam("surname") String surname,
+                                 @PathParam("fullname") String fullName,
                                  @PathParam("page") long number) {
-        UserListByName userListByName = new UserListByName(name, surname, number * 10);
+        UserListByName userListByName =
+                new UserListByName(fullName, number * 10);
         return null;
     }
 }

@@ -80,8 +80,4 @@ public class GroupLogic {
             return false;
         }
     }
-
-    public ArrayList<User> followers() {
-        return null;
-    }
 }

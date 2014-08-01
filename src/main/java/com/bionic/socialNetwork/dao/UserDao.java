@@ -44,7 +44,8 @@ public interface UserDao {
      * @return List<User>
      * @throws Exception
      */
-    public List<User> selectByName(String name, String surname, long beginId) throws Exception;
+    public List<User> selectByFullName(String name, String surname, int page)
+            throws Exception;
 
     /**
      * Select next 10 (or less) users begin with id
@@ -67,7 +68,8 @@ public interface UserDao {
 
     public List<User> selectFollowingsNext(int lot) throws Exception;
 
-    public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception;
+    public List<User> selectFollowingsByFullName(String name, String surname,
+                                             long id, int lot) throws Exception;
 
     public void insertFollowing(User user, User hisFollowing) throws Exception;
 
@@ -75,7 +77,8 @@ public interface UserDao {
 
     public List<Group> selectUserGroupsNext(long id, int lot) throws Exception;
 
-    public List<Group> selectUserGroupsByName(long id, int lot, String name) throws Exception;
+    public List<Group> selectUserGroupsByName(long id, int lot, String name)
+    throws Exception;
 
     public List<Interest> selectAllInterests(long id) throws Exception;
 }

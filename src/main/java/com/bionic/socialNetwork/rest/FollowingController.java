@@ -1,58 +1,67 @@
 package com.bionic.socialNetwork.rest;
 
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
+import com.bionic.socialNetwork.logic.FollowingLogic;
 import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.logic.lists.FollowingUsersList;
-import com.bionic.socialNetwork.logic.lists.FollowingUsersListByName;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.io.InputStream;
 
 /**
- * Created by Denis Biyovskiy on 28.07.2014.
+ * @author Dmytro Troshchuk
+ * @version 1.00  01.08.14.
  */
 
-@Path("following{id}")
+
+@Path("followings")
 public class FollowingController {
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public InputStream getPage(@Context ServletContext context) {
+        return context.getResourceAsStream("/WEB-INF/pages/followings.html");
+    }
 
     @POST
-    @Path("subscribe{id}/{following_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean subscribeOnGroup(@PathParam("id") long id,
-                                    @PathParam("following_id") long followingId) {
-        return new UserLogic().subscribeOnUser(id, followingId);
+    @Path("add")
+    public String addFollowing(@Context HttpServletRequest request,
+                               @FormParam("followingId") long followingId) {
+        return "{\"status\": " + new FollowingLogic()
+                .addFollowing((Long) request.getAttribute("userId"),
+                              followingId) + "}";
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("delete")
+    public String deleteFollowing(@Context HttpServletRequest request,
+                                  @FormParam("followingId") long followingId) {
+        return "{\"status\": " + new FollowingLogic()
+                .deleteFollowing((Long) request.getAttribute("userId"),
+                                 followingId) + "}";
     }
 
     @GET
-    @Path("unsubscribe{id}/{following_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public boolean unsubscribeUser(@PathParam("id") long id,
-                                   @PathParam("following_id") long followingId) {
-        return new UserLogic().unsubscribeUser(id, followingId);
-    }
-
-
-    @GET
-    @Path("getPage{page}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public FollowingUsersList getFollowingUser(@PathParam("id") long id,
-                                               @PathParam("page") int page) {
-        return new FollowingUsersList(id, page);
+    @Path("getFollowings{page}")
+    public FollowingUsersList getNextUsers(@Context HttpServletRequest request,
+                                           @PathParam("page") int page) {
+        return new FollowingUsersList((Long) request.getAttribute("userId"),
+                                      page);
     }
 
     @GET
-    @Path("getFollowingByName{name}/{surname}/{page}")
     @Produces(MediaType.APPLICATION_JSON)
-    public FollowingUsersListByName getFollowingsByName(@Context HttpServletRequest request,
-                                                        @PathParam("name") String name,
-                                                        @PathParam("surname") String surname,
-                                                        @PathParam("page") int number) {
-        FollowingUsersListByName followingUsersListByName =
-                new FollowingUsersListByName(name, surname,
-                        Long.parseLong(request.getParameter("userId")), number * 10);
-        return followingUsersListByName;
+    @Path("getFollowings{fullname}/{page}")
+    public FollowingUsersList search(@Context HttpServletRequest request,
+                                     @PathParam("fullname") String fullName,
+                                     @PathParam("page") int page) {
+        return new FollowingUsersList(fullName, (Long) request.getAttribute("userId"),
+                                      page);
     }
-
 }

@@ -5,7 +5,6 @@ package com.bionic.socialNetwork.logic;
  * @autor Bish_UA
  */
 public class Responses {
-
     public static final String JSON_RESPONSE_TRUE = "{\"status\": true}";
     public static final String JSON_RESPONSE_FALSE = "{\"status\": false}";
     public static final String JSON_RESPONSE_WRONG_LOGIN_PASS ="{\"status\": \"wrongLoginPass\"}";

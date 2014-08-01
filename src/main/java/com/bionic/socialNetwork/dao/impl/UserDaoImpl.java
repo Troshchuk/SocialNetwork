@@ -43,9 +43,8 @@ public class UserDaoImpl implements UserDao {
             session = HibernateUtil.getSessionFactory().openSession();
             User user = (User) session.get(User.class, id);
             return user;
-        }
-        finally {
-            if(session!= null && session.isOpen()) {
+        } finally {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -71,23 +70,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectByName(String name, String surname, long beginId) throws Exception {
-        int limit = 10;
+    public List<User> selectByFullName(String name, String surname, int page)
+    throws Exception {
         List<User> returnUser = new ArrayList<User>();
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Query query = session.createQuery(
-                "FROM User WHERE name = '" + name + "' AND surname = '" + surname + "' AND id >= " + beginId);
-        List<User> list = query.list();
-        session.close();
-        for (User user : list) {
-            if (user.getName().equals(name)
-                    && user.getSurname().equals(surname)
-                    && returnUser.size() < limit
-                    ) {
-                returnUser.add(user);
-            }
-        }
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.add(Restrictions.eq("name", name))
+                .add(Restrictions.eq("surname", surname))
+                .setFirstResult(10 * page).setMaxResults(10);
+
         return returnUser;
     }
 
@@ -133,7 +125,8 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Users_Interests WHERE user_id = " + user.getId() +
-                        " AND interest_id = " + interest.getInterests_id() + ";");
+                " AND interest_id = " + interest.getInterests_id() + ";"
+                                               );
 
         query.executeUpdate();
 
@@ -156,7 +149,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectFollowingsByName(String name, String surname, long id, int lot) throws Exception {
+    public List<User> selectFollowingsByFullName(String name, String surname,
+                                             long id, int lot)
+    throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
@@ -170,8 +165,8 @@ public class UserDaoImpl implements UserDao {
         session.close();
         for (User user : list) {
             if (user.getName().equals(name)
-                    && user.getSurname().equals(surname)
-                    && resultList.size() < 10) {
+                && user.getSurname().equals(surname)
+                && resultList.size() < 10) {
                 resultList.add(user);
             }
         }
@@ -184,7 +179,8 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "INSERT INTO Followings VALUES (" + user.getId() + ", " +
-                        hisFriend.getId() + ");");
+                hisFriend.getId() + ");"
+                                               );
 
         query.executeUpdate();
 
@@ -197,7 +193,8 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Followings WHERE follower_id = " + user.getId() +
-                        " AND following_id = " + hisFollowing.getId() + ";");
+                " AND following_id = " + hisFollowing.getId() + ";"
+                                               );
 
         query.executeUpdate();
 
@@ -220,7 +217,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<Group> selectUserGroupsByName(long id, int lot, String name) throws Exception {
+    public List<Group> selectUserGroupsByName(long id, int lot, String name)
+    throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(Group.class);
@@ -233,7 +231,7 @@ public class UserDaoImpl implements UserDao {
         session.close();
         for (Group group : list) {
             if (group.getName().equals(name)
-                    && resultList.size() < 10) {
+                && resultList.size() < 10) {
                 resultList.add(group);
             }
         }

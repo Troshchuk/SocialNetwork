@@ -29,6 +29,20 @@ public class FollowingUsersList {
         }
     }
 
+    public FollowingUsersList(String fullName, long id, int beginId) {
+        String[] arr = fullName.split(" ");
+        String name = arr[0];
+        String surname = arr[1];
+        UserDao userDao = new UserDaoImpl();
+        try {
+            followingUsers =
+                    userDao.selectFollowingsByFullName(name, surname, id,
+                                                       beginId);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+    }
+
     public List<User> getFollowingUsers() {
         return followingUsers;
     }
