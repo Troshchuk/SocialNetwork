@@ -327,14 +327,19 @@ jQuery(function( $ ) {
             name.val(json.name);
             surname.val(json.surname);
             position.val(json.position);
-            interests.val(json.interests);
             var bday = json.birthday.split('-');
             year.val(bday[0]);
             month.val(bday[1]);
             date.val(bday[2]);
         });
         $.getJSON('/sn/user' + getUserId() + '/interests', {}, function(json) {
-            interests.val(json.interests);
+            var str = [];
+            for (var i = 0; i < json.interests.length; i++) {
+                str.push( json.interests[i].interest );
+            }
+            str = str.join(', ');
+
+            $('#userinterests').val(str);
         });
 
         $('#usereditform').validate({
