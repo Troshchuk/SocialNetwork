@@ -53,8 +53,8 @@ public class FollowingLogic {
 
     public boolean isFollowing(long userId1, long userId2) {
         try {
-            userDao.isFollowing(userId1, userId2);
-            return true;
+            return userDao.isFollowing(userId1, userId2);
+
         } catch (NullPointerException e) {
             return false;
         }
