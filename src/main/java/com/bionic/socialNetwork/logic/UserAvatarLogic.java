@@ -14,16 +14,24 @@ import java.nio.file.Path;
  */
 public class UserAvatarLogic {
 
-    final String AVATAR_DIR = "\\avatar\\";
+    final String AVATAR_DIR = "/avatar/";
     final String NO_AVATAR = "/avatar/noavatar.png";
 
     public void saveAvatar(InputStream uploadedInputStream,
                            String uploadedFileLocation,
                            String uploadedFileName,
                            long userId) {
+        String str = "";
+        try {
+            str = new String(uploadedFileName.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String filePath = uploadedFileLocation +
-                AVATAR_DIR + userId + uploadedFileName;
+                AVATAR_DIR + userId + str;
+
+
         try {
             OutputStream out = new FileOutputStream(new File(filePath));
             int read = 0;
@@ -56,7 +64,7 @@ public class UserAvatarLogic {
             file.delete();
         }
 
-        user.setPathToAvatar(AVATAR_DIR + userId + uploadedFileName);
+        user.setPathToAvatar(AVATAR_DIR + userId + str);
 
         try {
             userDao.update(user);
