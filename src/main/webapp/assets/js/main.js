@@ -107,7 +107,7 @@ jQuery(function ($) {
 
 // ============ HELPERS =========
 
-    decorateFollow();
+
 
     function decorateFollow(){
         setTimeout(function(){
@@ -118,7 +118,7 @@ jQuery(function ($) {
                     $('.follow').text('Follow');
                 }
             });
-        }, 500);
+        }, 1000);
     }
 
     function handleFollower() {
@@ -157,6 +157,19 @@ jQuery(function ($) {
         var formated = 'at ' + date.getHours() + ':' + date.getMinutes() + ' on ' + date.getDate() + '.' + month + '.' + date.getFullYear();
         return formated;
     };
+
+    function isSelfPage() {
+        var url = window.location.href;
+        var pos = url.indexOf('user');
+        if (pos == -1) return true;
+
+        var urlId = url.slice(pos + 4);
+        var cookieId = $.cookie("userId");
+        if( urlId == cookieId ) return true;
+        return false;
+
+    };
+
 
     function getUserId() {
         var url = window.location.href;
@@ -218,6 +231,17 @@ jQuery(function ($) {
         var position = '';
         var ava = new Image();
 
+        if ( isSelfPage() ){
+            $('.new-private-message').hide();
+            $('.follow').hide();
+        }
+
+        if ( ! isSelfPage() ){
+            $('.new-wall-post').hide();
+        }
+
+
+
         $.getJSON('/sn/user' + getUserId() + '/getUser', {}, function (json) {
             if (json != 'undefined') {
                 if (json.name != 'undefined') {
@@ -227,6 +251,10 @@ jQuery(function ($) {
                 if (json.surname != 'undefined') {
                     $('#user-surname').text(json.surname);
                     if (fullname.length > 0) fullname += ' ' + json.surname;
+                }
+                if (json.birthday != 'undefined') {
+                    $('#user-birthday').text(json.birthday);
+                    
                 }
                 if (json.position != 'undefined') {
                     $('#user-position').text(json.position);
@@ -239,7 +267,7 @@ jQuery(function ($) {
 
 
         $.getJSON('/sn/user' + getUserId() + '/interests', {}, function (json) {
-            if (json != 'undefined') {
+            if (json != 'undefined' ) {
                 //TODO: check interests
                 var str = [];
                 for (var i = 0; i < json.interests.length; i++) {
@@ -263,7 +291,7 @@ jQuery(function ($) {
                 var node = '<div class="post" id="' + json.posts[i].postId + '">';
                 node += '<div class="post-photo">';
                 node += '<a href="#">';
-                node += '<img id="avatar">';
+                node += '<img class="userPic">';
                 node += '</a>';
                 node += '</div>';
                 node += '<div class="post-message">';
@@ -274,12 +302,13 @@ jQuery(function ($) {
                 node += '</div>';
                 node += '</div>';
                 $('#wall').append(node);
-            }
-            ;
+            };
             $('.remove-post').on('click', function () {
                 var id = $(this).parents('.post').attr('id');
                 removePost(id);
             });
+            var userPic = '/sn/user' + getUserId() + '/getAvatar';
+            $('.userPic').attr("src", userPic);
         };
 
         _loadWallPosts();
@@ -294,17 +323,14 @@ jQuery(function ($) {
         $('.follow').click(function(event){
             event.stopPropagation();
             handleFollower();
-
-
         });
 
+        decorateFollow();
     }
 
 
     function setupMessagesPage() {
         logger.log('Setup Messages');
-
-
 
         $.getJSON('/sn/pm/sent0', {}, function (json) {
             var node = '<ul>'
@@ -359,19 +385,25 @@ jQuery(function ($) {
 
 
     function setupColleaguesPage() {
+
         logger.log('Setup Colleagues');
         $.getJSON('/sn/workers/getWorkers0', {}, function (json) {
             var list = '<ul>';
             for (var i = 0; i < json.users.length; i++) {
-                list += '<li class="user-entry">';
+                list += '<li class="user-entry clearfix">';
+                list += '<div class="post-photo">';
+                list += '<a href="/sn/user'+ json.users[i].id +'">';
+                list += '<img src="/sn/user' + json.users[i].id + '/getAvatar" >';
+                list += '</a>';
+                list += '</div>';
                 list += '<div class="textual">';
                 list += '<div class="user-name"><a href="/sn/user' + json.users[i].id + '"><span></span>' + json.users[i].name + ' ' + json.users[i].surname + '</a></div>';
                 list += '<div class="user-position"><span>Position </span>' + json.users[i].position + '</div>';
                 list += '</li>';
-            }
-            ;
+            };
             list += '</ul>';
             $('#listOfUsers').append($(list));
+
         });
     };
 
@@ -379,23 +411,24 @@ jQuery(function ($) {
     function setupNewsPage() {
         logger.log('Setup News');
         $.getJSON('/sn/news/news0', {}, function (json) {
-            for (var i = 0; i < json.posts.length; i++) {
-                var node = '<div class="news" id="' + json.posts[i].postId + '">';
-                // node += '<div class="post-photo">';
-                // node +=	'<a href="#">';
-                // node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
-                // node += '</a>';
-                // node += '</div>';
-                node += '<div class="news-message">';
-                // node += '<p class="news-name"><a href="">' + fullname + '</a></p>';
-                // node += '<span class="remove-post"></span>';
-                node += '<p>' + json.posts[i].post + '</p>';
-                node += '<span class="post-meta">' + formatDate(json.posts[i].time) + '</span>';
-                node += '</div>';
-                node += '</div>';
-                $('#content').append(node);
+            if (json.posts != null ) {
+                for (var i = 0; i < json.posts.length; i++) {
+                    var node = '<div class="news" id="' + json.posts[i].postId + '">';
+                    // node += '<div class="post-photo">';
+                    // node +=	'<a href="#">';
+                    // node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
+                    // node += '</a>';
+                    // node += '</div>';
+                    node += '<div class="news-message">';
+                    // node += '<p class="news-name"><a href="">' + fullname + '</a></p>';
+                    // node += '<span class="remove-post"></span>';
+                    node += '<p>' + json.posts[i].post + '</p>';
+                    node += '<span class="post-meta">' + formatDate(json.posts[i].time) + '</span>';
+                    node += '</div>';
+                    node += '</div>';
+                    $('#content').append(node);
+                };
             }
-            ;
         });
     };
 
@@ -405,7 +438,12 @@ jQuery(function ($) {
         $.getJSON('/sn/followings/getFollowings0', {}, function (json) {
         var list = '<ul>';
             for (var i = 0; i < json.followingUsers.length; i++) {
-                list += '<li class="user-entry">';
+                list += '<li class="user-entry clearfix">';
+                list += '<div class="post-photo">';
+                list += '<a href="/sn/user'+ json.followingUsers[i].id +'">';
+                list += '<img src="/sn/user' + json.followingUsers[i].id + '/getAvatar" >';
+                list += '</a>';
+                list += '</div>';
                 list += '<div class="textual">';
                 list += '<div class="user-name"><a href="/sn/user' + json.followingUsers[i].id + '"><span></span>' + json.followingUsers[i].name + ' ' + json.followingUsers[i].surname + '</a></div>';
                 list += '<div class="user-position"><span>Position </span>' + json.followingUsers[i].position + '</div>';

@@ -7,7 +7,7 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'> 
 	<!-- font-family: 'Roboto', sans-serif; -->
-	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>  
 	<!-- font-family: 'Roboto Condensed', sans-serif; -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 	<!-- font-family: 'Open Sans', sans-serif; -->
@@ -32,7 +32,7 @@
 		<script src="assets/javascripts/legacy/jquery.placeholder.js"></script>
 	<![endif]-->
 </head>
-<body id="home">
+<body id="groups">
 	
 	<header class="main-header">
 		<div class="wraper clearfix">
@@ -65,44 +65,26 @@
 		</aside>
 
 		<div id="content">
-			<div class="user clearfix">
-				<div class="user-image">
-					<img id="avatar">
-					<span class="change-user-photo">Change Photo</span>
-					<div class="new-private-message clearfix">
-						<p>Write a message</p>
-						<!-- <form action="home_submit" method="get" accept-charset="utf-8"> -->
-						<form accept-charset="utf-8">
-							<textarea class="message-message" id="wall-message--"></textarea>
-							<button id="wall-submit--" class="wall-submit inactive submit-submit" type="submit">Submit</button>
-						</form>
+			<div class="messages">
+				<h1>Groups</h1>
+				<a class="tab group-tab active" href="#group-list">Groups List</a>
+				<a class="tab group-tab" href="#group-create">New Group Creation</a>
+				<div class="groups-wrap">
+					<div id="inbox" class="inbox groups-tab-content">
+						
+
+						<!-- messages appended here -->
 
 					</div>
-					<span class="follow"></span>
-					<!-- <span class="unfollow"></span> -->
-				</div>
-				<div class="user-info">
-					<h1 class="name">
-						<span id="user-name"></span>
-						<span id="user-surname"></span>
-					</h1>
-					<p class="position" >Position: <span id="user-position"></span></p>
-					<p class="birthday">Birthday: <span id="user-birthday"> </span></p>
-					<p class="hobbies">Hobbies: <span id="user-hobbies"> </span></p>
+
+					<div id="sent" class="sent groups-tab-content">
+
+						<!-- messages appended here -->
+
+					</div>
 				</div>
 			</div>
 
-			<div id="wall" class="wall clearfix">
-				<p class="wall-posts-quentity">Wall posts</p>
-				<div class="new-wall-post clearfix">
-					<p>Write a message</p>
-					<form action="home_submit" method="get" accept-charset="utf-8">
-						<textarea id="wall-message"></textarea>
-						<button id="wall-submit" class="wall-submit inactive" type="submit">Submit</button>
-					</form>
-				</div>
-				<!-- posts appended here -->
-			</div>
 		</div>
 	</div>
 
