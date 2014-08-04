@@ -959,7 +959,8 @@ footer.main-footer .copyright {
 .user .name span {
   font-size: 32px;
 }
-/* line 25, ../sass/layouts/partials/_home.scss */
+/* line 26, ../sass/layouts/partials/_home.scss */
+.user .unfollow,
 .user .follow {
   display: block;
   padding: 5px;
@@ -968,7 +969,8 @@ footer.main-footer .copyright {
   color: white;
   cursor: pointer;
 }
-/* line 32, ../sass/layouts/partials/_home.scss */
+/* line 33, ../sass/layouts/partials/_home.scss */
+.user .unfollow:hover,
 .user .follow:hover {
   background: #002a58;
 }

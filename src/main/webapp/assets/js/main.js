@@ -107,16 +107,47 @@ jQuery(function ($) {
 
 // ============ HELPERS =========
 
+    decorateFollow();
 
-    function addFollower() {
+    function decorateFollow(){
+        setTimeout(function(){
+            $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
+                if(response.isFollowing) {
+                    $('.follow').text('Unfollow');
+                } else{
+                    $('.follow').text('Follow');
+                }
+            });
+        }, 500);
+    }
+
+    function handleFollower() {
         var id = getUserId();
-        $.post('/sn/followings/add', {followingId:id}, function(response){
-        logger.log(id);
-            if (response.status == true) {
-                location.reload();
+        $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
+            logger.log( response.isFollowing );
+            if ( response.isFollowing ) {
+                logger.log('do delete');
+                $.post('/sn/user'+ getUserId()+ '/delete', {}, function(response){
+                    logger.log('do delete '+id);
+                    if (response.status == true) {
+                        // location.reload();
+                        logger.log('done');
+                    }
+                });
+            } else {
+                logger.log('do add');
+                $.post('/sn/user'+ getUserId()+ '/add', {}, function(response){
+                    logger.log('do add '+id);
+                    if (response.status == true) {
+                        // location.reload();
+                        logger.log('done');
+                    }
+                });
             }
         });
+        decorateFollow();
     };
+
 
 
 
@@ -253,12 +284,18 @@ jQuery(function ($) {
 
         _loadWallPosts();
 
-        setTimeout(function () {
-            _loadWallPosts();
-        }, 5000);
+        // setTimeout(function () {
+        //     _loadWallPosts();
+        // }, 5000);
 
-        $('.follow').click(function(){
-            addFollower();
+
+        $('.follow').text( decorateFollow() );
+
+        $('.follow').click(function(event){
+            event.stopPropagation();
+            handleFollower();
+
+
         });
 
     }
