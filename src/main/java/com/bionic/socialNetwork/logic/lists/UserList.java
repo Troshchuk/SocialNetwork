@@ -57,6 +57,26 @@ public class UserList {
         resolved = true;
     }
 
+    public UserList() {
+
+    }
+
+    public void usersByInterest(String interest, int page) {
+        UserDao userDao = new UserDaoImpl();
+
+        try {
+            users = userDao.selectByInterest(interest, page);
+        }
+        catch (NullPointerException e) {
+            resolved = false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            resolved = false;
+        }
+        resolved = true;
+    }
+
     public Collection<User> getUsers() {
         return users;
     }

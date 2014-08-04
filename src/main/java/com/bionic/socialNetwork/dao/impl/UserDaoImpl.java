@@ -262,4 +262,19 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return result;
     }
+
+    @Override
+    public List<User> selectByInterest(String interest, int page)
+    throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("interests", "interestsAlias");
+        criteria.add(Restrictions.eq("interestsAlias.id", interest));
+        criteria.setFirstResult(page * 10);
+        criteria.setMaxResults(10);
+        List<User> list = criteria.list();
+        session.close();
+        return list;
+    }
 }

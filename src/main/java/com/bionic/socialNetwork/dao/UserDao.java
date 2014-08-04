@@ -69,7 +69,8 @@ public interface UserDao {
     public List<User> selectFollowingsNext(int lot) throws Exception;
 
     public List<User> selectFollowingsByFullName(String name, String surname,
-                                             long id, int lot) throws Exception;
+                                                 long id, int lot)
+    throws Exception;
 
     public void insertFollowing(User user, User hisFollowing) throws Exception;
 
@@ -83,4 +84,7 @@ public interface UserDao {
     public List<Interest> selectAllInterests(long id) throws Exception;
 
     public boolean isFollowing(long userId1, long userId2) throws Exception;
+
+    public List<User> selectByInterest(String interest, int page)
+    throws Exception;
 }
