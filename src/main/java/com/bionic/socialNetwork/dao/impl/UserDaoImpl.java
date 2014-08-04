@@ -189,14 +189,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteFollowing(User user, User hisFollowing) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-
+        session.beginTransaction();
         SQLQuery query = session.createSQLQuery(
                 "DELETE FROM Followings WHERE follower_id = " + user.getId() +
                 " AND following_id = " + hisFollowing.getId() + ";"
                                                );
 
         query.executeUpdate();
-
+        session.getTransaction().commit();
         session.close();
     }
 
