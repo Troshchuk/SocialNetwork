@@ -255,9 +255,10 @@ public class UserDaoImpl implements UserDao {
 
         SQLQuery query = session.createSQLQuery(
                 "SELECT * FROM Followings WHERE follower_id = " + userId1 +
-                " AND following_id = " + userId2 + ");");
+                " AND following_id = " + userId2 + ";");
 
         boolean result = query.list().size() > 0;
+
         session.close();
         return result;
     }
