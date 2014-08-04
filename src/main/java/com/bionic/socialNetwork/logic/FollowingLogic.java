@@ -51,5 +51,16 @@ public class FollowingLogic {
         return false;
     }
 
-
+    public boolean isFollowing(long userId1, long userId2) {
+        try {
+            userDao.isFollowing(userId1, userId2);
+            return true;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return false;
+    }
 }

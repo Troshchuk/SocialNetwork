@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
+import java.util.LongSummaryStatistics;
 
 /**
  * @author Dmytro Troshchuk
@@ -47,6 +48,16 @@ public class FollowingController {
     }
 
     @GET
+    @Produces
+    @Path("isFollowing")
+    public String isFollowing(@Context HttpServletRequest request,
+                              @FormParam("userId") long userId) {
+        return "{\"isFollowing\": " + new FollowingLogic()
+                .isFollowing((Long) request.getAttribute("userId"), userId) +
+               "}";
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getFollowings{page}")
     public FollowingUsersList getNextUsers(@Context HttpServletRequest request,
@@ -61,7 +72,8 @@ public class FollowingController {
     public FollowingUsersList search(@Context HttpServletRequest request,
                                      @PathParam("fullname") String fullName,
                                      @PathParam("page") int page) {
-        return new FollowingUsersList(fullName, (Long) request.getAttribute("userId"),
+        return new FollowingUsersList(fullName,
+                                      (Long) request.getAttribute("userId"),
                                       page);
     }
 }

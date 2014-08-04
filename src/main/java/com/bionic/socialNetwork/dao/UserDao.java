@@ -81,4 +81,6 @@ public interface UserDao {
     throws Exception;
 
     public List<Interest> selectAllInterests(long id) throws Exception;
+
+    public boolean isFollowing(long userId1, long userId2) throws Exception;
 }

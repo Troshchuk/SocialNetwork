@@ -149,7 +149,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> selectFollowingsByFullName(String name, String surname,
-                                             long id, int lot)
+                                                 long id, int lot)
     throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -247,5 +247,18 @@ public class UserDaoImpl implements UserDao {
         List<Interest> list = criteria.list();
         session.close();
         return list;
+    }
+
+    @Override
+    public boolean isFollowing(long userId1, long userId2) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        SQLQuery query = session.createSQLQuery(
+                "SELECT * FROM Followings WHERE follower_id = " + userId1 +
+                " AND following_id = " + userId2 + ");");
+
+        boolean result = query.list().size() > 0;
+        session.close();
+        return result;
     }
 }
