@@ -48,16 +48,6 @@ public class FollowingController {
     }
 
     @GET
-    @Produces
-    @Path("isFollowing")
-    public String isFollowing(@Context HttpServletRequest request,
-                              @FormParam("userId") long userId) {
-        return "{\"isFollowing\": " + new FollowingLogic()
-                .isFollowing((Long) request.getAttribute("userId"), userId) +
-               "}";
-    }
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getFollowings{page}")
     public FollowingUsersList getNextUsers(@Context HttpServletRequest request,

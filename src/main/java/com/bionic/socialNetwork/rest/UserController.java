@@ -1,9 +1,6 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.logic.EditUserProfileLogic;
-import com.bionic.socialNetwork.logic.Responses;
-import com.bionic.socialNetwork.logic.UserAvatarLogic;
-import com.bionic.socialNetwork.logic.UserLogic;
+import com.bionic.socialNetwork.logic.*;
 import com.bionic.socialNetwork.logic.lists.InterestList;
 import com.bionic.socialNetwork.logic.lists.PostsList;
 import com.bionic.socialNetwork.logic.lists.UserGroupsList;
@@ -70,7 +67,7 @@ public class UserController {
                              @FormParam("postId") long postId) {
         return "{\"status\": " + new UserLogic()
                 .deletePost((Long) request.getAttribute("userId"), postId) +
-                "}";
+               "}";
     }
 
     @GET
@@ -112,13 +109,14 @@ public class UserController {
                            @FormParam("month") String month) {
         long userId = (Long) request.getAttribute("userId");
         EditUserProfileLogic editUserProfile = new EditUserProfileLogic();
-        if(editUserProfile.edit(userId, name, surname, position, interests, day, month, year)) {
+        if (editUserProfile
+                .edit(userId, name, surname, position, interests, day, month,
+                      year)) {
             return Responses.JSON_RESPONSE_TRUE;
-        }else  {
+        } else {
             return Responses.JSON_RESPONSE_FALSE;
         }
     }
-
 
 
     @GET
@@ -129,10 +127,20 @@ public class UserController {
 
 
         UserAvatarLogic userAvatarLogic = new UserAvatarLogic();
-        File file = userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), id);
+        File file =
+                userAvatarLogic.getAvatar(context.getRealPath("/WEB-INF"), id);
         return Response.ok(file).build();
     }
 
+    @GET
+    @Produces
+    @Path("isFollowing")
+    public String isFollowing(@Context HttpServletRequest request,
+                              @FormParam("id") long id) {
+        return "{\"isFollowing\": " + new FollowingLogic()
+                .isFollowing((Long) request.getAttribute("userId"), id) +
+               "}";
+    }
 
     @GET
     @Path("exit")
