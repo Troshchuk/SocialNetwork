@@ -27,26 +27,6 @@ public class FollowingController {
         return context.getResourceAsStream("/WEB-INF/pages/followings.html");
     }
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("add")
-    public String addFollowing(@Context HttpServletRequest request,
-                               @FormParam("followingId") long followingId) {
-        return "{\"status\": " + new FollowingLogic()
-                .addFollowing((Long) request.getAttribute("userId"),
-                              followingId) + "}";
-    }
-
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("delete")
-    public String deleteFollowing(@Context HttpServletRequest request,
-                                  @FormParam("followingId") long followingId) {
-        return "{\"status\": " + new FollowingLogic()
-                .deleteFollowing((Long) request.getAttribute("userId"),
-                                 followingId) + "}";
-    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("getFollowings{page}")

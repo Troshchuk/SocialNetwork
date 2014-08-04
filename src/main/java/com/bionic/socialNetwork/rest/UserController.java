@@ -132,6 +132,26 @@ public class UserController {
         return Response.ok(file).build();
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("add")
+    public String addFollowing(@Context HttpServletRequest request,
+                               @PathParam("id") long id) {
+        return "{\"status\": " + new FollowingLogic()
+                .addFollowing((Long) request.getAttribute("userId"),
+                              id) + "}";
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("delete")
+    public String deleteFollowing(@Context HttpServletRequest request,
+                                  @PathParam("id") long id) {
+        return "{\"status\": " + new FollowingLogic()
+                .deleteFollowing((Long) request.getAttribute("userId"),
+                                 id) + "}";
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("isFollowing")
