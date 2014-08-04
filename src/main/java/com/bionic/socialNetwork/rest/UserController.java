@@ -133,10 +133,10 @@ public class UserController {
     }
 
     @GET
-    @Produces
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("isFollowing")
     public String isFollowing(@Context HttpServletRequest request,
-                              @FormParam("id") long id) {
+                              @PathParam("id") long id) {
         return "{\"isFollowing\": " + new FollowingLogic()
                 .isFollowing((Long) request.getAttribute("userId"), id) +
                "}";
