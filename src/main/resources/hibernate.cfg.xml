@@ -4,10 +4,13 @@
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost/SocialNetwork</property>
+        <property name="connection.url">
+            jdbc:mysql://localhost/SocialNetwork?useUnicode=true&amp;characterEncoding=utf8
+        </property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver
+        </property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <property name="show_sql">false</property>
@@ -25,12 +28,12 @@
         <mapping class="com.bionic.socialNetwork.models.User"/>
         <mapping class="com.bionic.socialNetwork.models.Password"/>
         <mapping class="com.bionic.socialNetwork.models.Post"/>
-        <mapping class="com.bionic.socialNetwork.models.Administrator" />
-        <mapping class="com.bionic.socialNetwork.models.BackOfficeAdmin" />
-        <mapping class="com.bionic.socialNetwork.models.Interest" />
-        <mapping class="com.bionic.socialNetwork.models.PrivateMessage" />
-        <mapping class="com.bionic.socialNetwork.models.Group" />
-        <mapping class="com.bionic.socialNetwork.models.GroupPost" />
+        <mapping class="com.bionic.socialNetwork.models.Administrator"/>
+        <mapping class="com.bionic.socialNetwork.models.BackOfficeAdmin"/>
+        <mapping class="com.bionic.socialNetwork.models.Interest"/>
+        <mapping class="com.bionic.socialNetwork.models.PrivateMessage"/>
+        <mapping class="com.bionic.socialNetwork.models.Group"/>
+        <mapping class="com.bionic.socialNetwork.models.GroupPost"/>
         <mapping class="com.bionic.socialNetwork.models.SessionUser"/>
         <mapping class="com.bionic.socialNetwork.models.Invite"/>
     </session-factory>
