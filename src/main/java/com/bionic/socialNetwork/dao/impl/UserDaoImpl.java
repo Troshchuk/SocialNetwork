@@ -175,14 +175,14 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void insertFollowing(User user, User hisFriend) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
-
+        session.beginTransaction();
         SQLQuery query = session.createSQLQuery(
                 "INSERT INTO Followings VALUES (" + user.getId() + ", " +
                 hisFriend.getId() + ");"
                                                );
 
         query.executeUpdate();
-
+        session.getTransaction().commit();
         session.close();
     }
 

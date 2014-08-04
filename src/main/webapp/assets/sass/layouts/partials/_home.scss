@@ -7,7 +7,6 @@
 		width: 200px;
 		float: left;
 		.change-user-photo{
-			// ba
 		}
 	}
 
@@ -22,5 +21,17 @@
 		}
 	}
 	.position{}
+
+	.follow{
+		display: block;
+		padding: 5px;
+		text-align: center;
+		background: $btn-bg;
+		color: $btn-color;
+		cursor: pointer;
+		&:hover{
+			background: $btn-bg-active;
+		}
+	}
 }
 

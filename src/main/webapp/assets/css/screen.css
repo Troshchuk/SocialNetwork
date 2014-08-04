@@ -947,17 +947,30 @@ footer.main-footer .copyright {
   width: 200px;
   float: left;
 }
-/* line 14, ../sass/layouts/partials/_home.scss */
+/* line 13, ../sass/layouts/partials/_home.scss */
 .user .user-info {
   margin-left: 220px;
 }
-/* line 18, ../sass/layouts/partials/_home.scss */
+/* line 17, ../sass/layouts/partials/_home.scss */
 .user .name {
   padding: 5px 0 10px;
 }
-/* line 20, ../sass/layouts/partials/_home.scss */
+/* line 19, ../sass/layouts/partials/_home.scss */
 .user .name span {
   font-size: 32px;
+}
+/* line 25, ../sass/layouts/partials/_home.scss */
+.user .follow {
+  display: block;
+  padding: 5px;
+  text-align: center;
+  background: #008ab8;
+  color: white;
+  cursor: pointer;
+}
+/* line 32, ../sass/layouts/partials/_home.scss */
+.user .follow:hover {
+  background: #002a58;
 }
 
 /* line 2, ../sass/layouts/partials/_wall.scss */

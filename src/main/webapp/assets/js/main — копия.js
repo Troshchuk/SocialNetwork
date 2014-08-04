@@ -105,18 +105,11 @@ jQuery(function ($) {
 
 
 
-// ============ HELPERS =========
 
 
-    function addFollower() {
-        var id = getUserId();
-        $.post('/sn/followings/add', {followingId:id}, function(response){
-        logger.log(id);
-            if (response.status == true) {
-                location.reload();
-            }
-        });
-    };
+
+
+
 
 
 
@@ -180,27 +173,17 @@ jQuery(function ($) {
 
 
     function setupHomePage() {
-        logger.log('Setup Home');
+        console.log('Setup Home');
         var page = 0;
-        var haveMorePages = true;
         var fullname = '';
         var position = '';
         var ava = new Image();
 
         $.getJSON('/sn/user' + getUserId() + '/getUser', {}, function (json) {
-            if (json != 'undefined') {
-                if (json.name != 'undefined') {
-                    $('#user-name').text(json.name);
-                    fullname += json.name;
-                }
-                if (json.surname != 'undefined') {
-                    $('#user-surname').text(json.surname);
-                    if (fullname.length > 0) fullname += ' ' + json.surname;
-                }
-                if (json.position != 'undefined') {
-                    $('#user-position').text(json.position);
-                }
-            }
+            $('#user-name').text(json.name);
+            $('#user-surname').text(json.surname);
+            $('#user-position').text(json.position);
+            fullname = json.name + ' ' + json.surname;
         });
 
         var str = '/sn/user' + getUserId() + '/getAvatar';
@@ -208,15 +191,13 @@ jQuery(function ($) {
 
 
         $.getJSON('/sn/user' + getUserId() + '/interests', {}, function (json) {
-            if (json != 'undefined') {
-                //TODO: check interests
-                var str = [];
-                for (var i = 0; i < json.interests.length; i++) {
-                    str.push(json.interests[i].interest);
-                };
-                str = str.join(', ');
-                $('#user-hobbies').text(str);
+            var str = [];
+            for (var i = 0; i < json.interests.length; i++) {
+                str.push(json.interests[i].interest);
             }
+            ;
+            str = str.join(', ');
+            $('#user-hobbies').text(str);
         });
 
 
@@ -257,15 +238,11 @@ jQuery(function ($) {
             _loadWallPosts();
         }, 5000);
 
-        $('.follow').click(function(){
-            addFollower();
-        });
-
     }
 
 
     function setupMessagesPage() {
-        logger.log('Setup Messages');
+        console.log('Setup Messages');
 
 
 
@@ -322,7 +299,7 @@ jQuery(function ($) {
 
 
     function setupColleaguesPage() {
-        logger.log('Setup Colleagues');
+        console.log('Setup Colleagues');
         $.getJSON('/sn/workers/getWorkers0', {}, function (json) {
             var list = '<ul>';
             for (var i = 0; i < json.users.length; i++) {
@@ -340,7 +317,7 @@ jQuery(function ($) {
 
 
     function setupNewsPage() {
-        logger.log('Setup News');
+        console.log('Setup News');
         $.getJSON('/sn/news/news0', {}, function (json) {
             for (var i = 0; i < json.posts.length; i++) {
                 var node = '<div class="news" id="' + json.posts[i].postId + '">';
@@ -364,24 +341,15 @@ jQuery(function ($) {
 
 
     function setupFollowingsPage() {
-        logger.log('Setup Followings');
-        $.getJSON('/sn/followings/getFollowings0', {}, function (json) {
-        var list = '<ul>';
-            for (var i = 0; i < json.followingUsers.length; i++) {
-                list += '<li class="user-entry">';
-                list += '<div class="textual">';
-                list += '<div class="user-name"><a href="/sn/user' + json.followingUsers[i].id + '"><span></span>' + json.followingUsers[i].name + ' ' + json.followingUsers[i].surname + '</a></div>';
-                list += '<div class="user-position"><span>Position </span>' + json.followingUsers[i].position + '</div>';
-                list += '</li>';
-            };
-            list += '</ul>';
-            $('#listOfUsers').append($(list));
+        console.log('Setup Followings');
+        $.getJSON('/sn/' + getUserId() + '/followings0', {}, function (json) {
+
         });
     };
 
 
     function setupGroupPage() {
-        logger.log('Setup Group');
+        console.log('Setup Group');
         $.getJSON('/sn/groups0', {}, function (json) {
 
         });
@@ -389,7 +357,7 @@ jQuery(function ($) {
 
 
     function setupUserEditPage() {
-        logger.log('Setup Useredit');
+        console.log('Setup Useredit');
         var name = $('#username');
         var surname = $('#usersurname');
         var position = $('#userposition');
@@ -432,54 +400,39 @@ jQuery(function ($) {
 
 
 
-
-    function Logger(state) {
-        this.output = state || false;
-        this.log = function (msg) {
-            if (this.output) {
-                console.log(msg);
-            }
-        }
-    };
-
-    var logger = new Logger(true);
-
-
-
-
     function determinePage() {
         var pageId = $('body').attr('id');
         switch (pageId) {
             case 'home':
-                logger.log('Home-page detected');
+                console.log('Home-page detected');
                 setupHomePage();
                 break;
             case 'colleagues':
-                logger.log('Сolleagues-page detected');
+                console.log('Сolleagues-page detected');
                 setupColleaguesPage();
                 break;
             case 'messages':
-                logger.log('Messages-page detected');
+                console.log('Messages-page detected');
                 setupMessagesPage();
                 break;
             case 'news':
-                logger.log('News-page detected');
+                console.log('News-page detected');
                 setupNewsPage();
                 break;
             case 'followings':
-                logger.log('Followings-page detected');
+                console.log('Followings-page detected');
                 setupFollowingsPage();
                 break;
             case 'group':
-                logger.log('Group-page detected');
+                console.log('Group-page detected');
                 setupGroupPage();
                 break;
             case 'useredit':
-                logger.log('Useredit-page detected');
+                console.log('Useredit-page detected');
                 setupUserEditPage();
                 break;
             default:
-                logger.log('Custom-page detected');
+                console.log('Custom-page detected');
         }
     }
 
