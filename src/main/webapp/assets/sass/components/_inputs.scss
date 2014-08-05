@@ -1,13 +1,15 @@
 .button{
 	border: 1px solid #fff;
 	@include border-radius(4px);
-	padding: 10px 20px;
+	padding: 10px 30px;
 	@include box-sizing(border-box);
 	background: #fff;
 	color: #000;
 	line-height: 1;
+	font-size: 14px;
 	@include transition(background .2s);
 	cursor: pointer;
+	display: inline-block;
 	&:hover{
 		background: transparent;
 		color: #fff;

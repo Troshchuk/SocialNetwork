@@ -372,28 +372,30 @@ a img.aligncenter {
 }
 
 /* line 1, ../sass/components/_inputs.scss */
-.button, .new-wall-post .wall-submit, header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
+.button, .main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .user-edit input[type="submit"], header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
   border: 1px solid #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
-  padding: 10px 20px;
+  padding: 10px 30px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #fff;
   color: #000;
   line-height: 1;
+  font-size: 14px;
   -webkit-transition: background 0.2s;
   -moz-transition: background 0.2s;
   -o-transition: background 0.2s;
   transition: background 0.2s;
   cursor: pointer;
+  display: inline-block;
 }
-/* line 11, ../sass/components/_inputs.scss */
-.button:hover, .new-wall-post .wall-submit:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
+/* line 13, ../sass/components/_inputs.scss */
+.button:hover, .main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .user-edit input[type="submit"]:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
   background: transparent;
   color: #fff;
 }
@@ -412,26 +414,32 @@ body {
   line-height: 24px;
 }
 
-/* line 28, ../sass/_base.scss */
+/* line 29, ../sass/_base.scss */
 h1,
 h2,
 h3 {
-  line-height: 1;
+  line-height: 1.3;
 }
 
-/* line 32, ../sass/_base.scss */
+/* line 33, ../sass/_base.scss */
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* line 38, ../sass/_base.scss */
 textarea {
   font-family: "Open Sans", Verdana, Arial, sans-serif;
   font-size: 12px;
 }
 
-/* line 37, ../sass/_base.scss */
+/* line 43, ../sass/_base.scss */
 img {
   width: 100%;
   display: block;
 }
 
-/* line 42, ../sass/_base.scss */
+/* line 48, ../sass/_base.scss */
 a {
   color: #004a58;
   text-decoration: none;
@@ -440,31 +448,31 @@ a {
   -o-transition: color 0.3s;
   transition: color 0.3s;
 }
-/* line 46, ../sass/_base.scss */
+/* line 52, ../sass/_base.scss */
 a:hover {
   color: #00aac8;
 }
 
-/* line 51, ../sass/_base.scss */
+/* line 57, ../sass/_base.scss */
 .wraper {
   width: 960px;
   margin: auto;
   padding: 0 20px;
 }
 
-/* line 57, ../sass/_base.scss */
+/* line 63, ../sass/_base.scss */
 #aside {
   width: 25%;
   float: left;
 }
 
-/* line 62, ../sass/_base.scss */
+/* line 68, ../sass/_base.scss */
 #content {
   width: 75%;
   float: left;
 }
 
-/* line 68, ../sass/_base.scss */
+/* line 74, ../sass/_base.scss */
 .title {
   font-size: 50px;
   text-align: center;
@@ -472,11 +480,11 @@ a:hover {
   display: block;
   position: relative;
 }
-/* line 74, ../sass/_base.scss */
+/* line 80, ../sass/_base.scss */
 .title.decorated {
   padding-bottom: 60px;
 }
-/* line 76, ../sass/_base.scss */
+/* line 82, ../sass/_base.scss */
 .title.decorated:after {
   content: '';
   position: absolute;
@@ -489,87 +497,35 @@ a:hover {
   text-align: center;
 }
 
-/* line 91, ../sass/_base.scss */
+/* line 97, ../sass/_base.scss */
 .wait {
   text-align: center;
   clear: both;
   display: block;
   padding-top: 20px;
 }
-/* line 96, ../sass/_base.scss */
+/* line 102, ../sass/_base.scss */
 .wait img {
   width: auto;
   margin: auto;
 }
 
-/* line 104, ../sass/_base.scss */
-.new-wall-post {
-  padding: 10px 20px;
-  margin-bottom: 20px;
-  border: 1px solid #004a58;
-  border-left: none;
-  border-right: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background: #fcfdfd;
-}
-/* line 112, ../sass/_base.scss */
-.new-wall-post textarea {
-  border: 1px solid #cccccc;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 5px 5px;
-  resize: none;
-  min-height: 70px;
-}
-/* line 120, ../sass/_base.scss */
-.new-wall-post .wall-submit {
-  float: right;
-  background: #008ab8;
-  color: white;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-}
-/* line 126, ../sass/_base.scss */
-.new-wall-post .wall-submit.inactive {
-  background: #999999;
-  cursor: default;
-}
-/* line 129, ../sass/_base.scss */
-.new-wall-post .wall-submit.inactive:hover {
-  background: #999999;
-}
-/* line 133, ../sass/_base.scss */
-.new-wall-post .wall-submit:hover {
-  background: #004a78;
-}
-/* line 136, ../sass/_base.scss */
-.new-wall-post .wall-submit:active {
-  background: #002a58;
-}
-
-/* line 144, ../sass/_base.scss */
+/* line 111, ../sass/_base.scss */
 .post-photo {
   width: 80px;
-  height: 90px;
+  max-height: 100px;
   float: left;
   border: 1px solid #cccccc;
   overflow: hidden;
 }
-/* line 150, ../sass/_base.scss */
+/* line 117, ../sass/_base.scss */
 .post-photo img {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 152, ../sass/_base.scss */
+/* line 119, ../sass/_base.scss */
 .post-photo img:hover {
   -webkit-transform: scale(1.2, 1.2);
   -moz-transform: scale(1.2, 1.2);
@@ -578,13 +534,13 @@ a:hover {
   transform: scale(1.2, 1.2);
 }
 
-/* line 157, ../sass/_base.scss */
+/* line 125, ../sass/_base.scss */
 .post-meta {
   font-size: 10px;
   color: #999999;
 }
 
-/* line 163, ../sass/_base.scss */
+/* line 130, ../sass/_base.scss */
 .tab {
   display: inline-block;
   padding: 5px 20px;
@@ -592,11 +548,68 @@ a:hover {
   color: #00aac8;
   border: 1px solid #00aac8;
 }
-/* line 169, ../sass/_base.scss */
+/* line 136, ../sass/_base.scss */
 .tab.active {
   background: #00aac8;
   color: white;
   border: 1px solid #00aac8;
+}
+
+/* line 143, ../sass/_base.scss */
+.main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .user-edit input[type="submit"] {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  background: #008ab8;
+  color: white;
+}
+/* line 148, ../sass/_base.scss */
+.main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .user-edit input[type="submit"]:hover {
+  background: #004a78;
+}
+/* line 151, ../sass/_base.scss */
+.main-button:active, .user .expand-message-form p:active, .user .expand-message-form button[type="submit"]:active, .wall .new-wall-post p:active, .wall .new-wall-post .wall-post-submit:active, .user-edit input[type="submit"]:active {
+  background: #002a58;
+}
+
+/*Added by JS*/
+/* line 158, ../sass/_base.scss */
+.button-inactive {
+  background: #999999 !important;
+  cursor: default !important;
+}
+/* line 161, ../sass/_base.scss */
+.button-inactive:hover {
+  background: #999999 !important;
+}
+
+/* line 167, ../sass/_base.scss */
+.unbutton {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #222222 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  float: none !important;
+}
+
+/* line 176, ../sass/_base.scss */
+.rotateY {
+  -webkit-transform: rotateX(360deg);
+  -moz-transform: rotateX(360deg);
+  -ms-transform: rotateX(360deg);
+  -o-transform: rotateX(360deg);
+  transform: rotateX(360deg);
+}
+
+/* line 180, ../sass/_base.scss */
+.add-transition {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 /* line 1, ../sass/layouts/partials/_header.scss */
@@ -868,7 +881,7 @@ footer.main-footer .copyright {
 }
 /* line 4, ../sass/layouts/partials/_user-list.scss */
 .user-list .user-entry {
-  border-bottom: 1px solid #777;
+  border-bottom: 1px solid #cccccc;
   padding: 20px 10px;
   margin-bottom: 10px;
   -webkit-box-sizing: border-box;
@@ -881,7 +894,7 @@ footer.main-footer .copyright {
 }
 /* line 13, ../sass/layouts/partials/_user-list.scss */
 .user-list .textual {
-  margin-left: 60px;
+  margin-left: 100px;
 }
 /* line 19, ../sass/layouts/partials/_user-list.scss */
 .user-list .user-name span,
@@ -938,29 +951,116 @@ footer.main-footer .copyright {
   margin-bottom: 30px;
 }
 /* line 3, ../sass/layouts/partials/_home.scss */
+.user .user-aside {
+  width: 200px;
+  float: left;
+}
+/* line 7, ../sass/layouts/partials/_home.scss */
 .user .user-image {
   border: 1px solid #cccccc;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 4px;
-  width: 200px;
-  float: left;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
-/* line 13, ../sass/layouts/partials/_home.scss */
+/* line 14, ../sass/layouts/partials/_home.scss */
+.user .user-image .change-user-pic {
+  display: inline-block;
+  padding: 2px 5px;
+  margin: 0 0 10px 10px;
+  position: absolute;
+  bottom: -40px;
+  color: rgba(153, 153, 153, 0.8);
+  background: rgba(153, 153, 153, 0.1);
+  font-weight: bold;
+  border: 1px solid rgba(153, 153, 153, 0.8);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  -webkit-transition: bottom 0.4s, opacity 0.2s;
+  -moz-transition: bottom 0.4s, opacity 0.2s;
+  -o-transition: bottom 0.4s, opacity 0.2s;
+  transition: bottom 0.4s, opacity 0.2s;
+}
+/* line 28, ../sass/layouts/partials/_home.scss */
+.user .user-image .change-user-pic:hover {
+  box-shadow: 0 0 5px rgba(0, 138, 184, 0.7);
+}
+/* line 33, ../sass/layouts/partials/_home.scss */
+.user .user-image:hover .change-user-pic {
+  bottom: 0;
+  opacity: 1;
+}
+/* line 38, ../sass/layouts/partials/_home.scss */
+.user .user-image .upload-user-pic {
+  display: none;
+  position: absolute;
+  bottom: 0;
+}
+/* line 45, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic {
+  margin: 0 0 10px 10px;
+}
+/* line 47, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic input {
+  display: none;
+}
+/* line 50, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic label {
+  display: inline-block;
+  height: 30px;
+  color: rgba(153, 153, 153, 0.8);
+  background: rgba(153, 153, 153, 0.1);
+  border: 1px solid rgba(153, 153, 153, 0.8);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  line-height: 30px;
+  vertical-align: top;
+}
+/* line 62, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic label.file {
+  font-size: 30px;
+  width: 30px;
+}
+/* line 66, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic label.submit {
+  padding: 0 5px;
+  width: auto;
+}
+/* line 71, ../sass/layouts/partials/_home.scss */
+.user .upload-user-pic label:hover {
+  box-shadow: 0 0 5px rgba(0, 138, 184, 0.7);
+}
+/* line 77, ../sass/layouts/partials/_home.scss */
 .user .user-info {
   margin-left: 220px;
 }
-/* line 17, ../sass/layouts/partials/_home.scss */
+/* line 81, ../sass/layouts/partials/_home.scss */
 .user .name {
   padding: 5px 0 10px;
 }
-/* line 19, ../sass/layouts/partials/_home.scss */
+/* line 83, ../sass/layouts/partials/_home.scss */
 .user .name span {
   font-size: 32px;
 }
-/* line 26, ../sass/layouts/partials/_home.scss */
-.user .unfollow,
+/* line 89, ../sass/layouts/partials/_home.scss */
+.user .follow-combo {
+  position: relative;
+}
+/* line 93, ../sass/layouts/partials/_home.scss */
 .user .follow {
   display: block;
   padding: 5px;
@@ -969,10 +1069,46 @@ footer.main-footer .copyright {
   color: white;
   cursor: pointer;
 }
-/* line 33, ../sass/layouts/partials/_home.scss */
-.user .unfollow:hover,
+/* line 100, ../sass/layouts/partials/_home.scss */
 .user .follow:hover {
   background: #002a58;
+}
+/* line 105, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form {
+  margin-top: 30px;
+}
+/* line 106, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form p {
+  display: inline-block;
+  -webkit-transition: padding 0.7s;
+  -moz-transition: padding 0.7s;
+  -o-transition: padding 0.7s;
+  transition: padding 0.7s;
+}
+/* line 112, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form form {
+  display: none;
+}
+/* line 115, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form textarea {
+  border: 1px solid #cccccc;
+  resize: none;
+  min-height: 80px;
+  padding: 10px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+/* line 123, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form textarea:focus {
+  border-color: #008ab8;
+  box-shadow: 0 0 4px rgba(0, 138, 184, 0.6);
+}
+/* line 128, ../sass/layouts/partials/_home.scss */
+.user .expand-message-form button[type="submit"] {
+  display: none;
 }
 
 /* line 2, ../sass/layouts/partials/_wall.scss */
@@ -980,7 +1116,48 @@ footer.main-footer .copyright {
   background: #004a58;
   padding: 5px 20px;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+}
+/* line 10, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  border-left: none;
+  border-right: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fcfdfd;
+}
+/* line 18, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post p {
+  -webkit-transition: padding 0.7s;
+  -moz-transition: padding 0.7s;
+  -o-transition: padding 0.7s;
+  transition: padding 0.7s;
+  float: right;
+}
+/* line 26, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post form,
+.wall .new-wall-post [type="submit"] {
+  display: none;
+}
+/* line 29, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post textarea {
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  resize: none;
+  min-height: 70px;
+}
+/* line 38, ../sass/layouts/partials/_wall.scss */
+.wall .new-wall-post .wall-post-submit {
+  float: right;
 }
 
 /* line 3, ../sass/layouts/partials/wall/_post.scss */
@@ -1218,4 +1395,78 @@ footer.main-footer .copyright {
   -o-transition: opacity 0.4s;
   transition: opacity 0.4s;
   cursor: pointer;
+}
+
+/* line 2, ../sass/layouts/partials/_user-edit.scss */
+.user-edit fieldset {
+  border-bottom: 1px solid #cccccc;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px 0;
+}
+/* line 8, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .name .input-block {
+  width: 49%;
+  margin-right: 2%;
+  float: left;
+}
+/* line 12, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .name .input-block:last-child {
+  margin-right: 0;
+}
+/* line 18, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday {
+  margin-top: 20px;
+  margin-top: 30px;
+}
+/* line 20, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday .input-block {
+  display: inline-block;
+}
+/* line 23, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday .userdate {
+  width: 100px;
+}
+/* line 26, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday .usermonth {
+  width: 100px;
+}
+/* line 29, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday .useryear {
+  width: 200px;
+}
+/* line 33, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .birthday input {
+  display: inline-block;
+}
+/* line 40, ../sass/layouts/partials/_user-edit.scss */
+.user-edit input[type="text"],
+.user-edit input[type="password"],
+.user-edit input[type="email"] {
+  font-size: 18px;
+  border: 1px solid #cccccc;
+  padding: 10px 15px;
+  margin-top: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  color: #333;
+}
+/* line 48, ../sass/layouts/partials/_user-edit.scss */
+.user-edit input[type="text"]:focus,
+.user-edit input[type="password"]:focus,
+.user-edit input[type="email"]:focus {
+  border: 1px solid #00aac8;
+  box-shadow: 0 0 3px rgba(0, 170, 200, 0.5);
+}
+/* line 54, ../sass/layouts/partials/_user-edit.scss */
+.user-edit .caption {
+  font-size: 16px;
+}
+/* line 58, ../sass/layouts/partials/_user-edit.scss */
+.user-edit input[type="submit"] {
+  margin-top: 20px;
+  float: right;
 }

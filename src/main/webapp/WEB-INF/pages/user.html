@@ -36,7 +36,7 @@
 	
 	<header class="main-header">
 		<div class="wraper clearfix">
-		<button id="exit" class="exit-btn">Exit</button>
+		<button id="exit" class="exit-btn">Logout</button>
 			<a class="logo" href=""><img src="/assets/img/logo.png" alt="">Socialiser</a>
 		</div>
 		<nav class="main-nav clearfix">
@@ -66,21 +66,26 @@
 
 		<div id="content">
 			<div class="user clearfix">
-				<div class="user-image">
-					<img id="avatar">
-					<span class="change-user-photo">Change Photo</span>
-					<div class="new-private-message clearfix">
-						<p>Write a message</p>
-						<!-- <form action="home_submit" method="get" accept-charset="utf-8"> -->
-						<form accept-charset="utf-8">
-							<textarea class="message-message" id="wall-message--"></textarea>
-							<button id="wall-submit--" class="wall-submit inactive submit-submit" type="submit">Submit</button>
-						</form>
+				<div class="user-aside">
+					<div class="user-image">
+						<img id="avatar" >
+						<span class="change-user-pic">Change Photo</span>
 
+						<div class='upload-user-pic'>
+		                    <input type='file' id='_file' value="+" >
+							<label class="file" for="_file">+</label>
+		                    <input type='button' id='_submit' value='Upload!'>
+							<label class="submit" for="_submit">Upload</label>
+			                <!-- <div class='progress_outer'>
+			                    <div id='_progress' class='progress'></div>
+			                </div> -->
+			            </div>
 					</div>
+
 					<span class="follow"></span>
-					<!-- <span class="unfollow"></span> -->
+
 				</div>
+
 				<div class="user-info">
 					<h1 class="name">
 						<span id="user-name"></span>
@@ -89,16 +94,25 @@
 					<p class="position" >Position: <span id="user-position"></span></p>
 					<p class="birthday">Birthday: <span id="user-birthday"> </span></p>
 					<p class="hobbies">Hobbies: <span id="user-hobbies"> </span></p>
+
+					<div class="expand-message-form private-message-form clearfix">
+						<p>Send private message</p>
+						<!-- <form action="home_submit" method="get" accept-charset="utf-8"> -->
+						<form accept-charset="utf-8" class="clearfix">
+							<textarea class="form-text-area message-message" placeholder="Type private message here"></textarea>
+							<button class="form-submit-button button-inactive private-message-submit" type="submit">Send</button>
+						</form>
+					</div>
 				</div>
 			</div>
 
 			<div id="wall" class="wall clearfix">
 				<p class="wall-posts-quentity">Wall posts</p>
-				<div class="new-wall-post clearfix">
-					<p>Write a message</p>
+				<div class="new-wall-post expand-message-form clearfix">
+					<p>Write a wall message</p>
 					<form action="home_submit" method="get" accept-charset="utf-8">
-						<textarea id="wall-message"></textarea>
-						<button id="wall-submit" class="wall-submit inactive" type="submit">Submit</button>
+						<textarea class="form-text-area" placeholder="Type your message here"></textarea>
+						<button class="wall-post-submit button-inactive" type="submit">Post on Wall</button>
 					</form>
 				</div>
 				<!-- posts appended here -->
@@ -112,5 +126,52 @@
 	<footer class="main-footer">
 		<div class="copyright">Bionic University. Social Network Project 2014</div>
 	</footer>
+
+	<script>
+        var _submit = document.getElementById('_submit'),
+                    _file = document.getElementById('_file'),
+                    _progress = document.getElementById('_progress');
+
+        var upload = function(){
+
+            if(_file.files.length === 0 ){
+                return;
+            }
+
+            if(_file.files[0].size >5242880){
+                alert("File is too large")
+                return;
+            }
+
+
+            var data = new FormData();
+            data.append('file', _file.files[0]);
+
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function(){
+                if(request.readyState == 4){
+                    try {
+                        var resp = JSON.parse(request.status);
+                        location.reload();
+                    } catch (e){
+                        var resp = {
+                            status: 'error',
+                            data: 'Unknown error occurred: [' + request.responseText + ']'
+                        };
+                    }
+                }
+            };
+
+            // request.upload.addEventListener('progress', function(e){
+            //     _progress.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
+            // }, false);
+
+            request.open('POST', '/sn/edit/setAvatar');
+            request.send(data);
+
+        };
+
+        _submit.addEventListener('click', upload);
+    </script>
 </body>
 </html>

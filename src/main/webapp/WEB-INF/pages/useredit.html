@@ -36,7 +36,7 @@
 	
 	<header class="main-header">
 		<div class="wraper clearfix">
-		<button id="exit" class="exit-btn">Exit</button>
+		<button id="exit" class="exit-btn">Logout</button>
 			<a class="logo" href=""><img src="/assets/img/logo.png" alt="">Socialiser</a>
 		</div>
 		<nav class="main-nav clearfix">
@@ -64,96 +64,45 @@
 			</ul>
 		</aside>
 
-		<div id="content">
+		<div id="content" class="user-edit">
 			
 			<form id="usereditform" method="post" data-url="sn/change/user0/setAvatar">
-				<h1>Edit Personal Information</h1>
-				<fieldset>
-					<div>
-						<input type="text" id="username" name="username" value="" placeholder="Name" required>
-					</div>
-					<div>
-						<input type="text" id="usersurname" name="usersurname" value="" placeholder="Surname" required>
+				<h1>Edit your Personal Data</h1>
+				<fieldset class="personal-info">
+					<div class="name clearfix">
+						<div class="input-block">
+							<input type="text" id="username" name="username" value="" placeholder="Name" required>
+						</div>
+						<div class="input-block">
+							<input type="text" id="usersurname" name="usersurname" value="" placeholder="Surname" required>
+						</div>
 					</div>
 
 					<div class="birthday">
-						Your birthday
-						<div>
-							<input type="text" id="userdate" name="userdate" value="" placeholder="date" required>
+						<p class="caption">Your birthday</p>
+						<div class="input-block">
+							<input type="text" id="userdate" class="userdate" name="userdate" value="" placeholder="date" required>
 						</div>
-						<div>
-							<input type="text" id="usermonth" name="usermonth" value="" placeholder="month" required>
+						<div class="input-block">
+							<input type="text" id="usermonth" class="usermonth" name="usermonth" value="" placeholder="month" required>
 						</div>
-						<div>
-							<input type="text" id="useryear" name="useryear" value="" placeholder="year" required>
+						<div class="input-block">
+							<input type="text" id="useryear" class="useryear" name="useryear" value="" placeholder="year" required>
 						</div>
 					</div>
 				</fieldset>
 
-				<fieldset>
-					<div>
-						<input type="text" id="userinterests" name="userinterests" value="" placeholder="Interests" required>
+				<fieldset class="">
+					<p class="caption">More details</p>
+					<div class="input-block">
+						<input type="text" id="userinterests" name="userinterests" value="" placeholder="Your Interests (separated by commas)" required>
 					</div>
-					<div>
+					<div class="input-block">
 						<input type="text" id="userposition" name="userposition" value="" placeholder="Position" required>
 					</div>
 				</fieldset>
 				<input type="submit" value="Update">
 			</form>
-
-            <div class='container'>
-                <p>
-                    Select File: <input type='file' id='_file'> <input type='button' id='_submit' value='Upload!'>
-                </p>
-                <div class='progress_outer'>
-                    <div id='_progress' class='progress'></div>
-                </div>
-            </div>
-            <script>var _submit = document.getElementById('_submit'),
-                    _file = document.getElementById('_file'),
-                    _progress = document.getElementById('_progress');
-
-            var upload = function(){
-
-                if(_file.files.length === 0 ){
-                    return;
-                }
-
-                if(_file.files[0].size >5242880){
-                    alert("File is too large")
-                    return;
-                }
-
-
-                var data = new FormData();
-                data.append('file', _file.files[0]);
-
-                var request = new XMLHttpRequest();
-                request.onreadystatechange = function(){
-                    if(request.readyState == 4){
-                        try {
-                            var resp = JSON.parse(request.response);
-                        } catch (e){
-                            var resp = {
-                                status: 'error',
-                                data: 'Unknown error occurred: [' + request.responseText + ']'
-                            };
-                        }
-                        console.log(resp.status + ': ' + resp.data);
-                    }
-                };
-
-                request.upload.addEventListener('progress', function(e){
-                    _progress.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
-                }, false);
-
-                request.open('POST', '/sn/edit/setAvatar');
-                request.send(data);
-
-            };
-
-            _submit.addEventListener('click', upload);
-            </script>
 
 		</div>
 	</div>

@@ -1,0 +1,63 @@
+.user-edit{
+	fieldset{
+		border-bottom: 1px solid $border-color;
+		@include box-sizing(border-box);
+		padding: 20px 0;
+	}
+	.name{
+		.input-block{
+			width: 49%;
+			margin-right: 2%;
+			float: left;
+			&:last-child{
+				margin-right: 0;
+			}
+		}
+	}
+
+	.birthday{
+		margin-top: 20px;
+		.input-block{
+			display: inline-block;
+		}
+		.userdate{
+			width: 100px;
+		}
+		.usermonth{
+			width: 100px;
+		}
+		.useryear{
+			width: 200px;
+		}
+		margin-top: 30px;
+		input{
+			display: inline-block;
+		}
+	}
+
+	input[type="text"],
+	input[type="password"],
+	input[type="email"]{
+		font-size: 18px;
+		border: 1px solid $border-color;
+		padding: 10px 15px;
+		margin-top: 10px;
+		@include box-sizing(border-box);
+		width: 100%;
+		color: #333;
+		&:focus{
+			border: 1px solid $focus-color;
+			box-shadow: 0 0 3px rgba($focus-color, .5);
+		}
+	}
+
+	.caption{
+		font-size: 16px;
+	}
+
+	input[type="submit"]{
+		@extend .main-button;
+		margin-top: 20px;
+		float: right;
+	}
+}

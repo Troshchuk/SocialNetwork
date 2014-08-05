@@ -81,9 +81,13 @@ jQuery(function ($) {
     });
 
 
-    $('#wall-submit').on('click', function (event) {
+
+
+    $('.wall-post-submit').on('click', function (event) {
+        var thisEl = $(this);
         event.preventDefault();
-        var msg = $('#wall-message').val();
+        var msg = thisEl.parent('form').find('textarea').val();
+        // var msg = $('.form-text-area').val();
         if (msg == '') return;
         $.post('/sn/user' + getUserId() + '/createPost', {msg: msg}, function (response) {
             if (response.status == true) {
@@ -92,15 +96,50 @@ jQuery(function ($) {
         });
     });
 
-    $('#wall-message').on('change keyup', function () {
-        if ($('#wall-message').val() == '') {
-            $('#wall-submit').addClass('inactive');
-        } else {
-            $('#wall-submit').removeClass('inactive');
+
+    $('.private-message-submit').click(function(event){
+        event.preventDefault();
+        var thisEl = $(this);
+        var btn = thisEl.parent('form').find('[type="submit"]');
+        var msg = thisEl.parent('form').find('textarea');
+        if( msg.val() != '') {
+            sendPrivateMessage( msg.val() );
+            msg.val('');
+            btn.addClass('button-inactive');
         }
     });
 
 
+    $('.form-text-area').on('change keyup', function () {
+        var thisEl = $(this);
+        var button = thisEl.parent('form').find('[type="submit"]');
+        if ( thisEl.val() == '') {
+            button.addClass('button-inactive');
+        } else {
+            button.removeClass('button-inactive');
+        }
+    });
+
+
+    $('.change-user-pic').click(function(){
+        $(this).hide();
+        $('.upload-user-pic').show();
+    });
+
+
+
+    $('.expand-message-form p').click(function(){
+        var thisEl = $(this);
+        var form = thisEl.parent().find('form');
+        var btn = thisEl.parent().find('button[type="submit"]');
+        thisEl.addClass('unbutton');
+        setTimeout(function(){
+            form.fadeIn();
+            setTimeout(function(){
+                btn.fadeIn();
+            },600);
+        }, 400);
+    });
 
 
 
@@ -108,8 +147,22 @@ jQuery(function ($) {
 // ============ HELPERS =========
 
 
+    function isPageEnd() {
+        var offset = $('.main-footer').scrollTop();
+        var wHeight = $(window).height();
+        if( offset < wHeight ) return true;
+        return false;
+    };
 
-    function decorateFollow(){
+
+    function rotateY(el) {
+        el.addClass('rotateY add-transition');
+        setTimeout(function(){
+            el.removeClass('rotateY add-transition');
+        },500);
+    }
+
+    function nameFollow(){
         setTimeout(function(){
             $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
                 if(response.isFollowing) {
@@ -118,7 +171,7 @@ jQuery(function ($) {
                     $('.follow').text('Follow');
                 }
             });
-        }, 1000);
+        }, 500);
     }
 
     function handleFollower() {
@@ -126,26 +179,19 @@ jQuery(function ($) {
         $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
             logger.log( response.isFollowing );
             if ( response.isFollowing ) {
-                logger.log('do delete');
                 $.post('/sn/user'+ getUserId()+ '/delete', {}, function(response){
-                    logger.log('do delete '+id);
                     if (response.status == true) {
-                        // location.reload();
-                        logger.log('done');
                     }
                 });
             } else {
-                logger.log('do add');
                 $.post('/sn/user'+ getUserId()+ '/add', {}, function(response){
-                    logger.log('do add '+id);
                     if (response.status == true) {
-                        // location.reload();
-                        logger.log('done');
                     }
                 });
             }
         });
-        decorateFollow();
+        nameFollow();
+        rotateY($('.follow'));
     };
 
 
@@ -199,17 +245,6 @@ jQuery(function ($) {
 
         });
     };
-    // sendPrivateMessage();
-
-    $('.submit-submit').click(function(event){
-        event.preventDefault();
-        var mesage = $('.message-message').val();
-        $('.message-message').val('');
-        sendPrivateMessage(mesage);
-    });
-
-
-
 
 
 
@@ -232,12 +267,13 @@ jQuery(function ($) {
         var ava = new Image();
 
         if ( isSelfPage() ){
-            $('.new-private-message').hide();
+            $('.private-message-form').hide();
             $('.follow').hide();
         }
 
         if ( ! isSelfPage() ){
             $('.new-wall-post').hide();
+            $('.change-user-pic').hide();
         }
 
 
@@ -318,14 +354,14 @@ jQuery(function ($) {
         // }, 5000);
 
 
-        $('.follow').text( decorateFollow() );
+        $('.follow').text( nameFollow() );
 
         $('.follow').click(function(event){
             event.stopPropagation();
             handleFollower();
         });
 
-        decorateFollow();
+        nameFollow();
     }
 
 

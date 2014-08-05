@@ -1,12 +1,76 @@
 .user{
 	margin-bottom: 30px;
+	.user-aside{
+		width: 200px;
+		float: left;
+	}
 	.user-image{
 		border: 1px solid $border-color;
 		@include box-sizing(border-box);
 		padding: 4px;
-		width: 200px;
-		float: left;
-		.change-user-photo{
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 10px;
+		.change-user-pic{
+			display: inline-block;
+			padding: 2px 5px;
+			margin: 0 0 10px 10px;
+			position: absolute;
+			bottom: -40px;
+			color: rgba(#999, .8);
+			background: rgba(#999, .1);
+			font-weight: bold;
+			border: 1px solid rgba(#999, .8) ;
+			@include border-radius(5px); 
+			cursor: pointer;
+			opacity: 0;
+			@include transition(bottom 0.4s, opacity 0.2s);
+			&:hover{
+				box-shadow: 0 0 5px rgba($btn-bg, .7);
+			}
+		}
+		&:hover{
+			.change-user-pic{
+				bottom: 0;
+				opacity: 1;
+			}
+		}
+		.upload-user-pic{
+			display: none;
+			position: absolute;
+			bottom: 0;
+		}
+	}
+
+	.upload-user-pic{
+		margin: 0 0 10px 10px;
+		input{
+			display: none;
+		}
+		label{
+			display: inline-block;
+			height: 30px;
+			color: rgba(#999, .8);
+			background: rgba(#999, .1);
+			border: 1px solid rgba(#999, .8);
+			@include border-radius(5px); 
+			font-weight: bold;
+			text-align: center;
+			cursor: pointer;
+			line-height: 30px;
+			vertical-align: top;
+			&.file{
+				font-size: 30px;
+				width: 30px;
+			}
+			&.submit{
+				padding: 0 5px;
+				width: auto;
+
+			}
+			&:hover{
+				box-shadow: 0 0 5px rgba($btn-bg, .7);
+			}
 		}
 	}
 
@@ -22,7 +86,10 @@
 	}
 	.position{}
 
-	.unfollow,
+	.follow-combo{
+		position: relative;
+	}
+
 	.follow{
 		display: block;
 		padding: 5px;
@@ -32,6 +99,35 @@
 		cursor: pointer;
 		&:hover{
 			background: $btn-bg-active;
+		}
+	}
+
+	.expand-message-form{
+		p{
+			@extend .main-button;
+			display: inline-block;
+			@include transition(padding 0.7s);
+		}
+		margin-top: 30px;
+		form{
+			display: none;
+		}
+		textarea{
+			border: 1px solid $border-color;
+			resize: none;
+			min-height: 80px;
+			padding: 10px;
+			width: 100%;
+			@include box-sizing(border-box);
+			font-size: 14px;
+			&:focus{
+				border-color: $btn-bg;
+				box-shadow: 0 0 4px rgba($btn-bg, .6);
+			}
+		}
+		button[type="submit"]{
+			display: none;
+			@extend .main-button;
 		}
 	}
 }

@@ -2,7 +2,7 @@
 	width: 500px;
 	margin: auto;
 	.user-entry{
-		border-bottom: 1px solid #777;
+		border-bottom: 1px solid $border-color;
 		padding: 20px 10px;
 		margin-bottom: 10px;
 		@include box-sizing(border-box);
@@ -11,7 +11,7 @@
 		float: left;
 	}
 	.textual{
-		margin-left: 60px;
+		margin-left: 100px;
 	}
 	.user-name span,
 	.user-department span,

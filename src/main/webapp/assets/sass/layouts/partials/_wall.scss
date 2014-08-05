@@ -3,7 +3,41 @@
 		background: $wall-header-bg;
 		padding: 5px 20px;
 		color: #fff;
-		margin-bottom: 10px;
+		margin-bottom: 25px;
 	}
 	
+
+	.new-wall-post{
+		padding: 10px 20px;
+		margin-bottom: 20px;
+		border: 1px solid $border-color;
+		border-left: none;
+		border-right: none;
+		@include box-sizing(border-box);
+		background: $wall-new-post-bg;
+		p{
+			@extend .main-button;
+			@include transition(padding 0.7s);
+			float: right;
+			// margin-right: auto;
+			// margin-left: 100%; 
+		}
+		form,
+		[type="submit"]{
+			display: none;
+		}
+		textarea{
+			font-size: 14px;
+			border: 1px solid $border-color;
+			width: 100%;
+			@include box-sizing(border-box);
+			padding: 5px 5px;
+			resize: none;
+			min-height: 70px;
+		}
+		.wall-post-submit{
+			float: right;
+			@extend .main-button;
+		}
+	}
 }
