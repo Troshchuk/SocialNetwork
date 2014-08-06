@@ -4,6 +4,7 @@ package com.bionic.socialNetwork.rest;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.logic.CreateGroupLogic;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -16,28 +17,18 @@ import java.io.InputStream;
  */
 
 //not finished
-@Path("user{id}/newGroup")
+@Path("newGroup")
 public class CreateGroupController {
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes("application/x-www-form-urlencoded")
-    public InputStream createGroup(@Context ServletContext context) {
-
-        return context.getResourceAsStream("/Web-INF/pages/newGroup.html");
-
-    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes("application/x-www-form-urlencoded")
-    @Path("confirmCreating")
     public String confirmCreating(@FormParam("name") String name,
                                   @FormParam("description") String description,
-                                  @PathParam("id") long id) {
-
+                                  @Context HttpServletRequest request) {
+        long userId = (Long)request.getAttribute("userId");
         CreateGroupLogic createGroup =
-                new CreateGroupLogic(name, description, id);
+                new CreateGroupLogic(name, description, userId);
         return createGroup.getResponse();
     }
 
