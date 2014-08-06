@@ -372,7 +372,7 @@ a img.aligncenter {
 }
 
 /* line 1, ../sass/components/_inputs.scss */
-.button, .main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .user-edit input[type="submit"], header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
+.button, .main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"], header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
   border: 1px solid #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -395,7 +395,7 @@ a img.aligncenter {
   display: inline-block;
 }
 /* line 13, ../sass/components/_inputs.scss */
-.button:hover, .main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .user-edit input[type="submit"]:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
+.button:hover, .main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
   background: transparent;
   color: #fff;
 }
@@ -428,18 +428,24 @@ h1 {
 }
 
 /* line 38, ../sass/_base.scss */
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* line 43, ../sass/_base.scss */
 textarea {
   font-family: "Open Sans", Verdana, Arial, sans-serif;
   font-size: 12px;
 }
 
-/* line 43, ../sass/_base.scss */
+/* line 48, ../sass/_base.scss */
 img {
   width: 100%;
   display: block;
 }
 
-/* line 48, ../sass/_base.scss */
+/* line 53, ../sass/_base.scss */
 a {
   color: #004a58;
   text-decoration: none;
@@ -448,31 +454,31 @@ a {
   -o-transition: color 0.3s;
   transition: color 0.3s;
 }
-/* line 52, ../sass/_base.scss */
+/* line 57, ../sass/_base.scss */
 a:hover {
   color: #00aac8;
 }
 
-/* line 57, ../sass/_base.scss */
+/* line 62, ../sass/_base.scss */
 .wraper {
   width: 960px;
   margin: auto;
   padding: 0 20px;
 }
 
-/* line 63, ../sass/_base.scss */
+/* line 68, ../sass/_base.scss */
 #aside {
   width: 25%;
   float: left;
 }
 
-/* line 68, ../sass/_base.scss */
+/* line 73, ../sass/_base.scss */
 #content {
   width: 75%;
   float: left;
 }
 
-/* line 74, ../sass/_base.scss */
+/* line 79, ../sass/_base.scss */
 .title {
   font-size: 50px;
   text-align: center;
@@ -480,11 +486,11 @@ a:hover {
   display: block;
   position: relative;
 }
-/* line 80, ../sass/_base.scss */
+/* line 85, ../sass/_base.scss */
 .title.decorated {
   padding-bottom: 60px;
 }
-/* line 82, ../sass/_base.scss */
+/* line 87, ../sass/_base.scss */
 .title.decorated:after {
   content: '';
   position: absolute;
@@ -497,20 +503,20 @@ a:hover {
   text-align: center;
 }
 
-/* line 97, ../sass/_base.scss */
+/* line 102, ../sass/_base.scss */
 .wait {
   text-align: center;
   clear: both;
   display: block;
   padding-top: 20px;
 }
-/* line 102, ../sass/_base.scss */
+/* line 107, ../sass/_base.scss */
 .wait img {
   width: auto;
   margin: auto;
 }
 
-/* line 111, ../sass/_base.scss */
+/* line 116, ../sass/_base.scss */
 .post-photo {
   width: 80px;
   max-height: 100px;
@@ -518,14 +524,14 @@ a:hover {
   border: 1px solid #cccccc;
   overflow: hidden;
 }
-/* line 117, ../sass/_base.scss */
+/* line 122, ../sass/_base.scss */
 .post-photo img {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 119, ../sass/_base.scss */
+/* line 124, ../sass/_base.scss */
 .post-photo img:hover {
   -webkit-transform: scale(1.2, 1.2);
   -moz-transform: scale(1.2, 1.2);
@@ -534,13 +540,13 @@ a:hover {
   transform: scale(1.2, 1.2);
 }
 
-/* line 125, ../sass/_base.scss */
+/* line 130, ../sass/_base.scss */
 .post-meta {
   font-size: 10px;
   color: #999999;
 }
 
-/* line 130, ../sass/_base.scss */
+/* line 135, ../sass/_base.scss */
 .tab {
   display: inline-block;
   padding: 5px 20px;
@@ -548,15 +554,15 @@ a:hover {
   color: #00aac8;
   border: 1px solid #00aac8;
 }
-/* line 136, ../sass/_base.scss */
+/* line 141, ../sass/_base.scss */
 .tab.active {
   background: #00aac8;
   color: white;
   border: 1px solid #00aac8;
 }
 
-/* line 143, ../sass/_base.scss */
-.main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .user-edit input[type="submit"] {
+/* line 148, ../sass/_base.scss */
+.main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"] {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
@@ -565,27 +571,27 @@ a:hover {
   background: #008ab8;
   color: white;
 }
-/* line 148, ../sass/_base.scss */
-.main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .user-edit input[type="submit"]:hover {
+/* line 153, ../sass/_base.scss */
+.main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover {
   background: #004a78;
 }
-/* line 151, ../sass/_base.scss */
-.main-button:active, .user .expand-message-form p:active, .user .expand-message-form button[type="submit"]:active, .wall .new-wall-post p:active, .wall .new-wall-post .wall-post-submit:active, .user-edit input[type="submit"]:active {
+/* line 156, ../sass/_base.scss */
+.main-button:active, .user .expand-message-form p:active, .user .expand-message-form button[type="submit"]:active, .wall .new-wall-post p:active, .wall .new-wall-post .wall-post-submit:active, .group .expand-message-form p:active, .group .expand-message-form button[type="submit"]:active, .user-edit input[type="submit"]:active {
   background: #002a58;
 }
 
 /*Added by JS*/
-/* line 158, ../sass/_base.scss */
+/* line 163, ../sass/_base.scss */
 .button-inactive {
   background: #999999 !important;
   cursor: default !important;
 }
-/* line 161, ../sass/_base.scss */
+/* line 166, ../sass/_base.scss */
 .button-inactive:hover {
   background: #999999 !important;
 }
 
-/* line 167, ../sass/_base.scss */
+/* line 172, ../sass/_base.scss */
 .unbutton {
   background: transparent !important;
   border-color: transparent !important;
@@ -595,7 +601,7 @@ a:hover {
   float: none !important;
 }
 
-/* line 176, ../sass/_base.scss */
+/* line 181, ../sass/_base.scss */
 .rotateY {
   -webkit-transform: rotateX(360deg);
   -moz-transform: rotateX(360deg);
@@ -604,12 +610,18 @@ a:hover {
   transform: rotateX(360deg);
 }
 
-/* line 180, ../sass/_base.scss */
+/* line 185, ../sass/_base.scss */
 .add-transition {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+/* line 189, ../sass/_base.scss */
+.input-error {
+  border-color: #ff3333 !important;
+  box-shadow: 0 0 4px rgba(255, 51, 51, 0.6) !important;
 }
 
 /* line 1, ../sass/layouts/partials/_header.scss */
@@ -1298,6 +1310,24 @@ footer.main-footer .copyright {
 }
 
 /* line 2, ../sass/layouts/partials/_groups.scss */
+.groups .tab-content.group-create {
+  display: none;
+}
+/* line 6, ../sass/layouts/partials/_groups.scss */
+.groups .groups-wrap {
+  border-top: 1px solid #00aac8;
+  padding: 10px 20px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 12, ../sass/layouts/partials/_groups.scss */
+.groups .tab {
+  margin-bottom: -1px;
+  margin-left: 10px;
+}
+
+/* line 24, ../sass/layouts/partials/_groups.scss */
 .group .primary {
   width: 70%;
   margin-right: 30%;
@@ -1306,37 +1336,69 @@ footer.main-footer .copyright {
   box-sizing: border-box;
   padding: 0 20px;
 }
-/* line 8, ../sass/layouts/partials/_groups.scss */
+/* line 30, ../sass/layouts/partials/_groups.scss */
 .group .secondary {
   width: 30%;
   float: right;
 }
-/* line 12, ../sass/layouts/partials/_groups.scss */
+/* line 34, ../sass/layouts/partials/_groups.scss */
 .group h1 {
   font-size: 32px;
   margin-bottom: 10px;
 }
-/* line 16, ../sass/layouts/partials/_groups.scss */
-.group .description {
+/* line 38, ../sass/layouts/partials/_groups.scss */
+.group .group-description {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-/* line 21, ../sass/layouts/partials/_groups.scss */
+/* line 43, ../sass/layouts/partials/_groups.scss */
 .group .details {
   margin-bottom: 10px;
 }
-/* line 24, ../sass/layouts/partials/_groups.scss */
+/* line 46, ../sass/layouts/partials/_groups.scss */
 .group .members-quantity {
   padding: 10px 0;
   font-weight: bold;
   color: #004a78;
 }
-/* line 30, ../sass/layouts/partials/_groups.scss */
+/* line 53, ../sass/layouts/partials/_groups.scss */
+.group .expand-message-form p {
+  display: inline-block;
+  -webkit-transition: padding 0.7s;
+  -moz-transition: padding 0.7s;
+  -o-transition: padding 0.7s;
+  transition: padding 0.7s;
+}
+/* line 58, ../sass/layouts/partials/_groups.scss */
+.group .expand-message-form form {
+  display: none;
+}
+/* line 61, ../sass/layouts/partials/_groups.scss */
+.group .expand-message-form textarea {
+  border: 1px solid #cccccc;
+  resize: none;
+  min-height: 80px;
+  padding: 10px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+/* line 70, ../sass/layouts/partials/_groups.scss */
+.group .expand-message-form button[type="submit"] {
+  display: none;
+}
+/* line 76, ../sass/layouts/partials/_groups.scss */
+.group .post {
+  margin-top: 30px;
+}
+/* line 80, ../sass/layouts/partials/_groups.scss */
 .group .post-message {
   margin-left: 100px;
 }
-/* line 33, ../sass/layouts/partials/_groups.scss */
+/* line 83, ../sass/layouts/partials/_groups.scss */
 .group .post-name {
   font-weight: bold;
 }
@@ -1365,7 +1427,7 @@ footer.main-footer .copyright {
   margin-left: 10px;
 }
 /* line 19, ../sass/layouts/partials/_message.scss */
-.messages .messages-tab-content.sent {
+.messages .tab-content.sent {
   display: none;
 }
 /* line 23, ../sass/layouts/partials/_message.scss */

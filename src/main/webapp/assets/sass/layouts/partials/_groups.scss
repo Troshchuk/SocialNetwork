@@ -1,3 +1,25 @@
+.groups{
+	.tab-content.group-create{
+		display: none;
+	}
+
+	.groups-wrap{
+		border-top: 1px solid $tab-bg-active;
+		padding: 10px 20px 0;
+		@include box-sizing(border-box);
+	}
+
+	.tab{
+		margin-bottom: -1px;
+		margin-left: 10px;
+	}
+}
+
+
+
+
+
+
 .group{
 	.primary{
 		width: 70%;
@@ -13,7 +35,7 @@
 		font-size: 32px;
 		margin-bottom: 10px;
 	}
-	.description{
+	.group-description{
 		font-size: 16px;
 		font-weight: bold;
 		margin-bottom: 10px;
@@ -25,6 +47,34 @@
 		padding: 10px 0;
 		font-weight: bold;
 		color: $main-color;
+	}
+
+	.expand-message-form{
+		p{
+			@extend .main-button;
+			display: inline-block;
+			@include transition(padding 0.7s);
+		}
+		form{
+			display: none;
+		}
+		textarea{
+			border: 1px solid $border-color;
+			resize: none;
+			min-height: 80px;
+			padding: 10px;
+			width: 100%;
+			@include box-sizing(border-box);
+			font-size: 14px;
+		}
+		button[type="submit"]{
+			display: none;
+			@extend .main-button;
+		}
+	}
+
+	.post{
+		margin-top: 30px;
 	}
 
 	.post-message{

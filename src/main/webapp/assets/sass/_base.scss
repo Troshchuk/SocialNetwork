@@ -35,6 +35,11 @@ h1{
 	margin-bottom: 10px;
 }
 
+h2{
+	font-size: 20px;
+	margin-bottom: 10px;	
+}
+
 textarea{
 	font-family: $base-font-family;
 	font-size: 12px;
@@ -179,4 +184,9 @@ a{
 	
 .add-transition{
 	@include transition(all .5s);	
+}
+
+.input-error{
+	border-color: $error-color!important;
+	box-shadow: 0 0 4px rgba($error-color, .6)!important;
 }

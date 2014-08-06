@@ -61,14 +61,14 @@ jQuery(function ($) {
     });
 
 
-    $('.messages-tab').click(function (event) {
+    $('.tab').click(function (event) {
         event.preventDefault();
         var tab = $(this);
-        $('.messages-tab').removeClass('active')
+        $('.tab').removeClass('active')
         tab.addClass('active')
 
         var id = tab.attr('href');
-        $('.messages-tab-content').hide();
+        $('.tab-content').hide();
         $(id).fadeIn();
     });
 
@@ -87,11 +87,24 @@ jQuery(function ($) {
         var thisEl = $(this);
         event.preventDefault();
         var msg = thisEl.parent('form').find('textarea').val();
-        // var msg = $('.form-text-area').val();
         if (msg == '') return;
         $.post('/sn/user' + getUserId() + '/createPost', {msg: msg}, function (response) {
             if (response.status == true) {
                 location.reload();
+            }
+        });
+    });
+
+
+    $('.group-message-submit').on('click', function (event) {
+        var thisEl = $(this);
+        event.preventDefault();
+        var msg = thisEl.parent('form').find('textarea').val();
+        if (msg == '') return;
+        logger.log(msg);
+        $.post('/sn/group' + getGroupId() + '/createPost', {msg: msg}, function (response) {
+            if (response.status == true) {
+                // location.reload();
             }
         });
     });
@@ -228,6 +241,18 @@ jQuery(function ($) {
         return id;
     }
 
+    function getGroupId() {
+        var url = window.location.href;
+        var pos = url.indexOf('group');
+        // if (pos == -1) {
+            // var id = $.cookie("userId");
+            // return id;
+        // }
+        var id = url.slice(pos + 5);
+        return id;
+    }
+
+
     function removePost(id) {
         $.post('/sn/user' + getUserId() + '/deletePost', {postId: id}, function (response) {
             if (response.status == true) {
@@ -249,6 +274,11 @@ jQuery(function ($) {
 
 
 
+    function createGroup(name, descr, userId) {
+        $.post('/sn/newGroup', {name:name, description:descr }, function (json) {
+
+        });
+    }
 
 
 
@@ -491,12 +521,109 @@ jQuery(function ($) {
     };
 
 
-    function setupGroupPage() {
-        logger.log('Setup Group');
-        $.getJSON('/sn/groups0', {}, function (json) {
 
+    function setupGroupListPage() {
+        logger.log('Setup GroupList');
+        // $.get('/sn/groups0', {}, function (json) {
+        //     var list = '<ul>';
+        //     for (var i = 0; i < json.users.length; i++) {
+        //         list += '<li class="user-entry clearfix">';
+        //         list += '<div class="post-photo">';
+        //         list += '<a href="/sn/user'+ json.users[i].id +'">';
+        //         list += '<img src="/sn/user' + json.users[i].id + '/getAvatar" >';
+        //         list += '</a>';
+        //         list += '</div>';
+        //         list += '<div class="textual">';
+        //         list += '<div class="user-name"><a href="/sn/user' + json.users[i].id + '"><span></span>' + json.users[i].name + ' ' + json.users[i].surname + '</a></div>';
+        //         list += '<div class="user-position"><span>Position </span>' + json.users[i].position + '</div>';
+        //         list += '</li>';
+        //     };
+        //     list += '</ul>';
+        //     $('#group-list').append($(list));
+        // });
+
+
+
+        $('.create-group').click(function(event){
+            event.preventDefault();
+            var thisEl = $(this);
+            var id = getUserId();
+            var name = thisEl.parent().find('#group-name');
+            var descr = thisEl.parent().find('textarea');
+            name.removeClass('input-error');
+            descr.removeClass('input-error');
+            if (name.val() == '') {
+                name.addClass('input-error');
+                return;
+            }
+            if (descr.val() == '') {
+                descr.addClass('input-error');
+                return;
+            }
+
+            createGroup(name.val(), descr.val(), id);
+            name.val('');
+            descr.val('');
         });
     };
+
+
+
+    function setupGroupPage() {
+        var haveMorePages = true;
+        var page = 0;
+        logger.log('Setup Group');
+
+        $.get('/sn/group'+ getGroupId() +'/description', {}, function (json) {
+            logger.log(json);
+            if (json != 'undefined') {
+                if (json.name != 'undefined') {
+                    $('#group-name').text(json.name);
+                }
+                if (json.description != 'undefined') {
+                    $('#group-description').text(json.description);
+                }
+            }
+        });
+
+
+        function _loadGroupPosts() {
+            $.getJSON('/sn/user' + getUserId() + '/posts' + page, {}, function (json) {
+                _makeupGroupPosts(json);
+            });
+            page++;
+        };
+
+
+        function _makeupGroupPosts(json) {
+            for (var i = 0; i < json.posts.length; i++) {
+                var node = '<div class="post" id="' + json.posts[i].postId + '">';
+                node += '<div class="post-photo">';
+                node += '<a href="#">';
+                node += '<img class="userPic">';
+                node += '</a>';
+                node += '</div>';
+                node += '<div class="post-message">';
+                node += '<p class="post-name"><a href="">' + fullname + '</a></p>';
+                node += '<span class="remove-post"></span>';
+                node += '<p>' + json.posts[i].post + '</p>';
+                node += '<span class="post-meta">' + formatDate(json.posts[i].time) + '</span>';
+                node += '</div>';
+                node += '</div>';
+                $('#primary').append(node);
+            };
+            $('.remove-post').on('click', function () {
+                var id = $(this).parents('.post').attr('id');
+                removePost(id);
+            });
+            var userPic = '/sn/user' + getUserId() + '/getAvatar';
+            $('.userPic').attr("src", userPic);
+        };
+
+        _loadGroupPosts();
+
+    };
+
 
 
     function setupUserEditPage() {
@@ -580,6 +707,10 @@ jQuery(function ($) {
             case 'followings':
                 logger.log('Followings-page detected');
                 setupFollowingsPage();
+                break;
+            case 'groups':
+                logger.log('Groups-page detected');
+                setupGroupListPage();
                 break;
             case 'group':
                 logger.log('Group-page detected');

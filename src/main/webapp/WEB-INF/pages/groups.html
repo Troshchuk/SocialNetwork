@@ -65,21 +65,25 @@
 		</aside>
 
 		<div id="content">
-			<div class="messages">
+			<div class="groups">
 				<h1>Groups</h1>
 				<a class="tab group-tab active" href="#group-list">Groups List</a>
 				<a class="tab group-tab" href="#group-create">New Group Creation</a>
 				<div class="groups-wrap">
-					<div id="inbox" class="inbox groups-tab-content">
-						
-
-						<!-- messages appended here -->
+					<div id="group-list" class="group-list tab-content">
+						list
+						<!-- groups appended here -->
 
 					</div>
 
-					<div id="sent" class="sent groups-tab-content">
+					<div id="group-create" class="group-create tab-content">
 
-						<!-- messages appended here -->
+						<form action="groups_submit" method="post" accept-charset="utf-8">
+							<h2>Create New Group</h2>
+							<input type="text" id="group-name" name="group-name" value="" placeholder="Enter Group mame">
+							<textarea name="group-description"></textarea>
+							<input type="submit" class="create-group" name="" value="Create Group">
+						</form>
 
 					</div>
 				</div>
