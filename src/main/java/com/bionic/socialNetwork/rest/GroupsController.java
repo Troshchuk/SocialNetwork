@@ -28,6 +28,7 @@ public class GroupsController {
         return context.getResourceAsStream("/WEB-INF/pages/groups.html");
     }
 
+    @GET
     @Path("{page}")
     public GroupList getGroups(@Context HttpServletRequest request,
                                @PathParam("page") int page) {

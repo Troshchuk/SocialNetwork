@@ -104,7 +104,7 @@ jQuery(function ($) {
         logger.log(msg);
         $.post('/sn/group' + getGroupId() + '/createPost', {msg: msg}, function (response) {
             if (response.status == true) {
-                // location.reload();
+                location.reload();
             }
         });
     });
@@ -209,13 +209,13 @@ jQuery(function ($) {
 
 
 
-
     function formatDate(msec) {
         var date = new Date(msec);
         var month = ( '0' + ( date.getMonth() + 1 ) ).slice(-2);
         var formated = 'at ' + date.getHours() + ':' + date.getMinutes() + ' on ' + date.getDate() + '.' + month + '.' + date.getFullYear();
         return formated;
     };
+
 
     function isSelfPage() {
         var url = window.location.href;
@@ -230,7 +230,10 @@ jQuery(function ($) {
     };
 
 
-    function getUserId() {
+    function getUserId(paramId) {
+        if( paramId != 'undefined' && !isNaN(paramId) ) {
+            return paramId;
+        }
         var url = window.location.href;
         var pos = url.indexOf('user');
         if (pos == -1) {
@@ -584,11 +587,12 @@ jQuery(function ($) {
                     $('#group-description').text(json.description);
                 }
             }
+
         });
 
 
         function _loadGroupPosts() {
-            $.getJSON('/sn/user' + getUserId() + '/posts' + page, {}, function (json) {
+            $.getJSON('/sn/group' + getGroupId() + '/posts' + page, {}, function (json) {
                 _makeupGroupPosts(json);
             });
             page++;
@@ -596,28 +600,29 @@ jQuery(function ($) {
 
 
         function _makeupGroupPosts(json) {
-            for (var i = 0; i < json.posts.length; i++) {
-                var node = '<div class="post" id="' + json.posts[i].postId + '">';
+            logger.log(json);
+            for (var i = 0; i < json.groupPosts.length; i++) {
+                var node = '<div class="post clearfix" id="' + json.groupPosts[i].groupPostId + '">';
                 node += '<div class="post-photo">';
-                node += '<a href="#">';
-                node += '<img class="userPic">';
+                node += '<a href="/sn/user'+ json.groupPosts[i].user.id +'">';
+                node += '<img class="userPic" src="/sn/user'+json.groupPosts[i].user.id+'/getAvatar">';
                 node += '</a>';
                 node += '</div>';
                 node += '<div class="post-message">';
-                node += '<p class="post-name"><a href="">' + fullname + '</a></p>';
+                node += '<p class="post-name"><a href="/sn/user'+ json.groupPosts[i].user.id +'">' + json.groupPosts[i].user.name + ' ' + json.groupPosts[i].user.surname + '</a></p>';
                 node += '<span class="remove-post"></span>';
-                node += '<p>' + json.posts[i].post + '</p>';
-                node += '<span class="post-meta">' + formatDate(json.posts[i].time) + '</span>';
+                node += '<p>' + json.groupPosts[i].post + '</p>';
+                node += '<span class="post-meta">' + formatDate(json.groupPosts[i].time) + '</span>';
                 node += '</div>';
                 node += '</div>';
-                $('#primary').append(node);
+                $('#group-posts-wrap').append(node);
+                
+
             };
             $('.remove-post').on('click', function () {
                 var id = $(this).parents('.post').attr('id');
                 removePost(id);
             });
-            var userPic = '/sn/user' + getUserId() + '/getAvatar';
-            $('.userPic').attr("src", userPic);
         };
 
         _loadGroupPosts();
@@ -744,3 +749,5 @@ jQuery(function ($) {
      });
      });*/
 });
+
+// 063 148 71 22
