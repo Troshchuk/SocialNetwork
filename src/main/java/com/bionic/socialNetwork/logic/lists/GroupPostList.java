@@ -31,7 +31,7 @@ public class GroupPostList {
         try {
             GroupPostDao groupPostDao = new GroupPostDaoImpl();
             Group group = new GroupDaoImpl().selectById(id);
-            groupPostDao.selectLastWith(group, page);
+            groupPosts = groupPostDao.selectLastWith(group, page);
             created = true;
         } catch (NullPointerException e) {
             created = false;
