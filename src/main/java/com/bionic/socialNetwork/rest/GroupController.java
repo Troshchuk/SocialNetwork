@@ -43,23 +43,23 @@ public class GroupController {
     }
 
     @POST
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("createPost")
-    public boolean createPost(@Context HttpServletRequest request,
+    public String createPost(@Context HttpServletRequest request,
                               @PathParam("id") long id,
                               @FormParam("msg") String msg) {
-        return new GroupLogic()
-                .createPost(id, (Long) request.getAttribute("id"), msg);
+        return "{\"status\": " + new GroupLogic()
+                .createPost(id, (Long) request.getAttribute("userId"), msg) + "}";
     }
 
     @POST
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("deletePost")
-    public boolean deletePost(@Context HttpServletRequest request,
+    public String deletePost(@Context HttpServletRequest request,
                               @PathParam("id") long id,
                               @FormParam("postId") long postId) {
-        return new GroupLogic()
-                .deletePost((Long) request.getAttribute("id"), postId);
+        return "{\"status\": " + new GroupLogic()
+                .deletePost((Long) request.getAttribute("userId"), postId) + "}";
     }
 
 
