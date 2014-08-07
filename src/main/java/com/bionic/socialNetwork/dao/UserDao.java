@@ -87,4 +87,8 @@ public interface UserDao {
 
     public List<User> selectByInterest(long interest, int page)
     throws Exception;
+
+    public void insertGroup(long userId, long groupId) throws Exception;
+
+    public void deleteGroup(long userId, long groupId) throws Exception;
 }

@@ -89,4 +89,24 @@ public class GroupLogic {
             return false;
         }
     }
+
+    public boolean follow(long userId, long groupId) {
+        try {
+            new UserDaoImpl().insertGroup(userId, groupId);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean unFollow(long userId, long groupId) {
+        try {
+            new UserDaoImpl().deleteGroup(userId, groupId);
+            return true;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return false;
+    }
 }

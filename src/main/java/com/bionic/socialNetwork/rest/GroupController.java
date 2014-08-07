@@ -62,5 +62,21 @@ public class GroupController {
                 .deletePost((Long) request.getAttribute("userId"), postId) + "}";
     }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("follow")
+    public String follow(@Context HttpServletRequest request,
+                             @PathParam("id") long id) {
+        return "{\"status\": " + new GroupLogic()
+                .follow((Long) request.getAttribute("userId"), id) + "}";
+    }
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("unfollow")
+    public String unFollow(@Context HttpServletRequest request,
+                         @PathParam("id") long id) {
+        return "{\"status\": " + new GroupLogic()
+                .unFollow((Long) request.getAttribute("userId"), id) + "}";
+    }
 }

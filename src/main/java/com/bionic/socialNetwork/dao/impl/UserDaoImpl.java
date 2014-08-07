@@ -277,4 +277,36 @@ public class UserDaoImpl implements UserDao {
         session.close();
         return list;
     }
+
+    @Override
+    public void insertGroup(long userId, long groupId) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        SQLQuery sqlQuery = session.createSQLQuery("INSERT INTO Users_Groups VALUES (:userId, :groupId);");
+        sqlQuery.setParameter("userId", userId);
+        sqlQuery.setParameter("groupId", groupId);
+        sqlQuery.executeUpdate();
+
+        session.getTransaction().commit();
+
+        session.close();
+    }
+
+    @Override
+    public void deleteGroup(long userId, long groupId) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        session.beginTransaction();
+
+        SQLQuery sqlQuery = session.createSQLQuery("DELETE FROM Users_Groups WHERE user_id = :userId AND group_id = :groupId;");
+        sqlQuery.setParameter("userId", userId);
+        sqlQuery.setParameter("groupId", groupId);
+        sqlQuery.executeUpdate();
+
+        session.getTransaction().commit();
+
+        session.close();
+    }
 }
