@@ -29,6 +29,7 @@ public class GroupsController {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("{page}")
     public GroupList getGroups(@Context HttpServletRequest request,
                                @PathParam("page") int page) {

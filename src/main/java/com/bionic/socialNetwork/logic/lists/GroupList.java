@@ -1,5 +1,6 @@
 package com.bionic.socialNetwork.logic.lists;
 
+import com.bionic.socialNetwork.dao.impl.GroupPostDaoImpl;
 import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
 import com.bionic.socialNetwork.models.Group;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +15,7 @@ import java.util.List;
  * @version 1.00  01.08.14.
  */
 public class GroupList {
-    private Collection<Group> groupPosts;
+    private Collection<Group> groups;
 
     @JsonIgnore
     private static final Logger LOGGER =
@@ -22,10 +23,13 @@ public class GroupList {
 
     public GroupList(long id, int page) {
         try {
-            List<Group> group =
-                    new UserDaoImpl().selectUserGroupsNext(id, page);
+            groups = new UserDaoImpl().selectUserGroupsNext(id, page);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    public Collection<Group> getGroups() {
+        return groups;
     }
 }

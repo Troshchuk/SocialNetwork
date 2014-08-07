@@ -23,37 +23,48 @@ public class EditUserProfileLogic {
                      String position, String interests, String day,
                      String month, String year) {
         try {
-            logic(userId, name, surname, position, interests, day, month, year);
-        }
-        catch (NullPointerException e) {
-            return false;
+            if(logic(userId, name, surname, position, interests, day, month, year)){
+                return true;
+            }else{
+                return false;
+            }
+
         }
         catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
 
-        return true;
+
     }
 
-    private void logic(long userId, String name, String surname,
+    private boolean logic(long userId, String name, String surname,
                        String position, String interests, String day,
                        String month, String year) throws Exception {
         UserDao userDao = new UserDaoImpl();
         User user = userDao.selectById(userId);
-        if (!name.equals("")) user.setName(name);
-        if (!surname.equals("")) user.setSurname(surname);
-        if (!position.equals("")) user.setPosition(position);
+
+        if (!name.equals("")&& !surname.equals("") && !position.equals("")) {
+            user.setName(name);
+            user.setSurname(surname);
+            user.setPosition(position);
+        }else{
+            return false;
+        }
 
         Date date = null;
         date = parseBirthday(day, month, year);
+
         if (date != null) {
             user.setBirthday(date);
+        }else{
+            return false;
         }
 
         userDao.update(user);
 
         editInterests(userId, interests);
+
+        return true;
     }
 
 
@@ -139,10 +150,11 @@ public class EditUserProfileLogic {
 
 
         if (intDay < 32 && intDay > 0 &&
-                intMonth < 12 && intMonth > 0 &&
+                intMonth <= 12 && intMonth > 0 &&
                 intYear > 1920 && intYear <2020) {
             //month -- because int sqlDate first month is 0
-            Calendar calendar = new GregorianCalendar(intYear, --intMonth, intDay);
+            intMonth--;
+            Calendar calendar = new GregorianCalendar(intYear, intMonth, intDay);
             Date date = new Date(calendar.getTimeInMillis());
             return date;
         } else {
