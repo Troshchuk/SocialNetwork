@@ -206,11 +206,13 @@ public class UserDaoImpl implements UserDao {
 
         Criteria criteria = session.createCriteria(Group.class);
         criteria.createAlias("followers", "followersAlias");
+        criteria.add(Restrictions.eq("followersAlias.id", id));
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
 
         List<Group> list = criteria.list();
+        System.out.println(list.size());
         session.close();
         return list;
     }
@@ -300,7 +302,7 @@ public class UserDaoImpl implements UserDao {
 
         session.beginTransaction();
 
-        SQLQuery sqlQuery = session.createSQLQuery("DELETE FROM Users_Groups WHERE user_id = :userId AND group_id = :groupId;");
+        SQLQuery sqlQuery = session.createSQLQuery("DELETE FROM Users_Groups WHERE user_id = :userId AND group_id = :groupId ;");
         sqlQuery.setParameter("userId", userId);
         sqlQuery.setParameter("groupId", groupId);
         sqlQuery.executeUpdate();
