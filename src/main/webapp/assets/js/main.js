@@ -471,6 +471,11 @@ jQuery(function ($) {
     function setupMessagesPage() {
         logger.log('Setup Messages');
 
+        function getSentMessages() {
+
+        };
+
+
         $.getJSON('/sn/pm/sent0', {}, function (json) {
             var node = '<ul>'
             for (var i = 0; i < json.privateMessages.length; i++) {
@@ -669,9 +674,7 @@ jQuery(function ($) {
                 list += '<div class="group-created-by"><span>Created by </span> <a href="/sn/user'+json.groups[i].author.id+'">' + json.groups[i].author.name + ' ' + json.groups[i].author.surname + '</div>';
                 list += '</li>';
                 if( json.groups.length < 10 ) {
-                    $('.more-group-list').click(function(){
-                        _getGroupList();
-                    });
+                    $('.more-group-list').hide();
                 }
             };
             list += '</ul>';
@@ -680,7 +683,9 @@ jQuery(function ($) {
 
         _getGroupList();
 
-
+        $('.more-group-list').click(function(){
+            _getGroupList();
+        });
 
 
         $('.create-group').click(function(event){
