@@ -2,9 +2,12 @@ package com.bionic.socialNetwork.dao.impl;
 
 import com.bionic.socialNetwork.dao.GroupDao;
 import com.bionic.socialNetwork.models.Group;
+import com.bionic.socialNetwork.models.User;
 import com.bionic.socialNetwork.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -44,9 +47,8 @@ public class GroupDaoImpl implements GroupDao {
             session.update(group);
 
             session.getTransaction().commit();
-        }
-        finally {
-            if (session!= null && session.isOpen()) {
+        } finally {
+            if (session != null && session.isOpen()) {
                 session.close();
             }
         }
@@ -76,5 +78,18 @@ public class GroupDaoImpl implements GroupDao {
         List<Group> list = criteria.list();
         session.close();
         return list;
+    }
+
+    @Override
+    public long selectCount(long groupId) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(User.class);
+        criteria.createAlias("groups", "groupsAlias");
+        criteria.add(Restrictions.eq("groupsAlias.groupId", groupId));
+        Long result = (Long) criteria.setProjection(Projections.rowCount())
+                                     .uniqueResult();
+        session.close();
+        return result;
     }
 }

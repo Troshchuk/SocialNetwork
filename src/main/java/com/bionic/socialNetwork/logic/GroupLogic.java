@@ -47,6 +47,15 @@ public class GroupLogic {
         }
     }
 
+    public long members(long groupId) {
+        try {
+            return groupDao.selectCount(groupId);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return 0;
+    }
+
     public boolean createPost(long id, long ts, String msg) {
         try {
             Group group = getGroup(id);

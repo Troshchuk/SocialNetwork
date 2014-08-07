@@ -89,4 +89,12 @@ public class GroupController {
                 .isFollowing((Long) request.getAttribute("userId"), id) +
                "}";
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("members")
+    public String members(@PathParam("id") long id) {
+        return "{\"members\": " + new GroupLogic()
+                .members(id) + "}";
+    }
 }

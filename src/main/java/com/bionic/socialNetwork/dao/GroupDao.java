@@ -19,4 +19,6 @@ public interface GroupDao {
 
     public List<Group> selectByGroupName(String groupName, int lot)
     throws Exception;
+
+    public long selectCount(long groupId) throws Exception;
 }
