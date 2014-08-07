@@ -372,7 +372,7 @@ a img.aligncenter {
 }
 
 /* line 1, ../sass/components/_inputs.scss */
-.button, .main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .groups .group-create input[type="submit"], .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"], header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
+.button, .main-button, .more-container .load-more, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .groups .group-create input[type="submit"], .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"], header.main-header .exit-btn, .login-section .btn-full, .login-section .btn-empty {
   border: 1px solid #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -395,7 +395,7 @@ a img.aligncenter {
   display: inline-block;
 }
 /* line 13, ../sass/components/_inputs.scss */
-.button:hover, .main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .groups .group-create input[type="submit"]:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
+.button:hover, .main-button:hover, .more-container .load-more:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .groups .group-create input[type="submit"]:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover, header.main-header .exit-btn:hover, .login-section .btn-full:hover, .login-section .btn-empty:hover {
   background: transparent;
   color: #fff;
 }
@@ -430,7 +430,7 @@ h1 {
 /* line 38, ../sass/_base.scss */
 h2 {
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 /* line 43, ../sass/_base.scss */
@@ -516,7 +516,14 @@ a:hover {
   margin: auto;
 }
 
-/* line 116, ../sass/_base.scss */
+/* line 113, ../sass/_base.scss */
+.more-container {
+  clear: both;
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* line 123, ../sass/_base.scss */
 .post-photo {
   width: 80px;
   max-height: 100px;
@@ -524,14 +531,14 @@ a:hover {
   border: 1px solid #cccccc;
   overflow: hidden;
 }
-/* line 122, ../sass/_base.scss */
+/* line 129, ../sass/_base.scss */
 .post-photo img {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 124, ../sass/_base.scss */
+/* line 131, ../sass/_base.scss */
 .post-photo img:hover {
   -webkit-transform: scale(1.2, 1.2);
   -moz-transform: scale(1.2, 1.2);
@@ -540,13 +547,13 @@ a:hover {
   transform: scale(1.2, 1.2);
 }
 
-/* line 130, ../sass/_base.scss */
+/* line 137, ../sass/_base.scss */
 .post-meta {
   font-size: 10px;
   color: #999999;
 }
 
-/* line 135, ../sass/_base.scss */
+/* line 142, ../sass/_base.scss */
 .tab {
   display: inline-block;
   padding: 5px 20px;
@@ -554,15 +561,15 @@ a:hover {
   color: #00aac8;
   border: 1px solid #00aac8;
 }
-/* line 141, ../sass/_base.scss */
+/* line 148, ../sass/_base.scss */
 .tab.active {
   background: #00aac8;
   color: white;
   border: 1px solid #00aac8;
 }
 
-/* line 148, ../sass/_base.scss */
-.main-button, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .groups .group-create input[type="submit"], .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"] {
+/* line 155, ../sass/_base.scss */
+.main-button, .more-container .load-more, .user .expand-message-form p, .user .expand-message-form button[type="submit"], .wall .new-wall-post p, .wall .new-wall-post .wall-post-submit, .groups .group-create input[type="submit"], .group .expand-message-form p, .group .expand-message-form button[type="submit"], .user-edit input[type="submit"] {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
@@ -571,27 +578,27 @@ a:hover {
   background: #008ab8;
   color: white;
 }
-/* line 153, ../sass/_base.scss */
-.main-button:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .groups .group-create input[type="submit"]:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover {
+/* line 160, ../sass/_base.scss */
+.main-button:hover, .more-container .load-more:hover, .user .expand-message-form p:hover, .user .expand-message-form button[type="submit"]:hover, .wall .new-wall-post p:hover, .wall .new-wall-post .wall-post-submit:hover, .groups .group-create input[type="submit"]:hover, .group .expand-message-form p:hover, .group .expand-message-form button[type="submit"]:hover, .user-edit input[type="submit"]:hover {
   background: #004a78;
 }
-/* line 156, ../sass/_base.scss */
-.main-button:active, .user .expand-message-form p:active, .user .expand-message-form button[type="submit"]:active, .wall .new-wall-post p:active, .wall .new-wall-post .wall-post-submit:active, .groups .group-create input[type="submit"]:active, .group .expand-message-form p:active, .group .expand-message-form button[type="submit"]:active, .user-edit input[type="submit"]:active {
+/* line 163, ../sass/_base.scss */
+.main-button:active, .more-container .load-more:active, .user .expand-message-form p:active, .user .expand-message-form button[type="submit"]:active, .wall .new-wall-post p:active, .wall .new-wall-post .wall-post-submit:active, .groups .group-create input[type="submit"]:active, .group .expand-message-form p:active, .group .expand-message-form button[type="submit"]:active, .user-edit input[type="submit"]:active {
   background: #002a58;
 }
 
 /*Added by JS*/
-/* line 163, ../sass/_base.scss */
+/* line 170, ../sass/_base.scss */
 .button-inactive {
   background: #999999 !important;
   cursor: default !important;
 }
-/* line 166, ../sass/_base.scss */
+/* line 173, ../sass/_base.scss */
 .button-inactive:hover {
   background: #999999 !important;
 }
 
-/* line 172, ../sass/_base.scss */
+/* line 179, ../sass/_base.scss */
 .unbutton {
   background: transparent !important;
   border-color: transparent !important;
@@ -601,7 +608,7 @@ a:hover {
   float: none !important;
 }
 
-/* line 181, ../sass/_base.scss */
+/* line 188, ../sass/_base.scss */
 .rotateY {
   -webkit-transform: rotateX(360deg);
   -moz-transform: rotateX(360deg);
@@ -610,7 +617,7 @@ a:hover {
   transform: rotateX(360deg);
 }
 
-/* line 185, ../sass/_base.scss */
+/* line 192, ../sass/_base.scss */
 .add-transition {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
@@ -618,7 +625,7 @@ a:hover {
   transition: all 0.5s;
 }
 
-/* line 189, ../sass/_base.scss */
+/* line 196, ../sass/_base.scss */
 .input-error {
   border-color: #ff3333 !important;
   box-shadow: 0 0 4px rgba(255, 51, 51, 0.6) !important;
@@ -1124,7 +1131,7 @@ footer.main-footer .copyright {
 }
 
 /* line 2, ../sass/layouts/partials/_wall.scss */
-.wall .wall-posts-quentity {
+.wall .wall-posts-quantity {
   background: #004a58;
   padding: 5px 20px;
   color: #fff;
@@ -1326,7 +1333,19 @@ footer.main-footer .copyright {
   margin-bottom: -1px;
   margin-left: 10px;
 }
-/* line 20, ../sass/layouts/partials/_groups.scss */
+/* line 17, ../sass/layouts/partials/_groups.scss */
+.groups .group-entry {
+  margin-bottom: 15px;
+}
+/* line 21, ../sass/layouts/partials/_groups.scss */
+.groups .group-name {
+  font-weight: bold;
+}
+/* line 24, ../sass/layouts/partials/_groups.scss */
+.groups .group-created-by {
+  font-weight: bold;
+}
+/* line 31, ../sass/layouts/partials/_groups.scss */
 .groups .group-create input[type="text"],
 .groups .group-create textarea {
   border: 1px solid #cccccc;
@@ -1337,12 +1356,12 @@ footer.main-footer .copyright {
   box-sizing: border-box;
   margin-bottom: 10px;
 }
-/* line 29, ../sass/layouts/partials/_groups.scss */
+/* line 40, ../sass/layouts/partials/_groups.scss */
 .groups .group-create textarea {
   resize: none;
 }
 
-/* line 45, ../sass/layouts/partials/_groups.scss */
+/* line 56, ../sass/layouts/partials/_groups.scss */
 .group .primary {
   width: 70%;
   margin-right: 30%;
@@ -1351,41 +1370,41 @@ footer.main-footer .copyright {
   box-sizing: border-box;
   padding: 0 20px;
 }
-/* line 51, ../sass/layouts/partials/_groups.scss */
+/* line 62, ../sass/layouts/partials/_groups.scss */
 .group .secondary {
   width: 30%;
   float: right;
 }
-/* line 55, ../sass/layouts/partials/_groups.scss */
+/* line 66, ../sass/layouts/partials/_groups.scss */
 .group h1 {
   font-size: 32px;
   margin-bottom: 10px;
 }
-/* line 59, ../sass/layouts/partials/_groups.scss */
+/* line 70, ../sass/layouts/partials/_groups.scss */
 .group .group-description {
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-/* line 64, ../sass/layouts/partials/_groups.scss */
+/* line 75, ../sass/layouts/partials/_groups.scss */
 .group .details {
   margin-bottom: 10px;
 }
-/* line 67, ../sass/layouts/partials/_groups.scss */
+/* line 78, ../sass/layouts/partials/_groups.scss */
 .group .members-quantity {
   padding: 10px 0;
   font-weight: bold;
   color: #004a78;
 }
-/* line 73, ../sass/layouts/partials/_groups.scss */
+/* line 84, ../sass/layouts/partials/_groups.scss */
 .group .created-by {
   margin-bottom: 20px;
 }
-/* line 75, ../sass/layouts/partials/_groups.scss */
+/* line 86, ../sass/layouts/partials/_groups.scss */
 .group .created-by span {
   font-weight: bold;
 }
-/* line 81, ../sass/layouts/partials/_groups.scss */
+/* line 92, ../sass/layouts/partials/_groups.scss */
 .group .subcsribe-group {
   display: block;
   padding: 5px;
@@ -1394,11 +1413,11 @@ footer.main-footer .copyright {
   color: white;
   cursor: pointer;
 }
-/* line 88, ../sass/layouts/partials/_groups.scss */
+/* line 99, ../sass/layouts/partials/_groups.scss */
 .group .subcsribe-group:hover {
   background: #002a58;
 }
-/* line 94, ../sass/layouts/partials/_groups.scss */
+/* line 105, ../sass/layouts/partials/_groups.scss */
 .group .expand-message-form p {
   display: inline-block;
   -webkit-transition: padding 0.7s;
@@ -1406,11 +1425,11 @@ footer.main-footer .copyright {
   -o-transition: padding 0.7s;
   transition: padding 0.7s;
 }
-/* line 99, ../sass/layouts/partials/_groups.scss */
+/* line 110, ../sass/layouts/partials/_groups.scss */
 .group .expand-message-form form {
   display: none;
 }
-/* line 102, ../sass/layouts/partials/_groups.scss */
+/* line 113, ../sass/layouts/partials/_groups.scss */
 .group .expand-message-form textarea {
   border: 1px solid #cccccc;
   resize: none;
@@ -1422,19 +1441,19 @@ footer.main-footer .copyright {
   box-sizing: border-box;
   font-size: 14px;
 }
-/* line 111, ../sass/layouts/partials/_groups.scss */
+/* line 122, ../sass/layouts/partials/_groups.scss */
 .group .expand-message-form button[type="submit"] {
   display: none;
 }
-/* line 117, ../sass/layouts/partials/_groups.scss */
+/* line 128, ../sass/layouts/partials/_groups.scss */
 .group .post {
   margin-top: 30px;
 }
-/* line 121, ../sass/layouts/partials/_groups.scss */
+/* line 132, ../sass/layouts/partials/_groups.scss */
 .group .post-message {
   margin-left: 100px;
 }
-/* line 124, ../sass/layouts/partials/_groups.scss */
+/* line 135, ../sass/layouts/partials/_groups.scss */
 .group .post-name {
   font-weight: bold;
 }

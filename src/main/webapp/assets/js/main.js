@@ -2,6 +2,9 @@ jQuery(function ($) {
     'use strict';
 
     var interestPage = 0;
+    var workersPage = 0;
+    var followersPage = 0;
+    var groupListPage = 0;
 
 
     $('#formlogin').validate({
@@ -434,6 +437,9 @@ jQuery(function ($) {
                 node += '</div>';
                 node += '</div>';
                 $('#wall').append(node);
+                if(json.posts.length < 10 ) {
+                    $('.more-wall-posts').hide();
+                }
             };
             $('.remove-post').on('click', function () {
                 var id = $(this).parents('.post').attr('id');
@@ -445,9 +451,10 @@ jQuery(function ($) {
 
         _loadWallPosts();
 
-        // setTimeout(function () {
-        //     _loadWallPosts();
-        // }, 5000);
+
+        $('.more-wall-posts').click(function(){
+            _loadWallPosts();
+        });
 
 
         $('.follow').text( nameFollow() );
@@ -519,7 +526,17 @@ jQuery(function ($) {
     function setupColleaguesPage() {
 
         logger.log('Setup Colleagues');
-        $.getJSON('/sn/workers/getWorkers0', {}, function (json) {
+
+
+        function _loadColleags() {
+            $.getJSON('/sn/workers/getWorkers' + workersPage, {}, function (json) {
+                _makeupColleags(json);
+            });
+            workersPage++;
+        };
+
+
+        function _makeupColleags(json) {
             var list = '<ul>';
             for (var i = 0; i < json.users.length; i++) {
                 list += '<li class="user-entry clearfix">';
@@ -532,10 +549,19 @@ jQuery(function ($) {
                 list += '<div class="user-name"><a href="/sn/user' + json.users[i].id + '"><span></span>' + json.users[i].name + ' ' + json.users[i].surname + '</a></div>';
                 list += '<div class="user-position"><span>Position </span>' + json.users[i].position + '</div>';
                 list += '</li>';
+                if( json.users.length < 10 ) {
+                    $('.more-workers').hide();
+                }
             };
             list += '</ul>';
             $('#listOfUsers').append($(list));
+        };
 
+        _loadColleags();
+
+
+        $('.more-workers').click(function(){
+            _loadColleags();
         });
     };
 
@@ -567,8 +593,18 @@ jQuery(function ($) {
 
     function setupFollowingsPage() {
         logger.log('Setup Followings');
-        $.getJSON('/sn/followings/getFollowings0', {}, function (json) {
-        var list = '<ul>';
+
+
+        function _loadFollowings() {
+           $.getJSON('/sn/followings/getFollowings' + followersPage, {}, function (json) {
+                _makeupFollowings(json);
+           });
+           followersPage++;
+        };
+
+
+        function _makeupFollowings(json) {
+            var list = '<ul>';
             for (var i = 0; i < json.followingUsers.length; i++) {
                 list += '<li class="user-entry clearfix">';
                 list += '<div class="post-photo">';
@@ -580,9 +616,18 @@ jQuery(function ($) {
                 list += '<div class="user-name"><a href="/sn/user' + json.followingUsers[i].id + '"><span></span>' + json.followingUsers[i].name + ' ' + json.followingUsers[i].surname + '</a></div>';
                 list += '<div class="user-position"><span>Position </span>' + json.followingUsers[i].position + '</div>';
                 list += '</li>';
+                if( json.followingUsers.length < 10 ) {
+                    $('.more-followings').hide();
+                }
             };
             list += '</ul>';
             $('#listOfUsers').append($(list));
+        }
+
+        _loadFollowings();
+
+        $('.more-followings').click(function(){
+            _loadFollowings();
         });
     };
 
@@ -590,23 +635,51 @@ jQuery(function ($) {
 
     function setupGroupListPage() {
         logger.log('Setup GroupList');
-        // $.get('/sn/groups0', {}, function (json) {
+        // $.get('/sn/groups/' + groupList, {}, function (json) {
         //     var list = '<ul>';
-        //     for (var i = 0; i < json.users.length; i++) {
-        //         list += '<li class="user-entry clearfix">';
-        //         list += '<div class="post-photo">';
-        //         list += '<a href="/sn/user'+ json.users[i].id +'">';
-        //         list += '<img src="/sn/user' + json.users[i].id + '/getAvatar" >';
-        //         list += '</a>';
-        //         list += '</div>';
+        //     for (var i = 0; i < json.groups.length; i++) {
+        //         list += '<li class="group-entry clearfix">';
         //         list += '<div class="textual">';
-        //         list += '<div class="user-name"><a href="/sn/user' + json.users[i].id + '"><span></span>' + json.users[i].name + ' ' + json.users[i].surname + '</a></div>';
-        //         list += '<div class="user-position"><span>Position </span>' + json.users[i].position + '</div>';
+        //         list += '<div class="group-name"><a href="/sn/group' + json.groups[i].groupId + '"><span></span>' + json.groups[i].name + '</a></div>';
+        //         list += '<div class="group-description"><span></span>' + json.groups[i].description + '</div>';
+        //         list += '<div class="group-created-by"><span>Created by </span> <a href="/sn/user'+json.groups[i].author.id+'">' + json.groups[i].author.name + ' ' + json.groups[i].author.surname + '</div>';
         //         list += '</li>';
         //     };
         //     list += '</ul>';
         //     $('#group-list').append($(list));
         // });
+
+
+
+        function _getGroupList() {
+            $.get('/sn/groups/' + groupListPage, {}, function (json) {
+                _makeupGroupList(json);
+            });
+            groupListPage++;
+        };
+
+
+        function _makeupGroupList(json) {
+            var list = '<ul>';
+            for (var i = 0; i < json.groups.length; i++) {
+                list += '<li class="group-entry clearfix">';
+                list += '<div class="textual">';
+                list += '<div class="group-name"><a href="/sn/group' + json.groups[i].groupId + '"><span></span>' + json.groups[i].name + '</a></div>';
+                list += '<div class="group-description"><span></span>' + json.groups[i].description + '</div>';
+                list += '<div class="group-created-by"><span>Created by </span> <a href="/sn/user'+json.groups[i].author.id+'">' + json.groups[i].author.name + ' ' + json.groups[i].author.surname + '</div>';
+                list += '</li>';
+                if( json.groups.length < 10 ) {
+                    $('.more-group-list').click(function(){
+                        _getGroupList();
+                    });
+                }
+            };
+            list += '</ul>';
+            $('.group-inner').append($(list));
+        };
+
+        _getGroupList();
+
 
 
 
@@ -670,6 +743,7 @@ jQuery(function ($) {
         function _makeupGroupPosts(json) {
             logger.log(json);
             for (var i = 0; i < json.groupPosts.length; i++) {
+                // if()
                 var node = '<div class="post clearfix" id="' + json.groupPosts[i].groupPostId + '">';
                 node += '<div class="post-photo">';
                 node += '<a href="/sn/user'+ json.groupPosts[i].user.id +'">';
@@ -819,3 +893,6 @@ jQuery(function ($) {
 });
 
 // 063 148 71 22
+
+
+

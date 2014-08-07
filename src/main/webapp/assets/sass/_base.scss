@@ -37,7 +37,7 @@ h1{
 
 h2{
 	font-size: 20px;
-	margin-bottom: 10px;	
+	margin-bottom: 15px;	
 }
 
 textarea{
@@ -110,7 +110,14 @@ a{
 	}
 }
 
-
+.more-container{
+	clear: both;
+	text-align: center;
+	padding: 30px 0;
+	.load-more{
+		@extend .main-button;
+	}
+}
 
 
 .post-photo{
