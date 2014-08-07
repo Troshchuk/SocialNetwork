@@ -5,6 +5,9 @@ jQuery(function ($) {
     var workersPage = 0;
     var followersPage = 0;
     var groupListPage = 0;
+    var sentMessagesPage = 0;
+    var inboxMessagesPage = 0;
+    var newsPage = 0;
 
 
     $('#formlogin').validate({
@@ -471,12 +474,23 @@ jQuery(function ($) {
     function setupMessagesPage() {
         logger.log('Setup Messages');
 
-        function getSentMessages() {
 
+        function _getSentMessages() {
+            $.getJSON('/sn/pm/sent' + sentMessagesPage, {}, function (json) {
+                _makeupSentMessages(json);
+            });
+            sentMessagesPage++;
         };
 
+        function _getInboxMessages() {
+            $.getJSON('/sn/pm/received'+ inboxMessagesPage, {}, function (json) {
+                _makeupInboxMessages(json);
+            });
+            inboxMessagesPage++;
+        }
 
-        $.getJSON('/sn/pm/sent0', {}, function (json) {
+
+        function _makeupSentMessages(json){
             var node = '<ul>'
             for (var i = 0; i < json.privateMessages.length; i++) {
                 var name = json.privateMessages[i].receiverUser.name + ' ' + json.privateMessages[i].receiverUser.surname;
@@ -484,9 +498,12 @@ jQuery(function ($) {
                 node += '<p'+json.privateMessages[i].receiverUser.id + '" > Sent to <span class="name">' + name + '</span></p>';
                 node += '<div class="message-container"></div>';
                 node += '</li>';
+                if ( json.privateMessages.length < 10 ) {
+                    $('.more-sent-messages').hide();
+                }
             };
             node += '</ul>';
-            $('#sent').append( $(node) );
+            $('.sent-inner').append( $(node) );
             $('.message').on('click', function(event){
                 event.stopPropagation();
                 var thisEl = $(this);
@@ -499,9 +516,10 @@ jQuery(function ($) {
                     $(message).append( msg );
                 });
             });
-        });
+        }
 
-        $.getJSON('/sn/pm/received0', {}, function (json) {
+
+        function _makeupInboxMessages(json) {
             var node = '<ul>'
             for (var i = 0; i < json.privateMessages.length; i++) {
                 var name = json.privateMessages[i].sentUser.name + ' ' + json.privateMessages[i].sentUser.surname;
@@ -509,9 +527,12 @@ jQuery(function ($) {
                 node += '<p'+json.privateMessages[i].receiverUser.id + '" > From <span class="name">' + name + '</span></p>';
                 node += '<div class="message-container"></div>';
                 node += '</li>';
+                if ( json.privateMessages.length < 10 ) {
+                    $('.more-inbox-messages').hide();
+                }
             };
             node += '</ul>';
-            $('#inbox').append( $(node) );
+            $('.inbox-inner').append( $(node) );
             $('.message').on('click', function(event){
                 event.stopPropagation();
                 var thisEl = $(this);
@@ -524,8 +545,25 @@ jQuery(function ($) {
                     $(message).append( msg );
                 });
             });
+        };
+
+
+        _getSentMessages();
+
+        _getInboxMessages();
+
+        $('.more-sent-messages').click(function(){
+            _getSentMessages();
+        });
+
+        $('.more-inbox-messages').click(function(){
+            _getInboxMessages();
         });
     }
+
+
+
+
 
 
     function setupColleaguesPage() {
@@ -573,15 +611,18 @@ jQuery(function ($) {
 
     function setupNewsPage() {
         logger.log('Setup News');
-        $.getJSON('/sn/news/news0', {}, function (json) {
+
+        function _getNews(){
+            $.getJSON('/sn/news/news' + newsPage, {}, function (json) {
+                _makeupNews(json);
+            });
+            newsPage++;
+        };
+
+        function _makeupNews(json){
             if (json.posts != null ) {
                 for (var i = 0; i < json.posts.length; i++) {
                     var node = '<div class="news" id="' + json.posts[i].postId + '">';
-                    // node += '<div class="post-photo">';
-                    // node +=	'<a href="#">';
-                    // node += '<img src="/assets/img/Mt-8_dgwlHM.jpg" alt="">';
-                    // node += '</a>';
-                    // node += '</div>';
                     node += '<div class="news-message">';
                     // node += '<p class="news-name"><a href="">' + fullname + '</a></p>';
                     // node += '<span class="remove-post"></span>';
@@ -589,11 +630,23 @@ jQuery(function ($) {
                     node += '<span class="post-meta">' + formatDate(json.posts[i].time) + '</span>';
                     node += '</div>';
                     node += '</div>';
-                    $('#content').append(node);
+                    $('.news-inner').append(node);
+                    if( json.posts.length < 10 ) {
+                        $('.more-news').hide();
+                    }
                 };
             }
+        };
+
+        _getNews();
+
+        $('.more-news').click(function(){
+            _getNews();
         });
+
     };
+
+
 
 
     function setupFollowingsPage() {
@@ -640,20 +693,6 @@ jQuery(function ($) {
 
     function setupGroupListPage() {
         logger.log('Setup GroupList');
-        // $.get('/sn/groups/' + groupList, {}, function (json) {
-        //     var list = '<ul>';
-        //     for (var i = 0; i < json.groups.length; i++) {
-        //         list += '<li class="group-entry clearfix">';
-        //         list += '<div class="textual">';
-        //         list += '<div class="group-name"><a href="/sn/group' + json.groups[i].groupId + '"><span></span>' + json.groups[i].name + '</a></div>';
-        //         list += '<div class="group-description"><span></span>' + json.groups[i].description + '</div>';
-        //         list += '<div class="group-created-by"><span>Created by </span> <a href="/sn/user'+json.groups[i].author.id+'">' + json.groups[i].author.name + ' ' + json.groups[i].author.surname + '</div>';
-        //         list += '</li>';
-        //     };
-        //     list += '</ul>';
-        //     $('#group-list').append($(list));
-        // });
-
 
 
         function _getGroupList() {
