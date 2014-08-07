@@ -1,8 +1,5 @@
 package com.bionic.socialNetwork.rest;
 
-import com.bionic.socialNetwork.dao.impl.UserDaoImpl;
-import com.bionic.socialNetwork.logic.FollowingLogic;
-import com.bionic.socialNetwork.logic.UserLogic;
 import com.bionic.socialNetwork.logic.lists.FollowingUsersList;
 
 import javax.servlet.ServletContext;
@@ -11,7 +8,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
-import java.util.LongSummaryStatistics;
 
 /**
  * @author Dmytro Troshchuk
