@@ -223,8 +223,9 @@ jQuery(function ($) {
 
 
     function nameSubscriber(){
+        logger.log('dfgdg');
         setTimeout(function(){
-            $.get('/sn/user'+ getGroupId() +'/isFollowing', function(response){
+            $.get('/sn/group'+ getGroupId() +'/isFollowing', function(response){
                 if(response.isFollowing) {
                     $('.subcsribe-group').text('Unsubscribe');
                 } else{
@@ -648,10 +649,15 @@ jQuery(function ($) {
                 if (json.description != 'undefined') {
                     $('#group-description').text(json.description);
                 }
+                if( json.author != 'undefined' ) {
+                    $('#created-by span').html('<a href="/sn/user'+json.author.id+'"">' + json.author.name + ' ' + json.author.surname +'</a>');
+                }
             }
         });
 
-        $('.subcsribe-group').text( nameFollow() );
+        $('.subcsribe-group').text( nameSubscriber() );
+
+
 
         function _loadGroupPosts() {
             $.getJSON('/sn/group' + getGroupId() + '/posts' + page, {}, function (json) {

@@ -70,8 +70,24 @@
 		color: $main-color;
 	}
 
+	.created-by{
+		margin-bottom: 20px;
+		span{
+			font-weight: bold;
+		}
+	}
+
+
 	.subcsribe-group{
-		@extend .main-button;
+		display: block;
+		padding: 5px;
+		text-align: center;
+		background: $btn-bg;
+		color: $btn-color;
+		cursor: pointer;
+		&:hover{
+			background: $btn-bg-active;
+		}
 	}
 
 	.expand-message-form{
