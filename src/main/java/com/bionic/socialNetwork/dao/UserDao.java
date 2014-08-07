@@ -66,7 +66,7 @@ public interface UserDao {
 
     public void deleteInterests(Interest interest, User user) throws Exception;
 
-    public List<User> selectFollowingsNext(int lot) throws Exception;
+    public List<User> selectFollowingsNext(long id, int lot) throws Exception;
 
     public List<User> selectFollowingsByFullName(String name, String surname,
                                                  long id, int lot)

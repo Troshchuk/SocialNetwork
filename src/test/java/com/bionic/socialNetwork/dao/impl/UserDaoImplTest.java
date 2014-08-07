@@ -70,7 +70,7 @@ public class UserDaoImplTest {
 
         userDao.insertFollowing(user, friend1);
         userDao.insertFollowing(user, friend2);
-        List<User> users = userDao.selectFollowingsNext(0);
+        List<User> users = userDao.selectFollowingsNext(user.getId(), 0);
         assertEquals(users.size(), 2);
 
         userDao.deleteFollowing(user, friend1);

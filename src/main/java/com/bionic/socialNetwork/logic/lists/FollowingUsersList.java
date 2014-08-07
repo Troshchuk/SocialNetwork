@@ -23,7 +23,7 @@ public class FollowingUsersList {
     public FollowingUsersList(long id, int page) {
         UserDao userDao = new UserDaoImpl();
         try {
-            followingUsers = userDao.selectFollowingsNext(page);
+            followingUsers = userDao.selectFollowingsNext(id, page);
         }
 //        catch (NullPointerException e) {
 //            followingUsers = null;

@@ -133,11 +133,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectFollowingsNext(int lot) throws Exception {
+    public List<User> selectFollowingsNext(long id, int lot) throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         Criteria criteria = session.createCriteria(User.class);
-        criteria.createAlias("myFollowings", "followingsAlias");
+        criteria.createAlias("myFollowings", "myFollowingsAlias");
+        criteria.add(Restrictions.eq("myFollowingsAlias.id", id));
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
