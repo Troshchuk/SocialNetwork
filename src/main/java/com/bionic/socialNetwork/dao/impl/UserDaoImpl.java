@@ -17,6 +17,7 @@ import org.hibernate.criterion.Restrictions;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @author Dmytro Troshchuk, Denis Biyovskiy
@@ -211,9 +212,9 @@ public class UserDaoImpl implements UserDao {
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
-
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<Group> list = criteria.list();
-        System.out.println(list.size());
+
         session.close();
         return list;
     }
