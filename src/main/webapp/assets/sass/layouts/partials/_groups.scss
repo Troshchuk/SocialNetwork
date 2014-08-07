@@ -13,6 +13,27 @@
 		margin-bottom: -1px;
 		margin-left: 10px;
 	}
+
+
+	.group-create{
+		input[type="text"], 
+		textarea{
+			border: 1px solid $border-color;
+			padding: 10px;
+			width: 100%;
+			@include box-sizing(border-box);
+			margin-bottom: 10px;
+		}
+		// input[type="text"]{
+		// }
+		textarea{
+			resize: none;
+		}
+		input[type="submit"]{
+			@extend .main-button;
+		}
+		
+	}
 }
 
 
@@ -47,6 +68,10 @@
 		padding: 10px 0;
 		font-weight: bold;
 		color: $main-color;
+	}
+
+	.subcsribe-group{
+		@extend .main-button;
 	}
 
 	.expand-message-form{

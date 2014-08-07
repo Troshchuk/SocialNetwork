@@ -1,6 +1,9 @@
 jQuery(function ($) {
     'use strict';
 
+    var interestPage = 0;
+
+
     $('#formlogin').validate({
         submitHandler: function (form) {
             var login = $('#userlogin').val();
@@ -155,6 +158,15 @@ jQuery(function ($) {
     });
 
 
+    $('.subcsribe-group').click(function(event){
+        event.stopPropagation();
+        handleSubscriber();
+    });
+
+
+
+
+
 
 
 // ============ HELPERS =========
@@ -175,6 +187,7 @@ jQuery(function ($) {
         },500);
     }
 
+
     function nameFollow(){
         setTimeout(function(){
             $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
@@ -189,15 +202,14 @@ jQuery(function ($) {
 
     function handleFollower() {
         var id = getUserId();
-        $.get('/sn/user'+ getUserId() +'/isFollowing', function(response){
-            logger.log( response.isFollowing );
+        $.get('/sn/user'+ id +'/isFollowing', function(response){
             if ( response.isFollowing ) {
-                $.post('/sn/user'+ getUserId()+ '/delete', {}, function(response){
+                $.post('/sn/user'+ id + '/delete', {}, function(response){
                     if (response.status == true) {
                     }
                 });
             } else {
-                $.post('/sn/user'+ getUserId()+ '/add', {}, function(response){
+                $.post('/sn/user'+ id + '/add', {}, function(response){
                     if (response.status == true) {
                     }
                 });
@@ -205,6 +217,42 @@ jQuery(function ($) {
         });
         nameFollow();
         rotateY($('.follow'));
+    };
+
+
+
+
+    function nameSubscriber(){
+        setTimeout(function(){
+            $.get('/sn/user'+ getGroupId() +'/isFollowing', function(response){
+                if(response.isFollowing) {
+                    $('.subcsribe-group').text('Unsubscribe');
+                } else{
+                    $('.subcsribe-group').text('Subscribe');
+                }
+            });
+        }, 500);
+    };
+
+
+    function handleSubscriber() {
+        var id = getGroupId();
+        $.get('/sn/group'+ id +'/isFollowing', function(response){
+            logger.log( response.isFollowing );
+            if ( response.isFollowing ) {
+                $.post('/sn/group'+ id + '/unfollow', {}, function(response){
+                    if (response.status == true) {
+                    }
+                });
+            } else {
+                $.post('/sn/group'+ id + '/follow', {}, function(response){
+                    if (response.status == true) {
+                    }
+                });
+            }
+        });
+        nameSubscriber();
+        rotateY($('.subcsribe-group'));
     };
 
 
@@ -287,6 +335,14 @@ jQuery(function ($) {
 
 
 
+    function findByInterest(interest) {
+        $.get('/sn/interest'+ interest + '/' + interestPage, function(){
+
+        });
+        // interestPage++;
+    };
+
+
 
 
 
@@ -337,15 +393,21 @@ jQuery(function ($) {
 
         $.getJSON('/sn/user' + getUserId() + '/interests', {}, function (json) {
             if (json != 'undefined' ) {
-                //TODO: check interests
                 var str = [];
                 for (var i = 0; i < json.interests.length; i++) {
-                    str.push(json.interests[i].interest);
+                    var line = '<a class="interest-url" data-interest-id="'+json.interests[i].interests_id+'" href="">' + json.interests[i].interest + '</a>'; 
+                    str.push(line);
                 };
                 str = str.join(', ');
-                $('#user-hobbies').text(str);
+                $('#user-hobbies').html(str);
             }
+            $('.interest-url').click(function(event){
+                event.preventDefault();
+                var interestId = $(this).data('interest-id');
+                findByInterest(interestId);
+            });
         });
+
 
 
         function _loadWallPosts() {
@@ -587,9 +649,9 @@ jQuery(function ($) {
                     $('#group-description').text(json.description);
                 }
             }
-
         });
 
+        $('.subcsribe-group').text( nameFollow() );
 
         function _loadGroupPosts() {
             $.getJSON('/sn/group' + getGroupId() + '/posts' + page, {}, function (json) {
