@@ -79,4 +79,14 @@ public class GroupController {
         return "{\"status\": " + new GroupLogic()
                 .unFollow((Long) request.getAttribute("userId"), id) + "}";
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("isFollowing")
+    public String isFollowing(@Context HttpServletRequest request,
+                              @PathParam("id") long id) {
+        return "{\"isFollowing\": " + new GroupLogic()
+                .isFollowing((Long) request.getAttribute("userId"), id) +
+               "}";
+    }
 }

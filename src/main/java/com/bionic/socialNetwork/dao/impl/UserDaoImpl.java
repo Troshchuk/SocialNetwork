@@ -309,4 +309,18 @@ public class UserDaoImpl implements UserDao {
 
         session.close();
     }
+
+    @Override
+    public boolean isGroupFollowing(long userId, long groupId) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        SQLQuery query = session.createSQLQuery(
+                "SELECT * FROM Users_Groups WHERE user_id = " + userId +
+                " AND group_id = " + groupId + ";");
+
+        boolean result = query.list().size() > 0;
+
+        session.close();
+        return result;
+    }
 }

@@ -91,4 +91,6 @@ public interface UserDao {
     public void insertGroup(long userId, long groupId) throws Exception;
 
     public void deleteGroup(long userId, long groupId) throws Exception;
+
+    public boolean isGroupFollowing(long userId, long groupId) throws Exception;
 }

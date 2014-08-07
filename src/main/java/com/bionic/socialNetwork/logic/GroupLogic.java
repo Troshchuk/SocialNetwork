@@ -109,4 +109,17 @@ public class GroupLogic {
         }
         return false;
     }
+
+    public boolean isFollowing(long userId, long groupId) {
+        try {
+            return new UserDaoImpl().isGroupFollowing(userId, groupId);
+
+        } catch (NullPointerException e) {
+            return false;
+        }
+        catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
+        return false;
+    }
 }
