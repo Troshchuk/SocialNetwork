@@ -81,7 +81,6 @@ public class GroupPostDaoImpl implements GroupPostDao {
             criteria.add(Restrictions.eq("group.groupId", group.getGroupId()));
             criteria.addOrder(Order.desc("time"));
             criteria.setFirstResult(lot * 10);
-            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
             List list = criteria.list();
             return list;
         }

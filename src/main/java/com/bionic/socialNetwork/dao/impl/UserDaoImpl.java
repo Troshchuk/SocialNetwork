@@ -212,7 +212,6 @@ public class UserDaoImpl implements UserDao {
         criteria.setMaxResults(10);
         criteria.addOrder(Order.asc("id"));
         criteria.setFirstResult(lot * 10);
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         List<Group> list = criteria.list();
 
         session.close();

@@ -27,10 +27,10 @@ public class Group {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "group", targetEntity = GroupPost.class, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "group", targetEntity = GroupPost.class, fetch = FetchType.LAZY)
     private List<GroupPost> groupPosts;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Users_Groups",
                joinColumns = {@JoinColumn(name = "group_id")},
                inverseJoinColumns = {@JoinColumn(name = "user_id")})

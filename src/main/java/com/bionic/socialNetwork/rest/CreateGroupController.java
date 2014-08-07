@@ -1,6 +1,7 @@
 package com.bionic.socialNetwork.rest;
 
 
+import com.bionic.socialNetwork.logic.GroupLogic;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.logic.CreateGroupLogic;
 import javax.servlet.ServletContext;
@@ -29,6 +30,7 @@ public class CreateGroupController {
         long userId = (Long)request.getAttribute("userId");
         CreateGroupLogic createGroup =
                 new CreateGroupLogic(name, description, userId);
+        new GroupLogic().follow(userId, createGroup.getGroup().getGroupId());
         return createGroup.getResponse();
     }
 
