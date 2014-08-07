@@ -61,7 +61,7 @@ public class UserList {
 
     }
 
-    public void usersByInterest(String interest, int page) {
+    public UserList(long interest, int page) {
         UserDao userDao = new UserDaoImpl();
 
         try {

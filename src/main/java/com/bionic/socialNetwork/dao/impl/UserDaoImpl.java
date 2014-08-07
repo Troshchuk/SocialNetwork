@@ -264,7 +264,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> selectByInterest(String interest, int page)
+    public List<User> selectByInterest(long interest, int page)
     throws Exception {
         Session session = HibernateUtil.getSessionFactory().openSession();
 

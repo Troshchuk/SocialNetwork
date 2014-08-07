@@ -85,6 +85,6 @@ public interface UserDao {
 
     public boolean isFollowing(long userId1, long userId2) throws Exception;
 
-    public List<User> selectByInterest(String interest, int page)
+    public List<User> selectByInterest(long interest, int page)
     throws Exception;
 }
