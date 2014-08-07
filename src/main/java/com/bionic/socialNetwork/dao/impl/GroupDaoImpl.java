@@ -3,7 +3,11 @@ package com.bionic.socialNetwork.dao.impl;
 import com.bionic.socialNetwork.dao.GroupDao;
 import com.bionic.socialNetwork.models.Group;
 import com.bionic.socialNetwork.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+import java.util.List;
 
 /**
  * @author yoalex5
@@ -57,5 +61,20 @@ public class GroupDaoImpl implements GroupDao {
 
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Group> selectByGroupName(String groupName, int lot)
+    throws Exception {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Group.class);
+
+        criteria.setFirstResult(lot * 10);
+        criteria.setMaxResults(10);
+        criteria.add(Restrictions.eq("name", groupName));
+
+        List<Group> list = criteria.list();
+        session.close();
+        return list;
     }
 }

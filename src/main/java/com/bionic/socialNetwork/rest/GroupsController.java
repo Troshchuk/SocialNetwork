@@ -35,4 +35,12 @@ public class GroupsController {
                                @PathParam("page") int page) {
         return new GroupList((Long) request.getAttribute("userId"), page);
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("search{groupName}/{page}")
+    public GroupList search(@PathParam("groupName") String groupName,
+                            @PathParam("page") int page) {
+        return new GroupList(groupName, page);
+    }
 }
