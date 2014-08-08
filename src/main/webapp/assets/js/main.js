@@ -772,6 +772,12 @@ jQuery(function ($) {
             }
         });
 
+
+        $.get('/sn/group'+ getGroupId() +'/members', {}, function (json) {
+            $('.members-quantity span').text( json.members );
+        });
+
+
         $('.subcsribe-group').text( nameSubscriber() );
 
 
