@@ -17,7 +17,7 @@ SoccialNetwork is made with the following technologies :
 - [Jersey](https://jersey.java.net/)
 - [log4j2](http://logging.apache.org/log4j/2.x/)
  
-Tatami is developped by J-10 group in Bionic Unviversity 2014
+Social Network is developped by J-10 group in Bionic Unviversity 2014
 
 Prerequisites
 -------------
@@ -32,5 +32,6 @@ Installation for developpers
 - Install [Maven 3](http://maven.apache.org/)
 - Install [Mysql-server](http://dev.mysql.com/downloads/mysql/)
 - Create database from file: `source database.sql`
+- Add invte to databaase: `INSERT INTO Invites VALUES(NULL, "invite");`
 - Run Tomcat7 from Maven : `mvn tomcat7:run`
 - Connect to the application at http://localhost:8080/
